@@ -1,0 +1,77 @@
+
+REQ 
+
+1. En la pantalla principal deben haber 4 resumenes 
+    baños
+    vacunas
+    atenciones
+    desparacitacion
+
+CLAVE GAVET :   10467644021@
+            :   mjk125@jio
+
+
+
+// ACCESOS
+
+http://186.64.116.55/whm
+http://186.64.116.55/cpanel
+tuwebinc
+
+http://186.64.116.55/~gavet/html/ltr/index.php
+
+http://186.64.116.55/~gavet/html/ltr/login.php
+
+http://186.64.116.55/~gavet/presta
+----
+--
+---
+https://presta.tuwebin.com/adminpresta1
+
+
+
+
+
+
+-- al eliminar un cliente solo actualiza el codigo de estado a (2)
+-- Al grabar un cliente verifica que no exista el dni
+-- si existe muestra los datos
+-- cliente defecto - codigo 12345678
+
+ELIMINAR ESPACIOS EN BLANCO AL GRABAR
+
+
+-- al hacer click en el boton mascota 
+    llamr al formualrio nueva mascota
+
+    nueva - con el dni
+
+-- <SI SE QEUIVOCO AL INGRESAR LA MASCOTA PARA UN CLIENTE ELIMINARLO Y VOLVERLO A INGRESAR>
+--<un productos que tiene stock no se puede eliminar>
+    
+
+AL HACER UNA COMPARA GRABAR COMPRA
+INSERTAR REGISTROS DE DETALLE DE COMPRA
+ACTUALIZAR PRECIOS EN TBL PRODUCTO
+
+
+
+-- por la url que se mande
+
+Vacunas_Fecha
+Vacunas_IdProducto
+Vacunas_Precio
+Vacunas_IdMascota
+Vacunas_Observacion
+
+
+
+---------------------------------------
+RBDNILI - RBDNIMAS
+TEXT DNI - NOMBRE
+
+SELECCIONE MASCOTA
+SELECCIONE PRODUCTO - SEDE - SELECCIONE FECHA VENTA
+PRECIO - DESCUENTO - CANTIDAD
+TIPO PAGO - 
+---------------------------------------
