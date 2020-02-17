@@ -2032,3 +2032,19 @@ BEGIN
 END$$
 DELIMITER ;
 
+/******************************* 170220 *************/
+
+
+DROP PROCEDURE IF EXISTS SP_Obtener_TblTipoProducto_all_VariasTbl;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblTipoProducto_all_VariasTbl()
+BEGIN
+SELECT Producto_Id,Producto_Nombre,ttp.TipoProducto_Nombre,tc.Categoria_Nombre,tu.UM_NombreCorto,tp.Producto_Stock,tp.Producto_PrecioCompra,
+ tp.Producto_PrecioVenta
+ FROM tblProducto tp 
+ LEFT JOIN tblTipoProducto ttp ON tp.Producto_IdTipoPro = ttp.TipoProducto_Id
+ LEFT JOIN tblCategoria tc ON tp.Producto_IdTipoCat = tc.Categoria_Id
+ LEft JOIN tblUM tu ON tp.Producto_IdTipoUM = tu.UM_Id
+ WHERE  Producto_Estado = 1;
+END$$
+DELIMITER ;

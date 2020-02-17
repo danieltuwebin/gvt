@@ -120,6 +120,19 @@ if ($_POST['action'] == "EditarProducto") {
 }
 
 
+if ($_POST['action'] == "EliminarProducto") {
+
+    $Id = $_POST['Id'];
+    $sql = "CALL SP_Eliminar_TblProducto('$Id')";
+    $oCado = new Cado();
+    $rst = $oCado->ejecute_sql($sql);
+    $dt = mysqli_fetch_array($rst);
+    $Codigo = $dt['CODIGO'];
+    echo $Codigo;
+}
+
+
+
 /********************************************************/
 /*********************OTROS MODULOS*********************/
 if ($_POST['action'] == "MostrarProductoxCondicion") {
