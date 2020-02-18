@@ -1098,6 +1098,9 @@ session_start();
                         '<strong>Lo sentimos ocurrio un error en el proceso de grabación</strong>' +
                         '</div>')
                 }
+                $("#Resultado_Grabacion").fadeTo(2000, 500).slideUp(500, function() {
+                    $("#Resultado_Grabacion").slideUp(500);
+                });
             },
             complete: function() {
                 //alert('ok2');

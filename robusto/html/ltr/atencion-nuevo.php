@@ -12,7 +12,7 @@ session_start();
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Listado Productos y Servicios - Sistema Vet. TuWebIn</title>
+    <title>Nueva Atención - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="../../app-assets/images/ico/gavet-icon-120.png">
@@ -37,7 +37,6 @@ session_start();
     <!-- BEGIN Page Level CSS-->
     <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/menu/menu-types/vertical-overlay-menu.css">
-    <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/colors/palette-tooltip.css">
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
@@ -63,7 +62,7 @@ session_start();
         $CondicionMnu = $_SESSION['UserPerfil'];
 
         if ($CondicionMnu == 1) { /* PERFIL ADMIN (1) */
-        ?>
+            ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -112,7 +111,7 @@ session_start();
                             <li>
                                 <a href="proser-nuevo.php" class="menu-item">Nuevo Producto-Serv.</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
                         </ul>
@@ -190,7 +189,7 @@ session_start();
                             <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
                         </a>
                         <ul class="menu-content">
-                            <li>
+                            <li class="active">
                                 <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
                             </li>
                             <li>
@@ -251,7 +250,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 2) { /* PERFIL JEFE (2) */
-        ?>
+            ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -300,7 +299,7 @@ session_start();
                             <li>
                                 <a href="proser-nuevo.php" class="menu-item">Nuevo Producto-Serv.</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
                         </ul>
@@ -380,7 +379,7 @@ session_start();
                             <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
                         </a>
                         <ul class="menu-content">
-                            <li>
+                            <li class="active">
                                 <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
                             </li>
                             <li>
@@ -443,7 +442,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 3) { /* PERFIL SOLO LECTURA (3) */
-        ?>
+            ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -464,7 +463,7 @@ session_start();
                             <span data-i18n="nav.content.main" class="menu-title">Clientes</span>
                         </a>
                         <ul class="menu-content">
-                            <li class="active">
+                            <li>
                                 <a href="listado-cliente.php" class="menu-item">Listado Clientes</a>
                             </li>
                         </ul>
@@ -618,178 +617,183 @@ session_start();
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
     <!-- Modal -->
-    <div class="modal fade text-xs-left" id="Modal_ListadoProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade text-xs-left" id="Modal_Pregunta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel17">Edición de Producto / Servicio</h4>
+                    <h5 class="modal-title" id="exampleModalLabel">Cliente Existente</h5>
                 </div>
                 <div class="modal-body">
-                    <form class="form" id="FormularioProser">
-                        <div class="form-body">
-                            <h5>Datos </h5>
-
-                            <div class="row">
-                                <div class="col-xs-12 col-md-6">
-                                    <div class="form-group">
-                                        <label for="Txt_Nombre">Nombre</label>
-                                        <input type="text" style="text-transform:uppercase;" id="Txt_Nombre" class="form-control" placeholder="Nombres" name="Txt_Nombre" onkeyup="javascript:this.value=this.value.toUpperCase();">
-                                        <input type="hidden" id="Txt_Codigo" name="Txt_Codigo">
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-12 col-md-2">
-                                    <div class="form-group">
-                                        <label for="Txt_PrecioCompra">Precio Compra</label>
-                                        <input type="text" style="text-transform:uppercase;" id="Txt_PrecioCompra" class="form-control" placeholder="00.00" name="Txt_PrecioCompra" onkeyup="javascript:this.value=this.value.toUpperCase();">
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-12 col-md-2">
-                                    <div class="form-group">
-                                        <label for="Txt_PrecioVenta">Precio Venta</label>
-                                        <input type="text" style="text-transform:uppercase;" id="Txt_PrecioVenta" class="form-control" placeholder="00.00" name="Txt_PrecioVenta" onkeyup="javascript:this.value=this.value.toUpperCase();">
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-
-                            <div class="row">
-                                <div class="col-xs-12 col-md-4">
-                                    <div class="form-group">
-                                        <label for="CboTipoProducto">Tipo de Producto</label>
-                                        <select id="CboTipoProducto" name="CboTipoProducto" class="form-control">
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-12 col-md-4">
-                                    <div class="form-group">
-                                        <label for="CboCategoria">Categoria</label>
-                                        <select id="CboCategoria" name="CboCategoria" class="form-control">
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class=" col-xs-12 col-md-4">
-                                    <div class="form-group">
-                                        <label for="CboUM">Unidad de Medida</label>
-                                        <select id="CboUM" name="CboUM" class="form-control">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="Txt_Notas">Notas</label>
-                                        <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales" onkeyup="javascript:this.value=this.value.toUpperCase();"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </form>
+                    <p id="PreguntaCliente"></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">Cerrar</button>
-                    <button id="BtnActualizarProser" type="button" class="btn btn-success mr-1"><i class="icon-edit2"></i>Grabar Edición</button>
+                    <button id="BtnRestaurarCliente" type="button" class="btn btn-success mr-1"><i class="icon-check-circle "></i> Si, Mostrar datos</button>
+                    <button id="BtnActualizarCliente" type="button" class="btn btn-primary mr-1"><i class="icon-minus-circle "></i> No, Actualizar</button>
+                    <button id="BtnCerrarCliente" type="button" class="btn btn-warning mr-1" data-dismiss="modal"><i class="icon-times-circle "></i> Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
+    <!-- / Modal -->
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
     <div class="app-content content container-fluid">
         <div class="content-wrapper">
             <div class="content-header row">
-                <div class="content-header-left col-md-3 col-xs-12 mb-1">
-                    <h2 class="content-header-title">Listado</h2>
+                <div class="content-header-left col-md-6 col-xs-12 mb-1">
+                    <h2 class="content-header-title">Nueva Atención</h2>
                 </div>
-                <?php
-
-                if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-                ?>
-                    <div class="content-header-left col-md-3 col-xs-12 mb-1">
-                        <button id="BtnNuevo" type="button" class="btn btn-success"><i class="icon-android-add-circle"></i> Nuevo Producto / Servicio</button>
-                    </div>
-                <?php
-                }
-                ?>
-
             </div>
             <div class="content-body">
-                <!-- Bordered striped start -->
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Produtos / Servicios</h4>
-                                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-                                <div class="heading-elements">
-                                    <ul class="list-inline mb-0">
-                                        <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
-                                        <li onclick="Actualizar()"><a data-action="reload"><i class="icon-reload"></i></a></li>
-                                        <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
-                                        <!-- <li><a data-action="close"><i class="icon-cross2"></i></a></li> -->
-                                    </ul>
+                <!-- Basic form layout section start -->
+                <section id="basic-form-layouts">
+                    <div class="row match-height">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title" id="basic-layout-form">Datos de atención</h4>
+                                    <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+                                            <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                                            <li onclick="Actualizar()"><a data-action="reload"><i class="icon-reload"></i></a></li>
+                                            <!--<li><a id="Actualizar" data-action="reload"><i class="icon-reload"></i></a></li>-->
+                                            <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                                            <!--<li><a data-action="close"><i class="icon-cross2"></i></a></li>-->
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <br>
 
-                            <div class="card-block">
                                 <div class="card-body collapse in">
-                                    <div class="table-responsive">
-                                        <table id="TblProser" class="table table-striped table-bordered" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Nombre</th>
-                                                    <th>Tipo</th>
-                                                    <th>Categoria</th>
-                                                    <th>UM</th>
-                                                    <th>Stock</th>
-                                                    <th>Pre. Compra</th>
-                                                    <th>Pre. venta</th>
-                                                    <th>Administrar</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
+                                    <div class="card-block">
+                                        <form class="form" id="FormularioVacuna">
+                                            <!--<input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
+                                        <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">    -->
+                                            <div class="form-body">
+                                                <h4 class="form-section">Propietario</h4>
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group">
+                                                                    <label for="Txt_Buscar_Dni"><strong>Buscar Por :</strong></label>
+                                                                    <label class="display-inline-block custom-control custom-radio ml-1">
+                                                                        <input type="radio" id="RbDniP" name="Dni" class="custom-control-input" value="1" checked>
+                                                                        <span class="custom-control-indicator"></span>
+                                                                        <span class="custom-control-description ml-0">DNI Propietario</span>
+                                                                    </label>
+                                                                    <label class="display-inline-block custom-control custom-radio">
+                                                                        <input type="radio" id="RbDniM" name="Dni" class="custom-control-input" value="2">
+                                                                        <span class="custom-control-indicator"></span>
+                                                                        <span class="custom-control-description ml-0">DNI Mascota</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <input type="text" id="Txt_Dni" class="form-control" placeholder="Ingrese DNI" name="Txt_Dni">
+                                                                        <span class="input-group-btn">
+                                                                            <button id="btnBuscar" class="btn btn-warning mr-1" type="button"> <i class="icon-search5"></i> Buscar</button>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <h5>
+                                                                        <label for="Txt_Nombre_Dni">Nombre propietario :&nbsp;&nbsp; </label><label id="Txt_Nombre_Dni" class="primary"></label>
+                                                                        <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
+                                                                        <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="input-group">
+                                                                    <label class="display-inline" for="CboMascota">Seleccione nombre mascota :
+                                                                        <!-- <label class="display-inline-block" for="CboVacuna">S : -->
+                                                                        <select id="CboMascota" name="CboMascota" class="form-control">
+                                                                        </select>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <br>
+
+                                                <h4 class="form-section">Datos de Mascota</h4>
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="CboVacuna">Seleccione Vacuna :</label>
+                                                            <select id="CboVacuna" name="CboVacuna" class="form-control">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="Txt_Precio">Precio</label>
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Nombres" name="Txt_Precio">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="Txt_Fecha">Fecha Vacunación </label>
+                                                            <input id="Txt_Fecha" type="date" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="Txt_Notas">Notas</label>
+                                                    <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales"></textarea>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-actions">
+                                                <button id="btnLimpiar" type="button" class="btn btn-info mr-1">
+                                                    <i class="icon-reload"></i> Nuevo
+                                                </button>
+                                                <button id="btnGrabar" type="button" class="btn btn-success mr-1">
+                                                    <i class="icon-check2"></i> Registrar Vacuna
+                                                </button>
+                                                <button id="btnAgendar" type="button" class="btn btn-warning mr-1">
+                                                    <i class="icon-check2"></i> Agendar Vacuna
+                                                </button>
+                                            </div>
+                                            
+                                            <div id="Resultado_Grabacion"></div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                </div>
-
+                </section>
+                <!-- // Basic form layout section end -->
             </div>
         </div>
     </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 
-    <footer class="footer footer-static footer-light navbar-border">
-        <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright &copy; 2017 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank" class="text-bold-800 grey darken-2">PIXINVENT </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="icon-heart5 pink"></i></span></p>
-    </footer>
+    <?php
+    require_once("includes_html/footer.php");
+    ?>
 
     <!-- BEGIN VENDOR JS-->
     <script src="../../app-assets/js/core/libraries/jquery.min.js" type="text/javascript"></script>
@@ -809,43 +813,21 @@ session_start();
     <script src="../../app-assets/js/core/app.js" type="text/javascript"></script>
     <!-- END ROBUST JS-->
     <!-- BEGIN PAGE LEVEL JS-->
-    <script src="../../app-assets/js/scripts/tooltip/tooltip.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
 
     <!-- BEGIN PROPIOS JS-->
     <script src="lib_propio/propio.js" type="text/javascript"></script>
     <!-- END PROPIOS JS-->
-
-    <!-- BEGIN DATATABLE JS-->
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/b-1.5.6/b-html5-1.5.6/datatables.min.css" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/b-1.5.6/b-html5-1.5.6/datatables.min.js"></script>
-    <!-- END DATATABLE JS-->
-
 </body>
-
-
-<!-- css de ejemplo clases -->
-<style type="text/css">
-    .linea_buttons {
-        display: inline-block;
-    }
-</style>
-<!-- / css de ejemplo clases -->
 
 <!-- BEGIN. EVENTOS SCRIPT-->
 <script type="text/javascript">
-    var Condicion;
-    var table;
+    var IdMascota = '';
+    var ValorRb = 1;
+    var ValorTipoRegistro = 0;
+    /* BEGIN FUNCIONES GENERALES */
+
+    /* END FUNCIONES GENERALES */
 
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
@@ -855,189 +837,14 @@ session_start();
         Cerrar_Sesion("salir");
     });
 
-    function Obtener_Condicion() {
-        <?php
-        if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-        ?>
-            Condicion = 1;
-        <?php
-        } else {
-        ?>
-            Condicion = 0;
-        <?php
-        }
-        ?>
-    }
-
-    $("#BtnNuevo").click(function() {
-        var url = "proser-nuevo.php";
-        $(location).attr('href', url);
-    });
 
     function Actualizar() {
-        listar();
+        limpiaForm($("#FormularioVacuna"));
+        Obtener_Vacunas('MostrarProductoxCondicion', 1);
     }
 
-    var listar = function() {
-        table = $('#TblProser').DataTable({
-            "destroy": true,
-            "ajax": {
-                "method": "POST",
-                "url": "modulos/proser_listado.php"
-                //"dataSrc": ""
-            },
-            /* OCULTAR COLUMNAS */
-            /*
-                            "columnDefs": [{
-                                    "targets": [2],
-                                    "visible": false,
-                                    "searchable": false
-                                },
-                                {
-                                    "targets": [3],
-                                    "visible": false
-                                }
-                            ],
-            */
-            /*  END OCULTAR COLUMNAS*/
-            "columns": [{
-                    //"data": "Producto_Id"
-
-                    "render": function(data, type, row) {
-                        if (row.Producto_Id.length == 1) {
-                            var Cod = 'PR000' + row.Producto_Id;
-                        } else if (row.Producto_Id.length == 2) {
-                            var Cod = 'PR00' + row.Producto_Id;
-                        } else if (row.Producto_Id.length == 3) {
-                            var Cod = 'PR0' + row.Producto_Id;
-                        } else {
-                            var Cod = 'PR' + row.Producto_Id;
-                        }
-                        return Cod;
-                    }
-                },
-                {
-                    "data": "Producto_Nombre"
-                },
-                {
-                    "data": "TipoProducto_Nombre"
-                },
-                {
-                    "data": "Categoria_Nombre"
-                },
-                {
-                    "data": "UM_NombreCorto"
-                },
-                {
-                    "data": "Producto_Stock"
-                },
-                {
-                    "data": "Producto_PrecioCompra"
-                },
-                {
-                    "data": "Producto_PrecioVenta"
-                },
-                {
-                    "render": function(data, type, row) {
-                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Producto_Id + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Producto_Id + "'><i class='icon-trash-o'></i></button>   </div></div>";
-                    }
-                }
-            ],
-            /* BOTONES DE DATATABLE */
-            dom: 'Bfrtip',
-            buttons: [{
-                    extend: 'excelHtml5',
-                    text: '<i class="icon-file-excel-o"></i> ',
-                    titleAttr: 'Exportar a Excel',
-                    //className: 'btn btn-success'
-                    "oSelectorOpts": {
-                        filter: 'applied',
-                        order: 'current'
-                    },
-                },
-                {
-                    extend: 'pdfHtml5',
-                    text: '<i class="icon-file-pdf-o"></i> ',
-                    titleAttr: 'Exportar a PDF',
-                    className: 'btn btn-danger',
-                    orientation: 'landscape',
-                    //pageSize: 'TABLOID',
-                    exportOptions: {
-                        columns: [1, 2, 3, 4, 5, 6, 7]
-                    },
-
-                    //className: 'btn btn-success'
-                    "oSelectorOpts": {
-                        filter: 'applied',
-                        order: 'current'
-                    },
-                },
-                {
-                    extend: 'copyHtml5',
-                    text: '<i class="icon-copy2"></i> ',
-                    titleAttr: 'Copiar',
-                    className: 'btn btn-info',
-                    //className: 'btn btn-success'
-                    "oSelectorOpts": {
-                        filter: 'applied',
-                        order: 'current'
-                    },
-                },
-            ],
-            "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
-            }
-        });
-    }
-
-
-    $('#TblProser').on('click', '.editar', function() {
-        var id = $(this).val();
-        console.log($(this).val());
-        if (Condicion == 1) {
-            console.log($(this).val());
-            //Obtener_Provincia('MostrarProvincia');
-            //Obtener_Datos_cliente('MostrarClientexId', id, 1)
-
-            Obtener_TipoProducto('MostrarTipoProducto');
-            Obtener_UM('MostrarUM');
-            Obtener_Datos_Producto('MostrarProductoxId', id, 1, );
-
-            $("#Modal_ListadoProducto").modal("show");
-        } else {
-            alert('El perfil de usurio no esta habilitado para opción');
-        }
-    });
-
-    function Obtener_TipoProducto(act) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/proser.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                console.log(data);
-                var json = JSON.parse(data);
-                console.log(json);
-                $("#CboTipoProducto").empty();
-                $.each(json, function(i, item) {
-                    $("#CboTipoProducto").append('<option value="' + json[i].TipoProducto_Id + '">' + json[i].TipoProducto_Nombre + '</option>');
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    function Obtener_Datos_Producto(act, id, condicion) {
-
+    // Clase Proser
+    function Obtener_Vacunas(act, id) {
         $.ajax({
             type: "POST",
             url: "modulos/proser.php",
@@ -1045,10 +852,8 @@ session_start();
             dataType: "html",
             data: ({
                 action: act,
-                Id: id,
-                Condicion: condicion
+                Id: id
             }),
-
             beforeSend: function() {
                 //alert('ok');
             },
@@ -1056,26 +861,9 @@ session_start();
                 console.log(data);
                 var json = JSON.parse(data);
                 console.log(json);
+                $("#CboVacuna").empty();
                 $.each(json, function(i, item) {
-
-                    $("#PreguntaProducto").append('Exite un producto de nombre ' + json[i].Producto_Nombre + ' en el historico de productos, actualmente se encuentra eliminado desea restaurarlo ?');
-                    //console.log(json[i].Cliente_Id);
-                    $('#Txt_Codigo').val(json[i].Producto_Id);
-                    $('#Txt_Nombre').val(json[i].Producto_Nombre);
-                    $("#Txt_PrecioCompra").val(json[i].Producto_PrecioCompra),
-                        $("#Txt_PrecioVenta").val(json[i].Producto_PrecioVenta),
-                        $('#CboTipoProducto').val(json[i].Producto_IdTipoPro);
-
-                    console.log('valor json');
-                    console.log(json[i].Producto_IdTipoPro);
-                    console.log('valor variable');
-                    console.log($('#CboTipoProducto').val());
-
-                    Obtener_Categoria('MostrarCategoria', $('#CboTipoProducto').val());
-                    $("#CboCategoria option[value=" + json[i].Producto_IdTipoCat + "]").attr("selected", true);
-                    $('#CboUM').val(json[i].Producto_IdTipoUM);
-                    $('#Txt_Notas').val(json[i].Producto_Observacion);
-
+                    $("#CboVacuna").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
                 });
             },
             complete: function() {
@@ -1084,21 +872,21 @@ session_start();
         });
     }
 
+    $("#btnLimpiar").click(function() {
+        limpiaForm($("#FormularioVacuna"));
 
-    $("#CboTipoProducto").change(function() {
-        Obtener_Categoria('MostrarCategoria', $('#CboTipoProducto').val());
     });
 
-    function Obtener_Categoria(act, IdProducto) {
-        console.log('categoria-----------------' + act + ' - ' + IdProducto);
+    // Clase Mascota
+    function Obtener_NombreCliente_NombreMascota(act, id) {
         $.ajax({
             type: "POST",
-            url: "modulos/proser.php",
+            url: "modulos/mascotas.php",
             async: false,
             dataType: "html",
             data: ({
                 action: act,
-                IdProducto: IdProducto
+                Id: id
             }),
             beforeSend: function() {
                 //alert('ok');
@@ -1106,10 +894,13 @@ session_start();
             success: function(data) {
                 console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
-                $("#CboCategoria").empty();
                 $.each(json, function(i, item) {
-                    $("#CboCategoria").append('<option value="' + json[i].Categoria_Id + '">' + json[i].Categoria_Nombre + '</option>');
+                    $('#Txt_Dni').val(json[i].Cliente_Dni);
+                    $('#Txt_Nombre_Dni').html(json[i].Mascota_Cliente);
+                    $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
+                    $('#Txt_CodigoMascota').val(json[i].Mascota_Id);
+                    Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
+                    console.log('impr ' + $('#Txt_CodigoCliente').val().trim());
                 });
             },
             complete: function() {
@@ -1118,39 +909,199 @@ session_start();
         });
     }
 
+    // Clase Mascota
+    function Obtener_Mascotas_x_IdCliente(act, cond, id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/mascotas.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                Cond: cond,
+                Id: id
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                console.log(data);
+                var json = JSON.parse(data);
+                console.log(json);
+                $("#CboMascota").empty();
+                $.each(json, function(i, item) {
+                    $("#CboMascota").append('<option value="' + json[i].Mascota_Id + '">' + json[i].Mascota_Nombre + '</option>');
+                });
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+    $('#FormularioVacuna input').on('change', function() {
+        ValorRb = $('input[name=Dni]:checked', '#FormularioVacuna').val();
+    });
+
+    $('#btnBuscar').click(function() {
+        Obtener_Nombre_x_Dni_Mascota_Cliente('ObtenerNombrexIdClienteMascota', ValorRb, $('#Txt_Dni').val().toUpperCase().trim())
+    });
+    $("#Txt_Dni").keypress(function(e) {
+        if (e.which == 13) {
+            Obtener_Nombre_x_Dni_Mascota_Cliente('ObtenerNombrexIdClienteMascota', ValorRb, $('#Txt_Dni').val().toUpperCase().trim())
+        }
+    });
+
+    // Clase Mascota
+    function Obtener_Nombre_x_Dni_Mascota_Cliente(act, condicion, id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/mascotas.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                Condicion: condicion,
+                Id: id
+            }),
+            beforeSend: function() {
+                //alert('ok');
+                console.log(act + ':' + condicion + ':' + id);
+            },
+            success: function(data) {
+                console.log(data);
+                var json = JSON.parse(data);
+                if (json.length != 0) {
+                    if (condicion == 1) {
+                        $.each(json, function(i, item) {
+                            $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
+                            $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
+                        });
+                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
+                    } else if (condicion == 2) {
+                        $.each(json, function(i, item) {
+                            $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
+                            $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
+                            $('#Txt_CodigoMascota').val(json[i].Mascota_Id);
+                        });
+                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
+                        $("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
+                    }
+                } else {
+                    $('#Txt_Nombre_Dni').html('');
+                    $('#Txt_CodigoCliente').val('');
+                    $('#Txt_CodigoMascota').val('');
+                    $("#CboMascota").empty();
+                    alert('No existen registros para mostrar, verifique DNI propietario/mascota');
+                }
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+    $("#CboMascota").change(function() {
+        $('#Txt_CodigoMascota').val($("#CboMascota").val());
+    });
+
+    $("#CboVacuna").change(function() {
+        Obtener_Precio('MostrarPrecio', $("#CboVacuna").val().trim());
+    });
+
+    // Clase proser
+    function Obtener_Precio(act, id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/proser.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: id
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                console.log(data);
+                var json = JSON.parse(data);
+                $("#Txt_Precio").empty();
+                $.each(json, function(i, item) {
+                    $("#Txt_Precio").val(json[i].Producto_PrecioVenta);
+                });
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+    $('#btnAgendar').click(function() {
+        ProcesoGrabacion(1, 1000000, 2)
+    });
 
 
-    function ValidaCamposObligatorios(Nombre, PrecioCompra, PrecioVenta, TipoProducto, Categoria, Um) {
-        if (Nombre.length == 0) {
-            alert('El campo nombre es obligatorio');
-            $("#Txt_Nombre").focus();
+    $("#btnGrabar").click(function() {
+        ProcesoGrabacion(1, 1000000, 1)
+    });
+
+    function ProcesoGrabacion(tiporegistro, idvacuna, idcita) {
+        var nombredni = $('#Txt_Nombre_Dni').html();
+        if (nombredni == 0) {
+            alert('El DNI ingresado no existe, verificar el numero por favor o ingrese el DNI por defecto')
+        } else {
+            var Id = ValidaCamposObligatorios(
+                $('#Txt_Dni').val().toUpperCase().trim(),
+                $('#CboMascota').val().toUpperCase().trim(),
+                $('#CboVacuna').val().toUpperCase().trim(),
+                $('#Txt_Precio').val().toUpperCase().trim(),
+                $('#Txt_Fecha').val());
+            if (Id == 1) {
+                RegistrarVacuna("GrabarVacuna",
+                    tiporegistro,
+                    idvacuna,
+                    $("#Txt_Fecha").val(),
+                    $("#CboVacuna").val().toUpperCase().trim(),
+                    $("#Txt_Precio").val().toUpperCase().trim(),
+                    $("#CboMascota").val().toUpperCase().trim(),
+                    $("#Txt_Notas").val().toUpperCase().trim(),
+                    idcita,
+                    '<?php echo $_SESSION['User']; ?>',
+                    '1', '1',
+                    '<?php echo $_SESSION['IdAlmacen']; ?>'
+                );
+            }
+        }
+    }
+
+    function ValidaCamposObligatorios(dni, mascota, vacuna, precio, fecha) {
+        if (dni.length == 0) {
+            alert('El campo DNI es obligatorio');
+            $("#Txt_Dni").focus();
             return 0;
         } else {
-            if (PrecioCompra.length == 0) {
-                alert('El campo precio de compra de producto es obligatorio');
-                $('#Txt_PrecioCompra').focus();
+            if (mascota.length == 0) {
+                alert('El campo mascota es obligatorio');
+                $("#CboMascota").focus();
+                return 0;
             } else {
-                if (PrecioVenta.length == 0) {
-                    alert('El campo precio de venta de producto es obligatorio');
-                    $('#Txt_PrecioVenta').focus();
+                if (vacuna.length == 0) {
+                    alert('El campo vacuna es obligatorio');
+                    $("#CboVacuna").focus();
+                    return 0;
                 } else {
-                    if (TipoProducto.length == 0) {
-                        alert('El campo tipo de producto es obligatorio');
-                        $("#CboTipoProducto").focus();
+                    if (precio.length == 0) {
+                        alert('El campo precio es obligatorio');
+                        $("#Txt_Precio").focus();
                         return 0;
                     } else {
-                        if (Categoria.length == 0) {
-                            alert('El campo categoria es obligatorio');
-                            $("#CboCategoria").focus();
+                        if (fecha.length == 0) {
+                            alert('El campo fecha es obligatorio')
+                            $('#Txt_Fecha').focus();
                             return 0;
                         } else {
-                            if (Um.length == 0) {
-                                alert('El campo unidad de medida es obligatorio');
-                                $("#CboUM").focus();
-                                return 0;
-                            } else {
-                                return 1;
-                            }
+                            return 1;
                         }
                     }
                 }
@@ -1158,140 +1109,53 @@ session_start();
         }
     }
 
-    $('#BtnActualizarProser').click(function() {
-           var Id = ValidaCamposObligatorios(
-            $('#Txt_Nombre').val().trim(),
-            $('#Txt_PrecioCompra').val(),
-            $('#Txt_PrecioVenta').val(),
-            $('#CboTipoProducto').val().trim(),
-            $('#CboCategoria').val().trim(),
-            $('#CboUM').val().trim());
-        if (Id == 1) {
-            Editar_Proser("EditarProducto",
-                $("#Txt_Nombre").val().trim(),
-                $("#CboTipoProducto").val().trim(),
-                $("#CboCategoria").val().trim(),
-                $("#CboUM").val().trim(),
-                $("#Txt_PrecioCompra").val(),
-                $("#Txt_PrecioVenta").val(),
-                $("#Txt_Notas").val().trim(),
-                '1',
-                '<?php echo $_SESSION['User']; ?>',
-                $("#Txt_Codigo").val().trim(),
-                '2'
-            )
-            $("#PreguntaProducto").html("");
-            $("#Modal_Pregunta").modal("hide");
-        }
-    });
-
-
-    function Editar_Proser(act, nombre, tipoproducto, categoria, um, preciocompra, precioventa, notas, estado, usuario, codigoproducto, codigoact) {
+    function RegistrarVacuna(act, IdTipoRegistro, Idvacuna, Fecha, IdProducto, Precio, IdMascota, Observacion, Cita, Usuario, VentaTipo, Cantidad, IdAlmacen) {
         $.ajax({
             type: "POST",
-            url: "modulos/proser.php",
-            async: true,
+            url: "modulos/vacunas.php",
+            async: false,
             dataType: "html",
             data: ({
                 action: act,
-                Nombre: nombre,
-                Tipoproducto: tipoproducto,
-                Categoria: categoria,
-                Um: um,
-                Preciocompra: preciocompra,
-                Precioventa: precioventa,
-                Notas: notas,
-                Estado: estado,
-                Usuario: usuario,
-                Codigoproducto: codigoproducto,
-                Codigoact: codigoact
+                IdTipoRegistro: IdTipoRegistro,
+                Idvacuna: Idvacuna,
+                Fecha: Fecha,
+                IdProducto: IdProducto,
+                Precio: Precio,
+                IdMascota: IdMascota,
+                Observacion: Observacion,
+                Cita: Cita,
+                Usuario: Usuario,
+                VentaTipo: VentaTipo,
+                Cantidad: Cantidad,
+                IdAlmacen: IdAlmacen
             }),
             beforeSend: function() {
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
-
-                if (data == 1) {
-                    $("#Modal_ListadoProducto").modal("hide");
-                    listar();
-                    alert('Producto / Servicio Editado correctamente');
-                } else {
-                    alert('Lo sentimos ocurrio un error en el proceso de edición');
-                }
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    $('#TblProser').on('click', '.eliminar', function() {
-        var id = $(this).val();
-        if (Condicion == 1) {
-            var bool = confirm("Esta seguro de eliminar el registro ?");
-            if (bool) {
-                Eliminar_Producto('EliminarProducto', id)
-                alert('El producto seleccionado fue eliminado correctamente');
-            } else {
-                //alert("cancelo la solicitud");
-            }
-        } else {
-            alert('El perfil de usurio no esta habilitado para opción');
-        }
-    });
-
-    function Eliminar_Producto(act, codigo) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/proser.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: codigo
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                console.log(data);
-
-                if (data == 1) {
-                    //listar();
-                    //alert('Cliente Eliminado correctamente');
-                    listar();
-                } else {
-
-                    alert('Lo sentimos ocurrio un error en el proceso de edición');
-                }
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-
-    function Obtener_UM(act) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/proser.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
+                var idtmp;
                 console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
-                $("#CboUM").empty();
                 $.each(json, function(i, item) {
-                    $("#CboUM").append('<option value="' + json[i].UM_Id + '">' + json[i].UM_NombreLargo + '</option>');
+                    idtmp = json[i].CodigoVentaTmp;
+                    console.log(idtmp);
+                });
+                // Redireccionar
+                if (Cita == 1) {
+                    $("#Resultado_Grabacion").html('');
+                    var url = "venta-nuevo.php?IdVen=" + idtmp;
+                    $(location).attr('href', url);
+                } else {
+                    $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
+                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                        '<span aria-hidden="true">&times;</span>' +
+                        '</button>' +
+                        '<strong>Nuevo vacuna agendada correctamente</strong>' +
+                        '</div>')
+                }
+                $("#Resultado_Grabacion").fadeTo(2000, 500).slideUp(500, function() {
+                    $("#Resultado_Grabacion").slideUp(500);
                 });
             },
             complete: function() {
@@ -1301,13 +1165,24 @@ session_start();
     }
 
 
-
     $(function() {
-        Obtener_Nombre();
-        Obtener_Condicion();
-        listar();
 
+        Obtener_Vacunas('MostrarProductoxCondicion', 1);
 
+        if ($_GET("IdMas") === undefined) {
+            //SIN VALOR GET
+        } else {
+            // CON VALOR GET
+            $("#RbDniM").attr('checked', true);
+            $("input[type=radio]").attr('disabled', true);
+            $("#Txt_Dni").attr('disabled', true);
+            $("#btnBuscar").attr('disabled', true);
+            Obtener_NombreCliente_NombreMascota('MostrarNombrecliNombreMas', $_GET("IdMas"));
+            console.log('final' + $('#Txt_CodigoCliente').val().trim());
+            $("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
+        }
+        //EVALUAR
+        //Obtener_Precio('MostrarPrecio', 1);
 
     });
 </script>
