@@ -667,7 +667,7 @@ session_start();
 
                                 <div class="card-body collapse in">
                                     <div class="card-block">
-                                        <form class="form" id="FormularioVacuna">
+                                        <form class="form" id="FormularioAtencion">
                                             <!--<input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
                                         <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">    -->
                                             <div class="form-body">
@@ -737,8 +737,8 @@ session_start();
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label for="Txt_Notas">Sintomas</label>
-                                                            <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales"></textarea>
+                                                            <label for="Txt_Sintomas">Sintomas</label>
+                                                            <textarea id="Txt_Sintomas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Sintomas" placeholder=""></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -747,24 +747,24 @@ session_start();
                                                     <div class="col-md-3">
                                                         <div class="form-inline">
                                                             <div class="form-group">
-                                                                <label for="Txt_Precio">T.&nbsp;&nbsp;</label>
-                                                                <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Nombres" name="Txt_Precio">
+                                                                <label for="Txt_T">T.&nbsp;&nbsp;</label>
+                                                                <input type="text" style="text-transform:uppercase;" id="Txt_T" class="form-control" placeholder="" name="Txt_T">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-inline">
                                                             <div class="form-group">
-                                                                <label for="Txt_Precio">F.C.&nbsp;&nbsp;</label>
-                                                                <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Nombres" name="Txt_Precio">
+                                                                <label for="Txt_C">F.C.&nbsp;&nbsp;</label>
+                                                                <input type="text" style="text-transform:uppercase;" id="Txt_C" class="form-control" placeholder="" name="Txt_C">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-inline">
                                                             <div class="form-group">
-                                                                <label for="Txt_Precio">F.R.&nbsp;&nbsp;</label>
-                                                                <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Nombres" name="Txt_Precio">
+                                                                <label for="Txt_FR">F.R.&nbsp;&nbsp;</label>
+                                                                <input type="text" style="text-transform:uppercase;" id="Txt_FR" class="form-control" placeholder="" name="Txt_FR">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -774,22 +774,22 @@ session_start();
                                                 <div class="row">
                                                     <div class="col-md-1">
                                                         <div class="form-group">
-                                                            <label for="Txt_Precio">Deshidrat.&nbsp;</label>
+                                                            <label for="Txt_Deshidrat">Deshidrat.&nbsp;</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-5">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Nombres" name="Txt_Precio">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Deshidrat" class="form-control" placeholder="" name="Txt_Deshidrat">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1">
                                                         <div class="form-group">
-                                                            <label for="Txt_Precio">Mucosas.&nbsp;</label>
+                                                            <label for="Txt_Mucosa">Mucosa.&nbsp;</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-5">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Nombres" name="Txt_Precio">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Mucosa" class="form-control" placeholder="" name="Txt_Mucosa">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -797,32 +797,32 @@ session_start();
                                                 <div class="row">
                                                     <div class="col-md-1">
                                                         <div class="form-group">
-                                                            <label for="Txt_Precio">Diarrea.&nbsp;</label>
+                                                            <label for="Txt_Diarrea">Diarrea.&nbsp;</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Nombres" name="Txt_Precio">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Diarrea" class="form-control" placeholder="" name="Txt_Diarrea">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1">
                                                         <div class="form-group">
-                                                            <label for="Txt_Precio">Ganglio.&nbsp;</label>
+                                                            <label for="Txt_Ganglio">Ganglio.&nbsp;</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Nombres" name="Txt_Precio">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Ganglio" class="form-control" placeholder="" name="Txt_Ganglio">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1">
                                                         <div class="form-group">
-                                                            <label for="Txt_Precio">Peso.&nbsp;</label>
+                                                            <label for="Txt_Peso">Peso.&nbsp;</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Nombres" name="Txt_Precio">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Peso" class="form-control" placeholder="" name="Txt_Peso">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -832,34 +832,34 @@ session_start();
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <label for="Txt_Precio">Dx Presuntivo.&nbsp;</label>
+                                                            <label for="Txt_Dx_Presuntivo">Dx Presuntivo.&nbsp;</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-10">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Nombres" name="Txt_Precio">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Dx_Presuntivo" class="form-control" placeholder="" name="Txt_Dx_Presuntivo">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <label for="Txt_Precio">Dx Definitivo.&nbsp;</label>
+                                                            <label for="Txt_Dx_Definitivo">Dx Definitivo.&nbsp;</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-10">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Nombres" name="Txt_Precio">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Dx_Definitivo" class="form-control" placeholder="" name="Txt_Dx_Definitivo">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <label for="Txt_Precio">Dx Solicitado.&nbsp;</label>
+                                                            <label for="Txt_Dx_Solicitado">Dx Solicitado.&nbsp;</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-10">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Nombres" name="Txt_Precio">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Dx_Solicitado" class="form-control" placeholder="" name="Txt_Dx_Solicitado">
                                                         </div>
                                                     </div>
 
@@ -870,23 +870,23 @@ session_start();
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <label for="Txt_Precio">Dx Presuntivo.&nbsp;</label>
+                                                            <label for="Txt_Descripcion">Descipción.&nbsp;</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-10">
                                                         <div class="form-group">
-                                                        <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="3" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales"></textarea>
+                                                        <textarea id="Txt_Descripcion" style="text-transform:uppercase;" rows="3" class="form-control" name="Txt_Descripcion" placeholder=""></textarea>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <label for="Txt_Precio">Dx Presuntivo.&nbsp;</label>
+                                                            <label for="Txt_NotasAdicionales">Notas Adicionales.&nbsp;</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-10">
                                                         <div class="form-group">
-                                                        <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="3" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales"></textarea>
+                                                        <textarea id="Txt_NotasAdicionales" style="text-transform:uppercase;" rows="3" class="form-control" name="Txt_NotasAdicionales" placeholder=""></textarea>
                                                         </div>
                                                     </div>
 
@@ -901,10 +901,10 @@ session_start();
                                                     <i class="icon-reload"></i> Nuevo
                                                 </button>
                                                 <button id="btnGrabar" type="button" class="btn btn-success mr-1">
-                                                    <i class="icon-check2"></i> Registrar Vacuna
+                                                    <i class="icon-check2"></i> Registrar Atención
                                                 </button>
                                                 <button id="btnAgendar" type="button" class="btn btn-warning mr-1">
-                                                    <i class="icon-check2"></i> Agendar Vacuna
+                                                    <i class="icon-check2"></i> Agendar Atención
                                                 </button>
                                             </div>
 
@@ -971,12 +971,12 @@ session_start();
 
 
     function Actualizar() {
-        limpiaForm($("#FormularioVacuna"));
-        Obtener_Vacunas('MostrarProductoxCondicion', 1);
+        limpiaForm($("#FormularioAtencion"));
+        //Obtener_Vacunas('MostrarProductoxCondicion', 1);
     }
 
     // Clase Proser
-    function Obtener_Vacunas(act, id) {
+    /* function Obtener_Vacunas(act, id) {
         $.ajax({
             type: "POST",
             url: "modulos/proser.php",
@@ -1002,10 +1002,10 @@ session_start();
                 //alert('ok2');
             }
         });
-    }
+    } */
 
     $("#btnLimpiar").click(function() {
-        limpiaForm($("#FormularioVacuna"));
+        limpiaForm($("#FormularioAtencion"));
 
     });
 
@@ -1071,8 +1071,8 @@ session_start();
         });
     }
 
-    $('#FormularioVacuna input').on('change', function() {
-        ValorRb = $('input[name=Dni]:checked', '#FormularioVacuna').val();
+    $('#FormularioAtencion input').on('change', function() {
+        ValorRb = $('input[name=Dni]:checked', '#FormularioAtencion').val();
     });
 
     $('#btnBuscar').click(function() {
@@ -1170,34 +1170,43 @@ session_start();
     }
 
     $('#btnAgendar').click(function() {
-        ProcesoGrabacion(1, 1000000, 2)
+        ProcesoGrabacion(1, 4000000, 2)
     });
 
 
     $("#btnGrabar").click(function() {
-        ProcesoGrabacion(1, 1000000, 1)
+        ProcesoGrabacion(1, 4000000, 1)
     });
 
-    function ProcesoGrabacion(tiporegistro, idvacuna, idcita) {
+    function ProcesoGrabacion(tiporegistro, idatencion, idcita) {
         var nombredni = $('#Txt_Nombre_Dni').html();
         if (nombredni == 0) {
             alert('El DNI ingresado no existe, verificar el numero por favor o ingrese el DNI por defecto')
         } else {
             var Id = ValidaCamposObligatorios(
-                $('#Txt_Dni').val().toUpperCase().trim(),
-                $('#CboMascota').val().toUpperCase().trim(),
-                $('#CboVacuna').val().toUpperCase().trim(),
-                $('#Txt_Precio').val().toUpperCase().trim(),
-                $('#Txt_Fecha').val());
+                $('#Txt_Sintomas').val().toUpperCase().trim(),
+                $('#Txt_T').val().toUpperCase().trim(),
+                //$('#Txt_C').val().toUpperCase().trim(),
+                //$('#Txt_FR').val().toUpperCase().trim(),
+                //$('#Txt_Deshidrat').val().toUpperCase().trim(),
+                //$('#Txt_Mucosa').val().toUpperCase().trim(),
+                //$('#Txt_Diarrea').val().toUpperCase().trim(),
+                //$('#Txt_Ganglio').val().toUpperCase().trim(),
+                $('#Txt_Peso').val().toUpperCase().trim(),
+                $('#Txt_Dx_Presuntivo').val().toUpperCase().trim(),
+                //$('#Txt_Dx_Definitivo').val().toUpperCase().trim(),
+                //$('#Txt_Dx_Solicitado').val().toUpperCase().trim(),
+                $('#Txt_Descripcion').val().toUpperCase().trim(),
+                $('#Txt_NotasAdicionales').val().toUpperCase().trim())
             if (Id == 1) {
-                RegistrarVacuna("GrabarVacuna",
+                RegistrarAtencion("GrabarAtencion",
                     tiporegistro,
-                    idvacuna,
+                    idatencion,
                     $("#Txt_Fecha").val(),
-                    $("#CboVacuna").val().toUpperCase().trim(),
-                    $("#Txt_Precio").val().toUpperCase().trim(),
-                    $("#CboMascota").val().toUpperCase().trim(),
-                    $("#Txt_Notas").val().toUpperCase().trim(),
+                    $('#xx').val().toUpperCase().trim()
+                    $('#xx').val().toUpperCase().trim()
+                    $('#xx').val().toUpperCase().trim()
+                    $('#xx').val().toUpperCase().trim()
                     idcita,
                     '<?php echo $_SESSION['User']; ?>',
                     '1', '1',
@@ -1207,33 +1216,40 @@ session_start();
         }
     }
 
-    function ValidaCamposObligatorios(dni, mascota, vacuna, precio, fecha) {
-        if (dni.length == 0) {
-            alert('El campo DNI es obligatorio');
-            $("#Txt_Dni").focus();
+    function ValidaCamposObligatorios(sintomas, temp, peso, dxpresuntivo, descripcion, notasadicionales) {
+        if (sintomas.length == 0) {
+            alert('El campo sintomas es obligatorio');
+            $("#Txt_Sintomas").focus();
             return 0;
         } else {
-            if (mascota.length == 0) {
-                alert('El campo mascota es obligatorio');
-                $("#CboMascota").focus();
+            if (temp.length == 0) {
+                alert('El campo temperatura es obligatorio');
+                $("#Txt_T").focus();
                 return 0;
             } else {
-                if (vacuna.length == 0) {
-                    alert('El campo vacuna es obligatorio');
-                    $("#CboVacuna").focus();
+                if (peso.length == 0) {
+                    alert('El campo peso es obligatorio');
+                    $("#Txt_Peso").focus();
                     return 0;
                 } else {
-                    if (precio.length == 0) {
-                        alert('El campo precio es obligatorio');
-                        $("#Txt_Precio").focus();
+                    if (dxpresuntivo.length == 0) {
+                        alert('El campo Dx. presuntivo es obligatorio');
+                        $("#Txt_Dx_Presuntivo").focus();
                         return 0;
                     } else {
-                        if (fecha.length == 0) {
-                            alert('El campo fecha es obligatorio')
-                            $('#Txt_Fecha').focus();
+                        if (descripcion.length == 0) {
+                            alert('El campo descripción es obligatorio')
+                            $('#Txt_Descripcion').focus();
                             return 0;
                         } else {
-                            return 1;
+                            if(notasadicionales.length == 0){
+                                alert('El campo notas adicionales es obligatorio');
+                                $('#Txt_NotasAdicionales').focus();
+                                return 0;
+                            }else{
+                                return 1;
+                            }
+                            
                         }
                     }
                 }
@@ -1241,10 +1257,12 @@ session_start();
         }
     }
 
-    function RegistrarVacuna(act, IdTipoRegistro, Idvacuna, Fecha, IdProducto, Precio, IdMascota, Observacion, Cita, Usuario, VentaTipo, Cantidad, IdAlmacen) {
+    function RegistrarAtencion(act, IdTipoRegistro, IdAtencion, Fecha, IdMascota, Sintomas, Atencion_T, Atencion_FC, Atencion_FR, Atencion_sc_Des, Atencion_sc_Muc,
+    Atencion_sc_TLLC, Atencion_sc_Vom, Atencion_sc_Dia, Atencion_sc_Gan, Atencion_sc_Pes, Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des,
+    Atencion_tr_Obs, Atencion_tr_Pre, Pint_Documento, Pint_Cita, Pint_CitaEstado, Pint_Estado, Pvchr_Usuario, Pint_VentaTipo, Pint_IdAlmacen) {
         $.ajax({
             type: "POST",
-            url: "modulos/vacunas.php",
+            url: "modulos/atencion.php",
             async: false,
             dataType: "html",
             data: ({
@@ -1299,7 +1317,7 @@ session_start();
 
     $(function() {
 
-        Obtener_Vacunas('MostrarProductoxCondicion', 1);
+        //Obtener_Vacunas('MostrarProductoxCondicion', 1);
 
         if ($_GET("IdMas") === undefined) {
             //SIN VALOR GET

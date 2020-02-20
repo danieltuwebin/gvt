@@ -31,8 +31,7 @@ $('.solo-numero').keyup(function() {
     this.value = (this.value + '').replace(/[^0-9]/g, '');
 });
 
-
-/* //http://jquery-manual.blogspot.com/2013/12/como-obtener-parametros-get-con.html?mensaje=ok
+ //http://jquery-manual.blogspot.com/2013/12/como-obtener-parametros-get-con.html?mensaje=ok
 function $_GET(param) {
     // Obtener la url completa
     url = document.URL;
@@ -54,7 +53,7 @@ function $_GET(param) {
         }
         x++;
     }
-} */
+} 
 
 
 window.setTimeout(function() {
