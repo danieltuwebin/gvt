@@ -734,6 +734,50 @@ session_start();
                                                 <br>
 
                                                 <h4 class="form-section">signos Clinicos</h4>
+
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                        <div class="form-group">
+                                                            <label for="Txt_Fecha">Fecha.</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <input type="date" style="text-transform:uppercase;" id="Txt_Fecha" class="form-control" placeholder="" name="Txt_Fecha">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <div class="form-group">
+                                                            <label for="Txt_T">T.&nbsp;&nbsp;</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <div class="form-group">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_T" class="form-control" placeholder="" name="Txt_T">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <div class="form-group">
+                                                            <label for="Txt_C">F.C.&nbsp;&nbsp;</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <div class="form-group">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_C" class="form-control" placeholder="" name="Txt_C">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <div class="form-group">
+                                                            <label for="Txt_FR">F.R.&nbsp;&nbsp;</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <div class="form-group">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_FR" class="form-control" placeholder="" name="Txt_FR">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
@@ -743,7 +787,7 @@ session_start();
                                                     </div>
                                                 </div>
 
-                                                <div class="row">
+                                                <!-- <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-inline">
                                                             <div class="form-group">
@@ -768,9 +812,7 @@ session_start();
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <br>
-
+                                                </div> -->
                                                 <div class="row">
                                                     <div class="col-md-1">
                                                         <div class="form-group">
@@ -790,6 +832,29 @@ session_start();
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <input type="text" style="text-transform:uppercase;" id="Txt_Mucosa" class="form-control" placeholder="" name="Txt_Mucosa">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                        <div class="form-group">
+                                                            <label for="Txt_Tllc">Tllc.&nbsp;</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div class="form-group">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Tllc" class="form-control" placeholder="" name="Txt_Tllc">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <div class="form-group">
+                                                            <label for="Txt_Vomitos">Vomitos.&nbsp;</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div class="form-group">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Vomitos" class="form-control" placeholder="" name="Txt_Vomitos">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -875,7 +940,7 @@ session_start();
                                                     </div>
                                                     <div class="col-md-10">
                                                         <div class="form-group">
-                                                        <textarea id="Txt_Descripcion" style="text-transform:uppercase;" rows="3" class="form-control" name="Txt_Descripcion" placeholder=""></textarea>
+                                                            <textarea id="Txt_Descripcion" style="text-transform:uppercase;" rows="3" class="form-control" name="Txt_Descripcion" placeholder=""></textarea>
                                                         </div>
                                                     </div>
 
@@ -886,13 +951,26 @@ session_start();
                                                     </div>
                                                     <div class="col-md-10">
                                                         <div class="form-group">
-                                                        <textarea id="Txt_NotasAdicionales" style="text-transform:uppercase;" rows="3" class="form-control" name="Txt_NotasAdicionales" placeholder=""></textarea>
+                                                            <textarea id="Txt_NotasAdicionales" style="text-transform:uppercase;" rows="3" class="form-control" name="Txt_NotasAdicionales" placeholder=""></textarea>
                                                         </div>
                                                     </div>
 
                                                 </div>
 
+                                                <h4 class="form-section">Precio</h4>
 
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label for="Txt_Precio">Costo de Atención.&nbsp;</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <input type="text" id="Txt_Precio" style="text-transform:uppercase;" class="form-control" name="Txt_Precio" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                             </div>
 
@@ -1203,13 +1281,32 @@ session_start();
                     tiporegistro,
                     idatencion,
                     $("#Txt_Fecha").val(),
-                    $('#xx').val().toUpperCase().trim()
-                    $('#xx').val().toUpperCase().trim()
-                    $('#xx').val().toUpperCase().trim()
-                    $('#xx').val().toUpperCase().trim()
+                    $("#CboMascota").val(),
+                    $('#Txt_Sintomas').val().toUpperCase().trim(),
+                    $('#Txt_T').val().toUpperCase().trim(),
+                    $('#Txt_C').val().toUpperCase().trim(),
+                    $('#Txt_FR').val().toUpperCase().trim(),
+
+                    $('#Txt_Deshidrat').val().toUpperCase().trim(),
+                    $('#Txt_Mucosa').val().toUpperCase().trim(),
+                    $('#Txt_Tllc').val().toUpperCase().trim(),
+                    $('#Txt_Vomitos').val().toUpperCase().trim(),
+                    $('#Txt_Diarrea').val().toUpperCase().trim(),
+                    $('#Txt_Ganglio').val().toUpperCase().trim(),
+                    $('#Txt_Peso').val(),
+
+                    $('#Txt_Dx_Presuntivo').val().toUpperCase().trim(),
+                    $('#Txt_Dx_Definitivo').val().toUpperCase().trim(),
+                    $('#Txt_Dx_Solicitado').val().toUpperCase().trim(),
+                    $('#Txt_Descripcion').val().toUpperCase().trim(),
+                    $('#Txt_NotasAdicionales').val().toUpperCase().trim(),
+                    $('#Txt_Precio').val(),
+                    1, /* Documento */
                     idcita,
+                    'A',
+                    1,
                     '<?php echo $_SESSION['User']; ?>',
-                    '1', '1',
+                    '1',
                     '<?php echo $_SESSION['IdAlmacen']; ?>'
                 );
             }
@@ -1242,14 +1339,14 @@ session_start();
                             $('#Txt_Descripcion').focus();
                             return 0;
                         } else {
-                            if(notasadicionales.length == 0){
+                            if (notasadicionales.length == 0) {
                                 alert('El campo notas adicionales es obligatorio');
                                 $('#Txt_NotasAdicionales').focus();
                                 return 0;
-                            }else{
+                            } else {
                                 return 1;
                             }
-                            
+
                         }
                     }
                 }
@@ -1258,8 +1355,8 @@ session_start();
     }
 
     function RegistrarAtencion(act, IdTipoRegistro, IdAtencion, Fecha, IdMascota, Sintomas, Atencion_T, Atencion_FC, Atencion_FR, Atencion_sc_Des, Atencion_sc_Muc,
-    Atencion_sc_TLLC, Atencion_sc_Vom, Atencion_sc_Dia, Atencion_sc_Gan, Atencion_sc_Pes, Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des,
-    Atencion_tr_Obs, Atencion_tr_Pre, Pint_Documento, Pint_Cita, Pint_CitaEstado, Pint_Estado, Pvchr_Usuario, Pint_VentaTipo, Pint_IdAlmacen) {
+        Atencion_sc_TLLC, Atencion_sc_Vom, Atencion_sc_Dia, Atencion_sc_Gan, Atencion_sc_Pes, Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des,
+        Atencion_tr_Obs, Atencion_tr_Pre, Pint_Documento, Pint_Cita, Pint_CitaEstado, Pint_Estado, Pvchr_Usuario, Pint_VentaTipo, Pint_IdAlmacen) {
         $.ajax({
             type: "POST",
             url: "modulos/atencion.php",
@@ -1268,17 +1365,33 @@ session_start();
             data: ({
                 action: act,
                 IdTipoRegistro: IdTipoRegistro,
-                Idvacuna: Idvacuna,
+                IdAtencion: IdAtencion,
                 Fecha: Fecha,
-                IdProducto: IdProducto,
-                Precio: Precio,
                 IdMascota: IdMascota,
-                Observacion: Observacion,
-                Cita: Cita,
-                Usuario: Usuario,
-                VentaTipo: VentaTipo,
-                Cantidad: Cantidad,
-                IdAlmacen: IdAlmacen
+                Sintomas: Sintomas,
+                Atencion_T: Atencion_T,
+                Atencion_FC: Atencion_FC,
+                Atencion_FR: Atencion_FR,
+                Atencion_sc_Des: Atencion_sc_Des,
+                Atencion_sc_Muc: Atencion_sc_Muc,
+                Atencion_sc_TLLC: Atencion_sc_TLLC,
+                Atencion_sc_Vom: Atencion_sc_Vom,
+                Atencion_sc_Dia: Atencion_sc_Dia,
+                Atencion_sc_Gan: Atencion_sc_Gan,
+                Atencion_sc_Pes: Atencion_sc_Pes,
+                Atencion_dx_Pre: Atencion_dx_Pre,
+                Atencion_dx_Def: Atencion_dx_Def,
+                Atencion_dx_Sol: Atencion_dx_Sol,
+                Atencion_tr_Des: Atencion_tr_Des,
+                Atencion_tr_Obs: Atencion_tr_Obs,
+                Atencion_tr_Pre: Atencion_tr_Pre,
+                Pint_Documento: Pint_Documento,
+                Pint_Cita: Pint_Cita,
+                Pint_CitaEstado: Pint_CitaEstado,
+                Pint_Estado: Pint_Estado,
+                Pvchr_Usuario: Pvchr_Usuario,
+                Pint_VentaTipo: Pint_VentaTipo,
+                Pint_IdAlmacen :Pint_IdAlmacen
             }),
             beforeSend: function() {
                 //alert('ok');
