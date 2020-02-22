@@ -2177,3 +2177,114 @@ ELSEIF Pint_IdTipoRegistro = 2 THEN
   END IF;
 END IF;
 END
+
+
+------------ 220220
+
+-- SELECT * FROM tblAtencion
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblAtencion_All_x_Condicion (IN Pint_Condicion INT, IN Pint_IdMascota INT)
+BEGIN
+IF Pint_Condicion = 1 THEN
+BEGIN
+SELECT ta.Atencion_Id,tm.Mascota_Id,ta.Atencion_Fecha,tp.Producto_Nombre,tm.Mascota_Nombre,ta.Atencion_tr_Precio,
+CASE WHEN ta.Atencion_CitaEstado = 1 THEN 'REALIZADO' WHEN ta.Atencion_CitaEstado = 2 THEN 'AGENDADO' ELSE 'REPROGRAMADO ' END AS Atencion_CitaEstado,
+ta.Atencion_tr_Observacion FROM tblAtencion ta LEFT JOIN tblMascota tm ON ta.Atencion_IdMascota = tm.Mascota_Id
+LEFT JOIN tblProducto tp ON ta.Atencion_IdProducto = tp.Producto_Id
+WHERE ta.Atencion_Estado = 1;
+END;
+ELSEIF Pint_Condicion = 2 THEN
+BEGIN
+SELECT ta.Atencion_Id,tm.Mascota_Id,ta.Atencion_Fecha,tp.Producto_Nombre,tm.Mascota_Nombre,ta.Atencion_tr_Precio,
+CASE WHEN ta.Atencion_CitaEstado = 1 THEN 'REALIZADO' WHEN ta.Atencion_CitaEstado = 2 THEN 'AGENDADO' ELSE 'REPROGRAMADO ' END AS Atencion_CitaEstado,
+ta.Atencion_tr_Observacion FROM tblAtencion ta LEFT JOIN tblMascota tm ON ta.Atencion_IdMascota = tm.Mascota_Id
+LEFT JOIN tblProducto tp ON ta.Atencion_IdProducto = tp.Producto_Id
+WHERE ta.Atencion_Estado = 1 AND tm.Mascota_Id = Pint_IdMascota;
+END;
+END IF;
+END$$
+DELIMITER ;
+-- SP_Obtener_TblAtencion_All_x_Condicion
+
+
+DROP PROCEDURE IF EXISTS SP_Actualizar_TblAtencion
+DELIMITER $$
+CREATE PROCEDURE SP_Actualizar_TblAtencion(IN Pint_IdAtencion INT,                                           
+                                                 IN Pdat_Fecha DATE,
+                                            	 IN Pint_IdProducto INT,
+                                                 IN Pint_IdMascota INT,
+                                                 IN Pvchr_Sintomas VARCHAR(3000),                                                
+                                                 IN Pvchr_Atencion_T VARCHAR(100),
+                                                 IN Pvchr_Atencion_FC VARCHAR(100),
+                                                 IN Pvchr_Atencion_FR VARCHAR(100),                                                  
+                                                 IN Pvchr_Atencion_sc_Des VARCHAR(100),
+                                                 IN Pvchr_Atencion_sc_Muc VARCHAR(100),
+                                                 IN Pvchr_Atencion_sc_TLLC VARCHAR(100),
+                                                 IN Pvchr_Atencion_sc_Vom VARCHAR(100),
+                                                 IN Pvchr_Atencion_sc_Dia VARCHAR(100),
+                                                 IN Pvchr_Atencion_sc_Gan VARCHAR(100),
+                                                 IN Pvchr_Atencion_sc_Pes VARCHAR(50),                                                  
+                                                 IN Pvchr_Atencion_dx_Pre VARCHAR(150),
+                                                 IN Pvchr_Atencion_dx_Def VARCHAR(150),
+                                                 IN Pvchr_Atencion_dx_Sol VARCHAR(150),
+                                                 IN Pvchr_Atencion_tr_Des VARCHAR(150),
+                                                 IN Pvchr_Atencion_tr_Obs VARCHAR(150),
+                                                 IN Pflo_Atencion_tr_Pre FLOAT,
+                                                 IN Pint_Documento INT,
+                                                 IN Pint_Cita INT,
+                                                 IN Pchr_CitaEstado CHAR(1),
+                                                 IN Pint_Estado INT,                                                
+                                                 IN Pvchr_Usuario VARCHAR(100))
+BEGIN
+IF EXISTS(SELECT Atencion_Id FROM tblAtencion WHERE Atencion_Id = Pint_IdAtencion AND Pchr_CitaEstado LIKE 'A') THEN
+UPDATE tblAtencion SET 
+ Atencion_Fecha=Pdat_Fecha
+,Atencion_IdProducto=Pint_IdProducto
+,Atencion_IdMascota=Pint_IdMascota
+,Atencion_Sintomas=Pvchr_Sintomas
+,Atencion_T=Pvchr_Atencion_T
+,Atencion_FC=Pvchr_Atencion_FC
+,Atencion_FR=Pvchr_Atencion_FR
+,Atencion_sc_Deshidratacion=Pvchr_Atencion_sc_Des
+,Atencion_sc_Mucosas=Pvchr_Atencion_sc_Muc
+,Atencion_sc_TLLC=Pvchr_Atencion_sc_TLLC
+,Atencion_sc_Vomitos=Pvchr_Atencion_sc_Vom
+,Atencion_sc_Diarreas=Pvchr_Atencion_sc_Dia
+,Atencion_sc_Ganglios=Pvchr_Atencion_sc_Gan
+,Atencion_sc_Peso=Pvchr_Atencion_sc_Pes
+,Atencion_dx_Presuntivo=Pvchr_Atencion_dx_Pre
+,Atencion_dx_Definitivo=Pvchr_Atencion_dx_Def
+,Atencion_dx_Solicitado=Pvchr_Atencion_dx_Sol
+,Atencion_tr_Descripcion=Pvchr_Atencion_tr_Des
+,Atencion_tr_Observacion=Pvchr_Atencion_tr_Obs
+,Atencion_tr_Precio=Pflo_Atencion_tr_Pre
+,Atencion_IdDocumento=Pint_Documento
+,Atencion_Cita=Pint_Cita
+,Atencion_CitaEstado=Pchr_CitaEstado
+,Atencion_Estado=Pint_Estado
+,Atencion_FechaGrab_Edicion=NOW()
+,Atencion_UserGrab_Edicion=Pvchr_Usuario WHERE Atencion_Id = Pint_IdAtencion;
+SELECT '1' AS CODIGO;
+ELSE
+SELECT '2' AS CODIGO;
+END IF;
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE SP_Eliminar_TblAtencion (IN Pint_IdAtencion INT)
+BEGIN
+UPDATE tblAtencion SET Atencion_Estado = 2 WHERE Atencion_Id;
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS SP_Obtener_TblAtencion_All_x_Id;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblAtencion_All_x_Id (IN Pint_IdAtencion INT)
+BEGIN
+SELECT Atencion_Id, Atencion_IdVenta, Atencion_Fecha, Atencion_IdProducto, Atencion_IdMascota, Atencion_Sintomas, Atencion_T, Atencion_FC, Atencion_FR, Atencion_sc_Deshidratacion, Atencion_sc_Mucosas, Atencion_sc_TLLC, Atencion_sc_Vomitos, Atencion_sc_Diarreas, Atencion_sc_Ganglios, Atencion_sc_Peso, Atencion_dx_Presuntivo, Atencion_dx_Definitivo, Atencion_dx_Solicitado, Atencion_tr_Descripcion, Atencion_tr_Observacion, Atencion_tr_Precio, Atencion_IdDocumento, Atencion_Cita, Atencion_CitaEstado, Atencion_Estado, Atencion_FechaGra, Atencion_UserGrab, Atencion_FechaGrab_Edicion, Atencion_UserGrab_Edicion 
+FROM tblAtencion WHERE Atencion_Id = Pint_IdAtencion;
+END$$
+DELIMITER ;

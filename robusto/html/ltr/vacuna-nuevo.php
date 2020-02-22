@@ -711,7 +711,7 @@ session_start();
                                                                     <h5>
                                                                         <label for="Txt_Nombre_Dni">Nombre propietario :&nbsp;&nbsp; </label><label id="Txt_Nombre_Dni" class="primary"></label>
                                                                         <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
-                                                                        <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">
+                                                                        <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">                                                                      
                                                                     </h5>
                                                                 </div>
                                                             </div>

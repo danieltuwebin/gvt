@@ -23,6 +23,7 @@ if ($_POST['action'] == "GrabarAtencion") {
     $IdTipoRegistro = $_POST['IdTipoRegistro'];
     $IdAtencion = $_POST['IdAtencion'];
     $Fecha = $_POST['Fecha'];
+    $IdProducto = $_POST['IdProducto'];
     $IdMascota = $_POST['IdMascota'];
     $Sintomas = $_POST['Sintomas'];
     $Atencion_T = $_POST['Atencion_T'];
@@ -50,7 +51,7 @@ if ($_POST['action'] == "GrabarAtencion") {
     $Pint_IdAlmacen = $_POST['Pint_IdAlmacen'];    
 
     $myArray = array();
-    $sql = "CALL SP_Registrar_TblAtencion('$IdTipoRegistro','$IdAtencion','$Fecha','$IdMascota','$Sintomas','$Atencion_T','$Atencion_FC','$Atencion_FR',
+    $sql = "CALL SP_Registrar_TblAtencion('$IdTipoRegistro','$IdAtencion','$Fecha','$IdProducto','$IdMascota','$Sintomas','$Atencion_T','$Atencion_FC','$Atencion_FR',
     '$Atencion_sc_Des','$Atencion_sc_Muc','$Atencion_sc_TLLC','$Atencion_sc_Vom','$Atencion_sc_Dia','$Atencion_sc_Gan','$Atencion_sc_Pes','$Atencion_dx_Pre',
     '$Atencion_dx_Def','$Atencion_dx_Sol','$Atencion_tr_Des','$Atencion_tr_Obs','$Atencion_tr_Pre','$Pint_Documento','$Pint_Cita','$Pint_CitaEstado',
     '$Pint_Estado','$Pvchr_Usuario','$Pint_VentaTipo','$Pint_IdAlmacen')";

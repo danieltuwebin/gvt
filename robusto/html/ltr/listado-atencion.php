@@ -12,7 +12,7 @@ session_start();
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Nueva Atención - Sistema Vet. TuWebIn</title>
+    <title>Listado Atención - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="../../app-assets/images/ico/gavet-icon-120.png">
@@ -37,6 +37,7 @@ session_start();
     <!-- BEGIN Page Level CSS-->
     <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/menu/menu-types/vertical-overlay-menu.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/colors/palette-tooltip.css">
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
@@ -62,7 +63,7 @@ session_start();
         $CondicionMnu = $_SESSION['UserPerfil'];
 
         if ($CondicionMnu == 1) { /* PERFIL ADMIN (1) */
-        ?>
+            ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -189,10 +190,10 @@ session_start();
                             <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
                         </a>
                         <ul class="menu-content">
-                            <li class="active">
+                            <li>
                                 <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
@@ -250,7 +251,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 2) { /* PERFIL JEFE (2) */
-        ?>
+            ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -379,10 +380,10 @@ session_start();
                             <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
                         </a>
                         <ul class="menu-content">
-                            <li class="active">
+                            <li>
                                 <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
@@ -442,7 +443,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 3) { /* PERFIL SOLO LECTURA (3) */
-        ?>
+            ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -498,7 +499,7 @@ session_start();
                             <span data-i18n="nav.content.main" class="menu-title">Vacunas</span>
                         </a>
                         <ul class="menu-content">
-                            <li>
+                            <li class="active">
                                 <a href="listado-vacuna.php" class="menu-item">Listado Vacunas</a>
                             </li>
                         </ul>
@@ -553,7 +554,7 @@ session_start();
                             <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
                         </a>
                         <ul class="menu-content">
-                            <li>
+                            <li class="active">
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
@@ -617,394 +618,220 @@ session_start();
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
     <!-- Modal -->
-    <div class="modal fade text-xs-left" id="Modal_Pregunta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade text-xs-left" id="Modal_ListadoVacunas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cliente Existente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel17">Edición Atención</h4>
                 </div>
                 <div class="modal-body">
-                    <p id="PreguntaCliente"></p>
+                    <form class="form" id="FormularioVacuna">
+                        <div class="form-body">
+                            <h4 class="form-section">Propietario</h4>
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <label for="Txt_Buscar_Dni"><strong>Buscar Por :</strong></label>
+                                                <label class="display-inline-block custom-control custom-radio ml-1">
+                                                    <input type="radio" id="RbDniP" name="Dni" class="custom-control-input" value="1">
+                                                    <span class="custom-control-indicator"></span>
+                                                    <span class="custom-control-description ml-0">DNI Propietario</span>
+                                                </label>
+                                                <label class="display-inline-block custom-control custom-radio">
+                                                    <input type="radio" id="RbDniM" name="Dni" class="custom-control-input" value="2" checked>
+                                                    <span class="custom-control-indicator"></span>
+                                                    <span class="custom-control-description ml-0">DNI Mascota</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text" id="Txt_Dni" class="form-control" placeholder="Ingrese DNI" name="Txt_Dni">
+                                                    <span class="input-group-btn">
+                                                        <button id="btnBuscar" class="btn btn-warning mr-1" type="button"> <i class="icon-search5"></i> Buscar</button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <h5>
+                                                    <label for="Txt_Nombre_Dni">Nombre propietario :&nbsp;&nbsp; </label><label id="Txt_Nombre_Dni" class="primary"></label>
+                                                    <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
+                                                    <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">
+                                                    <input type="hidden" id="Txt_CodigoVacuna" name="Txt_CodigoVacuna">
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <label for="CboMascota">Seleccione nombre mascota :
+                                                    <!-- <label class="display-inline" for="CboMascota">Seleccione nombre mascota : -->
+                                                    <!-- <label class="display-inline-block" for="CboVacuna">S : -->
+                                                    <select id="CboMascota" name="CboMascota" class="form-control">
+                                                    </select>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <br>
+                            <h4 class="form-section">Datos de Mascota</h4>
+
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="CboVacuna">Seleccione Vacuna :</label>
+                                        <select id="CboVacuna" name="CboVacuna" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="Txt_Precio">Precio</label>
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="00.00" name="Txt_Precio">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="CboEstadoVacuna">Estado vacuna :</label>
+                                        <select id="CboEstadoVacuna" name="CboEstadoVacuna" class="form-control">
+                                            <option value="2">AGENDADO</option>
+                                            <option value="3">REPROGRAMADO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="Txt_Fecha">Fecha Vacunación </label>
+                                        <input id="Txt_Fecha" type="date" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Txt_Notas">Notas</label>
+                                <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales"></textarea>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button id="BtnRestaurarCliente" type="button" class="btn btn-success mr-1"><i class="icon-check-circle "></i> Si, Mostrar datos</button>
-                    <button id="BtnActualizarCliente" type="button" class="btn btn-primary mr-1"><i class="icon-minus-circle "></i> No, Actualizar</button>
-                    <button id="BtnCerrarCliente" type="button" class="btn btn-warning mr-1" data-dismiss="modal"><i class="icon-times-circle "></i> Cerrar</button>
+                    <div class="row">
+                        <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">Cerrar</button>
+                        <button id="BtnActualizarVacuna" type="button" class="btn btn-success mr-1"><i class="icon-edit2"></i>Grabar Edición</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- / Modal -->
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
     <div class="app-content content container-fluid">
         <div class="content-wrapper">
             <div class="content-header row">
-                <div class="content-header-left col-md-6 col-xs-12 mb-1">
-                    <h2 class="content-header-title">Nueva Atención</h2>
+                <div class="content-header-left col-md-3 col-xs-12 mb-1">
+                    <h2 class="content-header-title">Listado de Atención</h2>
                 </div>
+                <?php
+
+                if ($CondicionMnu == 1 || $CondicionMnu == 2) {
+                    ?>
+                    <div class="content-header-left col-md-3 col-xs-12 mb-1">
+                        <button id="BtnNuevo" type="button" class="btn btn-success"><i class="icon-android-add-circle"></i> Nueva Atención</button>
+                    </div>
+                <?php
+                }
+                ?>
+
             </div>
             <div class="content-body">
-                <!-- Basic form layout section start -->
-                <section id="basic-form-layouts">
-                    <div class="row match-height">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form">Datos de atención</h4>
-                                    <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-                                    <div class="heading-elements">
-                                        <ul class="list-inline mb-0">
-                                            <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
-                                            <li onclick="Actualizar()"><a data-action="reload"><i class="icon-reload"></i></a></li>
-                                            <!--<li><a id="Actualizar" data-action="reload"><i class="icon-reload"></i></a></li>-->
-                                            <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
-                                            <!--<li><a data-action="close"><i class="icon-cross2"></i></a></li>-->
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="card-body collapse in">
-                                    <div class="card-block">
-                                        <form class="form" id="FormularioAtencion">
-                                            <!--<input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
-                                        <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">    -->
-                                            <div class="form-body">
-                                                <h4 class="form-section">Propietario</h4>
-
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="input-group">
-                                                                    <label for="Txt_Buscar_Dni"><strong>Buscar Por :</strong></label>
-                                                                    <label class="display-inline-block custom-control custom-radio ml-1">
-                                                                        <input type="radio" id="RbDniP" name="Dni" class="custom-control-input" value="1" checked>
-                                                                        <span class="custom-control-indicator"></span>
-                                                                        <span class="custom-control-description ml-0">DNI Propietario</span>
-                                                                    </label>
-                                                                    <label class="display-inline-block custom-control custom-radio">
-                                                                        <input type="radio" id="RbDniM" name="Dni" class="custom-control-input" value="2">
-                                                                        <span class="custom-control-indicator"></span>
-                                                                        <span class="custom-control-description ml-0">DNI Mascota</span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-8">
-                                                                <div class="form-group">
-                                                                    <div class="input-group">
-                                                                        <input type="text" id="Txt_Dni" class="form-control" placeholder="Ingrese DNI" name="Txt_Dni">
-                                                                        <span class="input-group-btn">
-                                                                            <button id="btnBuscar" class="btn btn-warning mr-1" type="button"> <i class="icon-search5"></i> Buscar</button>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <h5>
-                                                                        <label for="Txt_Nombre_Dni">Nombre propietario :&nbsp;&nbsp; </label><label id="Txt_Nombre_Dni" class="primary"></label>
-                                                                        <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
-                                                                        <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">
-                                                                        <input type="hidden" id="Txt_CodigoProducto" name="Txt_CodigoProducto">
-                                                                    </h5>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="input-group">
-                                                                    <label class="display-inline" for="CboMascota">Seleccione nombre mascota :
-                                                                        <!-- <label class="display-inline-block" for="CboVacuna">S : -->
-                                                                        <select id="CboMascota" name="CboMascota" class="form-control">
-                                                                        </select>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <br>
-
-                                                <h4 class="form-section">signos Clinicos</h4>
-
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Fecha">Fecha.</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <input type="date" style="text-transform:uppercase;" id="Txt_Fecha" class="form-control" placeholder="" name="Txt_Fecha">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_T">T.&nbsp;&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_T" class="form-control" placeholder="" name="Txt_T">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_C">F.C.&nbsp;&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_C" class="form-control" placeholder="" name="Txt_C">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_FR">F.R.&nbsp;&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_FR" class="form-control" placeholder="" name="Txt_FR">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Sintomas">Sintomas</label>
-                                                            <textarea id="Txt_Sintomas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Sintomas" placeholder=""></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="form-inline">
-                                                            <div class="form-group">
-                                                                <label for="Txt_T">T.&nbsp;&nbsp;</label>
-                                                                <input type="text" style="text-transform:uppercase;" id="Txt_T" class="form-control" placeholder="" name="Txt_T">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-inline">
-                                                            <div class="form-group">
-                                                                <label for="Txt_C">F.C.&nbsp;&nbsp;</label>
-                                                                <input type="text" style="text-transform:uppercase;" id="Txt_C" class="form-control" placeholder="" name="Txt_C">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-inline">
-                                                            <div class="form-group">
-                                                                <label for="Txt_FR">F.R.&nbsp;&nbsp;</label>
-                                                                <input type="text" style="text-transform:uppercase;" id="Txt_FR" class="form-control" placeholder="" name="Txt_FR">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Deshidrat">Deshidrat.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Deshidrat" class="form-control" placeholder="" name="Txt_Deshidrat">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Mucosa">Mucosa.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Mucosa" class="form-control" placeholder="" name="Txt_Mucosa">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Tllc">Tllc.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Tllc" class="form-control" placeholder="" name="Txt_Tllc">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Vomitos">Vomitos.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Vomitos" class="form-control" placeholder="" name="Txt_Vomitos">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Diarrea">Diarrea.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Diarrea" class="form-control" placeholder="" name="Txt_Diarrea">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Ganglio">Ganglio.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Ganglio" class="form-control" placeholder="" name="Txt_Ganglio">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Peso">Peso.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Peso" class="form-control" placeholder="" name="Txt_Peso">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <h4 class="form-section">Diagnostico</h4>
-
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Dx_Presuntivo">Dx Presuntivo.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Dx_Presuntivo" class="form-control" placeholder="" name="Txt_Dx_Presuntivo">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Dx_Definitivo">Dx Definitivo.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Dx_Definitivo" class="form-control" placeholder="" name="Txt_Dx_Definitivo">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Dx_Solicitado">Dx Solicitado.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Dx_Solicitado" class="form-control" placeholder="" name="Txt_Dx_Solicitado">
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <h4 class="form-section">Tratamiento</h4>
-
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Descripcion">Descipción.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <div class="form-group">
-                                                            <textarea id="Txt_Descripcion" style="text-transform:uppercase;" rows="3" class="form-control" name="Txt_Descripcion" placeholder=""></textarea>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label for="Txt_NotasAdicionales">Notas Adicionales.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <div class="form-group">
-                                                            <textarea id="Txt_NotasAdicionales" style="text-transform:uppercase;" rows="3" class="form-control" name="Txt_NotasAdicionales" placeholder=""></textarea>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <h4 class="form-section">Precio</h4>
-
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Precio">Costo de Atención.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <input type="text" id="Txt_Precio" style="text-transform:uppercase;" class="form-control" name="Txt_Precio" placeholder="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="form-actions">
-                                                <button id="btnLimpiar" type="button" class="btn btn-info mr-1">
-                                                    <i class="icon-reload"></i> Nuevo
-                                                </button>
-                                                <button id="btnGrabar" type="button" class="btn btn-success mr-1">
-                                                    <i class="icon-check2"></i> Registrar Atención
-                                                </button>
-                                                <button id="btnAgendar" type="button" class="btn btn-warning mr-1">
-                                                    <i class="icon-check2"></i> Agendar Atención
-                                                </button>
-                                            </div>
-
-                                            <div id="Resultado_Grabacion"></div>
-                                        </form>
-                                    </div>
+                <!-- Bordered striped start -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Atención</h4>
+                                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                <div class="heading-elements">
+                                    <ul class="list-inline mb-0">
+                                        <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                                        <li onclick="Actualizar()"><a data-action="reload"><i class="icon-reload"></i></a></li>
+                                        <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                                        <!-- <li><a data-action="close"><i class="icon-cross2"></i></a></li> -->
+                                    </ul>
                                 </div>
                             </div>
+                            <br>
+
+                            <div class="card-block">
+                                <div class="card-body collapse in">
+                                    <div class="table-responsive">
+                                        <!-- <table id="TblAtencion" class="table table-bordered table-striped"> -->
+                                        <table id="TblAtencion" class="table table-striped table-bordered" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>DNI mascota</th>
+                                                    <th>Nombre</th>
+                                                    <th>Fecha</th>
+                                                    <th>Atención</th>
+                                                    <th>Estado Atención</th>
+                                                    <th>Observación</th>
+                                                    <th>Administrar</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="Resultado_Grabacion"></div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                </section>
-                <!-- // Basic form layout section end -->
+                </div>
             </div>
         </div>
     </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
 
-    <?php
-    require_once("includes_html/footer.php");
-    ?>
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+
+
+    <footer class="footer footer-static footer-light navbar-border">
+        <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright &copy; 2017 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank" class="text-bold-800 grey darken-2">PIXINVENT </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="icon-heart5 pink"></i></span></p>
+    </footer>
 
     <!-- BEGIN VENDOR JS-->
     <script src="../../app-assets/js/core/libraries/jquery.min.js" type="text/javascript"></script>
@@ -1024,21 +851,46 @@ session_start();
     <script src="../../app-assets/js/core/app.js" type="text/javascript"></script>
     <!-- END ROBUST JS-->
     <!-- BEGIN PAGE LEVEL JS-->
+    <script src="../../app-assets/js/scripts/tooltip/tooltip.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
 
     <!-- BEGIN PROPIOS JS-->
     <script src="lib_propio/propio.js" type="text/javascript"></script>
     <!-- END PROPIOS JS-->
+
+    <!-- BEGIN DATATABLE JS-->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/b-1.5.6/b-html5-1.5.6/datatables.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/b-1.5.6/b-html5-1.5.6/datatables.min.js"></script>
+    <!-- END DATATABLE JS-->
+
 </body>
+
+
+<!-- css de ejemplo clases -->
+<style type="text/css">
+    .linea_buttons {
+        display: inline-block;
+    }
+</style>
+<!-- / css de ejemplo clases -->
 
 <!-- BEGIN. EVENTOS SCRIPT-->
 <script type="text/javascript">
+    var Condicion;
+    var table;
     var IdMascota = '';
-    var ValorRb = 1;
-    var ValorTipoRegistro = 0;
-    /* BEGIN FUNCIONES GENERALES */
-
-    /* END FUNCIONES GENERALES */
+    var IdMascotaExterno = 0;
+    var ValorRb = 2;
 
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
@@ -1048,18 +900,206 @@ session_start();
         Cerrar_Sesion("salir");
     });
 
-
-    function Actualizar() {
-        limpiaForm($("#FormularioAtencion"));
-        //Obtener_Vacunas('MostrarProductoxCondicion', 1);
+    function Cerrar_Sesion(act) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/acceso.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                var url = "login.php";
+                $(location).attr('href', url);
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
     }
 
+    function Obtener_Condicion() {
+        <?php
+        if ($CondicionMnu == 1 || $CondicionMnu == 2) {
+            ?>
+            Condicion = 1;
+        <?php
+        } else {
+            ?>
+            Condicion = 0;
+        <?php
+        }
+        ?>
+    }
+
+    //http://jquery-manual.blogspot.com/2013/12/como-obtener-parametros-get-con.html?mensaje=ok
+    function $_GET(param) {
+        /* Obtener la url completa */
+        url = document.URL;
+        /* Buscar a partir del signo de interrogación ? */
+        url = String(url.match(/\?+.+/));
+        /* limpiar la cadena quitándole el signo ? */
+        url = url.replace("?", "");
+        /* Crear un array con parametro=valor */
+        url = url.split("&");
+        /* 
+        Recorrer el array url --> obtener el valor y dividirlo en dos partes a través del signo = 
+        0 = parametro
+        1 = valor
+        Si el parámetro existe devolver su valor
+        */
+        x = 0;
+        while (x < url.length) {
+            p = url[x].split("=");
+            if (p[0] == param) {
+                return decodeURIComponent(p[1]);
+            }
+            x++;
+        }
+    }
+
+    $("#BtnNuevo").click(function() {
+        var url = "atencion-nuevo.php";
+        $(location).attr('href', url);
+    });
+
+    function Actualizar() {
+        listar();
+    }
+
+    var listar = function() {
+        var url = ""
+        if (IdMascotaExterno == 0) {
+            url = "modulos/atencion_listado.php?Cond=1&Id=0";
+        } else {
+            //url = "modulos/vacunas_listado.php?Cond=2&Id=" + IdMascotaExterno;
+        }
+
+        table = $('#TblAtencion').DataTable({
+            "destroy": true,
+            "ajax": {
+                "method": "POST",
+                "url": url,
+            },
+            "columns": [{
+                    //"data": "Atencion_Id"
+                    "render": function(data, type, row) {
+                        if (row.Atencion_Id.length == 1) {
+                            var Cod = 'A000' + row.Atencion_Id;
+                        } else if (row.Atencion_Id.length == 2) {
+                            var Cod = 'A00' + row.Atencion_Id;
+                        } else if (row.Atencion_Id.length == 3) {
+                            var Cod = 'A0' + row.Atencion_Id;
+                        } else {
+                            var Cod = 'A' + row.Atencion_Id;
+                        }
+                        return Cod;
+                    }
+                },
+                {
+                    //"data": "Mascota_Id"
+                    "render": function(data, type, row) {
+                        if (row.Mascota_Id.length == 1) {
+                            var Cod = 'M000' + row.Mascota_Id;
+                        } else if (row.Mascota_Id.length == 2) {
+                            var Cod = 'M00' + row.Mascota_Id;
+                        } else if (row.Mascota_Id.length == 3) {
+                            var Cod = 'M0' + row.Mascota_Id;
+                        } else {
+                            var Cod = 'M' + row.Mascota_Id;
+                        }
+                        return Cod;
+                    }
+                },
+                {
+                    "data": "Mascota_Nombre"
+                },
+                {
+                    "data": "Atencion_Fecha"
+                },
+                {
+                    "data": "Producto_Nombre"
+                },
+                {
+                    "data": "Atencion_CitaEstado"
+                },
+                {
+                    "data": "Atencion_tr_Observacion"
+                },
+                {
+                    "render": function(data, type, row) {
+                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Atencion_Id + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Atencion_Id + "'><i class='icon-trash-o'></i></button>    <button id='mascota' type='button' class='mascota btn btn-success' value='" + row.Atencion_Id + "'><i class='icon-ios-paw'></i></button>   </div></div>";
+                    }
+                }
+            ],
+            /* BOTONES DE DATATABLE */
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'excelHtml5',
+                    text: '<i class="icon-file-excel-o"></i> ',
+                    titleAttr: 'Exportar a Excel',
+                    //className: 'btn btn-success'
+                    "oSelectorOpts": {
+                        filter: 'applied',
+                        order: 'current'
+                    },
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: '<i class="icon-file-pdf-o"></i> ',
+                    titleAttr: 'Exportar a PDF',
+                    //className: 'btn btn-danger',
+                    orientation: 'landscape',
+                    //pageSize: 'TABLOID',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6]
+                    },
+
+                    //className: 'btn btn-success'
+                    "oSelectorOpts": {
+                        filter: 'applied',
+                        order: 'current'
+                    },
+                },
+                {
+                    extend: 'copyHtml5',
+                    text: '<i class="icon-copy2"></i> ',
+                    titleAttr: 'Copiar',
+                    //className: 'btn btn-info',
+                    //className: 'btn btn-success'
+                    "oSelectorOpts": {
+                        filter: 'applied',
+                        order: 'current'
+                    },
+                },
+            ],
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+            }
+        });
+
+    }
+
+    $('#TblAtencion').on('click', '.editar', function() {
+        var id = $(this).val();
+        console.log($(this).val());
+        if (Condicion == 1) {
+            Obtener_Vacunas('MostrarProductoxCondicion', 1);
+            Obtener_Datos_Vacuna('ObtenerDatosVacunasxId', id);
+            $("#Modal_ListadoVacunas").modal("show");
+        } else {
+            alert('El perfil de usuario no esta habilitado para opción');
+        }
+    });
+
     // Clase Proser
-    /* function Obtener_Vacunas(act, id) {
+    function Obtener_Vacunas(act, id) {
         $.ajax({
             type: "POST",
             url: "modulos/proser.php",
-            async: true,
+            async: false,
             dataType: "html",
             data: ({
                 action: act,
@@ -1081,18 +1121,12 @@ session_start();
                 //alert('ok2');
             }
         });
-    } */
+    }
 
-    $("#btnLimpiar").click(function() {
-        limpiaForm($("#FormularioAtencion"));
-
-    });
-
-    // Clase Mascota
-    function Obtener_NombreCliente_NombreMascota(act, id) {
+    function Obtener_Datos_Vacuna(act, id) {
         $.ajax({
             type: "POST",
-            url: "modulos/mascotas.php",
+            url: "modulos/vacunas.php",
             async: false,
             dataType: "html",
             data: ({
@@ -1105,13 +1139,32 @@ session_start();
             success: function(data) {
                 console.log(data);
                 var json = JSON.parse(data);
+                console.log(json);
                 $.each(json, function(i, item) {
-                    $('#Txt_Dni').val(json[i].Cliente_Dni);
-                    $('#Txt_Nombre_Dni').html(json[i].Mascota_Cliente);
+
+                    var DniMascota = json[i].Mascota_Id;
+                    var CodigoDniMascota = '';
+                    if (DniMascota.length == 1) {
+                        CodigoDniMascota = 'M000' + DniMascota;
+                    } else if (DniMascota.length == 2) {
+                        CodigoDniMascota = 'M00' + DniMascota;
+                    } else if (DniMascota.length == 3) {
+                        CodigoDniMascota = 'M0' + DniMascota;
+                    } else {
+                        CodigoDniMascota = 'M' + DniMascota;
+                    }
+                    $('#Txt_Dni').val(CodigoDniMascota);
+                    $('#Txt_Nombre_Dni').html(json[i].Cliente_NombreCompleto);
                     $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
-                    $('#Txt_CodigoMascota').val(json[i].Mascota_Id);
+                    $('#Txt_CodigoMascota').val(json[i].Mascota_Id); // Mascota_Id (oculto)
                     Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
-                    console.log('impr ' + $('#Txt_CodigoCliente').val().trim());
+                    $('#CboMascota').val(json[i].Mascota_Id);
+                    $('#CboVacuna').val(json[i].Producto_Id);
+                    $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
+                    $('#CboEstadoVacuna').val(json[i].Vacunas_Cita);
+                    $('#Txt_Fecha').val(json[i].Vacunas_Fecha);
+                    $('#Txt_Notas').val(json[i].Vacunas_Observacion);
+                    $('#Txt_CodigoVacuna').val(json[i].Vacunas_Id);
                 });
             },
             complete: function() {
@@ -1150,8 +1203,10 @@ session_start();
         });
     }
 
-    $('#FormularioAtencion input').on('change', function() {
-        ValorRb = $('input[name=Dni]:checked', '#FormularioAtencion').val();
+
+    $('#FormularioVacuna input').on('change', function() {
+        ValorRb = $('input[name=Dni]:checked', '#FormularioVacuna').val();
+        console.log(ValorRb);
     });
 
     $('#btnBuscar').click(function() {
@@ -1212,9 +1267,6 @@ session_start();
         });
     }
 
-    $("#CboMascota").change(function() {
-        $('#Txt_CodigoMascota').val($("#CboMascota").val());
-    });
 
     $("#CboVacuna").change(function() {
         Obtener_Precio('MostrarPrecio', $("#CboVacuna").val().trim());
@@ -1248,107 +1300,60 @@ session_start();
         });
     }
 
-    $('#btnAgendar').click(function() {
-        ProcesoGrabacion(1, 4000000, 2)
-    });
+    $('#BtnActualizarVacuna').click(function() {
 
-
-    $("#btnGrabar").click(function() {
-        ProcesoGrabacion(1, 4000000, 1)
-    });
-
-    function ProcesoGrabacion(tiporegistro, idatencion, idcita) {
         var nombredni = $('#Txt_Nombre_Dni').html();
         if (nombredni == 0) {
             alert('El DNI ingresado no existe, verificar el numero por favor o ingrese el DNI por defecto')
         } else {
             var Id = ValidaCamposObligatorios(
-                $('#Txt_Sintomas').val().toUpperCase().trim(),
-                $('#Txt_T').val().toUpperCase().trim(),
-                //$('#Txt_C').val().toUpperCase().trim(),
-                //$('#Txt_FR').val().toUpperCase().trim(),
-                //$('#Txt_Deshidrat').val().toUpperCase().trim(),
-                //$('#Txt_Mucosa').val().toUpperCase().trim(),
-                //$('#Txt_Diarrea').val().toUpperCase().trim(),
-                //$('#Txt_Ganglio').val().toUpperCase().trim(),
-                $('#Txt_Peso').val().toUpperCase().trim(),
-                $('#Txt_Dx_Presuntivo').val().toUpperCase().trim(),
-                //$('#Txt_Dx_Definitivo').val().toUpperCase().trim(),
-                //$('#Txt_Dx_Solicitado').val().toUpperCase().trim(),
-                $('#Txt_Descripcion').val().toUpperCase().trim(),
-                $('#Txt_NotasAdicionales').val().toUpperCase().trim())
+                $('#Txt_Dni').val().toUpperCase().trim(),
+                $('#CboMascota').val().toUpperCase().trim(),
+                $('#CboVacuna').val().toUpperCase().trim(),
+                $('#Txt_Precio').val().toUpperCase().trim(),
+                $('#Txt_Fecha').val());
             if (Id == 1) {
-                RegistrarAtencion("GrabarAtencion",
-                    tiporegistro,
-                    idatencion,
-                    $("#Txt_Fecha").val(),
-                    $('#Txt_CodigoProducto').val(),
-                    $("#CboMascota").val(),
-                    $('#Txt_Sintomas').val().toUpperCase().trim(),
-                    $('#Txt_T').val().toUpperCase().trim(),
-                    $('#Txt_C').val().toUpperCase().trim(),
-                    $('#Txt_FR').val().toUpperCase().trim(),
-
-                    $('#Txt_Deshidrat').val().toUpperCase().trim(),
-                    $('#Txt_Mucosa').val().toUpperCase().trim(),
-                    $('#Txt_Tllc').val().toUpperCase().trim(),
-                    $('#Txt_Vomitos').val().toUpperCase().trim(),
-                    $('#Txt_Diarrea').val().toUpperCase().trim(),
-                    $('#Txt_Ganglio').val().toUpperCase().trim(),
-                    $('#Txt_Peso').val(),
-
-                    $('#Txt_Dx_Presuntivo').val().toUpperCase().trim(),
-                    $('#Txt_Dx_Definitivo').val().toUpperCase().trim(),
-                    $('#Txt_Dx_Solicitado').val().toUpperCase().trim(),
-                    $('#Txt_Descripcion').val().toUpperCase().trim(),
-                    $('#Txt_NotasAdicionales').val().toUpperCase().trim(),
-                    $('#Txt_Precio').val(),
-                    1, /* Documento */
-                    idcita,
-                    'A',
-                    '1',
-                    '<?php echo $_SESSION['User']; ?>',
-                    '1',
-                    '<?php echo $_SESSION['IdAlmacen']; ?>'
+                Editar_Vacuna("EditarVacuna",
+                    $("#Txt_CodigoVacuna").val(),
+                    $('#Txt_Fecha').val(),
+                    $("#CboVacuna").val().toUpperCase().trim(),
+                    $("#Txt_Precio").val().toUpperCase().trim(),
+                    $("#CboMascota").val().toUpperCase().trim(),
+                    $("#Txt_Notas").val().toUpperCase().trim(),
+                    $("#CboEstadoVacuna").val(),
+                    '<?php echo $_SESSION['User']; ?>'
                 );
             }
         }
-    }
+    });
 
-    function ValidaCamposObligatorios(sintomas, temp, peso, dxpresuntivo, descripcion, notasadicionales) {
-        if (sintomas.length == 0) {
-            alert('El campo sintomas es obligatorio');
-            $("#Txt_Sintomas").focus();
+    function ValidaCamposObligatorios(dni, mascota, vacuna, precio, fecha) {
+        if (dni.length == 0) {
+            alert('El campo DNI es obligatorio');
+            $("#Txt_Dni").focus();
             return 0;
         } else {
-            if (temp.length == 0) {
-                alert('El campo temperatura es obligatorio');
-                $("#Txt_T").focus();
+            if (mascota.length == 0) {
+                alert('El campo mascota es obligatorio');
+                $("#CboMascota").focus();
                 return 0;
             } else {
-                if (peso.length == 0) {
-                    alert('El campo peso es obligatorio');
-                    $("#Txt_Peso").focus();
+                if (vacuna.length == 0) {
+                    alert('El campo vacuna es obligatorio');
+                    $("#CboVacuna").focus();
                     return 0;
                 } else {
-                    if (dxpresuntivo.length == 0) {
-                        alert('El campo Dx. presuntivo es obligatorio');
-                        $("#Txt_Dx_Presuntivo").focus();
+                    if (precio.length == 0) {
+                        alert('El campo precio es obligatorio');
+                        $("#Txt_Precio").focus();
                         return 0;
                     } else {
-                        if (descripcion.length == 0) {
-                            alert('El campo descripción es obligatorio')
-                            $('#Txt_Descripcion').focus();
+                        if (fecha.length == 0) {
+                            alert('El campo fecha es obligatorio')
+                            $('#Txt_Fecha').focus();
                             return 0;
                         } else {
-                            if (notasadicionales.length == 0) {
-                                alert('El campo notas adicionales es obligatorio');
-                                $('#Txt_NotasAdicionales').focus();
-                                return 0;
-                            } else {
-                                return 1;
-                            }
-
+                            return 1;
                         }
                     }
                 }
@@ -1356,73 +1361,34 @@ session_start();
         }
     }
 
-    function RegistrarAtencion(act, IdTipoRegistro, IdAtencion, Fecha, IdProducto, IdMascota, Sintomas, Atencion_T, Atencion_FC, Atencion_FR, Atencion_sc_Des, Atencion_sc_Muc,
-        Atencion_sc_TLLC, Atencion_sc_Vom, Atencion_sc_Dia, Atencion_sc_Gan, Atencion_sc_Pes, Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des,
-        Atencion_tr_Obs, Atencion_tr_Pre, Pint_Documento, Pint_Cita, Pint_CitaEstado, Pint_Estado, Pvchr_Usuario, Pint_VentaTipo, Pint_IdAlmacen) {
+    function Editar_Vacuna(act, IdVacuna, Fecha, IdProducto, Precio, IdMascota, Observacion, Cita, Usuario) {
         $.ajax({
             type: "POST",
-            url: "modulos/atencion.php",
+            url: "modulos/vacunas.php",
             async: false,
             dataType: "html",
             data: ({
                 action: act,
-                IdTipoRegistro: IdTipoRegistro,
-                IdAtencion: IdAtencion,
+                IdVacuna: IdVacuna,
                 Fecha: Fecha,
                 IdProducto: IdProducto,
+                Precio: Precio,
                 IdMascota: IdMascota,
-                Sintomas: Sintomas,
-                Atencion_T: Atencion_T,
-                Atencion_FC: Atencion_FC,
-                Atencion_FR: Atencion_FR,
-                Atencion_sc_Des: Atencion_sc_Des,
-                Atencion_sc_Muc: Atencion_sc_Muc,
-                Atencion_sc_TLLC: Atencion_sc_TLLC,
-                Atencion_sc_Vom: Atencion_sc_Vom,
-                Atencion_sc_Dia: Atencion_sc_Dia,
-                Atencion_sc_Gan: Atencion_sc_Gan,
-                Atencion_sc_Pes: Atencion_sc_Pes,
-                Atencion_dx_Pre: Atencion_dx_Pre,
-                Atencion_dx_Def: Atencion_dx_Def,
-                Atencion_dx_Sol: Atencion_dx_Sol,
-                Atencion_tr_Des: Atencion_tr_Des,
-                Atencion_tr_Obs: Atencion_tr_Obs,
-                Atencion_tr_Pre: Atencion_tr_Pre,
-                Pint_Documento: Pint_Documento,
-                Pint_Cita: Pint_Cita,
-                Pint_CitaEstado: Pint_CitaEstado,
-                Pint_Estado: Pint_Estado,
-                Pvchr_Usuario: Pvchr_Usuario,
-                Pint_VentaTipo: Pint_VentaTipo,
-                Pint_IdAlmacen :Pint_IdAlmacen
+                Observacion: Observacion,
+                Cita: Cita,
+                Usuario: Usuario
             }),
             beforeSend: function() {
                 //alert('ok');
             },
             success: function(data) {
-                var idtmp;
-                console.log(data);
-                var json = JSON.parse(data);
-                $.each(json, function(i, item) {
-                    idtmp = json[i].CodigoVentaTmp;
-                    console.log(idtmp);
-                });
-                // Redireccionar
-                if (Pint_Cita == 1) {
-                    $("#Resultado_Grabacion").html('');
-                    var url = "venta-nuevo.php?IdVen=" + idtmp;
-                    $(location).attr('href', url);
+                if (data == 1) {
+                    $("#Modal_ListadoVacunas").modal("hide");
+                    listar();
+                    alert('Vacuna Editado correctamente');
                 } else {
-                    $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
-                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                        '<span aria-hidden="true">&times;</span>' +
-                        '</button>' +
-                        '<strong>Nuevo Atencion agendada correctamente</strong>' +
-                        '</div>')
+                    alert('Lo sentimos ocurrio un error en el proceso de edición');
                 }
-                $("#Resultado_Grabacion").fadeTo(2000, 500).slideUp(500, function() {
-                    $("#Resultado_Grabacion").slideUp(500);
-                });
             },
             complete: function() {
                 //alert('ok2');
@@ -1431,28 +1397,41 @@ session_start();
     }
 
 
-    // Clase Proser
-    function Obtener_Atencion(act, id) {
+    $('#TblAtencion').on('click', '.eliminar', function() {
+        var id = $(this).val();
+        if (Condicion == 1) {
+            var bool = confirm("Esta seguro de eliminar el registro ?");
+            if (bool) {
+                Eliminar_Vacuna('EliminarVacuna', id)
+                alert('La vacuna seleccionado fue eliminada correctamente');
+            } else {
+                //alert("cancelo la solicitud");
+            }
+        } else {
+            alert('El perfil de usurio no esta habilitado para opción');
+        }
+    });
+
+    function Eliminar_Vacuna(act, codigo) {
         $.ajax({
             type: "POST",
-            url: "modulos/proser.php",
-            async: false,
+            url: "modulos/vacunas.php",
+            async: true,
             dataType: "html",
             data: ({
                 action: act,
-                Id: id
+                Id: codigo
             }),
             beforeSend: function() {
                 //alert('ok');
             },
             success: function(data) {
                 console.log(data);
-                var json = JSON.parse(data);
-                console.log(json);
-                $("#Txt_CodigoProducto").val();
-                $.each(json, function(i, item) {
-                    $("#Txt_CodigoProducto").val(json[i].Producto_Id);
-                });
+                if (data == 1) {
+                    listar();
+                } else {
+                    alert('Lo sentimos ocurrio un error en el proceso de edición');
+                }
             },
             complete: function() {
                 //alert('ok2');
@@ -1460,53 +1439,19 @@ session_start();
         });
     }
 
- // Clase proser
- function Obtener_Precio(act, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/proser.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                console.log(data);
-                var json = JSON.parse(data);
-                $("#Txt_Precio").empty();
-                $.each(json, function(i, item) {
-                    $("#Txt_Precio").val(json[i].Producto_PrecioVenta);
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
 
     $(function() {
 
-        Obtener_Atencion('MostrarProductoxCondicion', 4);
-        Obtener_Precio('MostrarPrecio', $("#Txt_CodigoProducto").val().trim());
+        Obtener_Nombre();
+        Obtener_Condicion();
 
-        if ($_GET("IdMas") === undefined) {
-            //SIN VALOR GET
+        if ($_GET("IdCli") === undefined) {
+            console.log('sin valor');
         } else {
-            // CON VALOR GET
-            $("#RbDniM").attr('checked', true);
-            $("input[type=radio]").attr('disabled', true);
-            $("#Txt_Dni").attr('disabled', true);
-            $("#btnBuscar").attr('disabled', true);
-            Obtener_NombreCliente_NombreMascota('MostrarNombrecliNombreMas', $_GET("IdMas"));
-            console.log('final' + $('#Txt_CodigoCliente').val().trim());
-            $("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
+            IdMascotaExterno = $_GET("IdCli");
+            console.log(IdMascotaExterno);
         }
-        //EVALUAR
-        //Obtener_Precio('MostrarPrecio', 1);
+        listar();
 
     });
 </script>
