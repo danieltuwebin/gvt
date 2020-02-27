@@ -11,7 +11,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
+    <meta name="author" content="DCCAHUAY">
     <title>Listado Atención - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
@@ -63,7 +63,7 @@ session_start();
         $CondicionMnu = $_SESSION['UserPerfil'];
 
         if ($CondicionMnu == 1) { /* PERFIL ADMIN (1) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -251,7 +251,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 2) { /* PERFIL JEFE (2) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -443,7 +443,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 3) { /* PERFIL SOLO LECTURA (3) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -628,23 +628,25 @@ session_start();
                     <h4 class="modal-title" id="myModalLabel17">Edición Atención</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form" id="FormularioVacuna">
+                    <form class="form" id="FormularioAtencion">
+                        <!--<input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
+                                        <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">    -->
                         <div class="form-body">
                             <h4 class="form-section">Propietario</h4>
-                            <div class="row">
 
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="input-group">
                                                 <label for="Txt_Buscar_Dni"><strong>Buscar Por :</strong></label>
                                                 <label class="display-inline-block custom-control custom-radio ml-1">
-                                                    <input type="radio" id="RbDniP" name="Dni" class="custom-control-input" value="1">
+                                                    <input type="radio" id="RbDniP" name="Dni" class="custom-control-input" value="1" checked>
                                                     <span class="custom-control-indicator"></span>
                                                     <span class="custom-control-description ml-0">DNI Propietario</span>
                                                 </label>
                                                 <label class="display-inline-block custom-control custom-radio">
-                                                    <input type="radio" id="RbDniM" name="Dni" class="custom-control-input" value="2" checked>
+                                                    <input type="radio" id="RbDniM" name="Dni" class="custom-control-input" value="2">
                                                     <span class="custom-control-indicator"></span>
                                                     <span class="custom-control-description ml-0">DNI Mascota</span>
                                                 </label>
@@ -663,6 +665,7 @@ session_start();
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -670,19 +673,16 @@ session_start();
                                                     <label for="Txt_Nombre_Dni">Nombre propietario :&nbsp;&nbsp; </label><label id="Txt_Nombre_Dni" class="primary"></label>
                                                     <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
                                                     <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">
-                                                    <input type="hidden" id="Txt_CodigoVacuna" name="Txt_CodigoVacuna">
+                                                    <input type="hidden" id="Txt_CodigoProducto" name="Txt_CodigoProducto">
                                                 </h5>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="input-group">
-                                                <label for="CboMascota">Seleccione nombre mascota :
-                                                    <!-- <label class="display-inline" for="CboMascota">Seleccione nombre mascota : -->
+                                                <label class="display-inline" for="CboMascota">Seleccione nombre mascota :
                                                     <!-- <label class="display-inline-block" for="CboVacuna">S : -->
                                                     <select id="CboMascota" name="CboMascota" class="form-control">
                                                     </select>
@@ -691,48 +691,264 @@ session_start();
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <br>
-                            <h4 class="form-section">Datos de Mascota</h4>
+
+                            <h4 class="form-section">signos Clinicos</h4>
 
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-1">
                                     <div class="form-group">
-                                        <label for="CboVacuna">Seleccione Vacuna :</label>
-                                        <select id="CboVacuna" name="CboVacuna" class="form-control">
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="Txt_Precio">Precio</label>
-                                        <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="00.00" name="Txt_Precio">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="CboEstadoVacuna">Estado vacuna :</label>
-                                        <select id="CboEstadoVacuna" name="CboEstadoVacuna" class="form-control">
-                                            <option value="2">AGENDADO</option>
-                                            <option value="3">REPROGRAMADO</option>
-                                        </select>
+                                        <label for="Txt_Fecha">Fecha.</label>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="Txt_Fecha">Fecha Vacunación </label>
-                                        <input id="Txt_Fecha" type="date" class="form-control">
+                                        <input type="date" style="text-transform:uppercase;" id="Txt_Fecha" class="form-control" placeholder="" name="Txt_Fecha">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_T">T.&nbsp;&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_T" class="form-control" placeholder="" name="Txt_T">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_C">F.C.&nbsp;&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_C" class="form-control" placeholder="" name="Txt_C">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_FR">F.R.&nbsp;&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_FR" class="form-control" placeholder="" name="Txt_FR">
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="Txt_Notas">Notas</label>
-                                <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales"></textarea>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="Txt_Sintomas">Sintomas</label>
+                                        <textarea id="Txt_Sintomas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Sintomas" placeholder=""></textarea>
+                                    </div>
+                                </div>
                             </div>
+
+                            <!-- <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-inline">
+                                                            <div class="form-group">
+                                                                <label for="Txt_T">T.&nbsp;&nbsp;</label>
+                                                                <input type="text" style="text-transform:uppercase;" id="Txt_T" class="form-control" placeholder="" name="Txt_T">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-inline">
+                                                            <div class="form-group">
+                                                                <label for="Txt_C">F.C.&nbsp;&nbsp;</label>
+                                                                <input type="text" style="text-transform:uppercase;" id="Txt_C" class="form-control" placeholder="" name="Txt_C">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-inline">
+                                                            <div class="form-group">
+                                                                <label for="Txt_FR">F.R.&nbsp;&nbsp;</label>
+                                                                <input type="text" style="text-transform:uppercase;" id="Txt_FR" class="form-control" placeholder="" name="Txt_FR">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_Deshidrat">Deshidrat.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Deshidrat" class="form-control" placeholder="" name="Txt_Deshidrat">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_Mucosa">Mucosa.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Mucosa" class="form-control" placeholder="" name="Txt_Mucosa">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_Tllc">Tllc.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Tllc" class="form-control" placeholder="" name="Txt_Tllc">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_Vomitos">Vomitos.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Vomitos" class="form-control" placeholder="" name="Txt_Vomitos">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_Diarrea">Diarrea.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Diarrea" class="form-control" placeholder="" name="Txt_Diarrea">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_Ganglio">Ganglio.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Ganglio" class="form-control" placeholder="" name="Txt_Ganglio">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_Peso">Peso.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Peso" class="form-control" placeholder="" name="Txt_Peso">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h4 class="form-section">Diagnostico</h4>
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="Txt_Dx_Presuntivo">Dx Presuntivo.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Dx_Presuntivo" class="form-control" placeholder="" name="Txt_Dx_Presuntivo">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="Txt_Dx_Definitivo">Dx Definitivo.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Dx_Definitivo" class="form-control" placeholder="" name="Txt_Dx_Definitivo">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="Txt_Dx_Solicitado">Dx Solicitado.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Dx_Solicitado" class="form-control" placeholder="" name="Txt_Dx_Solicitado">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <h4 class="form-section">Tratamiento</h4>
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="Txt_Descripcion">Descipción.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <textarea id="Txt_Descripcion" style="text-transform:uppercase;" rows="3" class="form-control" name="Txt_Descripcion" placeholder=""></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="Txt_NotasAdicionales">Notas Adicionales.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <textarea id="Txt_NotasAdicionales" style="text-transform:uppercase;" rows="3" class="form-control" name="Txt_NotasAdicionales" placeholder=""></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <h4 class="form-section">Precio</h4>
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="Txt_Precio">Costo de Atención.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <input type="text" id="Txt_Precio" style="text-transform:uppercase;" class="form-control" name="Txt_Precio" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
+
+                        <div class="form-actions">
+                            <button id="btnLimpiar" type="button" class="btn btn-info mr-1">
+                                <i class="icon-reload"></i> Nuevo
+                            </button>
+                            <button id="btnGrabar" type="button" class="btn btn-success mr-1">
+                                <i class="icon-check2"></i> Registrar Atención
+                            </button>
+                            <button id="btnAgendar" type="button" class="btn btn-warning mr-1">
+                                <i class="icon-check2"></i> Agendar Atención
+                            </button>
+                        </div>
+
+                        <div id="Resultado_Grabacion"></div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -756,7 +972,7 @@ session_start();
                 <?php
 
                 if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-                    ?>
+                ?>
                     <div class="content-header-left col-md-3 col-xs-12 mb-1">
                         <button id="BtnNuevo" type="button" class="btn btn-success"><i class="icon-android-add-circle"></i> Nueva Atención</button>
                     </div>
@@ -923,11 +1139,11 @@ session_start();
     function Obtener_Condicion() {
         <?php
         if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-            ?>
+        ?>
             Condicion = 1;
         <?php
         } else {
-            ?>
+        ?>
             Condicion = 0;
         <?php
         }

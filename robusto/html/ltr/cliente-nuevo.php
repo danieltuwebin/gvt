@@ -11,7 +11,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
+    <meta name="author" content="DCCAHUAY">
     <title>Nuevo Cliente - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
@@ -156,6 +156,19 @@ session_start();
                         </ul>
                     </li>
                     <li class=" nav-item">
+                        <a href="#"><i class="icon-plus2"></i>
+                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li>
+                                <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
+                            </li>
+                            <li>
+                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
+                            </li>
+                        </ul>
+                    </li>                    
+                    <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
                         </a>
@@ -181,19 +194,6 @@ session_start();
                             </li>
                             <li>
                                 <a href="listado-venta.php" class="menu-item">Listado Ventas</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class=" nav-item">
-                        <a href="#"><i class="icon-plus2"></i>
-                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
-                        </a>
-                        <ul class="menu-content">
-                            <li>
-                                <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
-                            </li>
-                            <li>
-                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
                     </li>
@@ -343,6 +343,19 @@ session_start();
                             </li>
                         </ul>
                     </li>
+                    <li class=" nav-item">
+                        <a href="#"><i class="icon-plus2"></i>
+                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li>
+                                <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
+                            </li>
+                            <li>
+                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
+                            </li>
+                        </ul>
+                    </li>                    
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -371,19 +384,6 @@ session_start();
                             </li>
                             <li>
                                 <a href="listado-venta.php" class="menu-item">Listado Ventas</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class=" nav-item">
-                        <a href="#"><i class="icon-plus2"></i>
-                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
-                        </a>
-                        <ul class="menu-content">
-                            <li>
-                                <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
-                            </li>
-                            <li>
-                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
                     </li>
@@ -523,6 +523,16 @@ session_start();
                             </li>
                         </ul>
                     </li>
+                    <li class=" nav-item">
+                        <a href="#"><i class="icon-plus2"></i>
+                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li>
+                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
+                            </li>
+                        </ul>
+                    </li>                    
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -545,16 +555,6 @@ session_start();
                         <ul class="menu-content">
                             <li>
                                 <a href="listado-venta.php" class="menu-item">Listado Ventas</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class=" nav-item">
-                        <a href="#"><i class="icon-plus2"></i>
-                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
-                        </a>
-                        <ul class="menu-content">
-                            <li>
-                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
                     </li>
