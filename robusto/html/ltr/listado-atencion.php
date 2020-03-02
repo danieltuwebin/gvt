@@ -618,7 +618,7 @@ session_start();
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
     <!-- Modal -->
-    <div class="modal fade text-xs-left" id="Modal_ListadoVacunas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
+    <div class="modal fade text-xs-left" id="Modal_ListadoAtencion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -674,6 +674,7 @@ session_start();
                                                     <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
                                                     <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">
                                                     <input type="hidden" id="Txt_CodigoProducto" name="Txt_CodigoProducto">
+                                                    <input type="hidden" id="Txt_CodigoAtencion" name="Txt_CodigoAtencion">                                                    
                                                 </h5>
                                             </div>
                                         </div>
@@ -698,6 +699,7 @@ session_start();
                             <h4 class="form-section">signos Clinicos</h4>
 
                             <div class="row">
+
                                 <div class="col-md-1">
                                     <div class="form-group">
                                         <label for="Txt_Fecha">Fecha.</label>
@@ -708,6 +710,36 @@ session_start();
                                         <input type="date" style="text-transform:uppercase;" id="Txt_Fecha" class="form-control" placeholder="" name="Txt_Fecha">
                                     </div>
                                 </div>
+
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_Fecha">Estado.</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <label class="display-inline" for="CboEstado">
+                                            <!-- <label class="display-inline-block" for="CboVacuna">S : -->
+                                            <select id="CboEstado" name="CboEstado" class="form-control">
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <!--                                 <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_Fecha">Fecha.</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="date" style="text-transform:uppercase;" id="Txt_Fecha" class="form-control" placeholder="" name="Txt_Fecha">
+                                    </div>
+                                </div> -->
                                 <div class="col-md-1">
                                     <div class="form-group">
                                         <label for="Txt_T">T.&nbsp;&nbsp;</label>
@@ -936,25 +968,13 @@ session_start();
 
                         </div>
 
-                        <div class="form-actions">
-                            <button id="btnLimpiar" type="button" class="btn btn-info mr-1">
-                                <i class="icon-reload"></i> Nuevo
-                            </button>
-                            <button id="btnGrabar" type="button" class="btn btn-success mr-1">
-                                <i class="icon-check2"></i> Registrar Atención
-                            </button>
-                            <button id="btnAgendar" type="button" class="btn btn-warning mr-1">
-                                <i class="icon-check2"></i> Agendar Atención
-                            </button>
-                        </div>
-
                         <div id="Resultado_Grabacion"></div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <div class="row">
                         <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">Cerrar</button>
-                        <button id="BtnActualizarVacuna" type="button" class="btn btn-success mr-1"><i class="icon-edit2"></i>Grabar Edición</button>
+                        <button id="BtnActualizarAtencion" type="button" class="btn btn-success mr-1"><i class="icon-edit2"></i>Grabar Edición</button>
                     </div>
                 </div>
             </div>
@@ -1302,9 +1322,9 @@ session_start();
         var id = $(this).val();
         console.log($(this).val());
         if (Condicion == 1) {
-            Obtener_Vacunas('MostrarProductoxCondicion', 1);
-            Obtener_Datos_Vacuna('ObtenerDatosVacunasxId', id);
-            $("#Modal_ListadoVacunas").modal("show");
+            //Obtener_Vacunas('MostrarProductoxCondicion', 1);
+            Obtener_Datos_Atencion('ObtenerDatosAtencionxId', id);
+            $("#Modal_ListadoAtencion").modal("show");
         } else {
             alert('El perfil de usuario no esta habilitado para opción');
         }
@@ -1339,10 +1359,10 @@ session_start();
         });
     }
 
-    function Obtener_Datos_Vacuna(act, id) {
+    function Obtener_Datos_Atencion(act, id) {
         $.ajax({
             type: "POST",
-            url: "modulos/vacunas.php",
+            url: "modulos/atencion.php",
             async: false,
             dataType: "html",
             data: ({
@@ -1375,12 +1395,27 @@ session_start();
                     $('#Txt_CodigoMascota').val(json[i].Mascota_Id); // Mascota_Id (oculto)
                     Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
                     $('#CboMascota').val(json[i].Mascota_Id);
-                    $('#CboVacuna').val(json[i].Producto_Id);
-                    $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
-                    $('#CboEstadoVacuna').val(json[i].Vacunas_Cita);
-                    $('#Txt_Fecha').val(json[i].Vacunas_Fecha);
-                    $('#Txt_Notas').val(json[i].Vacunas_Observacion);
-                    $('#Txt_CodigoVacuna').val(json[i].Vacunas_Id);
+
+                    $('#Txt_Fecha').val(json[i].Atencion_Fecha);
+                    $('#Txt_T').val(json[i].Atencion_T);
+                    $('#Txt_C').val(json[i].Atencion_FC);
+                    $('#Txt_C').val(json[i].Atencion_FR);
+                    $('#Txt_Sintomas').val(json[i].Atencion_Sintomas);
+                    $('#Txt_Deshidrat').val(json[i].Atencion_sc_Deshidratacion);
+                    $('#Txt_Mucosa').val(json[i].Atencion_sc_Mucosas);
+                    $('#Txt_Tllc').val(json[i].Atencion_sc_TLLC);
+                    $('#Txt_Vomitos').val(json[i].Atencion_sc_Vomitos);
+                    $('#Txt_Diarrea').val(json[i].Atencion_sc_Diarreas);
+                    $('#Txt_Ganglio').val(json[i].Atencion_sc_Ganglios);
+                    $('#Txt_Peso').val(json[i].Atencion_sc_Peso);
+                    $('#Txt_Dx_Presuntivo').val(json[i].Atencion_dx_Presuntivo);
+                    $('#Txt_Dx_Definitivo').val(json[i].Atencion_dx_Definitivo);
+                    $('#Txt_Dx_Solicitado').val(json[i].Atencion_dx_Solicitado);
+                    $('#Txt_Descripcion').val(json[i].Atencion_tr_Descripcion);
+                    $('#Txt_NotasAdicionales').val(json[i].Atencion_tr_Observacion);
+                    $('#Txt_Precio').val(json[i].Atencion_tr_Precio);
+
+                    $('#Txt_CodigoAtencion').val(json[i].Atencion_Id);
                 });
             },
             complete: function() {
@@ -1516,7 +1551,7 @@ session_start();
         });
     }
 
-    $('#BtnActualizarVacuna').click(function() {
+    $('#BtnActualizarAtencion').click(function() {
 
         var nombredni = $('#Txt_Nombre_Dni').html();
         if (nombredni == 0) {
@@ -1524,52 +1559,76 @@ session_start();
         } else {
             var Id = ValidaCamposObligatorios(
                 $('#Txt_Dni').val().toUpperCase().trim(),
-                $('#CboMascota').val().toUpperCase().trim(),
-                $('#CboVacuna').val().toUpperCase().trim(),
-                $('#Txt_Precio').val().toUpperCase().trim(),
-                $('#Txt_Fecha').val());
+                $('#Txt_Sintomas').val().toUpperCase().trim(),
+                $('#Txt_T').val().toUpperCase().trim(),
+                $('#Txt_Peso').val().toUpperCase().trim(),
+                $('#Txt_Dx_Presuntivo').val().toUpperCase().trim(),
+                $('#Txt_Descripcion').val().toUpperCase().trim(),
+                $('#Txt_NotasAdicionales').val().toUpperCase().trim())
             if (Id == 1) {
-                Editar_Vacuna("EditarVacuna",
-                    $("#Txt_CodigoVacuna").val(),
-                    $('#Txt_Fecha').val(),
-                    $("#CboVacuna").val().toUpperCase().trim(),
-                    $("#Txt_Precio").val().toUpperCase().trim(),
-                    $("#CboMascota").val().toUpperCase().trim(),
-                    $("#Txt_Notas").val().toUpperCase().trim(),
-                    $("#CboEstadoVacuna").val(),
+                Editar_Atencion("EditarAtencion",
+                    $('#Txt_CodigoAtencion').val(),
+                    $("#Txt_Fecha").val(),
+                    $('#Txt_CodigoProducto').val(),
+                    $("#CboMascota").val(),
+                    $('#Txt_Sintomas').val().toUpperCase().trim(),
+                    $('#Txt_T').val().toUpperCase().trim(),
+                    $('#Txt_C').val().toUpperCase().trim(),
+                    $('#Txt_FR').val().toUpperCase().trim(),
+                    $('#Txt_Deshidrat').val().toUpperCase().trim(),
+                    $('#Txt_Mucosa').val().toUpperCase().trim(),
+                    $('#Txt_Tllc').val().toUpperCase().trim(),
+                    $('#Txt_Vomitos').val().toUpperCase().trim(),
+                    $('#Txt_Diarrea').val().toUpperCase().trim(),
+                    $('#Txt_Ganglio').val().toUpperCase().trim(),
+                    $('#Txt_Peso').val(),
+                    $('#Txt_Dx_Presuntivo').val().toUpperCase().trim(),
+                    $('#Txt_Dx_Definitivo').val().toUpperCase().trim(),
+                    $('#Txt_Dx_Solicitado').val().toUpperCase().trim(),
+                    $('#Txt_Descripcion').val().toUpperCase().trim(),
+                    $('#Txt_NotasAdicionales').val().toUpperCase().trim(),
+                    $('#Txt_Precio').val(),
+                    '1','1','1','1',
                     '<?php echo $_SESSION['User']; ?>'
                 );
             }
         }
     });
 
-    function ValidaCamposObligatorios(dni, mascota, vacuna, precio, fecha) {
-        if (dni.length == 0) {
-            alert('El campo DNI es obligatorio');
-            $("#Txt_Dni").focus();
+    function ValidaCamposObligatorios(sintomas, temp, peso, dxpresuntivo, descripcion, notasadicionales) {
+        if (sintomas.length == 0) {
+            alert('El campo sintomas es obligatorio');
+            $("#Txt_Sintomas").focus();
             return 0;
         } else {
-            if (mascota.length == 0) {
-                alert('El campo mascota es obligatorio');
-                $("#CboMascota").focus();
+            if (temp.length == 0) {
+                alert('El campo temperatura es obligatorio');
+                $("#Txt_T").focus();
                 return 0;
             } else {
-                if (vacuna.length == 0) {
-                    alert('El campo vacuna es obligatorio');
-                    $("#CboVacuna").focus();
+                if (peso.length == 0) {
+                    alert('El campo peso es obligatorio');
+                    $("#Txt_Peso").focus();
                     return 0;
                 } else {
-                    if (precio.length == 0) {
-                        alert('El campo precio es obligatorio');
-                        $("#Txt_Precio").focus();
+                    if (dxpresuntivo.length == 0) {
+                        alert('El campo Dx. presuntivo es obligatorio');
+                        $("#Txt_Dx_Presuntivo").focus();
                         return 0;
                     } else {
-                        if (fecha.length == 0) {
-                            alert('El campo fecha es obligatorio')
-                            $('#Txt_Fecha').focus();
+                        if (descripcion.length == 0) {
+                            alert('El campo descripción es obligatorio')
+                            $('#Txt_Descripcion').focus();
                             return 0;
                         } else {
-                            return 1;
+                            if (notasadicionales.length == 0) {
+                                alert('El campo notas adicionales es obligatorio');
+                                $('#Txt_NotasAdicionales').focus();
+                                return 0;
+                            } else {
+                                return 1;
+                            }
+
                         }
                     }
                 }
@@ -1577,31 +1636,63 @@ session_start();
         }
     }
 
-    function Editar_Vacuna(act, IdVacuna, Fecha, IdProducto, Precio, IdMascota, Observacion, Cita, Usuario) {
+
+ 
+
+
+    function Editar_Atencion(act, IdAtencion, Fecha, IdProducto, IdMascota, Sintomas, Atencion_T, Atencion_FC, Atencion_FR,
+    Atencion_sc_Des,Atencion_sc_Muc, Atencion_sc_TLLC, Atencion_sc_Vom, Atencion_sc_Dia, Atencion_sc_Gan, Atencion_sc_Pes,
+    Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des, Atencion_tr_Obs, Atencion_tr_Pre, Documento,
+    Cita, CitaEstado, Estado, Usuario) {
+    console.log('--------------');
+    console.log(act, IdAtencion, Fecha, IdProducto, IdMascota, Sintomas, Atencion_T, Atencion_FC, Atencion_FR,
+    Atencion_sc_Des,Atencion_sc_Muc, Atencion_sc_TLLC, Atencion_sc_Vom, Atencion_sc_Dia, Atencion_sc_Gan, Atencion_sc_Pes,
+    Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des, Atencion_tr_Obs, Atencion_tr_Pre, Documento,
+    Cita, CitaEstado, Estado, Usuario);
+        console.log(IdAtencion + ' cod');
         $.ajax({
             type: "POST",
-            url: "modulos/vacunas.php",
+            url: "modulos/atencion.php",
             async: false,
             dataType: "html",
             data: ({
                 action: act,
-                IdVacuna: IdVacuna,
+                IdAtencion: IdAtencion,
                 Fecha: Fecha,
                 IdProducto: IdProducto,
-                Precio: Precio,
                 IdMascota: IdMascota,
-                Observacion: Observacion,
+                Sintomas: Sintomas,
+                Atencion_T: Atencion_T,
+                Atencion_FC: Atencion_FC,
+                Atencion_FR: Atencion_FR,
+                Atencion_sc_Des: Atencion_sc_Des,
+                Atencion_sc_Muc: Atencion_sc_Muc,
+                Atencion_sc_TLLC: Atencion_sc_TLLC,
+                Atencion_sc_Vom: Atencion_sc_Vom,
+                Atencion_sc_Dia: Atencion_sc_Dia,
+                Atencion_sc_Gan: Atencion_sc_Gan,
+                Atencion_sc_Pes: Atencion_sc_Pes,
+                Atencion_dx_Pre: Atencion_dx_Pre,
+                Atencion_dx_Def: Atencion_dx_Def,
+                Atencion_dx_Sol: Atencion_dx_Sol,
+                Atencion_tr_Des: Atencion_tr_Des,
+                Atencion_tr_Obs: Atencion_tr_Obs,
+                Atencion_tr_Pre: Atencion_tr_Pre,
+                Documento: Documento,
                 Cita: Cita,
+                CitaEstado: CitaEstado,
+                Estado: Estado,
                 Usuario: Usuario
             }),
             beforeSend: function() {
                 //alert('ok');
             },
             success: function(data) {
+                console.log(data);
                 if (data == 1) {
-                    $("#Modal_ListadoVacunas").modal("hide");
+                    $("#Modal_ListadoAtencion").modal("hide");
                     listar();
-                    alert('Vacuna Editado correctamente');
+                    alert('Atención Editada correctamente');
                 } else {
                     alert('Lo sentimos ocurrio un error en el proceso de edición');
                 }
@@ -1618,8 +1709,8 @@ session_start();
         if (Condicion == 1) {
             var bool = confirm("Esta seguro de eliminar el registro ?");
             if (bool) {
-                Eliminar_Vacuna('EliminarVacuna', id)
-                alert('La vacuna seleccionado fue eliminada correctamente');
+                Eliminar_Atencion('EliminarAtencion', id)
+                alert('La atención seleccionado fue eliminada correctamente');
             } else {
                 //alert("cancelo la solicitud");
             }
@@ -1628,10 +1719,10 @@ session_start();
         }
     });
 
-    function Eliminar_Vacuna(act, codigo) {
+    function Eliminar_Atencion(act, codigo) {
         $.ajax({
             type: "POST",
-            url: "modulos/vacunas.php",
+            url: "modulos/atencion.php",
             async: true,
             dataType: "html",
             data: ({

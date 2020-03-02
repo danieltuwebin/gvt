@@ -2,13 +2,12 @@
 
 require_once("../../config/Cado.php");
 
-/*
-if ($_POST['action'] == "ObtenerDatosVacunasxId") {
+if ($_POST['action'] == "ObtenerDatosAtencionxId") {
    
     $Id = $_POST['Id'];
 
     $myArray = array();
-    $sql = "CALL SP_Obtener_TblVacunas_All_x_Id('$Id')";
+    $sql = "CALL SP_Obtener_TblAtencion_All_x_Id('$Id')";
     $oCado = new Cado();
     $rst = $oCado->ejecute_sql($sql);
     while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
@@ -16,7 +15,6 @@ if ($_POST['action'] == "ObtenerDatosVacunasxId") {
     }
     echo json_encode($myArray);
 }
-*/
 
 if ($_POST['action'] == "GrabarAtencion") {
    
@@ -63,32 +61,58 @@ if ($_POST['action'] == "GrabarAtencion") {
     echo json_encode($myArray);
 }
 
-if ($_POST['action'] == "EditarVacuna") {
+if ($_POST['action'] == "EditarAtencion") {
 
-    $IdVacuna = $_POST['IdVacuna'];
+    $IdAtencion = $_POST['IdAtencion'];
     $Fecha = $_POST['Fecha'];
-    $IdProducto = $_POST['IdProducto'];
-    $Precio = $_POST['Precio'];
+    //$IdProducto = $_POST['IdProducto'];
+    $IdProducto = 15;
     $IdMascota = $_POST['IdMascota'];
-    $Observacion = $_POST['Observacion'];
+    $Sintomas = $_POST['Sintomas'];
+    $Atencion_T = $_POST['Atencion_T'];
+    $Atencion_FC = $_POST['Atencion_FC'];
+    $Atencion_FR = $_POST['Atencion_FR'];
+    $Atencion_sc_Des = $_POST['Atencion_sc_Des'];
+    $Atencion_sc_Muc = $_POST['Atencion_sc_Muc'];
+    $Atencion_sc_TLLC = $_POST['Atencion_sc_TLLC'];
+    $Atencion_sc_Vom = $_POST['Atencion_sc_Vom'];
+    $Atencion_sc_Dia = $_POST['Atencion_sc_Dia'];
+    $Atencion_sc_Gan = $_POST['Atencion_sc_Gan'];
+    $Atencion_sc_Pes = $_POST['Atencion_sc_Pes'];
+    $Atencion_dx_Pre = $_POST['Atencion_dx_Pre'];
+    $Atencion_dx_Def = $_POST['Atencion_dx_Def'];
+    $Atencion_dx_Sol = $_POST['Atencion_dx_Sol'];
+    $Atencion_tr_Des = $_POST['Atencion_tr_Des'];
+    $Atencion_tr_Obs = $_POST['Atencion_tr_Obs'];
+    $Atencion_tr_Pre = $_POST['Atencion_tr_Pre'];
+    $Documento = $_POST['Documento'];
     $Cita = $_POST['Cita'];
-    $Usuario = $_POST['Usuario'];
+    $CitaEstado = $_POST['CitaEstado'];
+    $Estado = $_POST['Estado'];
+    $Usuario = $_POST['Usuario']; 
 
-    $sql = "CALL SP_Actualizar_TblVacunas('$IdVacuna', '$Fecha', '$IdProducto', '$Precio', '$IdMascota','$Observacion','$Cita','$Usuario')";
+    $sql = "CALL SP_Actualizar_TblAtencion('$IdAtencion', '$Fecha', '$IdProducto', '$IdMascota', '$Sintomas', '$Atencion_T', '$Atencion_FC',
+    '$Atencion_FR', '$Atencion_sc_Des', '$Atencion_sc_Muc', '$Atencion_sc_TLLC', '$Atencion_sc_Vom', '$Atencion_sc_Dia', '$Atencion_sc_Gan', '$Atencion_sc_Pes',
+    '$Atencion_dx_Pre', '$Atencion_dx_Def', '$Atencion_dx_Sol', '$Atencion_tr_Des', '$Atencion_tr_Obs', '$Atencion_tr_Pre', '$Documento',
+    '$Cita', '$CitaEstado', '$Estado', '$Usuario')";
     $oCado = new Cado();
+    
+    
     $rst = $oCado->ejecute_sql($sql);
-
     $dt = mysqli_fetch_array($rst);
     $Codigo = $dt['CODIGO'];
 
     echo $Codigo;
+    
+
+    //echo $sql;
 }
 
 
-if ($_POST['action'] == "EliminarVacuna") {
+if ($_POST['action'] == "EliminarAtencion") {
 
     $Id = $_POST['Id'];
-    $sql = "CALL SP_Eliminar_TblVacunas('$Id')";
+    $sql = "CALL SP_Eliminar_TblAtencion('$Id')";
     $oCado = new Cado();
     $rst = $oCado->ejecute_sql($sql);
 
@@ -97,6 +121,7 @@ if ($_POST['action'] == "EliminarVacuna") {
 
     echo $rst;
 }
+
 
 
 ?>

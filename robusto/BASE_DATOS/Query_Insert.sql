@@ -2284,7 +2284,10 @@ DROP PROCEDURE IF EXISTS SP_Obtener_TblAtencion_All_x_Id;
 DELIMITER $$
 CREATE PROCEDURE SP_Obtener_TblAtencion_All_x_Id (IN Pint_IdAtencion INT)
 BEGIN
-SELECT Atencion_Id, Atencion_IdVenta, Atencion_Fecha, Atencion_IdProducto, Atencion_IdMascota, Atencion_Sintomas, Atencion_T, Atencion_FC, Atencion_FR, Atencion_sc_Deshidratacion, Atencion_sc_Mucosas, Atencion_sc_TLLC, Atencion_sc_Vomitos, Atencion_sc_Diarreas, Atencion_sc_Ganglios, Atencion_sc_Peso, Atencion_dx_Presuntivo, Atencion_dx_Definitivo, Atencion_dx_Solicitado, Atencion_tr_Descripcion, Atencion_tr_Observacion, Atencion_tr_Precio, Atencion_IdDocumento, Atencion_Cita, Atencion_CitaEstado, Atencion_Estado, Atencion_FechaGra, Atencion_UserGrab, Atencion_FechaGrab_Edicion, Atencion_UserGrab_Edicion 
-FROM tblAtencion WHERE Atencion_Id = Pint_IdAtencion;
+SELECT ta.Atencion_Id, ta.Atencion_IdVenta, ta.Atencion_Fecha, ta.Atencion_IdProducto, ta.Atencion_IdMascota, tm.Mascota_Nombre, CONCAT(tc.Cliente_Nombre,' ',tc.Cliente_Apellido) AS Cliente_NombreCompleto, ta.Atencion_Sintomas, ta.Atencion_T, ta.Atencion_FC, ta.Atencion_FR, ta.Atencion_sc_Deshidratacion, ta.Atencion_sc_Mucosas, ta.Atencion_sc_TLLC, ta.Atencion_sc_Vomitos, ta.Atencion_sc_Diarreas, ta.Atencion_sc_Ganglios, ta.Atencion_sc_Peso, ta.Atencion_dx_Presuntivo, ta.Atencion_dx_Definitivo, ta.Atencion_dx_Solicitado, ta.Atencion_tr_Descripcion, ta.Atencion_tr_Observacion, ta.Atencion_tr_Precio, ta.Atencion_IdDocumento, ta.Atencion_Cita, ta.Atencion_CitaEstado, ta.Atencion_Estado, ta.Atencion_FechaGra, ta.Atencion_UserGrab, ta.Atencion_FechaGrab_Edicion, ta.Atencion_UserGrab_Edicion 
+FROM tblAtencion ta 
+LEFT JOIN tblMascota tm ON ta.Atencion_IdMascota = tm.Mascota_Id
+LEFT JOIN tblCliente tc ON tm.Mascota_IdCliente = tc.Cliente_Id
+WHERE Atencion_Estado = 1 AND Atencion_Id = Pint_IdAtencion;
 END$$
 DELIMITER ;
