@@ -156,6 +156,19 @@ session_start();
                         </ul>
                     </li>
                     <li class=" nav-item">
+                        <a href="#"><i class="icon-plus2"></i>
+                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li>
+                                <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
+                            </li>
+                            <li>
+                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
+                            </li>
+                        </ul>
+                    </li>                    
+                    <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
                         </a>
@@ -181,19 +194,6 @@ session_start();
                             </li>
                             <li>
                                 <a href="listado-venta.php" class="menu-item">Listado Ventas</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class=" nav-item">
-                        <a href="#"><i class="icon-plus2"></i>
-                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
-                        </a>
-                        <ul class="menu-content">
-                            <li>
-                                <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
-                            </li>
-                            <li>
-                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
                     </li>
@@ -343,6 +343,20 @@ session_start();
                             </li>
                         </ul>
                     </li>
+                    <li class=" nav-item">
+                        <a href="#"><i class="icon-plus2"></i>
+                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li>
+                                <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
+                            </li>
+                            <li>
+                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -371,19 +385,6 @@ session_start();
                             </li>
                             <li>
                                 <a href="listado-venta.php" class="menu-item">Listado Ventas</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class=" nav-item">
-                        <a href="#"><i class="icon-plus2"></i>
-                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
-                        </a>
-                        <ul class="menu-content">
-                            <li>
-                                <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
-                            </li>
-                            <li>
-                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
                     </li>
@@ -523,6 +524,16 @@ session_start();
                             </li>
                         </ul>
                     </li>
+                    <li class=" nav-item">
+                        <a href="#"><i class="icon-plus2"></i>
+                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li>
+                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
+                            </li>
+                        </ul>
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -545,16 +556,6 @@ session_start();
                         <ul class="menu-content">
                             <li>
                                 <a href="listado-venta.php" class="menu-item">Listado Ventas</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class=" nav-item">
-                        <a href="#"><i class="icon-plus2"></i>
-                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
-                        </a>
-                        <ul class="menu-content">
-                            <li>
-                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
                     </li>
