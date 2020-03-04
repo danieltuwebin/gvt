@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+require('lib_externos/fpdf182/fpdf.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -356,7 +357,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -533,7 +534,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -674,7 +675,7 @@ session_start();
                                                     <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
                                                     <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">
                                                     <input type="hidden" id="Txt_CodigoProducto" name="Txt_CodigoProducto">
-                                                    <input type="hidden" id="Txt_CodigoAtencion" name="Txt_CodigoAtencion">                                                    
+                                                    <input type="hidden" id="Txt_CodigoAtencion" name="Txt_CodigoAtencion">
                                                 </h5>
                                             </div>
                                         </div>
@@ -1266,7 +1267,7 @@ session_start();
                 },
                 {
                     "render": function(data, type, row) {
-                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Atencion_Id + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Atencion_Id + "'><i class='icon-trash-o'></i></button>    <button id='mascota' type='button' class='mascota btn btn-success' value='" + row.Atencion_Id + "'><i class='icon-ios-paw'></i></button>   </div></div>";
+                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Atencion_Id + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Atencion_Id + "'><i class='icon-trash-o'></i></button>    <button id='mascota' type='button' class='mascota btn btn-success' value='" + row.Atencion_Id + "'><i class='icon-eye-plus'></i></button>   </div></div>";
                     }
                 }
             ],
@@ -1588,7 +1589,7 @@ session_start();
                     $('#Txt_Descripcion').val().toUpperCase().trim(),
                     $('#Txt_NotasAdicionales').val().toUpperCase().trim(),
                     $('#Txt_Precio').val(),
-                    '1','1','1','1',
+                    '1', '1', '1', '1',
                     '<?php echo $_SESSION['User']; ?>'
                 );
             }
@@ -1637,18 +1638,18 @@ session_start();
     }
 
 
- 
+
 
 
     function Editar_Atencion(act, IdAtencion, Fecha, IdProducto, IdMascota, Sintomas, Atencion_T, Atencion_FC, Atencion_FR,
-    Atencion_sc_Des,Atencion_sc_Muc, Atencion_sc_TLLC, Atencion_sc_Vom, Atencion_sc_Dia, Atencion_sc_Gan, Atencion_sc_Pes,
-    Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des, Atencion_tr_Obs, Atencion_tr_Pre, Documento,
-    Cita, CitaEstado, Estado, Usuario) {
-    console.log('--------------');
-    console.log(act, IdAtencion, Fecha, IdProducto, IdMascota, Sintomas, Atencion_T, Atencion_FC, Atencion_FR,
-    Atencion_sc_Des,Atencion_sc_Muc, Atencion_sc_TLLC, Atencion_sc_Vom, Atencion_sc_Dia, Atencion_sc_Gan, Atencion_sc_Pes,
-    Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des, Atencion_tr_Obs, Atencion_tr_Pre, Documento,
-    Cita, CitaEstado, Estado, Usuario);
+        Atencion_sc_Des, Atencion_sc_Muc, Atencion_sc_TLLC, Atencion_sc_Vom, Atencion_sc_Dia, Atencion_sc_Gan, Atencion_sc_Pes,
+        Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des, Atencion_tr_Obs, Atencion_tr_Pre, Documento,
+        Cita, CitaEstado, Estado, Usuario) {
+        console.log('--------------');
+        console.log(act, IdAtencion, Fecha, IdProducto, IdMascota, Sintomas, Atencion_T, Atencion_FC, Atencion_FR,
+            Atencion_sc_Des, Atencion_sc_Muc, Atencion_sc_TLLC, Atencion_sc_Vom, Atencion_sc_Dia, Atencion_sc_Gan, Atencion_sc_Pes,
+            Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des, Atencion_tr_Obs, Atencion_tr_Pre, Documento,
+            Cita, CitaEstado, Estado, Usuario);
         console.log(IdAtencion + ' cod');
         $.ajax({
             type: "POST",
@@ -1746,6 +1747,24 @@ session_start();
         });
     }
 
+
+    $('#TblAtencion').on('click', '.mascota', function() {
+        var id = $(this).val();
+        console.log($(this).val());
+
+        //location.href = 'atencion_visor.php';
+        window.open('atencion_visor.php', '_blank')
+        /*
+        if (Condicion == 1) {
+            //Obtener_Vacunas('MostrarProductoxCondicion', 1);
+            Obtener_Datos_Atencion('ObtenerDatosAtencionxId', id);
+            $("#Modal_ListadoAtencion").modal("show");
+        } else {
+            alert('El perfil de usuario no esta habilitado para opción');
+        }
+        */
+
+    });
 
     $(function() {
 

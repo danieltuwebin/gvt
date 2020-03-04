@@ -157,6 +157,19 @@ session_start();
                         </ul>
                     </li>
                     <li class=" nav-item">
+                        <a href="#"><i class="icon-plus2"></i>
+                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li>
+                                <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
+                            </li>
+                            <li>
+                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
+                            </li>
+                        </ul>
+                    </li>                    
+                    <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
                         </a>
@@ -182,19 +195,6 @@ session_start();
                             </li>
                             <li>
                                 <a href="listado-venta.php" class="menu-item">Listado Ventas</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class=" nav-item">
-                        <a href="#"><i class="icon-plus2"></i>
-                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
-                        </a>
-                        <ul class="menu-content">
-                            <li>
-                                <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
-                            </li>
-                            <li>
-                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
                     </li>
@@ -344,6 +344,19 @@ session_start();
                             </li>
                         </ul>
                     </li>
+                    <li class=" nav-item">
+                        <a href="#"><i class="icon-plus2"></i>
+                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li>
+                                <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
+                            </li>
+                            <li>
+                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
+                            </li>
+                        </ul>
+                    </li>                    
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -372,19 +385,6 @@ session_start();
                             </li>
                             <li>
                                 <a href="listado-venta.php" class="menu-item">Listado Ventas</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class=" nav-item">
-                        <a href="#"><i class="icon-plus2"></i>
-                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
-                        </a>
-                        <ul class="menu-content">
-                            <li>
-                                <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
-                            </li>
-                            <li>
-                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
                     </li>
@@ -524,6 +524,16 @@ session_start();
                             </li>
                         </ul>
                     </li>
+                    <li class=" nav-item">
+                        <a href="#"><i class="icon-plus2"></i>
+                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li>
+                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
+                            </li>
+                        </ul>
+                    </li>                    
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -546,16 +556,6 @@ session_start();
                         <ul class="menu-content">
                             <li>
                                 <a href="listado-venta.php" class="menu-item">Listado Ventas</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class=" nav-item">
-                        <a href="#"><i class="icon-plus2"></i>
-                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
-                        </a>
-                        <ul class="menu-content">
-                            <li>
-                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
                     </li>
@@ -799,9 +799,9 @@ session_start();
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 
-    <footer class="footer footer-static footer-light navbar-border">
-        <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright &copy; 2017 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank" class="text-bold-800 grey darken-2">PIXINVENT </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="icon-heart5 pink"></i></span></p>
-    </footer>
+    <?php
+    require_once("includes_html/footer.php");
+    ?>
 
     <!-- BEGIN VENDOR JS-->
     <script src="../../app-assets/js/core/libraries/jquery.min.js" type="text/javascript"></script>
