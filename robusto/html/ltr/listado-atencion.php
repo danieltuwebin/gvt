@@ -1751,9 +1751,18 @@ require('lib_externos/fpdf182/fpdf.php');
     $('#TblAtencion').on('click', '.mascota', function() {
         var id = $(this).val();
         console.log($(this).val());
+        GenerarPDF();
 
+        window.open('atencion_visor_test.php?Cond=' + id, '_blank');
         //location.href = 'atencion_visor.php';
-        window.open('atencion_visor.php', '_blank')
+        //window.open('atencion_visor.php?Cond=1', '_blank')
+        //window.open('atencion_visor.php?rz=15', '_blank')
+        /*
+                href="javascript:window.open('facturapago.php?rz=25'
+                &user=<?php echo $usuario; ?>
+                &id=<?php echo $identifier; ?>');" class="btn btn-danger">Exportar Factura a PDF</a></td>
+        */
+
         /*
         if (Condicion == 1) {
             //Obtener_Vacunas('MostrarProductoxCondicion', 1);
@@ -1765,6 +1774,23 @@ require('lib_externos/fpdf182/fpdf.php');
         */
 
     });
+
+
+    function GenerarPDF() {
+        console.log('entre');
+        $.ajax({
+            type: 'POST',
+            url: 'atencion_visor.php',
+            data: {
+                "saludo": "hola"
+            }, //aquí le pasaré datos de controles de HTML
+
+            success: function(result) {
+                //$('#resulta').html(result);
+                console.log(result);
+            }
+        });
+    }
 
     $(function() {
 
