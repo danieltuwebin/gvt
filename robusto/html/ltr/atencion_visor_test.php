@@ -2,23 +2,27 @@
 //require('../librerias/fpdf/fpdf.php');
 require('lib_externos/fpdf182/fpdf.php');
 
-$Condicion = $_GET["Cond"];
+//$Condicion = $_GET["Cond"];
+//global $Condicion = $_GET["Cond"];
 
 class PDF extends FPDF
 {
 //Cabecera de página
 function Header()
 {
+
+$Condicion = utf8_decode('Atención Nro. '.$_GET["Cond"]);
 //Logo
 //$this->Image("../../app-assets/images/logo/dog.png" , 10 ,8, 35 , 38 , "png" );
-$this->Image('dog.png',10,8,33);
+//$this->Image('dog.png',10,8,33);
 //$this->Image('http://chart.googleapis.com/chart?cht=p3&chd=t:60,40&chs=250x100&chl=Hello|World',60,30,90,0,'PNG');
 //Arial bold 15
 $this->SetFont('Arial','B',15);
 //Movernos a la derecha
 $this->Cell(80);
 //Título
-$this->Cell(60,10,'Titulo del archivo',1,0,'C');
+$this->Cell(60,10,$Condicion,1,0,'C');
+//$this->Cell(60,10,'Titulo del archivo' + utf8_decode('¡Mi primera página pdf con FPDF! - '.$Condicion,1,0,'C');
 //Salto de línea
 $this->Ln(20);
    

@@ -3,7 +3,7 @@ require('lib_externos/fpdf182/fpdf.php');
 //header('Content-Type: text/html; charset=UTF-8');
 //require_once("../../config/Cado.php");
 
-$Condicion = $_GET["Cond"];
+$Condicion = $_GET["id"];
 //$saludo = $_POST['saludo'];
 
 

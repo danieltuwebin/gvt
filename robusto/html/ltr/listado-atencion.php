@@ -1267,7 +1267,7 @@ require('lib_externos/fpdf182/fpdf.php');
                 },
                 {
                     "render": function(data, type, row) {
-                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Atencion_Id + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Atencion_Id + "'><i class='icon-trash-o'></i></button>    <button id='mascota' type='button' class='mascota btn btn-success' value='" + row.Atencion_Id + "'><i class='icon-eye-plus'></i></button>   </div></div>";
+                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Atencion_Id + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Atencion_Id + "'><i class='icon-trash-o'></i></button>    <button id='ver' type='button' class='ver btn btn-success' value='" + row.Atencion_Id + "'><i class='icon-eye-plus'></i></button>   </div></div>";
                     }
                 }
             ],
@@ -1748,7 +1748,7 @@ require('lib_externos/fpdf182/fpdf.php');
     }
 
 
-    $('#TblAtencion').on('click', '.mascota', function() {
+    $('#TblAtencion').on('click', '.ver', function() {
         var id = $(this).val();
         console.log($(this).val());
         GenerarPDF();

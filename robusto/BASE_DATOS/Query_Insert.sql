@@ -2291,3 +2291,23 @@ LEFT JOIN tblCliente tc ON tm.Mascota_IdCliente = tc.Cliente_Id
 WHERE Atencion_Estado = 1 AND Atencion_Id = Pint_IdAtencion;
 END$$
 DELIMITER ;
+
+/* 09-03-2020 */
+
+DROP PROCEDURE IF EXISTS SP_Obtener_Datos_Agenda_All;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_Datos_Agenda_All()
+BEGIN
+SELECT tv.Vacunas_Id,tv.Vacunas_IdVenta,tv.Vacunas_Fecha,'VACUNA' AS SERVICIO,CASE WHEN tv.Vacunas_Cita = 2 THEN 'AGENDADO' WHEN tv.Vacunas_Cita = 3 THEN 'REPROGRAMADO' END AS Atencion,tp.Producto_Nombre,tv.Vacunas_IdMascota,
+tv.Vacunas_Observacion,tv.Vacunas_Precio FROM tblVacunas tv LEFT JOIN tblProducto tp ON tv.Vacunas_IdProducto = tp.Producto_Id WHERE tv.Vacunas_Cita IN (2,3)
+UNION
+SELECT tb.Banio_Id,tb.Banio_IdVenta,tb.Banio_Fecha,'BAÑO' AS SERVICIO,CASE WHEN tb.Banio_Cita= 2 THEN 'AGENDADO' WHEN tb.Banio_Cita = 3 THEN 'REPROGRAMADO' END AS Atencion,tp.Producto_Nombre,tb.Banio_IdMascota,tb.Banio_Observacion,tb.Banio_Precio
+FROM tblBanio tb LEFT JOIN tblProducto tp ON tb.Banio_IdProducto = tp.Producto_Id WHERE tb.Banio_Cita IN (2,3)
+UNION
+SELECT td.Desparacitacion_Id,td.Desparacitacion_IdVenta,td.Desparacitacion_Fecha,'DESPARACITACIÓN' AS SERVICIO,CASE WHEN td.Desparacitacion_Cita = 2 THEN 'AGENDADO' WHEN td.Desparacitacion_Cita = 3 THEN 'REPROGRAMADO' END AS Atencion,tp.Producto_Nombre,td.Desparacitacion_IdMascota,td.Desparacitacion_Observacion,td.Desparacitacion_Precio FROM tblDesparacitacion td LEFT JOIN tblProducto tp ON td.Desparacitacion_IdProducto = tp.Producto_Id WHERE td.Desparacitacion_Cita IN (2,3) 
+UNION
+SELECT ta.Atencion_Id,ta.Atencion_IdVenta,ta.Atencion_Fecha,'ATENCIÓN' AS ATENCION,CASE WHEN ta.Atencion_Cita = 2 THEN 'AGENDADO' WHEN ta.Atencion_Cita = 3 THEN 'REPROGRAMADO' END AS Atencion,
+Atencion_IdProducto,ta.Atencion_IdMascota,ta.Atencion_tr_Observacion,ta.Atencion_tr_Precio FROM tblAtencion ta LEFT JOIN tblProducto tp ON ta.Atencion_IdProducto = tp.Producto_Id WHERE Atencion_Cita IN (2,3)
+;
+END$$
+DELIMITER ;
