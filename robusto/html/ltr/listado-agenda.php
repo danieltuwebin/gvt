@@ -787,17 +787,18 @@ session_start();
                             <div class="card-block">
                                 <div class="card-body collapse in">
                                     <div class="table-responsive">
-                                        <!-- <table id="TblBanios" class="table table-bordered table-striped"> -->
-                                        <table id="TblBanios" class="table table-striped table-bordered" style="width:100%">
+                                        <!-- <table id="TblAgenda" class="table table-bordered table-striped"> -->
+                                        <table id="TblAgenda" class="table table-striped table-bordered" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>DNI mascota</th>
-                                                    <th>Nombre</th>
                                                     <th>Fecha</th>
-                                                    <th>Baño</th>
-                                                    <th>Estado Baño</th>
+                                                    <th>Servicio</th>
+                                                    <th>Estado Ate.</th>
+                                                    <th>Producto</th>
+                                                    <th>Mascota</th>
                                                     <th>Observación</th>
+                                                    <th>Precio</th>                                                    
                                                     <th>Administrar</th>
                                                 </tr>
                                             </thead>
@@ -972,65 +973,46 @@ session_start();
     var listar = function() {
         var url = ""
         if (IdMascotaExterno == 0) {
-            url = "modulos/banios_listado.php?Cond=1&Id=0";
+            url = "modulos/agenda_listado.php";
+            //url = "modulos/banios_listado.php?Cond=1&Id=0";
+           
         } else {
             //url = "modulos/vacunas_listado.php?Cond=2&Id=" + IdMascotaExterno;
         }
 
-        table = $('#TblBanios').DataTable({
+        table = $('#TblAgenda').DataTable({
             "destroy": true,
             "ajax": {
                 "method": "POST",
                 "url": url,
             },
             "columns": [{
-                    //"data": "Banio_Id"
-                    "render": function(data, type, row) {
-                        if (row.Banio_Id.length == 1) {
-                            var Cod = 'B000' + row.Banio_Id;
-                        } else if (row.Banio_Id.length == 2) {
-                            var Cod = 'B00' + row.Banio_Id;
-                        } else if (row.Banio_Id.length == 3) {
-                            var Cod = 'B0' + row.Banio_Id;
-                        } else {
-                            var Cod = 'B' + row.Banio_Id;
-                        }
-                        return Cod;
-                    }
+                    "data": "Codigo"
                 },
                 {
-                    //"data": "Mascota_Id"
-                    "render": function(data, type, row) {
-                        if (row.Mascota_Id.length == 1) {
-                            var Cod = 'M000' + row.Mascota_Id;
-                        } else if (row.Mascota_Id.length == 2) {
-                            var Cod = 'M00' + row.Mascota_Id;
-                        } else if (row.Mascota_Id.length == 3) {
-                            var Cod = 'M0' + row.Mascota_Id;
-                        } else {
-                            var Cod = 'M' + row.Mascota_Id;
-                        }
-                        return Cod;
-                    }
+                    "data": "Venta"
                 },
                 {
-                    "data": "Mascota_Nombre"
+                    "data": "Fecha"
                 },
                 {
-                    "data": "Banio_Fecha"
+                    "data": "Servicio"
+                },
+                {
+                    "data": "Atencion"
                 },
                 {
                     "data": "Producto_Nombre"
                 },
                 {
-                    "data": "Banio_Cita"
+                    "data": "Mascota_Nombre"
                 },
                 {
-                    "data": "Banio_Observacion"
-                },
+                    "data": "Precio"
+                },                
                 {
                     "render": function(data, type, row) {
-                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Banio_Id + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Banio_Id + "'><i class='icon-trash-o'></i></button>  </div></div>";
+                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Codigo + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Codigo + "'><i class='icon-trash-o'></i></button>  </div></div>";
                     }
                 }
             ],
@@ -1082,7 +1064,7 @@ session_start();
 
     }
 
-    $('#TblBanios').on('click', '.editar', function() {
+    $('#TblAgenda').on('click', '.editar', function() {
         var id = $(this).val();
         console.log($(this).val());
         if (Condicion == 1) {
@@ -1399,7 +1381,7 @@ session_start();
     }
 
 
-    $('#TblBanios').on('click', '.eliminar', function() {
+    $('#TblAgenda').on('click', '.eliminar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
             var bool = confirm("Esta seguro de eliminar el registro ?");
@@ -1446,7 +1428,7 @@ session_start();
 
         Obtener_Nombre();
         Obtener_Condicion();
-
+        /*
         if ($_GET("IdCli") === undefined) {
             console.log('sin valor');
         } else {
