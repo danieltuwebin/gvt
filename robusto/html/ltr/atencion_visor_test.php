@@ -1,19 +1,30 @@
 <?php
 require('lib_externos/fpdf/fpdf.php');
 
+//global $Condicion;
+//$Condicion = utf8_decode('Atención Nro. '.$_GET["Cond"]);
+
+$GLOBALS['Condicion'] = utf8_decode('Atención Nro. '.$_GET["Cond"]);
+
 class PDF extends FPDF
 {
+
+    
+
     // Cabecera de p�gina
     function Header()
     {
         // Logo
-        $this->Image('logo_pb.png', 10, 8, 33);
+        //$this->Image('logo_pb.png', 10, 8, 33);
+        //$this->Image('DANIEL1.jpg', 10, 8, 33);
+        $this->Image('../../app-assets/images/logo/gavet-80x80.png', 10, 8, 33);
+        //
         // Arial bold 15
         $this->SetFont('Arial', 'B', 15);
         // Movernos a la derecha
         $this->Cell(80);
         // T�tulo
-        $this->Cell(30, 10, 'Title', 1, 0, 'C');
+        $this->Cell(30, 10, $GLOBALS['Condicion'], 1, 0, 'C');
         // Salto de l�nea
         $this->Ln(20);
     }
@@ -29,6 +40,8 @@ class PDF extends FPDF
         $this->Cell(0, 10, 'Page ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
 }
+
+//$Condicion = utf8_decode('Atención Nro. '.$_GET["Cond"]);
 
 // Creaci�n del objeto de la clase heredada
 $pdf = new PDF();

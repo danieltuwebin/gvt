@@ -792,7 +792,7 @@ session_start();
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Fecha</th>
+                                                    <th>Fecha_Cita</th>
                                                     <th>Servicio</th>
                                                     <th>Estado Ate.</th>
                                                     <th>Producto</th>
@@ -990,9 +990,6 @@ session_start();
                     "data": "Codigo"
                 },
                 {
-                    "data": "Venta"
-                },
-                {
                     "data": "Fecha"
                 },
                 {
@@ -1006,6 +1003,9 @@ session_start();
                 },
                 {
                     "data": "Mascota_Nombre"
+                },
+                {
+                    "data": "Observacion"
                 },
                 {
                     "data": "Precio"
@@ -1434,7 +1434,7 @@ session_start();
         } else {
             IdMascotaExterno = $_GET("IdCli");
             console.log(IdMascotaExterno);
-        }
+        }*/
         listar();
 
     });
