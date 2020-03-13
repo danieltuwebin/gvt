@@ -2335,3 +2335,82 @@ ta.Atencion_tr_Observacion,ta.Atencion_tr_Precio
 FROM tblAtencion ta LEFT JOIN tblProducto tp ON ta.Atencion_IdProducto = tp.Producto_Id LEFT JOIN tblMascota tm ON ta.Atencion_IdMascota = tm.Mascota_Id WHERE Atencion_Cita IN (2,3);
 END$$
 DELIMITER ;
+
+
+CREATE DEFINER=`gavet`@`localhost` PROCEDURE `SP_Obtener_Datos_Agenda_All`()
+BEGIN
+/*
+SELECT CASE WHEN LENGTH( tv.Vacunas_Id) = 1 THEN CONCAT('V000',tv.Vacunas_Id) WHEN LENGTH( tv.Vacunas_Id) = 2 THEN CONCAT('V00',tv.Vacunas_Id) WHEN LENGTH( tv.Vacunas_Id) = 3 THEN CONCAT('V0',tv.Vacunas_Id) WHEN LENGTH( tv.Vacunas_Id) = 4 THEN CONCAT('V',tv.Vacunas_Id) ELSE 'ERROR' END Vacunas_Id,
+tv.Vacunas_IdVenta,tv.Vacunas_Fecha,'VACUNA' AS SERVICIO,CASE WHEN tv.Vacunas_Cita = 2 THEN 'AGENDADO' WHEN tv.Vacunas_Cita = 3 THEN 'REPROGRAMADO' END AS Atencion,tp.Producto_Nombre,tv.Vacunas_IdMascota,
+tv.Vacunas_Observacion,tv.Vacunas_Precio FROM tblVacunas tv LEFT JOIN tblProducto tp ON tv.Vacunas_IdProducto = tp.Producto_Id WHERE tv.Vacunas_Cita IN (2,3)
+UNION
+SELECT CASE WHEN LENGTH( tb.Banio_Id) = 1 THEN CONCAT('B000',tb.Banio_Id) WHEN LENGTH( tb.Banio_Id) = 2 THEN CONCAT('B00',tb.Banio_Id) WHEN LENGTH( tb.Banio_Id) = 3 THEN CONCAT('B0',tb.Banio_Id) WHEN LENGTH( tb.Banio_Id) = 4 THEN CONCAT('V',tb.Banio_Id) ELSE 'ERROR' END Banio_Id,
+tb.Banio_IdVenta,tb.Banio_Fecha,'BAÑO' AS SERVICIO,CASE WHEN tb.Banio_Cita= 2 THEN 'AGENDADO' WHEN tb.Banio_Cita = 3 THEN 'REPROGRAMADO' END AS Atencion,tp.Producto_Nombre,tb.Banio_IdMascota,tb.Banio_Observacion,tb.Banio_Precio
+FROM tblBanio tb LEFT JOIN tblProducto tp ON tb.Banio_IdProducto = tp.Producto_Id WHERE tb.Banio_Cita IN (2,3)
+UNION
+SELECT CASE WHEN LENGTH( td.Desparacitacion_Id) = 1 THEN CONCAT('D000',td.Desparacitacion_Id) WHEN LENGTH( td.Desparacitacion_Id) = 2 THEN CONCAT('D00',td.Desparacitacion_Id) WHEN LENGTH( td.Desparacitacion_Id) = 3 THEN CONCAT('D0',td.Desparacitacion_Id) WHEN LENGTH( td.Desparacitacion_Id) = 4 THEN CONCAT('V',td.Desparacitacion_Id) ELSE 'ERROR' END Desparacitacion_Id,
+td.Desparacitacion_IdVenta,td.Desparacitacion_Fecha,'DESPARACITACIÓN' AS SERVICIO,CASE WHEN td.Desparacitacion_Cita = 2 THEN 'AGENDADO' WHEN td.Desparacitacion_Cita = 3 THEN 'REPROGRAMADO' END AS Atencion,tp.Producto_Nombre,td.Desparacitacion_IdMascota,td.Desparacitacion_Observacion,td.Desparacitacion_Precio FROM tblDesparacitacion td LEFT JOIN tblProducto tp ON td.Desparacitacion_IdProducto = tp.Producto_Id WHERE td.Desparacitacion_Cita IN (2,3)
+UNION
+SELECT CASE WHEN LENGTH( ta.Atencion_Id) = 1 THEN CONCAT('A000',ta.Atencion_Id) WHEN LENGTH( ta.Atencion_Id) = 2 THEN CONCAT('A00',ta.Atencion_Id) WHEN LENGTH( ta.Atencion_Id) = 3 THEN CONCAT('A0',ta.Atencion_Id) WHEN LENGTH( ta.Atencion_Id) = 4 THEN CONCAT('V',ta.Atencion_Id) ELSE 'ERROR' END Atencion_Id,
+ta.Atencion_IdVenta,ta.Atencion_Fecha,'ATENCIÓN' AS ATENCION,CASE WHEN ta.Atencion_Cita = 2 THEN 'AGENDADO' WHEN ta.Atencion_Cita = 3 THEN 'REPROGRAMADO' END AS Atencion,
+Atencion_IdProducto,ta.Atencion_IdMascota,ta.Atencion_tr_Observacion,ta.Atencion_tr_Precio FROM tblAtencion ta LEFT JOIN tblProducto tp ON ta.Atencion_IdProducto = tp.Producto_Id WHERE Atencion_Cita IN (2,3);
+*/
+SELECT CASE WHEN LENGTH( tv.Vacunas_Id) = 1 THEN CONCAT('V000',tv.Vacunas_Id) WHEN LENGTH( tv.Vacunas_Id) = 2 THEN CONCAT('V00',tv.Vacunas_Id) WHEN LENGTH( tv.Vacunas_Id) = 3 THEN CONCAT('V0',tv.Vacunas_Id) WHEN LENGTH( tv.Vacunas_Id) = 4 THEN CONCAT('V',tv.Vacunas_Id) ELSE 'ERROR' END Codigo,
+tv.Vacunas_IdVenta as Venta,tv.Vacunas_Fecha as Fecha,'VACUNA' AS Servicio,CASE WHEN tv.Vacunas_Cita = 2 THEN 'AGENDADO' WHEN tv.Vacunas_Cita = 3 THEN 'REPROGRAMADO' END AS Atencion,tp.Producto_Nombre,
+CASE WHEN LENGTH( tv.Vacunas_IdMascota) = 1 THEN CONCAT('M000',tv.Vacunas_IdMascota,' - ',tm.Mascota_Nombre) WHEN LENGTH( tv.Vacunas_IdMascota) = 2 THEN CONCAT('M00',tv.Vacunas_IdMascota,' - ',tm.Mascota_Nombre) WHEN LENGTH( tv.Vacunas_IdMascota) = 3 THEN CONCAT('M0',tv.Vacunas_IdMascota,' - ',tm.Mascota_Nombre) WHEN LENGTH( tv.Vacunas_IdMascota) = 4 THEN CONCAT('M',tv.Vacunas_IdMascota,' - ',tm.Mascota_Nombre) ELSE 'ERROR' END AS Mascota_Nombre,tv.Vacunas_Observacion as Observacion,tv.Vacunas_Precio as Precio
+FROM tblVacunas tv LEFT JOIN tblProducto tp ON tv.Vacunas_IdProducto = tp.Producto_Id LEFT JOIN tblMascota tm ON tv.Vacunas_IdMascota = tm.Mascota_Id WHERE tv.Vacunas_Cita IN (2,3)
+UNION
+SELECT CASE WHEN LENGTH( tb.Banio_Id) = 1 THEN CONCAT('B000',tb.Banio_Id) WHEN LENGTH( tb.Banio_Id) = 2 THEN CONCAT('B00',tb.Banio_Id) WHEN LENGTH( tb.Banio_Id) = 3 THEN CONCAT('B0',tb.Banio_Id) WHEN LENGTH( tb.Banio_Id) = 4 THEN CONCAT('V',tb.Banio_Id) ELSE 'ERROR' END Banio_Id,
+tb.Banio_IdVenta,tb.Banio_Fecha,'BAÑO' AS SERVICIO,CASE WHEN tb.Banio_Cita= 2 THEN 'AGENDADO' WHEN tb.Banio_Cita = 3 THEN 'REPROGRAMADO' END AS Atencion,tp.Producto_Nombre,
+CASE WHEN LENGTH( tb.Banio_IdMascota) = 1 THEN CONCAT('M000',tb.Banio_IdMascota,' - ',tm.Mascota_Nombre) WHEN LENGTH( tb.Banio_IdMascota) = 2 THEN CONCAT('M00',tb.Banio_IdMascota,' - ',tm.Mascota_Nombre) WHEN LENGTH( tb.Banio_IdMascota) = 3 THEN CONCAT('M0',tb.Banio_IdMascota,' - ',tm.Mascota_Nombre) WHEN LENGTH(tb.Banio_IdMascota) = 4 THEN CONCAT('M',tb.Banio_IdMascota,' - ',tm.Mascota_Nombre) ELSE 'ERROR' END AS Mascota_Nombre,tb.Banio_Observacion,tb.Banio_Precio
+FROM tblBanio tb LEFT JOIN tblProducto tp ON tb.Banio_IdProducto = tp.Producto_Id LEFT JOIN tblMascota tm ON tb.Banio_IdMascota = tm.Mascota_Id WHERE tb.Banio_Cita IN (2,3)
+UNION
+SELECT CASE WHEN LENGTH( td.Desparacitacion_Id) = 1 THEN CONCAT('D000',td.Desparacitacion_Id) WHEN LENGTH( td.Desparacitacion_Id) = 2 THEN CONCAT('D00',td.Desparacitacion_Id) WHEN LENGTH( td.Desparacitacion_Id) = 3 THEN CONCAT('D0',td.Desparacitacion_Id) WHEN LENGTH( td.Desparacitacion_Id) = 4 THEN CONCAT('V',td.Desparacitacion_Id) ELSE 'ERROR' END Desparacitacion_Id,
+td.Desparacitacion_IdVenta,td.Desparacitacion_Fecha,'DESPARACITACIÓN' AS SERVICIO,CASE WHEN td.Desparacitacion_Cita = 2 THEN 'AGENDADO' WHEN td.Desparacitacion_Cita = 3 THEN 'REPROGRAMADO' END AS Atencion,tp.Producto_Nombre,
+CASE WHEN LENGTH( td.Desparacitacion_IdMascota) = 1 THEN CONCAT('M000',td.Desparacitacion_IdMascota,' - ',tm.Mascota_Nombre) WHEN LENGTH(td.Desparacitacion_IdMascota) = 2 THEN CONCAT('M00',td.Desparacitacion_IdMascota,' - ',tm.Mascota_Nombre) WHEN LENGTH( td.Desparacitacion_IdMascota) = 3 THEN CONCAT('M0',td.Desparacitacion_IdMascota,' - ',tm.Mascota_Nombre) WHEN LENGTH(td.Desparacitacion_IdMascota) = 4 THEN CONCAT('M',td.Desparacitacion_IdMascota,' - ',tm.Mascota_Nombre) ELSE 'ERROR' END AS Mascota_Nombre,td.Desparacitacion_Observacion,td.Desparacitacion_Precio
+FROM tblDesparacitacion td LEFT JOIN tblProducto tp ON td.Desparacitacion_IdProducto = tp.Producto_Id LEFT JOIN tblMascota tm ON td.Desparacitacion_IdMascota = tm.Mascota_Id WHERE td.Desparacitacion_Cita IN (2,3)
+UNION
+SELECT CASE WHEN LENGTH( ta.Atencion_Id) = 1 THEN CONCAT('A000',ta.Atencion_Id) WHEN LENGTH( ta.Atencion_Id) = 2 THEN CONCAT('A00',ta.Atencion_Id) WHEN LENGTH( ta.Atencion_Id) = 3 THEN CONCAT('A0',ta.Atencion_Id) WHEN LENGTH( ta.Atencion_Id) = 4 THEN CONCAT('V',ta.Atencion_Id) ELSE 'ERROR' END Atencion_Id,ta.Atencion_IdVenta,ta.Atencion_Fecha,'ATENCIÓN' AS ATENCION,CASE WHEN ta.Atencion_Cita = 2 THEN 'AGENDADO' WHEN ta.Atencion_Cita = 3 THEN 'REPROGRAMADO' END AS Atencion,Atencion_IdProducto,
+CASE WHEN LENGTH( ta.Atencion_IdMascota) = 1 THEN CONCAT('M000',ta.Atencion_IdMascota,' - ',tm.Mascota_Nombre) WHEN LENGTH(ta.Atencion_IdMascota) = 2 THEN CONCAT('M00',ta.Atencion_IdMascota,' - ',tm.Mascota_Nombre) WHEN LENGTH( ta.Atencion_IdMascota) = 3 THEN CONCAT('M0',ta.Atencion_IdMascota,' - ',tm.Mascota_Nombre) WHEN LENGTH(ta.Atencion_IdMascota) = 4 THEN CONCAT('M',ta.Atencion_IdMascota,' - ',tm.Mascota_Nombre) ELSE 'ERROR' END AS Mascota_Nombre,
+ta.Atencion_tr_Observacion,ta.Atencion_tr_Precio
+FROM tblAtencion ta LEFT JOIN tblProducto tp ON ta.Atencion_IdProducto = tp.Producto_Id LEFT JOIN tblMascota tm ON ta.Atencion_IdMascota = tm.Mascota_Id WHERE Atencion_Cita IN (2,3);
+END
+
+
+/*************** TEMPORAL *************************/
+
+http://186.64.116.55/~gavet/html/ltr/lib_externos/fullcalendar-4.4.0/examples/month-view-test-tool.html
+
+
+SELECT CONCAT('VACU',tv.Vacunas_Id) AS ID,CONCAT('CITA ', tp.Producto_Nombre, ' - ','VACUNA ',CASE WHEN tv.Vacunas_Cita = 2 THEN 'AGENDADA' WHEN tv.Vacunas_Cita = 3 THEN 'REPROGRAMADA' END) AS TITLE,
+tv.Vacunas_IdVenta as Venta,tv.Vacunas_Fecha as Fecha,'VACUNA' AS Servicio,
+
+CASE WHEN LENGTH( tv.Vacunas_IdMascota) = 1 THEN CONCAT('M000',tv.Vacunas_IdMascota,':',tm.Mascota_Nombre)
+     WHEN LENGTH( tv.Vacunas_IdMascota) = 2 THEN CONCAT('M00',tv.Vacunas_IdMascota,':',tm.Mascota_Nombre)
+     WHEN LENGTH( tv.Vacunas_IdMascota) = 3 THEN CONCAT('M0',tv.Vacunas_IdMascota,':',tm.Mascota_Nombre)
+     WHEN LENGTH( tv.Vacunas_IdMascota) = 4 THEN CONCAT('M',tv.Vacunas_IdMascota,':',tm.Mascota_Nombre)
+     ELSE 'ERROR' END AS Mascota_Nombre,' - ',tv.Vacunas_Observacion
+
+FROM tblVacunas tv LEFT JOIN tblProducto tp ON tv.Vacunas_IdProducto = tp.Producto_Id LEFT JOIN tblMascota tm ON tv.Vacunas_IdMascota = tm.Mascota_Id WHERE tv.Vacunas_Cita IN (2,3)   
+
+/*************** TEMPORAL *************************/
+
+
+SELECT SUBSTRING(servicio,1,2) FROM View_tbl_Atencion limit 500
+
+-- SELECT CONCAT(SUBSTRING(servicio,1,2),ID),FECHA,CONCAT('CITA : ',servicio),'EL  CON CODIGO ' + SUBSTRING(Mascota_Nombre,1,5) FROM View_tbl_Atencion 
+
+/*
+SELECT CONCAT(SUBSTRING(servicio,1,2),ID),FECHA,CONCAT('CITA : ',servicio),CONCAT('EL  CON CODIGO ',SUBSTRING(Mascota_Nombre,1,5),' DE NOMBRE ',SUBSTRING(Mascota_Nombre,9,LENGTH(Mascota_Nombre)),' TIENE UN SERVICIO DE ',servicio COLLATE latin1_spanish_ci) FROM View_tbl_Atencion 
+*/
+
+SELECT CONCAT('VACU',tv.Vacunas_Id) AS ID,CONCAT('CITA ', tp.Producto_Nombre, ' - ','VACUNA ',CASE WHEN tv.Vacunas_Cita = 2 THEN 'AGENDADA' WHEN tv.Vacunas_Cita = 3 THEN 'REPROGRAMADA' END) AS TITLE,
+tv.Vacunas_IdVenta as Venta,tv.Vacunas_Fecha as Fecha,'VACUNA' AS Servicio,
+
+CASE WHEN LENGTH( tv.Vacunas_IdMascota) = 1 THEN CONCAT('M000',tv.Vacunas_IdMascota,':',tm.Mascota_Nombre)
+     WHEN LENGTH( tv.Vacunas_IdMascota) = 2 THEN CONCAT('M00',tv.Vacunas_IdMascota,':',tm.Mascota_Nombre)
+     WHEN LENGTH( tv.Vacunas_IdMascota) = 3 THEN CONCAT('M0',tv.Vacunas_IdMascota,':',tm.Mascota_Nombre)
+     WHEN LENGTH( tv.Vacunas_IdMascota) = 4 THEN CONCAT('M',tv.Vacunas_IdMascota,':',tm.Mascota_Nombre)
+     ELSE 'ERROR' END AS Mascota_Nombre,' - ',tv.Vacunas_Observacion
+
+FROM tblVacunas tv LEFT JOIN tblProducto tp ON tv.Vacunas_IdProducto = tp.Producto_Id LEFT JOIN tblMascota tm ON tv.Vacunas_IdMascota = tm.Mascota_Id WHERE tv.Vacunas_Cita IN (2,3)   
