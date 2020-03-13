@@ -77,3 +77,36 @@ SELECCIONE PRODUCTO - SEDE - SELECCIONE FECHA VENTA
 PRECIO - DESCUENTO - CANTIDAD
 TIPO PAGO - 
 ---------------------------------------
+
+
+
+
+----------------------------------------------
+//Documentacion
+
+https://fullcalendar.io/docs/event-object
+https://fullcalendar.io/docs/event-source-object
+https://fullcalendar.io/docs/event-tooltip-demo
+https://fullcalendar.io/docs/eventRender
+https://fullcalendar.io/docs/event-tooltip-demo
+https://fullcalendar.io/docs/v3/eventMouseover
+
+
+//Externos
+https://stackoverflow.com/questions/22448097/fullcalendar-with-clickable-popup-on-hover/27922934#27922934
+https://stackoverflow.com/questions/4101287/proper-way-to-add-a-callback-to-jquery-datepicker
+https://html.dokry.com/6641
+https://www.templatemonster.com/help/es/js-animated-how-to-work-with-fullcalendar-plugin.html
+https://www.jose-aguilar.com/blog/fullcalendar-con-jquery/
+https://es.stackoverflow.com/questions/110495/cargar-datos-con-ajax-a-fullcalendar
+https://stackoverflow.com/questions/12019130/how-can-i-load-all-events-on-calendar-using-ajax
+https://programacion.net/articulo/crear_calendario_de_eventos_con_jquery-_php_y_mysql_1983
+
+**
+https://www.webslesson.info/2017/12/jquery-fullcalandar-integration-with-php-and-mysql.html 
+**
+
+
+//MDBOOSTRAT
+https://mdbootstrap.com/products
+-------------------------------------------
