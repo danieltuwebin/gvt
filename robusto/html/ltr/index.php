@@ -988,7 +988,8 @@ session_start();
                         '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
                         '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
                         '<td class="text-truncate">' + json[i].Vacunas_Fecha + '</td>' +
-                        '<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>');
+                        /* '<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>'); */
+                        '<td class="text-truncate"><a class="btn btn-success btn-sm" href="vacuna-nuevo.php?IdMas='+ json[i].Vacunas_Id + '">'+ 'Ver Detalle' + '</a> </td> </tr>');                        
                 });
             },
             complete: function() {
@@ -1018,7 +1019,8 @@ session_start();
                         '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
                         '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
                         '<td class="text-truncate">' + json[i].Desparacitacion_Fecha + '</td>' +
-                        '<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>');
+                        //'<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>');
+                        '<td class="text-truncate"><a class="btn btn-success btn-sm" href="desparacitacion-nuevo.php?IdMas='+ json[i].Desparacitacion_Id + '">'+ 'Ver Detalle' + '</a> </td> </tr>');                        
                 });
             },
             complete: function() {
@@ -1050,7 +1052,8 @@ session_start();
                         '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
                         '<td class="text-truncate">' + json[i].Atencion + '</td>' +
                         '<td class="text-truncate">' + json[i].Atencion_Fecha + '</td>' +
-                        '<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>');
+                        //'<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>');
+                        '<td class="text-truncate"><a class="btn btn-success btn-sm" href="atencion-nuevo.php?IdMas='+ json[i].Atencion_Id + '">'+ 'Ver Detalle' + '</a> </td> </tr>');                                                
                 });
             },
             complete: function() {

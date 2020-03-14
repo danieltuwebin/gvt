@@ -799,7 +799,7 @@ session_start();
                                                     <th>Mascota</th>
                                                     <th>Observación</th>
                                                     <th>Precio</th>                                                    
-                                                    <th>Administrar</th>
+                                                    <!-- <th>Administrar</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -982,6 +982,7 @@ session_start();
 
         table = $('#TblAgenda').DataTable({
             "destroy": true,
+            "order": [[ 1, "desc" ]],
             "ajax": {
                 "method": "POST",
                 "url": url,
@@ -1009,12 +1010,12 @@ session_start();
                 },
                 {
                     "data": "Precio"
-                },                
+                }/* ,                
                 {
                     "render": function(data, type, row) {
                         return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Codigo + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Codigo + "'><i class='icon-trash-o'></i></button>  </div></div>";
                     }
-                }
+                } */
             ],
             /* BOTONES DE DATATABLE */
             dom: 'Bfrtip',
@@ -1026,6 +1027,7 @@ session_start();
                     "oSelectorOpts": {
                         filter: 'applied',
                         order: 'current'
+                        
                     },
                 },
                 {

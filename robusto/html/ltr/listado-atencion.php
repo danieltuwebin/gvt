@@ -1753,7 +1753,7 @@ require('lib_externos/fpdf182/fpdf.php');
         console.log($(this).val());
         GenerarPDF();
 
-        window.open('atencion_visor_test.php?Cond=' + id, '_blank');
+        window.open('atencion_visor.php?Cond=' + id, '_blank');
         //location.href = 'atencion_visor.php';
         //window.open('atencion_visor.php?Cond=1', '_blank')
         //window.open('atencion_visor.php?rz=15', '_blank')
