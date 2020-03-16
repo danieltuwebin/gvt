@@ -33,7 +33,7 @@ https://www.youtube.com/watch?v=RRegIKu-z3k
 
 
 
-
+PASS : tuwebin
 
 -- al eliminar un cliente solo actualiza el codigo de estado a (2)
 -- Al grabar un cliente verifica que no exista el dni
