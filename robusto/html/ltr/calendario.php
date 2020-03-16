@@ -40,8 +40,13 @@ session_start();
     <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/colors/palette-tooltip.css">
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
+     <link rel="stylesheet" type="text/css" href="../../assets/css/style.css"> 
     <!-- END Custom CSS-->
+
+<!--     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
+ <!--   <link rel="stylesheet" href="lib_externos/fullcalendar/css/styles.css">  --> 
+    <link rel='stylesheet' type='text/css' href='lib_externos/fullcalendar/css/fullcalendar.css' />
+
 </head>
 
 <body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">
@@ -63,7 +68,7 @@ session_start();
         $CondicionMnu = $_SESSION['UserPerfil'];
 
         if ($CondicionMnu == 1) { /* PERFIL ADMIN (1) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -168,7 +173,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -251,7 +256,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 2) { /* PERFIL JEFE (2) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -356,7 +361,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -443,7 +448,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 3) { /* PERFIL SOLO LECTURA (3) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -533,7 +538,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -615,137 +620,26 @@ session_start();
     </div>
     <!--/ main menu-->
 
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
-
-    <!-- Modal -->
-    <div class="modal fade text-xs-left" id="Modal_ListadoBanios" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
+            <div class="modal fade" id="modal-event" tabindex="-1" role="dialog" aria-labelledby="modal-eventLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
                 <div class="modal-header">
+                    <h5 class="modal-title" id="event-title"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel17">Edición Baño</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form" id="FormularioBanio">
-                        <div class="form-body">
-                            <h4 class="form-section">Propietario</h4>
-                            <div class="row">
-
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="input-group">
-                                                <label for="Txt_Buscar_Dni"><strong>Buscar Por :</strong></label>
-                                                <label class="display-inline-block custom-control custom-radio ml-1">
-                                                    <input type="radio" id="RbDniP" name="Dni" class="custom-control-input" value="1">
-                                                    <span class="custom-control-indicator"></span>
-                                                    <span class="custom-control-description ml-0">DNI Propietario</span>
-                                                </label>
-                                                <label class="display-inline-block custom-control custom-radio">
-                                                    <input type="radio" id="RbDniM" name="Dni" class="custom-control-input" value="2" checked>
-                                                    <span class="custom-control-indicator"></span>
-                                                    <span class="custom-control-description ml-0">DNI Mascota</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="text" id="Txt_Dni" class="form-control" placeholder="Ingrese DNI" name="Txt_Dni">
-                                                    <span class="input-group-btn">
-                                                        <button id="btnBuscar" class="btn btn-warning mr-1" type="button"> <i class="icon-search5"></i> Buscar</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <h5>
-                                                    <label for="Txt_Nombre_Dni">Nombre propietario :&nbsp;&nbsp; </label><label id="Txt_Nombre_Dni" class="primary"></label>
-                                                    <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
-                                                    <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">
-                                                    <input type="hidden" id="Txt_CodigoBanio" name="Txt_CodigoBanio">
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <label for="CboMascota">Seleccione nombre mascota :
-                                                    <!-- <label class="display-inline" for="CboMascota">Seleccione nombre mascota : -->
-                                                    <!-- <label class="display-inline-block" for="CboProducto">S : -->
-                                                    <select id="CboMascota" name="CboMascota" class="form-control">
-                                                    </select>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <br>
-                            <h4 class="form-section">Datos de Mascota</h4>
-
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                    <label for="CboProducto">Seleccione Baño :</label>
-                                                            <select id="CboProducto" name="CboProducto" class="form-control">
-                                                            </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="Txt_Precio">Precio</label>
-                                        <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="00.00" name="Txt_Precio">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="CboEstado">Estado baño :</label>
-                                        <select id="CboEstado" name="CboEstado" class="form-control">
-                                            <option value="2">AGENDADO</option>
-                                            <option value="3">REPROGRAMADO</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="Txt_Fecha">Fecha Vacunación </label>
-                                        <input id="Txt_Fecha" type="date" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="Txt_Notas">Notas</label>
-                                <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales"></textarea>
-                            </div>
-                        </div>
-                    </form>
+                    <div id="event-description"></div>
                 </div>
                 <div class="modal-footer">
-                    <div class="row">
-                        <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">Cerrar</button>
-                        <button id="BtnActualizarBanio" type="button" class="btn btn-success mr-1"><i class="icon-edit2"></i>Grabar Edición</button>
-                    </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
                 </div>
             </div>
-        </div>
-    </div>
+            </div>
 
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
 
     <div class="app-content content container-fluid">
         <div class="content-wrapper">
@@ -758,7 +652,7 @@ session_start();
                 if ($CondicionMnu == 1 || $CondicionMnu == 2) {
                     ?>
                     <div class="content-header-left col-md-3 col-xs-12 mb-1">
-                        <button id="BtnNuevo" type="button" class="btn btn-success"><i class="icon-android-add-circle"></i> Ver Calendario</button>
+                        <!-- <button id="BtnNuevo" type="button" class="btn btn-success"><i class="icon-android-add-circle"></i> Nueva Cita</button> -->
                     </div>
                 <?php
                 }
@@ -786,25 +680,9 @@ session_start();
 
                             <div class="card-block">
                                 <div class="card-body collapse in">
-                                    <div class="table-responsive">
-                                        <!-- <table id="TblAgenda" class="table table-bordered table-striped"> -->
-                                        <table id="TblAgenda" class="table table-striped table-bordered" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Fecha_Cita</th>
-                                                    <th>Servicio</th>
-                                                    <th>Estado Ate.</th>
-                                                    <th>Producto</th>
-                                                    <th>Mascota</th>
-                                                    <th>Observación</th>
-                                                    <th>Precio</th>                                                    
-                                                    <!-- <th>Administrar</th> -->
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
+                                    <div class="table-responsive" >
+                                     <div id="calendar"></div> 
+
                                     </div>
                                     <div id="Resultado_Grabacion"></div>
                                 </div>
@@ -817,14 +695,9 @@ session_start();
         </div>
     </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
+
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <br> 
 
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
@@ -837,7 +710,7 @@ session_start();
     <!-- BEGIN VENDOR JS-->
     <script src="../../app-assets/js/core/libraries/jquery.min.js" type="text/javascript"></script>
     <script src="../../app-assets/vendors/js/ui/tether.min.js" type="text/javascript"></script>
-    <script src="../../app-assets/js/core/libraries/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../../app-assets/js/core/libraries/bootstrap.min.js" type="text/javascript"></script> 
     <script src="../../app-assets/vendors/js/ui/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
     <script src="../../app-assets/vendors/js/ui/unison.min.js" type="text/javascript"></script>
     <script src="../../app-assets/vendors/js/ui/blockUI.min.js" type="text/javascript"></script>
@@ -859,20 +732,17 @@ session_start();
     <script src="lib_propio/propio.js" type="text/javascript"></script>
     <!-- END PROPIOS JS-->
 
-    <!-- BEGIN DATATABLE JS-->
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/b-1.5.6/b-html5-1.5.6/datatables.min.css" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/b-1.5.6/b-html5-1.5.6/datatables.min.js"></script>
-    <!-- END DATATABLE JS-->
+    <!-- BEGIN -->
+
+<!--     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+
+    <script type='text/javascript' src='lib_externos/fullcalendar/js/moment.min.js'></script>
+    <script type='text/javascript' src='lib_externos/fullcalendar/js/fullcalendar.min.js'></script>
+    <script type='text/javascript' src='lib_externos/fullcalendar/js/locale/es.js'></script>
+
+    <!-- END -->
 
 </body>
 
@@ -924,11 +794,11 @@ session_start();
     function Obtener_Condicion() {
         <?php
         if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-            ?>
+        ?>
             Condicion = 1;
         <?php
         } else {
-            ?>
+        ?>
             Condicion = 0;
         <?php
         }
@@ -962,7 +832,7 @@ session_start();
     }
 
     $("#BtnNuevo").click(function() {
-        var url = "calendario.php";
+        var url = "banio-nuevo.php";
         $(location).attr('href', url);
     });
 
@@ -975,14 +845,16 @@ session_start();
         if (IdMascotaExterno == 0) {
             url = "modulos/agenda_listado.php";
             //url = "modulos/banios_listado.php?Cond=1&Id=0";
-           
+
         } else {
             //url = "modulos/vacunas_listado.php?Cond=2&Id=" + IdMascotaExterno;
         }
 
         table = $('#TblAgenda').DataTable({
             "destroy": true,
-            "order": [[ 1, "desc" ]],
+            "order": [
+                [1, "desc"]
+            ],
             "ajax": {
                 "method": "POST",
                 "url": url,
@@ -1010,12 +882,13 @@ session_start();
                 },
                 {
                     "data": "Precio"
-                }/* ,                
-                {
-                    "render": function(data, type, row) {
-                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Codigo + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Codigo + "'><i class='icon-trash-o'></i></button>  </div></div>";
-                    }
-                } */
+                }
+                /* ,                
+                                {
+                                    "render": function(data, type, row) {
+                                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Codigo + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Codigo + "'><i class='icon-trash-o'></i></button>  </div></div>";
+                                    }
+                                } */
             ],
             /* BOTONES DE DATATABLE */
             dom: 'Bfrtip',
@@ -1027,7 +900,7 @@ session_start();
                     "oSelectorOpts": {
                         filter: 'applied',
                         order: 'current'
-                        
+
                     },
                 },
                 {
@@ -1147,7 +1020,7 @@ session_start();
                     $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
                     $('#CboEstado').val(json[i].Banio_Cita);
                     $('#Txt_Fecha').val(json[i].Banio_Fecha);
-                    $('#Txt_Notas').val(json[i].Banio_Observacion );
+                    $('#Txt_Notas').val(json[i].Banio_Observacion);
                     $('#Txt_CodigoBanio').val(json[i].Banio_Id);
                 });
             },
@@ -1428,18 +1301,150 @@ session_start();
 
     $(function() {
 
-        Obtener_Nombre();
-        Obtener_Condicion();
-        /*
-        if ($_GET("IdCli") === undefined) {
-            console.log('sin valor');
-        } else {
-            IdMascotaExterno = $_GET("IdCli");
-            console.log(IdMascotaExterno);
-        }*/
-        listar();
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            defaultDate: yyyy + '-' + mm + '-' + dd,
+            buttonIcons: true, // show the prev/next text
+            weekNumbers: false,
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events 
+            events: [{
+                    title: 'All Day Event',
+                    description: 'Lorem ipsum 1...',
+                    start: yyyy + '-' + mm + '-01',
+                    color: '#3A87AD',
+                    textColor: '#ffffff',
+                },
+                {
+                    title: 'Long Event',
+                    description: 'Lorem ipsum 2...',
+                    start: yyyy + '-' + mm + '-07',
+                    end: yyyy + '-' + mm + '-10',
+                    color: '#3A87AD',
+                    textColor: '#ffffff',
+                },
+                {
+                    title: 'Repeating Event',
+                    description: 'Lorem ipsum 3...',
+                    start: yyyy + '-' + mm + '-09T16:00:00',
+                    color: '#3A87AD',
+                    textColor: '#ffffff',
+                },
+                {
+                    title: 'Repeating Event',
+                    description: 'Lorem ipsum 4...',
+                    start: yyyy + '-' + mm + '-16T16:00:00',
+                    color: '#3A87AD',
+                    textColor: '#ffffff',
+                },
+                {
+                    title: 'Conference',
+                    description: 'Lorem ipsum 5...',
+                    start: yyyy + '-' + mm + '-11',
+                    end: yyyy + '-' + mm + '-13',
+                    color: '#3A87AD',
+                    textColor: '#ffffff',
+                },
+                {
+                    title: 'Meeting',
+                    description: 'Lorem ipsum 6...',
+                    start: yyyy + '-' + mm + '-12T10:30:00',
+                    end: yyyy + '-' + mm + '-12T12:30:00',
+                    color: '#3A87AD',
+                    textColor: '#ffffff',
+                },
+                {
+                    title: 'Lunch',
+                    description: 'Lorem ipsum 7...',
+                    start: yyyy + '-' + mm + '-12T12:00:00',
+                    color: '#3A87AD',
+                    textColor: '#ffffff',
+                },
+                {
+                    title: 'Meeting',
+                    description: 'Lorem ipsum 8...',
+                    start: yyyy + '-' + mm + '-12T14:30:00',
+                    color: '#3A87AD',
+                    textColor: '#ffffff',
+                },
+                {
+                    title: 'Happy Hour',
+                    description: 'Lorem ipsum 9...',
+                    start: yyyy + '-' + mm + '-12T17:30:00',
+                    color: '#3A87AD',
+                    textColor: '#ffffff',
+                },
+                {
+                    title: 'Dinner',
+                    description: 'Lorem ipsum 10...',
+                    start: yyyy + '-' + mm + '-12T20:00:00',
+                    color: '#3A87AD',
+                    textColor: '#ffffff',
+                },
+                {
+                    title: 'Birthday Party',
+                    description: 'Lorem ipsum 11...',
+                    start: yyyy + '-' + mm + '-13T07:00:00',
+                    color: '#3A87AD',
+                    textColor: '#ffffff',
+                },
+                {
+                    title: 'Event with link',
+                    description: 'Lorem ipsum 12...',
+                    url: 'http://www.jose-aguilar.com/',
+                    start: yyyy + '-' + mm + '-28',
+                    color: '#3A87AD',
+                    textColor: '#ffffff',
+                }
+            ],
+            dayClick: function(date, jsEvent, view) {
+                alert('Has hecho click en: ' + date.format());
+            },
+            eventClick: function(calEvent, jsEvent, view) {
+                console.log('ts');
+                $('#event-title').text(calEvent.title);
+                $('#event-description').html(calEvent.description);
+                $('#modal-event').modal();
+            },
+        });
+
 
     });
+
+
+
+    function addZero(i) {
+        if (i < 10) {
+            i = '0' + i;
+        }
+        return i;
+    }
+
+    var hoy = new Date();
+    var dd = hoy.getDate();
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    var mm = hoy.getMonth() + 1;
+    var yyyy = hoy.getFullYear();
+
+    dd = addZero(dd);
+    mm = addZero(mm);
+
+    /* $(document).ready(function() {
+        
+    });
+     */
 </script>
 <!-- END. EVENTOS SCRIPT-->
 
