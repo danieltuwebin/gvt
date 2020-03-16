@@ -205,7 +205,7 @@ require('lib_externos/fpdf182/fpdf.php');
                         </a>
                         <ul class="menu-content">
                             <li>
-                                <a href="agenda-nuevo.php" class="menu-item">Nueva cita</a>
+                                <a href="calendario.php" class="menu-item">Calendario</a>
                             </li>
                             <li>
                                 <a href="listado-agenda.php" class="menu-item">Listado Citas</a>
@@ -395,7 +395,7 @@ require('lib_externos/fpdf182/fpdf.php');
                         </a>
                         <ul class="menu-content">
                             <li>
-                                <a href="agenda-nuevo.php" class="menu-item">Nueva cita</a>
+                                <a href="calendario.php" class="menu-item">Calendario</a>
                             </li>
                             <li>
                                 <a href="listado-agenda.php" class="menu-item">Listado Citas</a>
