@@ -1145,7 +1145,7 @@ session_start();
                 // Redireccionar
                 if (Cita == 1) {
                     $("#Resultado_Grabacion").html('');
-                    var url = "venta-nuevo.php?IdVen=" + idtmp;
+                    var url = "venta-nuevo.php?IdVen=" + idtmp +"&IdMas=" + $("#CboMascota").val();
                     $(location).attr('href', url);
                 } else {
                     $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +

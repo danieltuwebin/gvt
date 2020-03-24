@@ -920,11 +920,11 @@ session_start();
         });
     }
 
-
+    /* INICIO */
     function Obtener_Sede(act) {
         $.ajax({
             type: "POST",
-            url: "modulos/compras.php",
+            url: "modulos/inicio.php",
             async: true,
             dataType: "html",
             data: ({

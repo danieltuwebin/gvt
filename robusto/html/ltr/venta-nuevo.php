@@ -12,7 +12,7 @@ session_start();
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Razas - Sistema Vet. TuWebIn</title>
+    <title>Nueva Venta - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="../../app-assets/images/ico/gavet-icon-120.png">
@@ -730,13 +730,16 @@ session_start();
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="CboTipoPago">Tipo de Pago</label>
-                                                            <select id="CboTipoPago" name="CboTipoPago" class="form-control"></select>
+                                                            <select id="CboTipoPago" name="CboTipoPago" class="form-control">
+                                                                <option value="1" selected>EFECTIVO</option>
+                                                                <option value="2">TARJETA DE CREDITO</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="Txt_Fecha">Fecha Vacunación </label>
-                                                            <input id="Txt_Fecha" type="date" class="form-control">
+                                                            <label for="TxtFecha">Fecha Venta </label>
+                                                            <input id="TxtFecha" type="date" class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -745,31 +748,39 @@ session_start();
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="CboEspecie">Seleccione Producto</label>
-                                                            <select id="CboEspecie" name="CboEspecie" class="form-control"></select>
+                                                        <label for="TxtProducto">Seleccione Producto :</label>
+                                                            <input list="productos" style="text-transform:uppercase;" id="TxtProducto" class="form-control" placeholder="Ingrese producto" name="TxtProducto">
+                                                            <datalist id="productos" size="400">
+                                                                <!--
+                                                                <option>PNG</option>
+                                                                <option>JPEG</option>
+                                                                <option>GIF</option>
+                                                                <option>TGA</option> 
+                                                                -->
+                                                            </datalist>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="Txt_Nombre">Precio</label>
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Nombre" class="form-control" placeholder="Ingrese nombre" name="Txt_Nombre" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return soloLetras(event)">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Ingrese nombre" name="Txt_Nombre" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return soloLetras(event)">
+                                                            <input type="hidden" id="Txt_Precio" name="Txt_Precio">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label for="Txt_Descuento">Descuento</label>
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Descuento" class="form-control" placeholder="Ingrese nombre" name="Txt_Descuento" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return soloLetras(event)">
                                                             <input type="hidden" id="Txt_Codigo" name="Txt_Codigo">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <label for="Txt_Nombre">Descuento</label>
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Nombre" class="form-control" placeholder="Ingrese nombre" name="Txt_Nombre" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return soloLetras(event)">
-                                                            <input type="hidden" id="Txt_Codigo" name="Txt_Codigo">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Nombre">Cantidad</label>
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Nombre" class="form-control" placeholder="Ingrese nombre" name="Txt_Nombre" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return soloLetras(event)">
+                                                            <label for="Txt_Cantidad">Cantidad</label>
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Cantidad" class="form-control" placeholder="Ingrese nombre" name="Txt_Cantidad" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return soloLetras(event)">
                                                             <input type="hidden" id="Txt_Codigo" name="Txt_Codigo">
                                                         </div>
                                                     </div>
@@ -783,10 +794,10 @@ session_start();
                                                                 <i class="icon-reload"></i> Nuevo
                                                             </button>
                                                             <button id="btnActivar" type="button" class="btn btn-warning mr-1" style="display: none;">
-                                                                <i class="icon-check2"></i> Actualizar Especie
+                                                                <i class="icon-check2"></i> Agregar
                                                             </button>
                                                             <button id="btngrabar" type="button" class="btn btn-success mr-1">
-                                                                <i class="icon-check2"></i> Guardar Especie
+                                                                <i class="icon-check2"></i> Agregar
                                                             </button>
                                                         </div>
                                                     </div>
@@ -824,15 +835,16 @@ session_start();
                                     <div class="card-body collapse in">
                                         <div class="card-block">
                                             <div class="table-responsive">
-                                                <table id="TblRaza" class="table table-striped table-bordered nowrap" style="width:100%">
-                                                    <thead>
+                                                <table id="TblVenta" class="table table-striped table-bordered nowrap" style="width:100%">
+                                                    <thead class="bg-info">
                                                         <tr>
-                                                            <th>ID</th>
-                                                            <th>Especie</th>
-                                                            <th>Nombre</th>
-                                                            <th>Estado</th>
-                                                            <th>Fecha Grabación</th>
-                                                            <th>Usuario Grabación</th>
+                                                            <th>Nro.</th>
+                                                            <th>Id</th>
+                                                            <th>Producto</th>
+                                                            <th>Precio</th>
+                                                            <th>Descuento</th>
+                                                            <th>Cantidad</th>
+                                                            <th>Total</th>                                                            
                                                             <th>Administrar</th>
                                                         </tr>
                                                     </thead>
@@ -903,6 +915,7 @@ session_start();
 <!-- BEGIN. EVENTOS SCRIPT-->
 <script type="text/javascript">
     var table;
+    var Id_VentaTemporal;
 
     /* BEGIN FUNCIONES GENERALES */
     function limpiaForm(miForm) {
@@ -971,26 +984,103 @@ session_start();
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    function Obtener_Registros_Tblventatemporal(act) {
+    /* INICIO */
+    function Obtener_Sede(act) {
         $.ajax({
             type: "POST",
-            url: "modulos/mascotas.php",
+            url: "modulos/inicio.php",
             async: true,
             dataType: "html",
             data: ({
                 action: act
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                console.log(data);
+                var json = JSON.parse(data);
+                console.log(json);
+                $("#CboSede").empty();
+                $.each(json, function(i, item) {
+                    $("#CboSede").append('<option value="' + json[i].Sede_Id + '">' + json[i].Sede_Nombre + '</option>');
+                });
+            },
+            complete: function() {
+               // $("#CboSede option[value=" + CondicionSede + "]").attr("selected", true);
+            }
+        });
+    }
+
+
+    $("#TxtProducto").keyup(function() {
+        console.log('%' + $("#TxtProducto").val() + '%');
+        Obtener_Producto('MostrarProductoxNombre', '%' + $("#TxtProducto").val() + '%', 1);
+    });
+
+    $("#TxtProducto").change(function() {
+        var value = $('#TxtProducto').val();
+        Obtener_Precio('MostrarPrecio', $('#productos [value="' + value + '"]').data('value'));
+    });
+
+    function Obtener_Producto(act, nombre, sede) {
+        var lista = '';
+        $.ajax({
+            type: "POST",
+            url: "modulos/compras.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                Nombre: nombre,
+                Sede: sede
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                var json = JSON.parse(data);
+                $("#productos").empty();
+                $.each(json, function(i, item) {
+                    lista = lista + '<option data-value="' + json[i].Producto_Id + '" value="' + json[i].Producto_Nombre + '" style="display:inline-block; width:400px;"> <span> ' + '' + '</span> </option>';
+                    //lista = lista + '<option data-value="' + json[i].Producto_Id + '" value="' + json[i].Producto_Nombre + '" style="display:inline-block; width:400px;"> <span> S/. ' + json[i].Producto_PrecioVenta + '</span> <span>&nbsp;&nbsp;&nbsp;&nbsp; Stock : ' + json[i].Almacen_Cantidad + '</span> </option>';
+                });
+            },
+            complete: function() {
+                $("#productos").html(lista);
+            }
+        });
+    }
+    // Clase proser
+    function Obtener_Precio(act, id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/proser.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: id
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                console.log(data);
+                var json = JSON.parse(data);
+                $("#Txt_Precio").empty();
+                $.each(json, function(i, item) {
+                    $("#Txt_Precio").val(json[i].Producto_PrecioVenta);
+                });
+            },
+            complete: function() {}
+        });
+    }
+
+  // Clase Mascota
+  function Obtener_NombreCliente_NombreMascota(act, id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/mascotas.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: id
             }),
             beforeSend: function() {
                 //alert('ok');
@@ -998,10 +1088,13 @@ session_start();
             success: function(data) {
                 console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
-                $("#CboEspecie").empty();
                 $.each(json, function(i, item) {
-                    $("#CboEspecie").append('<option value="' + json[i].Especie_Id + '">' + json[i].Especie_Nombre + '</option>');
+                    $('#Txt_Dni').val(json[i].Cliente_Dni);
+                    $('#Txt_Nombre_Dni').html(json[i].Mascota_Cliente);
+                    $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
+                    $('#Txt_CodigoMascota').val(json[i].Mascota_Id);
+                    Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
+                    console.log('impr ' + $('#Txt_CodigoCliente').val().trim());
                 });
             },
             complete: function() {
@@ -1010,8 +1103,80 @@ session_start();
         });
     }
 
+
+        // Clase Mascota
+        function Obtener_Mascotas_x_IdCliente(act, cond, id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/mascotas.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                Cond: cond,
+                Id: id
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                console.log(data);
+                var json = JSON.parse(data);
+                console.log(json);
+                $("#CboMascota").empty();
+                $.each(json, function(i, item) {
+                    $("#CboMascota").append('<option value="' + json[i].Mascota_Id + '">' + json[i].Mascota_Nombre + '</option>');
+                });
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+
+    function Obtener_Registros_Tblventatemporal(act,Id ) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/ventas.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: Id
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                console.log('obtener_venta_temp');
+                console.log(data);
+                var json = JSON.parse(data);
+                console.log(json);
+                $("#CboEspecie").empty();
+                 $.each(json, function(i, item) {
+
+                    $('#TxtFecha').val(json[i].VentaTemporal_Fecha);
+                    //$('#TxtProducto').val(json[i].VentaTemporal_IdProducto);
+                    $('#TxtProducto').val(json[i].Producto_Nombre);
+                    $('#Txt_Precio').val(json[i].VentaTemporal_Precio);
+                    $('#Txt_Descuento').val('0.00');
+                    $('#Txt_Cantidad').val('1.00');                    
+
+                    
+                    
+                    
+                    //$("#CboEspecie").append('<option value="' + json[i].Especie_Id + '">' + json[i].Especie_Nombre + '</option>');
+                }); 
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
     var listar = function() {
-        table = $('#TblRaza').DataTable({
+        table = $('#TblVenta').DataTable({
             "destroy": true,
             "ajax": {
                 "method": "POST",
@@ -1219,7 +1384,7 @@ session_start();
         });
     }
 
-    $('#TblRaza').on('click', '.editar', function() {
+    $('#TblVenta').on('click', '.editar', function() {
         var id = $(this).val();
         console.log($(this).val());
         if (Condicion == 1) {
@@ -1327,7 +1492,7 @@ session_start();
         });
     }
 
-    $('#TblRaza').on('click', '.eliminar', function() {
+    $('#TblVenta').on('click', '.eliminar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
             var bool = confirm("Esta seguro de eliminar el registro ?");
@@ -1374,6 +1539,12 @@ session_start();
 
     $(function() {
 
+        console.log($_GET("IdVen"));
+        console.log($_GET("IdMas"));
+
+        Obtener_Sede('MostrarSede');
+        $('#TxtFecha').val(MostrarFechaActual());
+
         if ($_GET("IdVen") === undefined) {
             //SIN VALOR GET
         } else {
@@ -1382,10 +1553,22 @@ session_start();
             $("input[type=radio]").attr('disabled', true);
             $("#Txt_Dni").attr('disabled', true);
             $("#btnBuscar").attr('disabled', true);
+
+            $("#RbDniM").attr('checked', true);
+            $("input[type=radio]").attr('disabled', true);
+            $("#Txt_Dni").attr('disabled', true);
+            $("#btnBuscar").attr('disabled', true);
             Obtener_NombreCliente_NombreMascota('MostrarNombrecliNombreMas', $_GET("IdMas"));
             console.log('final' + $('#Txt_CodigoCliente').val().trim());
             $("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
-        }
+
+            Obtener_Registros_Tblventatemporal('ObtenerRegistrosTblventatemporal',$_GET("IdVen"));
+
+            //----------------Obtener_NombreCliente_NombreMascota('MostrarNombrecliNombreMas', $_GET("IdMas"));
+            //----------------console.log('final' + $('#Txt_CodigoCliente').val().trim());
+            //----------------$("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
+        } 
+
 
 
 /*         ActivarBotones();
@@ -1394,6 +1577,7 @@ session_start();
         Obtener_Especie('MostrarEspecie');
         listar(); */
 
+        
 
         window.setTimeout(function() {
             $(".alert").fadeTo(500, 0).slideUp(500, function() {

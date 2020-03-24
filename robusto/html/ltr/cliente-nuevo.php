@@ -799,6 +799,10 @@ session_start();
         Cerrar_Sesion("salir");
     });
     /* END FUNCIONES GENERALES */
+    function Obtener_Nombre() {
+        $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
+    }
+
 
     function ActivarBotones() {
         $("#btnLimpiar").show();

@@ -747,10 +747,10 @@ session_start();
                 <div class="modal-footer" style="text-align:center;">
                     <div class="row">
                         <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">Cerrar</button>
-                        <button id="BtnActualizarMascota" type="button" class="btn btn-success mr-1" onclick="LinkVacunas(IdMascota)"><i class="icon-eyedropper"></i> Nueva Vacuna</button>
-                        <button id="BtnActualizarMascota" type="button" class="btn btn-success mr-1" onclick="LinkBanios(IdMascota)"><i class="icon-droplet"></i> Nuevo Baño</button>
-                        <button id="BtnActualizarMascota" type="button" class="btn btn-success mr-1" onclick="LinkDesparacitacion(IdMascota)"><i class="icon-folder-plus"></i> Nueva Desparacitación</button>
-                        <button id="BtnActualizarMascota" type="button" class="btn btn-success mr-1"><i class="icon-plus2"></i> Nueva Atención</button>
+                        <button id="BtnVerVacunas" type="button" class="btn btn-success mr-1" onclick="LinkVacunas(IdMascota)"><i class="icon-eyedropper"></i> Nueva Vacuna</button>
+                        <button id="BtnVerBanios" type="button" class="btn btn-success mr-1" onclick="LinkBanios(IdMascota)"><i class="icon-droplet"></i> Nuevo Baño</button>
+                        <button id="BtnVerDesparacittacion" type="button" class="btn btn-success mr-1" onclick="LinkDesparacitacion(IdMascota)"><i class="icon-folder-plus"></i> Nueva Desparacitación</button>
+                        <button id="BtnVerAtencion" type="button" class="btn btn-success mr-1" onclick="LinkAtencion(IdMascota)"><i class="icon-plus2"></i> Nueva Atención</button>
                     </div>
                 </div>
             </div>
@@ -1424,7 +1424,15 @@ session_start();
         var url = "desparacitacion-nuevo.php?IdMas=" + IdMascota;
         //var url = "vacuna-nuevo.php?Cond=" + daniel;
         $(location).attr('href', url);
-    }    
+    }
+    
+
+    function LinkAtencion(IdMascota) {
+        console.log('test: ' + IdMascota)
+        var url = "atencion-nuevo.php?IdMas=" + IdMascota;
+        //var url = "vacuna-nuevo.php?Cond=" + daniel;
+        $(location).attr('href', url);
+    }     
 
 
 

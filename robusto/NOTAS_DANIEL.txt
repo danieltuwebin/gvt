@@ -110,3 +110,13 @@ https://www.webslesson.info/2017/12/jquery-fullcalandar-integration-with-php-and
 //MDBOOSTRAT
 https://mdbootstrap.com/products
 -------------------------------------------
+
+
+------------------- DEFINICION DE PROCESO DE GRABACION
+
+valida si existe id antes de grabar
+INSERTA SI NO EXISTEN REGITROS EN LA TBL tblCompra_tmp & tblCompraDetalle_tmp y si existen solo inserta registros en la TBL tblCompraDetalle_tmp
+
+-- DEPUES GRABAR COMPRA
+busca producto en la tabla almacen por cod de producto y cod de sede : si existe actualiza stock de lo contrario inserta registro
+inserta registros en la tabla tblCompra & tblCompraDetalle

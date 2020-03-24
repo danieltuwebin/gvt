@@ -2414,3 +2414,26 @@ CASE WHEN LENGTH( tv.Vacunas_IdMascota) = 1 THEN CONCAT('M000',tv.Vacunas_IdMasc
      ELSE 'ERROR' END AS Mascota_Nombre,' - ',tv.Vacunas_Observacion
 
 FROM tblVacunas tv LEFT JOIN tblProducto tp ON tv.Vacunas_IdProducto = tp.Producto_Id LEFT JOIN tblMascota tm ON tv.Vacunas_IdMascota = tm.Mascota_Id WHERE tv.Vacunas_Cita IN (2,3)   
+
+
+DROP PROCEDURE IF EXISTS SP_Obtener_Datos_Agenda_Not_All;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_Datos_Agenda_Not_All()
+BEGIN
+SELECT Codigo as id,CONCAT(Servicio,' ',Atencion) as title,Fecha as `start`,
+CONCAT('LA MASCOTA DE NOMBRE (',Mascota_Nombre,') TIENE UN SERVICIO DE ',Producto_Nombre,'<br>OBSERVACION ADICIONAL : ',Observacion)
+as description FROM View_tbl_Atencion;
+END $$
+DELIMITER ;
+
+
+
+/* ----- */
+SELECT * FROM tblCliente tc 
+LEFT JOIN tblMascota tm ON tc.Cliente_Id = tm.Mascota_IdCliente
+LEFT JOIN tblEspecie te ON tm.Mascota_IdEspecie = te.Especie_Id
+LEFT JOIN tblRaza tr ON tm.Mascota_IdRaza = tr.Raza_Id
+LEFT JOIN tblVacunas tv ON tm.Mascota_Id = tv.Vacunas_IdMascota
+LEFT JOIN View_tbl_Atencion va ON tm.Mascota_Id = va.Id_Mascota 
+WHERE tc.Cliente_Dni LIKE '45454242'
+/* ----- */

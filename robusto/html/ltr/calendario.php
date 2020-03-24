@@ -634,7 +634,7 @@ session_start();
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
                 </div>
             </div>
@@ -1313,7 +1313,20 @@ session_start();
             weekNumbers: false,
             editable: true,
             eventLimit: true, // allow "more" link when too many events 
-            events: [{
+
+            events: 'modulos/agenda_listado_calendar.php',
+
+ /*            events: [
+                {"id":"V0001",
+                "title":"VACUNA AGENDADO",
+                "start":"2020-03-05",
+                "description":"LA MASCOTA DE NOMBRE M0003 - NEGRA TIENE UN SERVICIO DE BA\u00d1 02 - OBSERVACION ADICIONAL SIN OBS"},
+                {"id":"V0002",
+                "title":"VACUNA AGENDADO",
+                "start":"2020-03-09",
+                "description":"LA MASCOTA DE NOMBRE M0002 - DOKIS TIENE UN SERVICIO DE VACUNA III - OBSERVACION ADICIONAL SIN OBS"}], */
+
+/*             events: [{
                     title: 'All Day Event',
                     description: 'Lorem ipsum 1...',
                     start: yyyy + '-' + mm + '-01',
@@ -1401,9 +1414,10 @@ session_start();
                     color: '#3A87AD',
                     textColor: '#ffffff',
                 }
-            ],
+            ], */
+
             dayClick: function(date, jsEvent, view) {
-                alert('Has hecho click en: ' + date.format());
+                //alert('Has hecho click en: ' + date.format());
             },
             eventClick: function(calEvent, jsEvent, view) {
                 console.log('ts');

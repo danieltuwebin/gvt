@@ -85,5 +85,14 @@ if ($_POST['action'] == "tablaResumenDesparacitacion") {
 }
 
 
-
+if ($_POST['action'] == "MostrarSede") {
+    $myArray = array();
+    $sql = "CALL SP_Obtener_TblSede_all()";
+    $oCado = new Cado();
+    $rst = $oCado->ejecute_sql($sql);
+    while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+        $myArray[] = $row;
+    }
+    echo json_encode($myArray);
+}
 
