@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerra_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -11,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
+    <meta name="author" content="DCCAHUAY">
     <title>Nueva Vacuna - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
@@ -62,7 +63,7 @@ session_start();
         $CondicionMnu = $_SESSION['UserPerfil'];
 
         if ($CondicionMnu == 1) { /* PERFIL ADMIN (1) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -167,7 +168,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -250,7 +251,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 2) { /* PERFIL JEFE (2) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -355,7 +356,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -442,7 +443,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 3) { /* PERFIL SOLO LECTURA (3) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -532,7 +533,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -616,28 +617,6 @@ session_start();
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
-    <!-- Modal -->
-    <div class="modal fade text-xs-left" id="Modal_Pregunta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cliente Existente</h5>
-                </div>
-                <div class="modal-body">
-                    <p id="PreguntaCliente"></p>
-                </div>
-                <div class="modal-footer">
-                    <button id="BtnRestaurarCliente" type="button" class="btn btn-success mr-1"><i class="icon-check-circle "></i> Si, Mostrar datos</button>
-                    <button id="BtnActualizarCliente" type="button" class="btn btn-primary mr-1"><i class="icon-minus-circle "></i> No, Actualizar</button>
-                    <button id="BtnCerrarCliente" type="button" class="btn btn-warning mr-1" data-dismiss="modal"><i class="icon-times-circle "></i> Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- / Modal -->
-
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
-
     <div class="app-content content container-fluid">
         <div class="content-wrapper">
             <div class="content-header row">
@@ -668,11 +647,11 @@ session_start();
                                 <div class="card-body collapse in">
                                     <div class="card-block">
                                         <form class="form" id="FormularioVacuna">
-                                            <!--<input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
-                                        <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">    -->
+                                            <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
+                                            <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">
+                                            <input type="hidden" id="Txt_CodigoProducto" name="Txt_CodigoProducto">
                                             <div class="form-body">
                                                 <h4 class="form-section">Propietario</h4>
-
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="row">
@@ -692,6 +671,7 @@ session_start();
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        
                                                         <div class="row">
                                                             <div class="col-md-8">
                                                                 <div class="form-group">
@@ -710,8 +690,6 @@ session_start();
                                                                 <div class="form-group">
                                                                     <h5>
                                                                         <label for="Txt_Nombre_Dni">Nombre propietario :&nbsp;&nbsp; </label><label id="Txt_Nombre_Dni" class="primary"></label>
-                                                                        <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
-                                                                        <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">                                                                      
                                                                     </h5>
                                                                 </div>
                                                             </div>
@@ -730,23 +708,30 @@ session_start();
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 <br>
-
+                                                
                                                 <h4 class="form-section">Datos de Mascota</h4>
-
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label for="CboVacuna">Seleccione Vacuna :</label>
                                                             <select id="CboVacuna" name="CboVacuna" class="form-control">
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="Txt_Precio">Precio</label>
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Nombres" name="Txt_Precio">
+                                                            <input type="number" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="00.00" name="Txt_Precio">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label for="CboEstadoVacuna">Estado </label>
+                                                            <select id="CboEstadoVacuna" name="CboEstadoVacuna" class="form-control">
+                                                                <option value="1" selected="selected">REALIZADO</option>
+                                                                <option value="3">REPROGRAMADO</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
@@ -756,7 +741,7 @@ session_start();
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                
                                                 <div class="form-group">
                                                     <label for="Txt_Notas">Notas</label>
                                                     <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales"></textarea>
@@ -775,7 +760,7 @@ session_start();
                                                     <i class="icon-check2"></i> Agendar Vacuna
                                                 </button>
                                             </div>
-                                            
+
                                             <div id="Resultado_Grabacion"></div>
                                         </form>
                                     </div>
@@ -824,10 +809,10 @@ session_start();
 <script type="text/javascript">
     var IdMascota = '';
     var ValorRb = 1;
-    var ValorTipoRegistro = 0;
-    /* BEGIN FUNCIONES GENERALES */
+    var IdTipoProcesoGrabacion = 0;
+    var IdVacuna = 0;
 
-    /* END FUNCIONES GENERALES */
+    /* BEGIN FUNCIONES GENERALES */
 
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
@@ -837,18 +822,26 @@ session_start();
         Cerrar_Sesion("salir");
     });
 
-
     function Actualizar() {
         limpiaForm($("#FormularioVacuna"));
         Obtener_Vacunas('MostrarProductoxCondicion', 1);
     }
+
+    function Habilita_Desabilita(boolLimpiar,boolGrabar,boolAgendar) {
+        $("#btnLimpiar").attr('disabled', boolLimpiar);
+        $("#btnGrabar").attr('disabled', boolGrabar);
+        $("#btnAgendar").attr('disabled', boolAgendar);
+    }    
+
+    /* END FUNCIONES GENERALES */
+
 
     // Clase Proser
     function Obtener_Vacunas(act, id) {
         $.ajax({
             type: "POST",
             url: "modulos/proser.php",
-            async: true,
+            async: false,
             dataType: "html",
             data: ({
                 action: act,
@@ -858,10 +851,9 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboVacuna").empty();
+                $("#CboVacuna").append('<option selected="true" disabled="disabled">SELECCIONE VACUNA</option>');
                 $.each(json, function(i, item) {
                     $("#CboVacuna").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
                 });
@@ -874,7 +866,12 @@ session_start();
 
     $("#btnLimpiar").click(function() {
         limpiaForm($("#FormularioVacuna"));
-
+        $('#Txt_Nombre_Dni').html('');
+        Habilita_Desabilita(true,false,false);
+        if (IdTipoProcesoGrabacion == 1) {
+            var url = "vacuna-nuevo.php";
+            $(location).attr('href', url);
+        }
     });
 
     // Clase Mascota
@@ -892,7 +889,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
                     $('#Txt_Dni').val(json[i].Cliente_Dni);
@@ -900,7 +896,6 @@ session_start();
                     $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
                     $('#Txt_CodigoMascota').val(json[i].Mascota_Id);
                     Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
-                    console.log('impr ' + $('#Txt_CodigoCliente').val().trim());
                 });
             },
             complete: function() {
@@ -925,9 +920,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboMascota").empty();
                 $.each(json, function(i, item) {
                     $("#CboMascota").append('<option value="' + json[i].Mascota_Id + '">' + json[i].Mascota_Nombre + '</option>');
@@ -966,10 +959,8 @@ session_start();
             }),
             beforeSend: function() {
                 //alert('ok');
-                console.log(act + ':' + condicion + ':' + id);
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 if (json.length != 0) {
                     if (condicion == 1) {
@@ -1024,7 +1015,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 $("#Txt_Precio").empty();
                 $.each(json, function(i, item) {
@@ -1038,12 +1028,32 @@ session_start();
     }
 
     $('#btnAgendar').click(function() {
-        ProcesoGrabacion(1, 1000000, 2)
+        if (IdTipoProcesoGrabacion == 0) {
+            ProcesoGrabacion(1, 1000000, 2);
+        } else {
+            if ($("#CboEstadoVacuna").val()==3){
+                ProcesoGrabacion(2, IdVacuna , 3);
+            }else{
+                alert('Debe cambiar el estado de la vacuna a Reprogramado');                
+                $("#CboEstadoVacuna").focus();
+                $("#CboEstadoVacuna").select();
+            }
+        }
     });
 
-
     $("#btnGrabar").click(function() {
-        ProcesoGrabacion(1, 1000000, 1)
+        if (IdTipoProcesoGrabacion == 0) {
+            ProcesoGrabacion(1, 1000000, 1)
+        } else {
+            alert($("#CboEstadoVacuna").val());
+            if ($("#CboEstadoVacuna").val()==1){
+                ProcesoGrabacion(2, IdVacuna , 1);
+            }else{
+                alert('Debe cambiar el estado de la vacuna a Realizado');                
+                $("#CboEstadoVacuna").focus();
+                $("#CboEstadoVacuna").select();
+            }
+        }
     });
 
     function ProcesoGrabacion(tiporegistro, idvacuna, idcita) {
@@ -1110,6 +1120,7 @@ session_start();
     }
 
     function RegistrarVacuna(act, IdTipoRegistro, Idvacuna, Fecha, IdProducto, Precio, IdMascota, Observacion, Cita, Usuario, VentaTipo, Cantidad, IdAlmacen) {
+        //console.log(act +'-'+ IdTipoRegistro+'-'+ Idvacuna+'-'+ Fecha+'-'+ IdProducto+'-'+ Precio+'-'+ IdMascota+'-'+ Observacion+'-'+ Cita+'-'+ Usuario+'-'+ VentaTipo+'-'+ Cantidad+'-'+ IdAlmacen);
         $.ajax({
             type: "POST",
             url: "modulos/vacunas.php",
@@ -1135,27 +1146,64 @@ session_start();
             },
             success: function(data) {
                 var idtmp;
-                console.log(data);
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
                     idtmp = json[i].CodigoVentaTmp;
-                    console.log(idtmp);
                 });
                 // Redireccionar
                 if (Cita == 1) {
                     $("#Resultado_Grabacion").html('');
-                    var url = "venta-nuevo.php?IdVen=" + idtmp;
+                    var url = "venta-nuevo.php?IdVen=" + idtmp +"&IdMas=" + $("#CboMascota").val() + "&Tipo=2";
                     $(location).attr('href', url);
                 } else {
-                    $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
+                    if (IdTipoProcesoGrabacion == 1){
+                        $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
+                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                        '<span aria-hidden="true">&times;</span>' +
+                        '</button>' +
+                        '<strong>Vacuna reprogramada correctamente correctamente</strong>' +
+                        '</div>')
+                    }else{
+                        $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
                         '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
                         '<span aria-hidden="true">&times;</span>' +
                         '</button>' +
                         '<strong>Nuevo vacuna agendada correctamente</strong>' +
                         '</div>')
+                    }
                 }
                 $("#Resultado_Grabacion").fadeTo(2000, 500).slideUp(500, function() {
                     $("#Resultado_Grabacion").slideUp(500);
+                });
+            },
+            complete: function() {
+                Habilita_Desabilita(false,true,true);
+            }
+        });
+    }
+
+    function Obtener_Datos_Vacuna(act, id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/vacunas.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: id
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                $.each(json, function(i, item) {
+                    $('#Txt_CodigoProducto').val(json[i].Producto_Id);
+                    $("#CboVacuna option[value=" + $('#Txt_CodigoProducto').val() + "]").attr("selected", true);
+                    $("#CboVacuna").attr('disabled', true);
+                    $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
+                    $('#Txt_Fecha').val(json[i].Vacunas_Fecha);
+                    $('#Txt_Notas').val(json[i].Vacunas_Observacion);
                 });
             },
             complete: function() {
@@ -1164,10 +1212,10 @@ session_start();
         });
     }
 
-
     $(function() {
-
+        Habilita_Desabilita(true,false,false);
         Obtener_Vacunas('MostrarProductoxCondicion', 1);
+        $("#CboEstadoVacuna").attr('disabled', true);
 
         if ($_GET("IdMas") === undefined) {
             //SIN VALOR GET
@@ -1178,8 +1226,16 @@ session_start();
             $("#Txt_Dni").attr('disabled', true);
             $("#btnBuscar").attr('disabled', true);
             Obtener_NombreCliente_NombreMascota('MostrarNombrecliNombreMas', $_GET("IdMas"));
-            console.log('final' + $('#Txt_CodigoCliente').val().trim());
             $("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
+            if ($_GET("IdPro") === undefined) {
+                //SIN VALOR GET
+            } else {
+                $("#CboEstadoVacuna").attr('disabled', false);
+                IdVacuna = $_GET("IdPro");
+                Obtener_Datos_Vacuna('ObtenerDatosVacunasxId', IdVacuna);
+                IdTipoProcesoGrabacion = 1;
+                $("#btnAgendar").text('Reprogramar');
+            }
         }
         //EVALUAR
         //Obtener_Precio('MostrarPrecio', 1);

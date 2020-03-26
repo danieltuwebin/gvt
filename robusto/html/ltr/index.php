@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerra_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -63,7 +64,7 @@ session_start();
         $CondicionMnu = $_SESSION['UserPerfil'];
 
         if ($CondicionMnu == 1) { /* PERFIL ADMIN (1) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -168,7 +169,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -251,7 +252,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 2) { /* PERFIL JEFE (2) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -356,7 +357,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -443,7 +444,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 3) { /* PERFIL SOLO LECTURA (3) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -533,7 +534,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -733,7 +734,7 @@ session_start();
 
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Proximas Atenciones</h4>
+                                <h4 class="card-title">Proximas Vacunas</h4>
                                 <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -750,13 +751,13 @@ session_start();
                                             <tr>
                                                 <th>Codigo</th>
                                                 <th>Mascota</th>
-                                                <th>Tipo Atención</th>
+                                                <th>Tipo de Vacuna</th>
                                                 <th>Fecha</th>
                                                 <th> </th>
                                             </tr>
                                         </thead>
                                         <!-- DETALLE -->
-                                        <tbody id="tablaResumenAtenciones">
+                                        <tbody id="tablaResumenVacunas">
                                         </tbody>
                                     </table>
                                 </div>
@@ -797,39 +798,7 @@ session_start();
 
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Proximos Vacunas</h4>
-                                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-                                <div class="heading-elements">
-                                    <ul class="list-inline mb-0">
-                                        <!--<li><a data-action="reload"><i class="icon-reload"></i></a></li>-->
-                                        <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover mb-0">
-                                        <!-- ENCABEZADO -->
-                                        <thead>
-                                            <tr>
-                                                <th>Codigo</th>
-                                                <th>Mascota</th>
-                                                <th>Tipo de Vacuna</th>
-                                                <th>Fecha</th>
-                                                <th> </th>
-                                            </tr>
-                                        </thead>
-                                        <!-- DETALLE -->
-                                        <tbody id="tablaResumenVacunas">
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Proximos Desparacitaciones</h4>
+                                <h4 class="card-title">Proximas Desparacitaciones</h4>
                                 <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -859,11 +828,42 @@ session_start();
                             </div>
                         </div>
 
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Proximas Atenciones</h4>
+                                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                <div class="heading-elements">
+                                    <ul class="list-inline mb-0">
+                                        <!--<li><a data-action="reload"><i class="icon-reload"></i></a></li>-->
+                                        <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <!-- ENCABEZADO -->
+                                        <thead>
+                                            <tr>
+                                                <th>Codigo</th>
+                                                <th>Mascota</th>
+                                                <th>Tipo Atención</th>
+                                                <th>Fecha</th>
+                                                <th> </th>
+                                            </tr>
+                                        </thead>
+                                        <!-- DETALLE -->
+                                        <tbody id="tablaResumenAtenciones">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
                 <!--/ Estadisticas de ingresos -->
-
 
             </div>
         </div>
@@ -900,169 +900,9 @@ session_start();
     -->
     <!-- END PAGE LEVEL JS-->
 
-
-
 </body>
 <!-- BEGIN. EVENTOS SCRIPT-->
 <script type="text/javascript">
-    function ObtenerTotales(act) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/inicio.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act
-            }),
-            beforeSend: function() {
-                //alert('ok');
-                //$('#txt_ven_numcor').val('Cargando...');
-            },
-            success: function(data) {
-                console.log(data);
-                var json = JSON.parse(data);
-                //alert(json.tmes);
-                $('#TotalClientes').html(json.tclientes);
-                $('#TotalMascotas').html(json.tmascotas);
-                $('#TotalAtenciones').html(json.tatenciones);
-                $('#IngresosDia').html(json.tdia);
-                $('#IngresosSemana').html(json.tsemana);
-                $('#IngresosMes').html(json.tmes);
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    function Obtener_Tablas_Resumenes_Banios(act) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/inicio.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act
-            }),
-            beforeSend: function() {
-                //alert('ok');
-                //$('#txt_ven_numcor').val('Cargando...');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                $.each(json, function(i, item) {
-                    $("#tablaResumenBanios").append('<tr>' +
-                        '<td class="text-truncate">' + json[i].Banio_Id + '</td>' +
-                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
-                        '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
-                        '<td class="text-truncate">' + json[i].Banio_Fecha + '</td>' +
-                        //'<td class="text-truncate"> <button type="button" value="' + json[i].Banio_Id + '" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>');
-                        '<td class="text-truncate"><a class="btn btn-success btn-sm" href="banio-nuevo.php?IdMas='+ json[i].Banio_Id + '">'+ 'Ver Detalle' + '</a> </td> </tr>');
-                        //'<a class="btn btn-primary" href="banio-nuevo.php?id=<?php echo $row->id; ?>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>');
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    function Obtener_Tablas_Resumenes_Vacunas(act) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/inicio.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act
-            }),
-            beforeSend: function() {
-                //alert('ok');
-                //$('#txt_ven_numcor').val('Cargando...');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                $.each(json, function(i, item) {
-                    $("#tablaResumenVacunas").append('<tr>' +
-                        '<td class="text-truncate">' + json[i].Vacunas_Id + '</td>' +
-                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
-                        '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
-                        '<td class="text-truncate">' + json[i].Vacunas_Fecha + '</td>' +
-                        /* '<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>'); */
-                        '<td class="text-truncate"><a class="btn btn-success btn-sm" href="vacuna-nuevo.php?IdMas='+ json[i].Vacunas_Id + '">'+ 'Ver Detalle' + '</a> </td> </tr>');                        
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    function Obtener_Tablas_Resumenes_Desparacitacion(act) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/inicio.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act
-            }),
-            beforeSend: function() {
-                //alert('ok');
-                //$('#txt_ven_numcor').val('Cargando...');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                $.each(json, function(i, item) {
-                    $("#tablaResumenDesparacitacion").append('<tr>' +
-                        '<td class="text-truncate">' + json[i].Desparacitacion_Id + '</td>' +
-                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
-                        '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
-                        '<td class="text-truncate">' + json[i].Desparacitacion_Fecha + '</td>' +
-                        //'<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>');
-                        '<td class="text-truncate"><a class="btn btn-success btn-sm" href="desparacitacion-nuevo.php?IdMas='+ json[i].Desparacitacion_Id + '">'+ 'Ver Detalle' + '</a> </td> </tr>');                        
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    function Obtener_Tablas_Resumenes_Atenciones(act) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/inicio.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act
-            }),
-            beforeSend: function() {
-                //alert('ok');
-                //$('#txt_ven_numcor').val('Cargando...');
-            },
-            success: function(data) {
-                //console.log(data);
-                var json = JSON.parse(data);
-                //console.log(json);
-                $.each(json, function(i, item) {
-                    $("#tablaResumenAtenciones").append('<tr>' +
-                        '<td class="text-truncate">' + json[i].Atencion_Id + '</td>' +
-                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
-                        '<td class="text-truncate">' + json[i].Atencion + '</td>' +
-                        '<td class="text-truncate">' + json[i].Atencion_Fecha + '</td>' +
-                        //'<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>');
-                        '<td class="text-truncate"><a class="btn btn-success btn-sm" href="atencion-nuevo.php?IdMas='+ json[i].Atencion_Id + '">'+ 'Ver Detalle' + '</a> </td> </tr>');                                                
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-
 
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
@@ -1091,26 +931,161 @@ session_start();
     }
 
     $('#Salir').click(function() {
-        //alert('Sign new href executed.');
         Cerrar_Sesion("salir");
     });
 
+    function ObtenerTotales(act) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/inicio.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                $('#TotalClientes').html(json.tclientes);
+                $('#TotalMascotas').html(json.tmascotas);
+                $('#TotalAtenciones').html(json.tatenciones);
+                $('#IngresosDia').html(json.tdia);
+                $('#IngresosSemana').html(json.tsemana);
+                $('#IngresosMes').html(json.tmes);
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+    function Obtener_Tablas_Resumenes_Vacunas(act) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/inicio.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                $.each(json, function(i, item) {
+                    $("#tablaResumenVacunas").append('<tr>' +
+                        '<td class="text-truncate">' + json[i].Vacunas_Id + '</td>' +
+                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].Vacunas_Fecha + '</td>' +
+                        '<td class="text-truncate"><a class="btn btn-success btn-sm" href="vacuna-nuevo.php?IdMas=' + json[i].Mascota_Id + '&IdPro=' + json[i].Vacunas_Id + '">' + 'Atender' + '</a> </td> </tr>');
+                });
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+    function Obtener_Tablas_Resumenes_Banios(act) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/inicio.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                $.each(json, function(i, item) {
+                    $("#tablaResumenBanios").append('<tr>' +
+                        '<td class="text-truncate">' + json[i].Banio_Id + '</td>' +
+                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].Banio_Fecha + '</td>' +
+                        '<td class="text-truncate"><a class="btn btn-success btn-sm" href="banio-nuevo.php?IdMas=' + json[i].Mascota_Id + '&IdPro=' + json[i].Banio_Id + '">' + 'Atender' + '</a> </td> </tr>');
+                });
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+    function Obtener_Tablas_Resumenes_Desparacitacion(act) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/inicio.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                $.each(json, function(i, item) {
+                    $("#tablaResumenDesparacitacion").append('<tr>' +
+                        '<td class="text-truncate">' + json[i].Desparacitacion_Id + '</td>' +
+                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].Desparacitacion_Fecha + '</td>' +
+                        '<td class="text-truncate"><a class="btn btn-success btn-sm" href="desparacitacion-nuevo.php?IdMas=' + json[i].Mascota_Id + '&IdPro=' + json[i].Desparacitacion_Id + '">' + 'Atender' + '</a> </td> </tr>');
+                });
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+    function Obtener_Tablas_Resumenes_Atenciones(act) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/inicio.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                $.each(json, function(i, item) {
+                    $("#tablaResumenAtenciones").append('<tr>' +
+                        '<td class="text-truncate">' + json[i].Atencion_Id + '</td>' +
+                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].Atencion + '</td>' +
+                        '<td class="text-truncate">' + json[i].Atencion_Fecha + '</td>' +
+                        '<td class="text-truncate"><a class="btn btn-success btn-sm" href="atencion-nuevo.php?IdMas=' + json[i].Mascota_Id + '&IdPro=' + json[i].Atencion_Id + '">' + 'Atender' + '</a> </td> </tr>');
+                });
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
 
     $(function() {
-        //alert('hola');
-
-        //alert('<?php # echo 'Bienvenido : '.$_SESSION['User']; ?>')
         Obtener_Nombre();
-        //Obtener_MnuActivo();
         ObtenerTotales('MostrarTotales');
         Obtener_Tablas_Resumenes_Atenciones('tablaResumenAtenciones');
         Obtener_Tablas_Resumenes_Banios('tablaResumenBanios');
         Obtener_Tablas_Resumenes_Vacunas('tablaResumenVacunas');
         Obtener_Tablas_Resumenes_Desparacitacion('tablaResumenDesparacitacion');
-
-
-
     });
+
 </script>
 <!-- END. EVENTOS SCRIPT-->
 

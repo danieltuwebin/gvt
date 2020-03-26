@@ -35,6 +35,38 @@ if ($_POST['action'] == "MostrarTotales") {
     //echo $v1;
 }
 
+if ($_POST['action'] == "tablaResumenVacunas") {
+    $myArray = array();
+    $sql = "CALL SP_Obtener_TblVacunas_Agendados()";
+    $oCado = new Cado();
+    $rst = $oCado->ejecute_sql($sql);
+    while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+        $myArray[] = $row;
+    }
+    echo json_encode($myArray);
+}
+
+if ($_POST['action'] == "tablaResumenBanios") {
+    $myArray = array();
+    $sql = "CALL SP_Obtener_TblBanios_Agendados()";
+    $oCado = new Cado();
+    $rst = $oCado->ejecute_sql($sql);
+    while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+        $myArray[] = $row;
+    }
+    echo json_encode($myArray);
+}
+
+if ($_POST['action'] == "tablaResumenDesparacitacion") {
+    $myArray = array();
+    $sql = "CALL SP_Obtener_TblDesparacitacion_Agendados()";
+    $oCado = new Cado();
+    $rst = $oCado->ejecute_sql($sql);
+    while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+        $myArray[] = $row;
+    }
+    echo json_encode($myArray);
+}
 
 if ($_POST['action'] == "tablaResumenAtenciones") {
     $myArray = array();
@@ -49,40 +81,13 @@ if ($_POST['action'] == "tablaResumenAtenciones") {
 
 
 
-if ($_POST['action'] == "tablaResumenBanios") {
-    $myArray = array();
-    $sql = "CALL SP_Obtener_TblBanios_Agendados()";
-    $oCado = new Cado();
-    $rst = $oCado->ejecute_sql($sql);
-    while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
-        $myArray[] = $row;
-    }
-    echo json_encode($myArray);
-}
 
 
-if ($_POST['action'] == "tablaResumenVacunas") {
-    $myArray = array();
-    $sql = "CALL SP_Obtener_TblVacunas_Agendados()";
-    $oCado = new Cado();
-    $rst = $oCado->ejecute_sql($sql);
-    while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
-        $myArray[] = $row;
-    }
-    echo json_encode($myArray);
-}
 
 
-if ($_POST['action'] == "tablaResumenDesparacitacion") {
-    $myArray = array();
-    $sql = "CALL SP_Obtener_TblDesparacitacion_Agendados()";
-    $oCado = new Cado();
-    $rst = $oCado->ejecute_sql($sql);
-    while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
-        $myArray[] = $row;
-    }
-    echo json_encode($myArray);
-}
+
+
+
 
 
 if ($_POST['action'] == "MostrarSede") {

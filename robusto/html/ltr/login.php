@@ -12,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
+    <meta name="author" content="DCCAHUAY">
     <title>Login - Sistema Vet. GAVET</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
@@ -137,14 +137,11 @@ session_start();
 <!-- BEGIN. EVENTOS SCRIPT-->
 <script type="text/javascript">
     function Acceder(act, usuario, password) {
-
         //var CampoUsu = $("#Txt_User").val();
         //var CampoPass = $("#Txt_Pass").val();
-
         if (usuario.length == 0 || password.length == 0) {
             alert("Tiene que llenar un usuario y/o un nombre");
         } else {
-            //alert("Todo correcto");
             $.ajax({
                 type: "POST",
                 url: "modulos/acceso.php",
@@ -157,19 +154,14 @@ session_start();
                 }),
                 beforeSend: function() {
                     //alert('ok');
-                    //$('#txt_ven_numcor').val('Cargando...');
                 },
                 success: function(data) {
                     console.log(data);
                     if (data == 1) {
-                        //alert('<?php #echo 'Bienvenido : '.$_SESSION['User']; ?>')
                         alert('Bienvenido : ' + $("#Txt_User").val());
                         var url = "index.php";
-                        $(location).attr('href', url);
-                        //alert('Bienvenido : '.$("#Txt_User").val());
-                        
-                    } else {
-                                                                    
+                        $(location).attr('href', url);                       
+                    } else {                     
                         $("#Resultado_Login").html('<div class="alert alert-danger alert-dismissible fade in mb-2" role="alert">' +
                         '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
                         '<span aria-hidden="true">&times;</span>' +
@@ -182,11 +174,8 @@ session_start();
                     //alert('ok2');
                 }
             });
-
         }
-
     }
-
 
     $("#btnIngresar").click(function() {
         Acceder("acceso", $("#Txt_User").val(), $("#Txt_Pass").val());
@@ -195,10 +184,8 @@ session_start();
 
     $(function() {
         //alert('hola');
-
-
-
     });
+
 </script>
 <!-- END. EVENTOS SCRIPT-->
 
