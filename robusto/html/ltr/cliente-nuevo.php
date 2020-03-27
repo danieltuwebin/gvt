@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerrar_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -803,7 +804,6 @@ session_start();
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
     }
 
-
     function ActivarBotones() {
         $("#btnLimpiar").show();
         $("#btnActivar").hide();
@@ -826,6 +826,12 @@ session_start();
         ActivarBotones();
     }
 
+    function Habilita_Desabilita(boolLimpiar,boolGrabar) {
+        $("#btnLimpiar").attr('disabled', boolLimpiar);
+        $("#btngrabar").attr('disabled', boolGrabar);
+        //$("#btnAgendar").attr('disabled', boolAgendar);
+    }      
+
     function Obtener_Provincia(act) {
         $.ajax({
             type: "POST",
@@ -839,9 +845,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboProvincia").empty();
                 $.each(json, function(i, item) {
                     $("#CboProvincia").append('<option value="' + json[i].Provincia_Id + '">' + json[i].Provincia_Nombre + '</option>');
@@ -867,9 +871,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboDistrito").empty();
                 $.each(json, function(i, item) {
                     $("#CboDistrito").append('<option value="' + json[i].Distrito_Id + '">' + json[i].Distrito_Nombre + '</option>');
@@ -910,6 +912,7 @@ session_start();
     }
 
     $("#btnLimpiar").click(function() {
+        Habilita_Desabilita(true,false)
         limpiaForm($("#FormularioCliente"));
     });
     $("#btngrabar").click(function() {
@@ -959,7 +962,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 $("#Resultado_Grabacion").show();
                 if (data == 1) {
                     $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
@@ -969,7 +971,6 @@ session_start();
                         '<strong>Nuevo cliente registrado correctamente</strong>' +
                         '</div>')
                 } else if (data == 2) {
-                    console.log($("#Txt_Dni").val());
                     Obtener_Datos_cliente('MostrarClientexDni', $("#Txt_Dni").val(), 1);
                     $("#Modal_Pregunta").modal("show");
                 } else if (data == 3) {
@@ -992,7 +993,7 @@ session_start();
                 });
             },
             complete: function() {
-                //alert('ok2');
+                Habilita_Desabilita(false,true)
             }
         });
     }
@@ -1048,8 +1049,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
-
                 if (data == 1) {
                     $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
                         '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
@@ -1080,7 +1079,6 @@ session_start();
     });
 
     $("#BtnRestaurarCliente").click(function() {
-        console.log('click en boton restaurar');
         Obtener_Datos_cliente('MostrarClientexDni', $("#Txt_Dni").val(), 2);
         $("#Modal_Pregunta").modal("hide");
         $("#PreguntaCliente").html("");
@@ -1115,9 +1113,6 @@ session_start();
     });
 
     function Obtener_Datos_cliente(act, dni, condicion) {
-        console.log(act);
-        console.log(dni);
-        console.log(condicion);
         $.ajax({
             type: "POST",
             url: "modulos/clientes.php",
@@ -1132,19 +1127,13 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $.each(json, function(i, item) {
                     if (condicion == 1) {
                         $("#PreguntaCliente").append('Exite un cliente de nombre ' + json[i].Cliente_Nombre + ' ' + json[i].Cliente_Apellido + ' y numero de DNI : ' + json[i].Cliente_Dni + ' en el historico de clientes, actualmente se encuentra eliminado desea restaurarlo ?');
-                        console.log(json[i].Cliente_Id);
                         $('#Txt_Codigo').val(json[i].Cliente_Id);
                     } else if (condicion == 2) {
-                        console.log(json[i].Cliente_Nombre);
                         $('#Txt_Codigo').val(json[i].Cliente_Id);
-                        console.log(json[i].Cliente_Id);
-                        console.log($('#Txt_Codigo').val());
                         $('#Txt_Nombre').val(json[i].Cliente_Nombre);
                         $('#Txt_Apellido').val(json[i].Cliente_Apellido);
                         $('#Txt_Dni').val(json[i].Cliente_Dni);
@@ -1167,6 +1156,7 @@ session_start();
 
     $(function() {
         ActivarBotones();
+        Habilita_Desabilita(true,false)
         Obtener_Nombre();
         Obtener_Provincia('MostrarProvincia');
         Obtener_Distrito('MostrarDistrito', 1)

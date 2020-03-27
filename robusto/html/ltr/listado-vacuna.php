@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerrar_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -11,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
+    <meta name="author" content="DCCAHUAY">
     <title>Listado vacunas - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
@@ -63,7 +64,7 @@ session_start();
         $CondicionMnu = $_SESSION['UserPerfil'];
 
         if ($CondicionMnu == 1) { /* PERFIL ADMIN (1) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -168,7 +169,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -251,7 +252,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 2) { /* PERFIL JEFE (2) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -356,7 +357,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -443,7 +444,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 3) { /* PERFIL SOLO LECTURA (3) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -533,7 +534,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -625,7 +626,7 @@ session_start();
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel17">Edición Vacuna</h4>
+                    <h4 class="modal-title" id="myModalLabel17"><label id="LblIdVacuna">Edición Vacuna</label></h4>
                 </div>
                 <div class="modal-body">
                     <form class="form" id="FormularioVacuna">
@@ -756,7 +757,7 @@ session_start();
                 <?php
 
                 if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-                    ?>
+                ?>
                     <div class="content-header-left col-md-3 col-xs-12 mb-1">
                         <button id="BtnNuevo" type="button" class="btn btn-success"><i class="icon-android-add-circle"></i> Nueva Vacuna</button>
                     </div>
@@ -783,20 +784,18 @@ session_start();
                                 </div>
                             </div>
                             <br>
-
-                            <div class="card-block">
-                                <div class="card-body collapse in">
+                            <div class="card-body collapse in">
+                                <div class="card-block">
                                     <div class="table-responsive">
-                                        <!-- <table id="TblVacunas" class="table table-bordered table-striped"> -->
                                         <table id="TblVacunas" class="table table-striped table-bordered" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>DNI mascota</th>
                                                     <th>Nombre</th>
-                                                    <th>Fecha</th>
+                                                    <th>Fecha_Vacuna</th>
                                                     <th>Vacuna</th>
-                                                    <th>Estado Vacuna</th>
+                                                    <th>Estado</th>
                                                     <th>Observación</th>
                                                     <th>Administrar</th>
                                                 </tr>
@@ -808,7 +807,6 @@ session_start();
                                     <div id="Resultado_Grabacion"></div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -923,11 +921,11 @@ session_start();
     function Obtener_Condicion() {
         <?php
         if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-            ?>
+        ?>
             Condicion = 1;
         <?php
         } else {
-            ?>
+        ?>
             Condicion = 0;
         <?php
         }
@@ -959,6 +957,19 @@ session_start();
             x++;
         }
     }
+
+    function Obtener_Codigo_Formateado(id) {
+        if (id.length == 1) {
+            var Cod = 'V000' + id;
+        } else if (id.length == 2) {
+            var Cod = 'V00' + id;
+        } else if (id.length == 3) {
+            var Cod = 'V0' + id;
+        } else {
+            var Cod = 'V' + id;
+        }
+        return Cod;
+    }    
 
     $("#BtnNuevo").click(function() {
         var url = "vacuna-nuevo.php";
@@ -1041,6 +1052,9 @@ session_start();
                     text: '<i class="icon-file-excel-o"></i> ',
                     titleAttr: 'Exportar a Excel',
                     //className: 'btn btn-success'
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6]
+                    },
                     "oSelectorOpts": {
                         filter: 'applied',
                         order: 'current'
@@ -1056,7 +1070,6 @@ session_start();
                     exportOptions: {
                         columns: [0, 1, 2, 3, 4, 5, 6]
                     },
-
                     //className: 'btn btn-success'
                     "oSelectorOpts": {
                         filter: 'applied',
@@ -1079,15 +1092,14 @@ session_start();
                 "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
             }
         });
-
     }
 
     $('#TblVacunas').on('click', '.editar', function() {
         var id = $(this).val();
-        console.log($(this).val());
         if (Condicion == 1) {
             Obtener_Vacunas('MostrarProductoxCondicion', 1);
             Obtener_Datos_Vacuna('ObtenerDatosVacunasxId', id);
+            $("#LblIdVacuna").text("Edición Vacuna : " + Obtener_Codigo_Formateado(id));  
             $("#Modal_ListadoVacunas").modal("show");
         } else {
             alert('El perfil de usuario no esta habilitado para opción');
@@ -1109,9 +1121,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboVacuna").empty();
                 $.each(json, function(i, item) {
                     $("#CboVacuna").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
@@ -1137,11 +1147,8 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $.each(json, function(i, item) {
-
                     var DniMascota = json[i].Mascota_Id;
                     var CodigoDniMascota = '';
                     if (DniMascota.length == 1) {
@@ -1189,9 +1196,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboMascota").empty();
                 $.each(json, function(i, item) {
                     $("#CboMascota").append('<option value="' + json[i].Mascota_Id + '">' + json[i].Mascota_Nombre + '</option>');
@@ -1206,7 +1211,6 @@ session_start();
 
     $('#FormularioVacuna input').on('change', function() {
         ValorRb = $('input[name=Dni]:checked', '#FormularioVacuna').val();
-        console.log(ValorRb);
     });
 
     $('#btnBuscar').click(function() {
@@ -1232,10 +1236,9 @@ session_start();
             }),
             beforeSend: function() {
                 //alert('ok');
-                console.log(act + ':' + condicion + ':' + id);
+                //console.log(act + ':' + condicion + ':' + id);
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 if (json.length != 0) {
                     if (condicion == 1) {
@@ -1287,7 +1290,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 $("#Txt_Precio").empty();
                 $.each(json, function(i, item) {
@@ -1400,7 +1402,7 @@ session_start();
     $('#TblVacunas').on('click', '.eliminar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
-            var bool = confirm("Esta seguro de eliminar el registro ?");
+            var bool = confirm("Esta seguro de eliminar el registro " + Obtener_Codigo_Formateado(id) + " ?");
             if (bool) {
                 Eliminar_Vacuna('EliminarVacuna', id)
                 alert('La vacuna seleccionado fue eliminada correctamente');
@@ -1426,7 +1428,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 if (data == 1) {
                     listar();
                 } else {
@@ -1439,17 +1440,15 @@ session_start();
         });
     }
 
-
     $(function() {
 
         Obtener_Nombre();
         Obtener_Condicion();
 
         if ($_GET("IdCli") === undefined) {
-            console.log('sin valor');
+            //console.log('sin valor');
         } else {
             IdMascotaExterno = $_GET("IdCli");
-            console.log(IdMascotaExterno);
         }
         listar();
 

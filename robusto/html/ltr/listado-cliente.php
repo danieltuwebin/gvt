@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerrar_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -625,7 +626,7 @@ session_start();
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel17">Edición de Cliente</h4>
+                    <h4 class="modal-title" id="myModalLabel17"><label id="LblIdCliente">Edición de Cliente</label></h4>
                 </div>
                 <div class="modal-body">
                     <form class="form" id="FormularioCliente">
@@ -750,8 +751,8 @@ session_start();
                             </div>
                             <br>
 
+                            <div class="card-body collapse in">
                             <div class="card-block">
-                                <div class="card-body collapse in">
                                     <div class="table-responsive">
                                         <table id="TblClientes" class="table table-striped table-bordered" style="width:100%">
                                             <thead>
@@ -874,6 +875,19 @@ session_start();
         }
         ?>
     }
+
+    function Obtener_Codigo_Formateado(id) {
+        if (id.length == 1) {
+            var Cod = 'C000' + id;
+        } else if (id.length == 2) {
+            var Cod = 'C00' + id;
+        } else if (id.length == 3) {
+            var Cod = 'C0' + id;
+        } else {
+            var Cod = 'C' + id;
+        }
+        return Cod;
+    }    
 
     $("#BtnNuevo").click(function() {
         var url = "cliente-nuevo.php";
@@ -999,11 +1013,10 @@ session_start();
 
     $('#TblClientes').on('click', '.editar', function() {
         var id = $(this).val();
-        console.log($(this).val());
         if (Condicion == 1) {
-            console.log($(this).val());
             Obtener_Provincia('MostrarProvincia');
             Obtener_Datos_cliente('MostrarClientexId', id, 1)
+            $("#LblIdCliente").text("Edición de Cliente : " + Obtener_Codigo_Formateado(id));  
             $("#Modal_ListadoCliente").modal("show");
         } else {
             alert('El perfil de usurio no esta habilitado para opción');
@@ -1023,9 +1036,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboProvincia").empty();
                 $.each(json, function(i, item) {
                     $("#CboProvincia").append('<option value="' + json[i].Provincia_Id + '">' + json[i].Provincia_Nombre + '</option>');
@@ -1047,20 +1058,15 @@ session_start();
                 action: act,
                 Id: id
             }),
-
             beforeSend: function() {
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
-                console.log(condicion + ' soy cond');
                 $.each(json, function(i, item) {
 
                     if (condicion == 1) {
                         $('#Txt_Codigo').val(json[i].Cliente_Id);
-                        //console.log($('#Txt_Codigo').val());
                         $('#Txt_Nombre').val(json[i].Cliente_Nombre);
                         $('#Txt_Apellido').val(json[i].Cliente_Apellido);
                         $('#Txt_Dni').val(json[i].Cliente_Dni);
@@ -1078,7 +1084,6 @@ session_start();
                         $(location).attr('href', url);
                     }
                 });
-
             },
             complete: function() {
                 //alert('ok2');
@@ -1104,9 +1109,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboDistrito").empty();
                 $.each(json, function(i, item) {
                     $("#CboDistrito").append('<option value="' + json[i].Distrito_Id + '">' + json[i].Distrito_Nombre + '</option>');
@@ -1195,7 +1198,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                //console.log(data);
                 if (data == 1) {
                     $("#Modal_ListadoCliente").modal("hide");
                     listar();
@@ -1214,7 +1216,7 @@ session_start();
     $('#TblClientes').on('click', '.eliminar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
-            var bool = confirm("Esta seguro de eliminar el registro ?");
+            var bool = confirm("Esta seguro de eliminar el registro " + Obtener_Codigo_Formateado(id) + " ?");
             if (bool) {
                 Eliminar_Cliente('EliminarCliente', id)
                 alert('El cliente seleccionado fue eliminado correctamente');
@@ -1240,14 +1242,11 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
-
                 if (data == 1) {
                     //listar();
                     //alert('Cliente Eliminado correctamente');
                     listar();
                 } else {
-
                     alert('Lo sentimos ocurrio un error en el proceso de edición');
                 }
             },
@@ -1260,11 +1259,8 @@ session_start();
 
     $('#TblClientes').on('click', '.mascota', function() {
         var id = $(this).val();
-        console.log($(this).val());
         if (Condicion == 1) {
-            console.log($(this).val());
             Obtener_Datos_cliente('MostrarClientexId', id, 2)
-
         } else {
             alert('El perfil de usurio no esta habilitado para opción');
         }
@@ -1274,9 +1270,6 @@ session_start();
         Obtener_Nombre();
         Obtener_Condicion();
         listar();
-
-
-
     });
 </script>
 <!-- END. EVENTOS SCRIPT-->

@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerrar_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -625,7 +626,7 @@ session_start();
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel17">Edición de Mascota</h4>
+                    <h4 class="modal-title" id="myModalLabel17"><label id="LblIdMascota">Edición de Mascota</label></h4>
                 </div>
                 <div class="modal-body">
                     <form class="form" id="FormularioMascota">
@@ -795,9 +796,9 @@ session_start();
                                 </div>
                             </div>
                             <br>
-
+                            <div class="card-body collapse in">
                             <div class="card-block">
-                                <div class="card-body collapse in">
+  
                                     <div class="table-responsive">
                                         <!-- <table id="TblClientes" class="table table-bordered table-striped"> -->
                                         <table id="TblMascotas" class="table table-striped table-bordered" style="width:100%">
@@ -945,6 +946,19 @@ session_start();
         ?>
     }
 
+    function Obtener_Codigo_Formateado(id) {
+        if (id.length == 1) {
+            var Cod = 'M000' + id;
+        } else if (id.length == 2) {
+            var Cod = 'M00' + id;
+        } else if (id.length == 3) {
+            var Cod = 'M0' + id;
+        } else {
+            var Cod = 'M' + id;
+        }
+        return Cod;
+    }     
+
     //http://jquery-manual.blogspot.com/2013/12/como-obtener-parametros-get-con.html?mensaje=ok
     function $_GET(param) {
         /* Obtener la url completa */
@@ -1044,6 +1058,9 @@ session_start();
                     text: '<i class="icon-file-excel-o"></i> ',
                     titleAttr: 'Exportar a Excel',
                     //className: 'btn btn-success'
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6]
+                    },                    
                     "oSelectorOpts": {
                         filter: 'applied',
                         order: 'current'
@@ -1088,7 +1105,6 @@ session_start();
 
     $('#TblMascotas').on('click', '.editar', function() {
         var id = $(this).val();
-        console.log($(this).val());
         if (Condicion == 1) {
             Obtener_Especie('MostrarEspecie');
             Obtener_Raza('MostrarRaza', 1)
@@ -1096,6 +1112,7 @@ session_start();
                 Obtener_Raza('MostrarRaza', $('#CboEspecie').val());
             });
             Obtener_Datos_Mascota('MostrarMascotaxId', id, 1)
+            $("#LblIdMascota").text("Edición de Mascota : " + Obtener_Codigo_Formateado(id));  
             $("#Modal_ListadoMascota").modal("show");
         } else {
             alert('El perfil de usurio no esta habilitado para opción');
@@ -1115,9 +1132,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboEspecie").empty();
                 $.each(json, function(i, item) {
                     $("#CboEspecie").append('<option value="' + json[i].Especie_Id + '">' + json[i].Especie_Nombre + '</option>');
@@ -1143,9 +1158,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboRaza").empty();
                 $.each(json, function(i, item) {
                     $("#CboRaza").append('<option value="' + json[i].Raza_Id + '">' + json[i].Raza_Nombre + '</option>');
@@ -1172,12 +1185,8 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
-                //console.log(condicion + ' soy cond');
                 $.each(json, function(i, item) {
-
                     if (condicion == 1) {
                         $('#Txt_Dni').val(json[i].Cliente_Dni);
                         $('#Txt_Nombre_Dni').html(json[i].Cliente_NombreCompleto);
@@ -1233,12 +1242,9 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $('#Txt_Nombre_Dni').html(json.Cliente_Nombre);
                 $('#Txt_CodigoCliente').val(json.Cliente_Id)
-                console.log(json.Cliente_Id);
             },
             complete: function() {
                 //alert('ok2');
@@ -1248,7 +1254,6 @@ session_start();
 
     $('#BtnActualizarMascota').click(function() {
         var codigo = $('#Txt_CodigoCliente').val();
-        console.log('dato - ' + codigo);
         if (codigo == 0) {
             alert('El DNI ingresado no existe, verificar el numero por favor o ingrese el DNI por defecto')
         } else {
@@ -1258,7 +1263,6 @@ session_start();
                 $('#Txt_Fecha').val().toUpperCase().trim(),
                 $('#Txt_Dni').val().toUpperCase().trim());
             if (Id == 1) {
-                console.log('antes de editar')
                 Editar_Mascota("EditarMascota",
                     $("#Txt_CodigoCliente").val().toUpperCase().trim(),
                     $("#Txt_Nombre").val().toUpperCase().trim(),
@@ -1328,7 +1332,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                //console.log(data);
                 if (data == 1) {
                     $("#Modal_ListadoMascota").modal("hide");
                     listar();
@@ -1347,7 +1350,7 @@ session_start();
     $('#TblMascotas').on('click', '.eliminar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
-            var bool = confirm("Esta seguro de eliminar el registro ?");
+            var bool = confirm("Esta seguro de eliminar el registro " + Obtener_Codigo_Formateado(id) + " ?");
             if (bool) {
                 Eliminar_Mascota('EliminarMascota', id)
                 alert('La mascota seleccionado fue eliminado correctamente');
@@ -1373,14 +1376,11 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
-
                 if (data == 1) {
                     //listar();
                     //alert('Cliente Eliminado correctamente');
                     listar();
                 } else {
-
                     alert('Lo sentimos ocurrio un error en el proceso de edición');
                 }
             },
@@ -1393,11 +1393,7 @@ session_start();
 
     $('#TblMascotas').on('click', '.ver', function() {
         IdMascota = $(this).val();
-        console.log($(this).val());
-        console.log(IdMascota);
         if (Condicion == 1) {
-            console.log($(this).val());
-            //Obtener_Datos_cliente('MostrarClientexId', id, 2)
             $("#Modal_Opciones").modal("show");
         } else {
             alert('El perfil de usurio no esta habilitado para opción');
@@ -1406,31 +1402,23 @@ session_start();
 
 
     function LinkVacunas(IdMascota) {
-        console.log('test: ' + IdMascota)
         var url = "vacuna-nuevo.php?IdMas=" + IdMascota;
-        //var url = "vacuna-nuevo.php?Cond=" + daniel;
         $(location).attr('href', url);
     }
 
     function LinkBanios(IdMascota) {
-        console.log('test: ' + IdMascota)
         var url = "banio-nuevo.php?IdMas=" + IdMascota;
-        //var url = "vacuna-nuevo.php?Cond=" + daniel;
         $(location).attr('href', url);
     }
 
     function LinkDesparacitacion(IdMascota) {
-        console.log('test: ' + IdMascota)
         var url = "desparacitacion-nuevo.php?IdMas=" + IdMascota;
-        //var url = "vacuna-nuevo.php?Cond=" + daniel;
         $(location).attr('href', url);
     }
     
 
     function LinkAtencion(IdMascota) {
-        console.log('test: ' + IdMascota)
         var url = "atencion-nuevo.php?IdMas=" + IdMascota;
-        //var url = "vacuna-nuevo.php?Cond=" + daniel;
         $(location).attr('href', url);
     }     
 
@@ -1458,10 +1446,10 @@ session_start();
         Obtener_Condicion();
 
         if ($_GET("IdCli") === undefined) {
-            console.log('sin valor');
+            //console.log('sin valor');
         } else {
             IdClienteExterno = $_GET("IdCli");
-            console.log(IdClienteExterno);
+            //console.log(IdClienteExterno);
         }
         listar();
         MuestraAlert();

@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerrar_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -12,7 +13,7 @@ session_start();
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="DCCAHUAY">
-    <title>Nuevo Mascota - Sistema Vet. TuWebIn</title>
+    <title>Nueva Mascota - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="../../app-assets/images/ico/gavet-icon-120.png">
@@ -616,28 +617,6 @@ session_start();
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
-    <!-- Modal -->
-    <div class="modal fade text-xs-left" id="Modal_Pregunta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cliente Existente</h5>
-                </div>
-                <div class="modal-body">
-                    <p id="PreguntaCliente"></p>
-                </div>
-                <div class="modal-footer">
-                    <button id="BtnRestaurarCliente" type="button" class="btn btn-success mr-1"><i class="icon-check-circle "></i> Si, Mostrar datos</button>
-                    <button id="BtnActualizarCliente" type="button" class="btn btn-primary mr-1"><i class="icon-minus-circle "></i> No, Actualizar</button>
-                    <button id="BtnCerrarCliente" type="button" class="btn btn-warning mr-1" data-dismiss="modal"><i class="icon-times-circle "></i> Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- / Modal -->
-
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
-
     <div class="app-content content container-fluid">
         <div class="content-wrapper">
             <div class="content-header row">
@@ -760,7 +739,7 @@ session_start();
                                                     <i class="icon-reload"></i> Nuevo
                                                 </button>
                                                 <button id="btnGrabar" type="button" class="btn btn-success mr-1">
-                                                    <i class="icon-check2"></i> Guardar Mascota
+                                                    <i class="icon-check2"></i> Grabar Mascota
                                                 </button>
                                             </div>
                                             <div id="Resultado_Grabacion"></div>
@@ -821,17 +800,20 @@ session_start();
         Cerrar_Sesion("salir");
     });
 
+    function Habilita_Desabilita(boolLimpiar,boolGrabar) {
+        $("#btnLimpiar").attr('disabled', boolLimpiar);
+        $("#btnGrabar").attr('disabled', boolGrabar);
+        //$("#btnAgendar").attr('disabled', boolAgendar);
+    }       
 
     function Actualizar() {
         limpiaForm($("#FormularioMascota"));
         $("#Txt_Nombre_Dni").html('');
-
         Obtener_Especie('MostrarEspecie');
         Obtener_Raza('MostrarRaza', 1)
         $("#CboEspecie").change(function() {
             Obtener_Raza('MostrarRaza', $('#CboEspecie').val());
         });
-        //$("#Resultado_Grabacion").hide();
         $("#CboSexo option[value=" + 1 + "]").attr("selected", true);
     }
 
@@ -848,9 +830,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboEspecie").empty();
                 $.each(json, function(i, item) {
                     $("#CboEspecie").append('<option value="' + json[i].Especie_Id + '">' + json[i].Especie_Nombre + '</option>');
@@ -876,9 +856,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboRaza").empty();
                 $.each(json, function(i, item) {
                     $("#CboRaza").append('<option value="' + json[i].Raza_Id + '">' + json[i].Raza_Nombre + '</option>');
@@ -914,13 +892,9 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
-                //alert(json.tmes);
                 $('#Txt_Nombre_Dni').html(json.Cliente_Nombre);
                 $('#Txt_Codigo').val(json.Cliente_Id)
-                console.log(json.Cliente_Id);
             },
             complete: function() {
                 //alert('ok2');
@@ -930,11 +904,9 @@ session_start();
 
     $("#btnGrabar").click(function() {
         var codigo = $('#Txt_Codigo').val();
-        console.log('dato - ' + codigo);
         if (codigo == 0) {
             alert('El DNI ingresado no existe, verificar el numero por favor o ingrese el DNI por defecto')
         } else {
-            console.log('pase condicion 0');
             var Id = ValidaCamposObligatorios(
                 $('#Txt_Nombre').val().toUpperCase().trim(),
                 $('#Txt_Color').val().toUpperCase().trim(),
@@ -956,7 +928,6 @@ session_start();
                 //alert('ok');
             }
         }
-        
     });
 
     function ValidaCamposObligatorios(Nombre, Color, FechaNac, Dni) {
@@ -988,7 +959,7 @@ session_start();
     }
 
     function Grabar_Mascota(act, codigo, nombre, especie, raza, sexo, color, fecha, notas, estado, usuario) {
-        console.log(act + '-' + codigo + '-' + nombre + '-' + especie + '-' + raza + '-' + sexo + '-' + color + '-' + fecha + '-' + notas + '-' + estado + '-' + usuario);
+        //console.log(act + '-' + codigo + '-' + nombre + '-' + especie + '-' + raza + '-' + sexo + '-' + color + '-' + fecha + '-' + notas + '-' + estado + '-' + usuario);
         $.ajax({
             type: "POST",
             url: "modulos/mascotas.php",
@@ -1011,7 +982,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 $("#Resultado_Grabacion").show();
                 if (data == 1) {
                     $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
@@ -1033,29 +1003,27 @@ session_start();
                 });
             },
             complete: function() {
-                //alert('ok2');
+                Habilita_Desabilita(false,true);
             }
         });
     }
 
     $("#btnLimpiar").click(function() {
         limpiaForm($("#FormularioMascota"));
+        Habilita_Desabilita(true,false);
         $("#Txt_Nombre_Dni").html('');
-
-        //$("#Resultado_Grabacion").hide();
         Obtener_Especie('MostrarEspecie');
         Obtener_Raza('MostrarRaza', 1)
         $("#CboEspecie").change(function() {
             Obtener_Raza('MostrarRaza', $('#CboEspecie').val());
         });
-
         $("#CboSexo option[value=" + 1 + "]").attr("selected", true);
     });
 
     $(function() {
         Obtener_Nombre();
+        Habilita_Desabilita(true,false)
         Obtener_Especie('MostrarEspecie');
-
         Obtener_Raza('MostrarRaza', 1)
         $("#CboEspecie").change(function() {
             Obtener_Raza('MostrarRaza', $('#CboEspecie').val());

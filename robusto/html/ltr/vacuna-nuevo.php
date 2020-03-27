@@ -1,7 +1,7 @@
 <?php
 // start a session
 session_start();
-include('modulos/cerra_sesion.php');
+include('modulos/cerrar_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
