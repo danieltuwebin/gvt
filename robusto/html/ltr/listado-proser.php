@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerrar_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -11,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
+    <meta name="author" content="DCCAHUAY">
     <title>Listado Productos y Servicios - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
@@ -625,7 +626,7 @@ session_start();
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel17">Edición de Producto / Servicio</h4>
+                    <h4 class="modal-title" id="myModalLabel17"><label id="LblIdProser">Edición de Producto / Servicio</label></h4>
                 </div>
                 <div class="modal-body">
                     <form class="form" id="FormularioProser">
@@ -654,10 +655,7 @@ session_start();
                                         <input type="text" style="text-transform:uppercase;" id="Txt_PrecioVenta" class="form-control" placeholder="00.00" name="Txt_PrecioVenta" onkeyup="javascript:this.value=this.value.toUpperCase();">
                                     </div>
                                 </div>
-
                             </div>
-
-
 
                             <div class="row">
                                 <div class="col-xs-12 col-md-4">
@@ -705,6 +703,51 @@ session_start();
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade text-xs-left" id="Modal_VerDetalleProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel17">Resumen de Producto por Sede</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form" id="FormularioDetalleProducto">
+                        <div class="form-body">
+                        <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <!-- ENCABEZADO -->
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th>Sede</th>
+                                                <th>Codigo</th>
+                                                <th>Nombre</th>
+                                                <th>Cantidad</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- DETALLE -->
+                                        <tbody id="tablaResumenDetalleProducto">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" style="text-align:center;">
+                    <div class="row">
+                        <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
     <div class="app-content content container-fluid">
@@ -744,8 +787,8 @@ session_start();
                             </div>
                             <br>
 
+                            <div class="card-body collapse in">
                             <div class="card-block">
-                                <div class="card-body collapse in">
                                     <div class="table-responsive">
                                         <table id="TblProser" class="table table-striped table-bordered" style="width:100%">
                                             <thead>
@@ -833,7 +876,6 @@ session_start();
 
 </body>
 
-
 <!-- css de ejemplo clases -->
 <style type="text/css">
     .linea_buttons {
@@ -868,6 +910,19 @@ session_start();
         }
         ?>
     }
+
+    function Obtener_Codigo_Formateado(id) {
+        if (id.length == 1) {
+            var Cod = 'PR000' + id;
+        } else if (id.length == 2) {
+            var Cod = 'PR00' + id;
+        } else if (id.length == 3) {
+            var Cod = 'PR0' + id;
+        } else {
+            var Cod = 'PR' + id;
+        }
+        return Cod;
+    }      
 
     $("#BtnNuevo").click(function() {
         var url = "proser-nuevo.php";
@@ -939,7 +994,7 @@ session_start();
                 },
                 {
                     "render": function(data, type, row) {
-                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Producto_Id + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Producto_Id + "'><i class='icon-trash-o'></i></button>   </div></div>";
+                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Producto_Id + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Producto_Id + "'><i class='icon-trash-o'></i></button>   <button id='ver' type='button' class='ver btn btn-success' value='" + row.Producto_Id + "'><i class='icon-eye-plus'></i></button>  </div></div>";
                     }
                 }
             ],
@@ -950,6 +1005,9 @@ session_start();
                     text: '<i class="icon-file-excel-o"></i> ',
                     titleAttr: 'Exportar a Excel',
                     //className: 'btn btn-success'
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5, 6, 7]
+                    },                    
                     "oSelectorOpts": {
                         filter: 'applied',
                         order: 'current'
@@ -993,16 +1051,11 @@ session_start();
 
     $('#TblProser').on('click', '.editar', function() {
         var id = $(this).val();
-        console.log($(this).val());
         if (Condicion == 1) {
-            console.log($(this).val());
-            //Obtener_Provincia('MostrarProvincia');
-            //Obtener_Datos_cliente('MostrarClientexId', id, 1)
-
             Obtener_TipoProducto('MostrarTipoProducto');
             Obtener_UM('MostrarUM');
             Obtener_Datos_Producto('MostrarProductoxId', id, 1, );
-
+            $("#LblIdProser").text("Edición de Producto / Servicio : " + Obtener_Codigo_Formateado(id)); 
             $("#Modal_ListadoProducto").modal("show");
         } else {
             alert('El perfil de usurio no esta habilitado para opción');
@@ -1022,9 +1075,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboTipoProducto").empty();
                 $.each(json, function(i, item) {
                     $("#CboTipoProducto").append('<option value="' + json[i].TipoProducto_Id + '">' + json[i].TipoProducto_Nombre + '</option>');
@@ -1053,29 +1104,18 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $.each(json, function(i, item) {
-
                     $("#PreguntaProducto").append('Exite un producto de nombre ' + json[i].Producto_Nombre + ' en el historico de productos, actualmente se encuentra eliminado desea restaurarlo ?');
-                    //console.log(json[i].Cliente_Id);
                     $('#Txt_Codigo').val(json[i].Producto_Id);
                     $('#Txt_Nombre').val(json[i].Producto_Nombre);
                     $("#Txt_PrecioCompra").val(json[i].Producto_PrecioCompra),
-                        $("#Txt_PrecioVenta").val(json[i].Producto_PrecioVenta),
-                        $('#CboTipoProducto').val(json[i].Producto_IdTipoPro);
-
-                    console.log('valor json');
-                    console.log(json[i].Producto_IdTipoPro);
-                    console.log('valor variable');
-                    console.log($('#CboTipoProducto').val());
-
+                    $("#Txt_PrecioVenta").val(json[i].Producto_PrecioVenta),
+                    $('#CboTipoProducto').val(json[i].Producto_IdTipoPro);
                     Obtener_Categoria('MostrarCategoria', $('#CboTipoProducto').val());
                     $("#CboCategoria option[value=" + json[i].Producto_IdTipoCat + "]").attr("selected", true);
                     $('#CboUM').val(json[i].Producto_IdTipoUM);
                     $('#Txt_Notas').val(json[i].Producto_Observacion);
-
                 });
             },
             complete: function() {
@@ -1090,7 +1130,6 @@ session_start();
     });
 
     function Obtener_Categoria(act, IdProducto) {
-        console.log('categoria-----------------' + act + ' - ' + IdProducto);
         $.ajax({
             type: "POST",
             url: "modulos/proser.php",
@@ -1104,9 +1143,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboCategoria").empty();
                 $.each(json, function(i, item) {
                     $("#CboCategoria").append('<option value="' + json[i].Categoria_Id + '">' + json[i].Categoria_Nombre + '</option>');
@@ -1210,8 +1247,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
-
                 if (data == 1) {
                     $("#Modal_ListadoProducto").modal("hide");
                     listar();
@@ -1229,7 +1264,7 @@ session_start();
     $('#TblProser').on('click', '.eliminar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
-            var bool = confirm("Esta seguro de eliminar el registro ?");
+            var bool = confirm("Esta seguro de eliminar el registro " + Obtener_Codigo_Formateado(id) + " ?"); 
             if (bool) {
                 Eliminar_Producto('EliminarProducto', id)
                 alert('El producto seleccionado fue eliminado correctamente');
@@ -1255,14 +1290,9 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
-
                 if (data == 1) {
-                    //listar();
-                    //alert('Cliente Eliminado correctamente');
                     listar();
                 } else {
-
                     alert('Lo sentimos ocurrio un error en el proceso de edición');
                 }
             },
@@ -1271,7 +1301,6 @@ session_start();
             }
         });
     }
-
 
     function Obtener_UM(act) {
         $.ajax({
@@ -1286,9 +1315,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboUM").empty();
                 $.each(json, function(i, item) {
                     $("#CboUM").append('<option value="' + json[i].UM_Id + '">' + json[i].UM_NombreLargo + '</option>');
@@ -1300,16 +1327,54 @@ session_start();
         });
     }
 
+    $('#TblProser').on('click', '.ver', function() {
+        Id = $(this).val();
+        if (Condicion == 1) {
+            Obtener_Tablas_Detalle_Producto('tablaResumenDetalleProducto',Id);
+            $("#Modal_VerDetalleProducto").modal("show");
+        } else {
+            alert('El perfil de usurio no esta habilitado para opción');
+        }
+    });
 
+
+    function Obtener_Tablas_Detalle_Producto(act,Id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/proser.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: Id
+            }),
+            beforeSend: function() {
+                $("#tablaResumenDetalleProducto").html('');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                $.each(json, function(i, item) {
+                    $("#tablaResumenDetalleProducto").append('<tr>' +
+                        '<td class="text-truncate">' + json[i].Orden + '</td>' +
+                        '<td class="text-truncate">' + json[i].Sede_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].IdProducto + '</td>' +
+                        '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].Almacen_Cantidad + '</td>');
+                        //'<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>');
+                });
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
 
     $(function() {
         Obtener_Nombre();
         Obtener_Condicion();
         listar();
-
-
-
     });
+
 </script>
 <!-- END. EVENTOS SCRIPT-->
 

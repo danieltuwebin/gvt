@@ -31,7 +31,7 @@ $('.solo-numero').keyup(function() {
     this.value = (this.value + '').replace(/[^0-9]/g, '');
 });
 
- //http://jquery-manual.blogspot.com/2013/12/como-obtener-parametros-get-con.html?mensaje=ok
+//http://jquery-manual.blogspot.com/2013/12/como-obtener-parametros-get-con.html?mensaje=ok
 function $_GET(param) {
     // Obtener la url completa
     url = document.URL;
@@ -53,7 +53,7 @@ function $_GET(param) {
         }
         x++;
     }
-} 
+}
 
 
 window.setTimeout(function() {
@@ -91,7 +91,7 @@ function limpiaForm(miForm) {
         var type = this.type;
         var tag = this.tagName.toLowerCase();
         //limpiamos los valores de los campos…
-        if (type == 'text' || type == 'password' || tag == 'textarea' || type == 'hidden')
+        if (type == 'text' || type == 'password' || tag == 'textarea' || type == 'hidden' || type == 'number')
             this.value = '';
         // excepto de los checkboxes y radios, le quitamos el checked
         // pero su valor no debe ser cambiado

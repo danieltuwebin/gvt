@@ -124,6 +124,42 @@ if ($_POST['action'] == "ObtenerRegistrosTblventatemporal") {
 
 
 
+if ($_POST['action'] == "ProcesoVenta") {
+   
+    $IdSede = $_POST['IdSede'];
+    $IdProducto = $_POST['IdProducto'];
+    $Cantidad = $_POST['Cantidad'];
+    $Kardex = $_POST['Kardex'];
+    $Fecha = $_POST['Fecha'];
+    $TipoVenta = $_POST['TipoVenta'];
+    $TipoPago = $_POST['TipoPago'];
+    $IdMascota = $_POST['IdMascota'];
+    $Precio = $_POST['Precio'];
+    $Descuento = $_POST['Descuento'];
+    $PrecioTotal = $_POST['PrecioTotal'];
+    $Observacion = $_POST['Observacion'];
+    $Estado = $_POST['Estado'];
+    $Usuario = $_POST['Usuario'];
+    $Cita = $_POST['Cita'];
+    $CitaEstado = $_POST['CitaEstado'];
+                                        
+    $myArray = array();
+    $sql = "CALL SP_ProcesoVenta('$IdSede','$IdProducto','$Cantidad','$Kardex','$Fecha',
+    '$TipoVenta','$TipoPago'  ,'$IdMascota','$Precio','$Descuento','$PrecioTotal','$Observacion','$Estado','$Usuario','$Cita','$CitaEstado')";
+    $oCado = new Cado();
+/*     $rst = $oCado->ejecute_sql($sql);
+    while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+        $myArray[] = $row;
+    }
+    echo json_encode($myArray); */
+    $rst = $oCado->ejecute_sql($sql);
+    $dt = mysqli_fetch_array($rst);
+    $Codigo = $dt['CODIGO'];
+    echo $Codigo;
+}
+
+
+
 
 
 

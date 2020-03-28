@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerrar_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -11,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
+    <meta name="author" content="DCCAHUAY">
     <title>Tipo producto - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
@@ -676,16 +677,19 @@ session_start();
                                                                 <i class="icon-reload"></i> Nuevo
                                                             </button>
                                                             <button id="btnActivar" type="button" class="btn btn-warning mr-1" style="display: none;">
-                                                                <i class="icon-check2"></i> Actualizar Tipo Producto
+                                                                <i class="icon-check2"></i> Actualizar
                                                             </button>
                                                             <button id="btngrabar" type="button" class="btn btn-success mr-1">
-                                                                <i class="icon-check2"></i> Guardar Tipo Producto
+                                                                <i class="icon-check2"></i> Grabar
                                                             </button>
+                                                            <button id="btnCancelar" type="button" class="btn btn-danger mr-1" style="display: none;">
+                                                                <i class="icon-reply"></i> Cancelar
+                                                            </button>                                                              
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
                                                             <div id="Resultado_Grabacion"></div>
                                                         </div>
@@ -798,23 +802,6 @@ session_start();
     var table;
 
     /* BEGIN FUNCIONES GENERALES */
-    function limpiaForm(miForm) {
-        // recorremos todos los campos que tiene el formulario
-        $(':input', miForm).each(function() {
-            var type = this.type;
-            var tag = this.tagName.toLowerCase();
-            //limpiamos los valores de los campos…
-            if (type == 'text' || type == 'password' || tag == 'textarea' || type == 'hidden')
-                this.value = '';
-            // excepto de los checkboxes y radios, le quitamos el checked
-            // pero su valor no debe ser cambiado
-            else if (type == 'checkbox' || type == 'radio')
-                this.checked = false;
-            // los selects le ponesmos el indice a -
-            else if (tag == 'select')
-                this.selectedIndex = -1;
-        });
-    }
 
     /* END FUNCIONES GENERALES */
 
@@ -835,6 +822,19 @@ session_start();
         }
         ?>
     }
+
+    function Obtener_Codigo_Formateado(id) {
+        if (id.length == 1) {
+            var Cod = 'TP000' + id;
+        } else if (id.length == 2) {
+            var Cod = 'TP00' + id;
+        } else if (id.length == 3) {
+            var Cod = 'TP0' + id;
+        } else {
+            var Cod = 'TP' + id;
+        }
+        return Cod;
+    }       
 
     $('#Salir').click(function() {
         Cerrar_Sesion("salir");
@@ -866,13 +866,15 @@ session_start();
         $("#btnLimpiar").show();
         $("#btnActivar").hide();
         $("#btngrabar").show();
+        $("#btnCancelar").hide(); 
     }
 
     function DesactivarBotones() {
         $("#btnLimpiar").hide();
         $("#btnActivar").show();
-        $("#btnActivar").css("display", "block");
+        //$("#btnActivar").css("display", "block");
         $("#btngrabar").hide();
+        $("#btnCancelar").show(); 
     }
 
     var listar = function() {
@@ -948,6 +950,9 @@ session_start();
                     extend: 'excelHtml5',
                     text: '<i class="icon-file-excel-o"></i> ',
                     titleAttr: 'Exportar a Excel',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5]
+                    },                    
                     //className: 'btn btn-success'
                     "oSelectorOpts": {
                         filter: 'applied',
@@ -1016,7 +1021,6 @@ session_start();
     });
 
     $("#btngrabar").click(function() {
-        console.log('btng');
         var Id = ValidaCamposObligatorios($('#Txt_Nombre').val().trim());
         if (Id == 1) {
             Grabar_TipoProducto("GrabarTipoProducto",
@@ -1044,7 +1048,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 $("#Resultado_Grabacion").show();
                 if (data == 1) {
                     $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
@@ -1080,7 +1083,6 @@ session_start();
 
     $('#TblTipoProducto').on('click', '.editar', function() {
         var id = $(this).val();
-        console.log($(this).val());
         if (Condicion == 1) {
             Obtener_Datos_TipoProducto('MostrarTipoProductoxId', id);
             DesactivarBotones();
@@ -1132,6 +1134,12 @@ session_start();
         }
     });
 
+    $('#btnCancelar').click(function() {
+            ActivarBotones();
+            limpiaForm($("#FormularioTipoProducto"));
+            $("#VistaDetalle").show();
+    });       
+
     function Editar_TipoProducto(act, nombre, notas, usuario, codigo) {
         $.ajax({
             type: "POST",
@@ -1149,7 +1157,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 if (data == 1) {
                     $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
                         '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
@@ -1160,7 +1167,6 @@ session_start();
                     listar();
                     $("#Txt_Nombre").val('');
                     $("#Txt_Notas").val('');
-
                 } else if (data == 2) {
                     $("#Resultado_Grabacion").html('<div class="alert alert-warning alert-dismissible fade in mb-2" role="alert">' +
                         '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
@@ -1189,10 +1195,9 @@ session_start();
     $('#TblTipoProducto').on('click', '.eliminar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
-            var bool = confirm("Esta seguro de eliminar el registro ?");
+            var bool = confirm("Esta seguro de eliminar el registro "+ Obtener_Codigo_Formateado(id) + " ?");
             if (bool) {
                 Eliminar_TipoProducto('EliminarTipoProducto', id)
-                //alert('El cliente seleccionado fue eliminado correctamente');
             } else {
                 //alert("cancelo la solicitud");
             }
@@ -1217,7 +1222,7 @@ session_start();
             success: function(data) {
                 if (data == 1) {
                     //listar();
-                    alert('U.M. Eliminada correctamente');
+                    alert('Tipo de producto eliminado correctamente');
                     listar();
                 } else {
                     alert('Lo sentimos ocurrio un error en el proceso de edición');
@@ -1228,7 +1233,6 @@ session_start();
             }
         });
     }
-
 
     $(function() {
         ActivarBotones();

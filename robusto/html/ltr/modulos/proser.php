@@ -132,6 +132,19 @@ if ($_POST['action'] == "EliminarProducto") {
 }
 
 
+if ($_POST['action'] == "tablaResumenDetalleProducto") {
+    $Id = $_POST['Id'];
+    $myArray = array();
+    $sql = "CALL SP_Obtener_TblAlmacen_x_Id('$Id')";
+    $oCado = new Cado();
+    $rst = $oCado->ejecute_sql($sql);
+    while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+        $myArray[] = $row;
+    }
+    echo json_encode($myArray);
+}
+
+
 
 /********************************************************/
 /*********************OTROS MODULOS*********************/

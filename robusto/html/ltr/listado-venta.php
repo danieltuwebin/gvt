@@ -1,7 +1,6 @@
 <?php
 // start a session
 session_start();
-include('modulos/cerrar_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -12,8 +11,8 @@ include('modulos/cerrar_sesion.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="DCCAHUAY">
-    <title>Listado Agenda - Sistema Vet. TuWebIn</title>
+    <meta name="author" content="PIXINVENT">
+    <title>Listado Compra - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="../../app-assets/images/ico/gavet-icon-120.png">
@@ -64,7 +63,7 @@ include('modulos/cerrar_sesion.php');
         $CondicionMnu = $_SESSION['UserPerfil'];
 
         if ($CondicionMnu == 1) { /* PERFIL ADMIN (1) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -194,7 +193,7 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="cuadro-venta.php" class="menu-item">Cuadro de Cajas</a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="listado-venta.php" class="menu-item">Listado Ventas</a>
                             </li>
                         </ul>
@@ -207,7 +206,7 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="calendario.php" class="menu-item">Calendario</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="listado-agenda.php" class="menu-item">Listado Citas</a>
                             </li>
                         </ul>
@@ -252,7 +251,7 @@ include('modulos/cerrar_sesion.php');
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 2) { /* PERFIL JEFE (2) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -367,7 +366,7 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="compra-nuevo.php" class="menu-item">Nueva Compra</a>
                             </li>
-                            <li>
+                            <li  class="active">
                                 <a href="listado-compra.php" class="menu-item">Listado Compras</a>
                             </li>
                         </ul>
@@ -384,7 +383,7 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="cuadro-venta.php" class="menu-item">Cuadro de Cajas</a>
                             </li>
-                            <li>
+                            <li  class="active">
                                 <a href="listado-venta.php" class="menu-item">Listado Ventas</a>
                             </li>
                         </ul>
@@ -397,7 +396,7 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="calendario.php" class="menu-item">Calendario</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="listado-agenda.php" class="menu-item">Listado Citas</a>
                             </li>
                         </ul>
@@ -444,7 +443,7 @@ include('modulos/cerrar_sesion.php');
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 3) { /* PERFIL SOLO LECTURA (3) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -544,7 +543,7 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="compra-nuevo.php" class="menu-item">Nueva Compra</a>
                             </li>
-                            <li>
+                            <li  class="active">
                                 <a href="listado-compra.php" class="menu-item">Reporte Compras</a>
                             </li>
                         </ul>
@@ -555,7 +554,7 @@ include('modulos/cerrar_sesion.php');
                             <span data-i18n="nav.content.main" class="menu-title">Ventas</span>
                         </a>
                         <ul class="menu-content">
-                            <li>
+                            <li  class="active">
                                 <a href="listado-venta.php" class="menu-item">Listado Ventas</a>
                             </li>
                         </ul>
@@ -565,7 +564,7 @@ include('modulos/cerrar_sesion.php');
                             <span data-i18n="nav.content.main" class="menu-title">Agenda</span>
                         </a>
                         <ul class="menu-content">
-                            <li class="active">
+                            <li>
                                 <a href="listado-agenda.php" class="menu-item">Listado Citas</a>
                             </li>
                         </ul>
@@ -619,127 +618,97 @@ include('modulos/cerrar_sesion.php');
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
     <!-- Modal -->
-    <div class="modal fade text-xs-left" id="Modal_ListadoBanios" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
+    <div class="modal fade text-xs-left" id="Modal_EditarCompra" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel17">Edición Baño</h4>
+                    <h4 class="modal-title" id="myModalLabel17">Edición de Compra</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form" id="FormularioBanio">
+                    <form class="form" id="FormularioCompra">
                         <div class="form-body">
-                            <h4 class="form-section">Propietario</h4>
+
+                            <!--  <h4 class="form-section">Propietario</h4> -->
+                            <input type="hidden" id="Txt_Codigo" name="Txt_Codigo">
                             <div class="row">
-
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="input-group">
-                                                <label for="Txt_Buscar_Dni"><strong>Buscar Por :</strong></label>
-                                                <label class="display-inline-block custom-control custom-radio ml-1">
-                                                    <input type="radio" id="RbDniP" name="Dni" class="custom-control-input" value="1">
-                                                    <span class="custom-control-indicator"></span>
-                                                    <span class="custom-control-description ml-0">DNI Propietario</span>
-                                                </label>
-                                                <label class="display-inline-block custom-control custom-radio">
-                                                    <input type="radio" id="RbDniM" name="Dni" class="custom-control-input" value="2" checked>
-                                                    <span class="custom-control-indicator"></span>
-                                                    <span class="custom-control-description ml-0">DNI Mascota</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="text" id="Txt_Dni" class="form-control" placeholder="Ingrese DNI" name="Txt_Dni">
-                                                    <span class="input-group-btn">
-                                                        <button id="btnBuscar" class="btn btn-warning mr-1" type="button"> <i class="icon-search5"></i> Buscar</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <h5>
-                                                    <label for="Txt_Nombre_Dni">Nombre propietario :&nbsp;&nbsp; </label><label id="Txt_Nombre_Dni" class="primary"></label>
-                                                    <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
-                                                    <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">
-                                                    <input type="hidden" id="Txt_CodigoBanio" name="Txt_CodigoBanio">
-                                                </h5>
-                                            </div>
-                                        </div>
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <label for="TxtFecha">Seleccione Fecha :
+                                            <input id="TxtFecha" type="date" class="form-control">
+                                            </select>
+                                        </label>
                                     </div>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <label for="CboMascota">Seleccione nombre mascota :
-                                                    <!-- <label class="display-inline" for="CboMascota">Seleccione nombre mascota : -->
-                                                    <!-- <label class="display-inline-block" for="CboProducto">S : -->
-                                                    <select id="CboMascota" name="CboMascota" class="form-control">
-                                                    </select>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
-
-                            <br>
-                            <h4 class="form-section">Datos de Mascota</h4>
-
                             <div class="row">
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                    <label for="CboProducto">Seleccione Baño :</label>
-                                                            <select id="CboProducto" name="CboProducto" class="form-control">
-                                                            </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="Txt_Precio">Precio</label>
-                                        <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="00.00" name="Txt_Precio">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="CboEstado">Estado baño :</label>
-                                        <select id="CboEstado" name="CboEstado" class="form-control">
-                                            <option value="2">AGENDADO</option>
-                                            <option value="3">REPROGRAMADO</option>
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="Txt_Fecha">Fecha Vacunación </label>
-                                        <input id="Txt_Fecha" type="date" class="form-control">
+                                    <div class="input-group">
+                                        <label for="TxtDocumento">Documento :
+                                            <input type="text" style="text-transform:uppercase;" id="TxtDocumento" class="form-control" placeholder="Ingrese documento" name="TxtDocumento">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <label for="TxtProveedor">Proveedor :
+                                            <input type="text" style="text-transform:uppercase;" id="TxtProveedor" class="form-control" placeholder="Ingrese proveedor" name="TxtProveedor">
+                                        </label>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="Txt_Notas">Notas</label>
-                                <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales"></textarea>
-                            </div>
+                            <br>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">Cerrar</button>
+                    <button id="BtnActualizarCompra" type="button" class="btn btn-success mr-1"><i class="icon-edit2"></i>Grabar Edición</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade text-xs-left" id="Modal_VerCompras" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel17">Resumen de Compra</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form" id="FormularioCompra">
+                        <div class="form-body">
+                        <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <!-- ENCABEZADO -->
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th>Producto</th>
+                                                <th>Precio</th>
+                                                <th>Cantidad</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- DETALLE -->
+                                        <tbody id="tablaResumenCompra">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" style="text-align:center;">
                     <div class="row">
                         <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">Cerrar</button>
-                        <button id="BtnActualizarBanio" type="button" class="btn btn-success mr-1"><i class="icon-edit2"></i>Grabar Edición</button>
                     </div>
                 </div>
             </div>
@@ -752,14 +721,14 @@ include('modulos/cerrar_sesion.php');
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-3 col-xs-12 mb-1">
-                    <h2 class="content-header-title">Listado de Citas</h2>
+                    <h2 class="content-header-title">Listado de Compras</h2>
                 </div>
                 <?php
 
                 if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-                    ?>
+                ?>
                     <div class="content-header-left col-md-3 col-xs-12 mb-1">
-                        <button id="BtnNuevo" type="button" class="btn btn-success"><i class="icon-android-add-circle"></i> Ver Calendario</button>
+                        <button id="BtnNuevo" type="button" class="btn btn-success"><i class="icon-android-add-circle"></i> Nueva Compra</button>
                     </div>
                 <?php
                 }
@@ -772,7 +741,7 @@ include('modulos/cerrar_sesion.php');
                     <div class="col-xs-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Citas</h4>
+                                <h4 class="card-title">Compras</h4>
                                 <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -788,19 +757,18 @@ include('modulos/cerrar_sesion.php');
                             <div class="card-block">
                                 <div class="card-body collapse in">
                                     <div class="table-responsive">
-                                        <!-- <table id="TblAgenda" class="table table-bordered table-striped"> -->
-                                        <table id="TblAgenda" class="table table-striped table-bordered" style="width:100%">
+                                        <!-- <table id="TblClientes" class="table table-bordered table-striped"> -->
+                                        <table id="TblCompras" class="table table-striped table-bordered" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Fecha_Cita</th>
-                                                    <th>Servicio</th>
-                                                    <th>Estado Ate.</th>
-                                                    <th>Producto</th>
-                                                    <th>Mascota</th>
-                                                    <th>Observación</th>
-                                                    <th>Precio</th>                                                    
-                                                    <!-- <th>Administrar</th> -->
+                                                    <th>Fecha</th>
+                                                    <th>Guia</th>
+                                                    <th>Proveedor</th>
+                                                    <th>Precio</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Usuario</th>
+                                                    <th>Administrar</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -891,8 +859,7 @@ include('modulos/cerrar_sesion.php');
     var Condicion;
     var table;
     var IdMascota = '';
-    var IdMascotaExterno = 0;
-    var ValorRb = 2;
+    var IdClienteExterno = 0;
 
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
@@ -925,11 +892,11 @@ include('modulos/cerrar_sesion.php');
     function Obtener_Condicion() {
         <?php
         if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-            ?>
+        ?>
             Condicion = 1;
         <?php
         } else {
-            ?>
+        ?>
             Condicion = 0;
         <?php
         }
@@ -962,8 +929,9 @@ include('modulos/cerrar_sesion.php');
         }
     }
 
+
     $("#BtnNuevo").click(function() {
-        var url = "calendario.php";
+        var url = "compra-nuevo.php";
         $(location).attr('href', url);
     });
 
@@ -972,51 +940,52 @@ include('modulos/cerrar_sesion.php');
     }
 
     var listar = function() {
-        var url = ""
-        if (IdMascotaExterno == 0) {
-            url = "modulos/agenda_listado.php";
-            //url = "modulos/banios_listado.php?Cond=1&Id=0";
-           
-        } else {
-            //url = "modulos/vacunas_listado.php?Cond=2&Id=" + IdMascotaExterno;
-        }
+        var url = "modulos/compras_listado_general.php?Cond=1&Id=0";
 
-        table = $('#TblAgenda').DataTable({
+        table = $('#TblCompras').DataTable({
             "destroy": true,
-            "order": [[ 1, "desc" ]],
             "ajax": {
                 "method": "POST",
                 "url": url,
             },
             "columns": [{
-                    "data": "Codigo"
+                    //"data": "Compra_Id"
+                    "render": function(data, type, row) {
+                        if (row.Compra_Id.length == 1) {
+                            var Cod = 'CO000' + row.Compra_Id;
+                        } else if (row.Compra_Id.length == 2) {
+                            var Cod = 'CP00' + row.Compra_Id;
+                        } else if (row.Compra_Id.length == 3) {
+                            var Cod = 'CP0' + row.Compra_Id;
+                        } else {
+                            var Cod = 'C0' + row.Compra_Id;
+                        }
+                        return Cod;
+                    }
                 },
                 {
-                    "data": "Fecha"
+                    "data": "Compra_Fecha"
                 },
                 {
-                    "data": "Servicio"
+                    "data": "Compra_Guia"
                 },
                 {
-                    "data": "Atencion"
+                    "data": "Compra_Proveedor"
                 },
                 {
-                    "data": "Producto_Nombre"
+                    "data": "Compra_PrecioTotal"
                 },
                 {
-                    "data": "Mascota_Nombre"
+                    "data": "Compra_Cantidad"
                 },
                 {
-                    "data": "Observacion"
+                    "data": "Compra_UserGrab"
                 },
-                {
-                    "data": "Precio"
-                }/* ,                
                 {
                     "render": function(data, type, row) {
-                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Codigo + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Codigo + "'><i class='icon-trash-o'></i></button>  </div></div>";
+                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Compra_Id + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Compra_Id + "'><i class='icon-trash-o'></i></button>    <button id='ver' type='button' class='ver btn btn-success' value='" + row.Compra_Id + "'><i class='icon-eye-plus'></i></button>   </div></div>";
                     }
-                } */
+                }
             ],
             /* BOTONES DE DATATABLE */
             dom: 'Bfrtip',
@@ -1028,7 +997,6 @@ include('modulos/cerrar_sesion.php');
                     "oSelectorOpts": {
                         filter: 'applied',
                         order: 'current'
-                        
                     },
                 },
                 {
@@ -1067,330 +1035,124 @@ include('modulos/cerrar_sesion.php');
 
     }
 
-    $('#TblAgenda').on('click', '.editar', function() {
+
+    $('#TblCompras').on('click', '.editar', function() {
         var id = $(this).val();
+        console.log('id--');
         console.log($(this).val());
         if (Condicion == 1) {
-            Obtener_Banio('MostrarProductoxCondicion', 2);
-            Obtener_Datos_Banio('ObtenerDatosBaniosxId', id);
-            $("#Modal_ListadoBanios").modal("show");
+            Obtener_Datos_Compra('MostrarCompraxId', 2, id)
+            $("#Modal_EditarCompra").modal("show");
         } else {
-            alert('El perfil de usuario no esta habilitado para opción');
+            alert('El perfil de usurio no esta habilitado para opción');
         }
     });
 
-    // Clase Proser
-    function Obtener_Banio(act, id) {
+    function Obtener_Datos_Compra(act, Condicion, Id) {
         $.ajax({
             type: "POST",
-            url: "modulos/proser.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                console.log(data);
-                var json = JSON.parse(data);
-                console.log(json);
-                $("#CboProducto").empty();
-                $.each(json, function(i, item) {
-                    $("#CboProducto").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    function Obtener_Datos_Banio(act, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/banios.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                console.log(data);
-                var json = JSON.parse(data);
-                console.log(json);
-                $.each(json, function(i, item) {
-
-                    var DniMascota = json[i].Mascota_Id;
-                    var CodigoDniMascota = '';
-                    if (DniMascota.length == 1) {
-                        CodigoDniMascota = 'M000' + DniMascota;
-                    } else if (DniMascota.length == 2) {
-                        CodigoDniMascota = 'M00' + DniMascota;
-                    } else if (DniMascota.length == 3) {
-                        CodigoDniMascota = 'M0' + DniMascota;
-                    } else {
-                        CodigoDniMascota = 'M' + DniMascota;
-                    }
-                    $('#Txt_Dni').val(CodigoDniMascota);
-                    $('#Txt_Nombre_Dni').html(json[i].Cliente_NombreCompleto);
-                    $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
-                    $('#Txt_CodigoMascota').val(json[i].Mascota_Id); // Mascota_Id (oculto)
-                    Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
-                    $('#CboMascota').val(json[i].Mascota_Id);
-                    $('#CboProducto').val(json[i].Producto_Id);
-                    $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
-                    $('#CboEstado').val(json[i].Banio_Cita);
-                    $('#Txt_Fecha').val(json[i].Banio_Fecha);
-                    $('#Txt_Notas').val(json[i].Banio_Observacion );
-                    $('#Txt_CodigoBanio').val(json[i].Banio_Id);
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    // Clase Mascota
-    function Obtener_Mascotas_x_IdCliente(act, cond, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/mascotas.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                Cond: cond,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                console.log(data);
-                var json = JSON.parse(data);
-                console.log(json);
-                $("#CboMascota").empty();
-                $.each(json, function(i, item) {
-                    $("#CboMascota").append('<option value="' + json[i].Mascota_Id + '">' + json[i].Mascota_Nombre + '</option>');
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-
-    $('#FormularioBanio input').on('change', function() {
-        ValorRb = $('input[name=Dni]:checked', '#FormularioBanio').val();
-        console.log(ValorRb);
-    });
-
-    $('#btnBuscar').click(function() {
-        Obtener_Nombre_x_Dni_Mascota_Cliente('ObtenerNombrexIdClienteMascota', ValorRb, $('#Txt_Dni').val().toUpperCase().trim())
-    });
-    $("#Txt_Dni").keypress(function(e) {
-        if (e.which == 13) {
-            Obtener_Nombre_x_Dni_Mascota_Cliente('ObtenerNombrexIdClienteMascota', ValorRb, $('#Txt_Dni').val().toUpperCase().trim())
-        }
-    });
-
-    // Clase Mascota
-    function Obtener_Nombre_x_Dni_Mascota_Cliente(act, condicion, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/mascotas.php",
+            url: "modulos/compras.php",
             async: true,
             dataType: "html",
             data: ({
                 action: act,
-                Condicion: condicion,
-                Id: id
+                Condicion: Condicion,
+                Id: Id
             }),
-            beforeSend: function() {
-                //alert('ok');
-                console.log(act + ':' + condicion + ':' + id);
-            },
+            beforeSend: function() {},
             success: function(data) {
                 console.log(data);
                 var json = JSON.parse(data);
-                if (json.length != 0) {
-                    if (condicion == 1) {
-                        $.each(json, function(i, item) {
-                            $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
-                            $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
-                        });
-                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
-                    } else if (condicion == 2) {
-                        $.each(json, function(i, item) {
-                            $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
-                            $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
-                            $('#Txt_CodigoMascota').val(json[i].Mascota_Id);
-                        });
-                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
-                        $("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
-                    }
-                } else {
-                    $('#Txt_Nombre_Dni').html('');
-                    $('#Txt_CodigoCliente').val('');
-                    $('#Txt_CodigoMascota').val('');
-                    $("#CboMascota").empty();
-                    alert('No existen registros para mostrar, verifique DNI propietario/mascota');
-                }
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-
-    $("#CboProducto").change(function() {
-        Obtener_Precio('MostrarPrecio', $("#CboProducto").val().trim());
-    });
-
-    // Clase proser
-    function Obtener_Precio(act, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/proser.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                console.log(data);
-                var json = JSON.parse(data);
-                $("#Txt_Precio").empty();
+                console.log(json);
                 $.each(json, function(i, item) {
-                    $("#Txt_Precio").val(json[i].Producto_PrecioVenta);
+                    $('#Txt_Codigo').val(json[i].Compra_Id)
+                    $('#TxtFecha').val(json[i].Compra_Fecha);
+                    $('#TxtDocumento').val(json[i].Compra_Guia);
+                    $('#TxtProveedor').val(json[i].Compra_Proveedor);
                 });
             },
-            complete: function() {
-                //alert('ok2');
-            }
+            complete: function() {}
         });
     }
 
-    $('#BtnActualizarBanio').click(function() {
 
-        var nombredni = $('#Txt_Nombre_Dni').html();
-        if (nombredni == 0) {
-            alert('El DNI ingresado no existe, verificar el numero por favor o ingrese el DNI por defecto')
-        } else {
-            var Id = ValidaCamposObligatorios(
-                $('#Txt_Dni').val().toUpperCase().trim(),
-                $('#CboMascota').val().toUpperCase().trim(),
-                $('#CboProducto').val().toUpperCase().trim(),
-                $('#Txt_Precio').val().toUpperCase().trim(),
-                $('#Txt_Fecha').val());
-            if (Id == 1) {
-                Editar_Banio("EditarBanio",
-                    $("#Txt_CodigoBanio").val(),
-                    $('#Txt_Fecha').val(),
-                    $("#CboProducto").val().toUpperCase().trim(),
-                    $("#Txt_Precio").val().toUpperCase().trim(),
-                    $("#CboMascota").val().toUpperCase().trim(),
-                    $("#Txt_Notas").val().toUpperCase().trim(),
-                    $("#CboEstado").val(),
-                    '<?php echo $_SESSION['User']; ?>'
-                );
-            }
+    $('#BtnActualizarCompra').click(function() {
+        var codigo = $('#Txt_Codigo').val();
+        console.log('dato - ' + codigo);
+        var Id = ValidaCamposObligatorios(
+            $('#TxtFecha').val(),
+            $('#TxtDocumento').val().toUpperCase().trim(),
+            $('#TxtProveedor').val().toUpperCase().trim())
+        if (Id == 1) {
+            console.log('antes de editar')
+            Editar_Compra("EditarCompra",
+                $("#Txt_Codigo").val().toUpperCase().trim(),
+                $('#TxtFecha').val(),
+                $('#TxtDocumento').val().toUpperCase().trim(),
+                $('#TxtProveedor').val().toUpperCase().trim(),
+                '<?php echo $_SESSION['User']; ?>'
+            )
         }
     });
 
-    function ValidaCamposObligatorios(dni, mascota, banio, precio, fecha) {
-        if (dni.length == 0) {
-            alert('El campo DNI es obligatorio');
-            $("#Txt_Dni").focus();
+    function ValidaCamposObligatorios(Fecha, Guia, Proveedor) {
+        if (Fecha.length == 0) {
+            alert('El campo fecha es obligatorio');
+            $("#TxtFecha").focus();
             return 0;
         } else {
-            if (mascota.length == 0) {
-                alert('El campo mascota es obligatorio');
-                $("#CboMascota").focus();
+            if (Guia.length == 0) {
+                alert('El campo Nro. de guia es obligatorio');
+                $("#TxtDocumento").focus();
                 return 0;
             } else {
-                if (banio.length == 0) {
-                    alert('El campo baño es obligatorio');
-                    $("#CboProducto").focus();
+                if (Proveedor.length == 0) {
+                    alert('El campo proveedor es obligatorio');
+                    $("#TxtProveedor").focus();
                     return 0;
                 } else {
-                    if (precio.length == 0) {
-                        alert('El campo precio es obligatorio');
-                        $("#Txt_Precio").focus();
-                        return 0;
-                    } else {
-                        if (fecha.length == 0) {
-                            alert('El campo fecha es obligatorio')
-                            $('#Txt_Fecha').focus();
-                            return 0;
-                        } else {
-                            return 1;
-                        }
-                    }
+                    return 1;
                 }
             }
         }
     }
 
-    function Editar_Banio(act, IdBanio, Fecha, IdProducto, Precio, IdMascota, Observacion, Cita, Usuario) {
-        //console.log('entre al proceso de ecicion baño');
+    function Editar_Compra(act, Codigo, Fecha, Guia, Proveedor, Usuario) {
         $.ajax({
             type: "POST",
-            url: "modulos/banios.php",
-            async: false,
+            url: "modulos/compras.php",
+            async: true,
             dataType: "html",
             data: ({
                 action: act,
-                IdBanio: IdBanio,
+                Codigo: Codigo,
                 Fecha: Fecha,
-                IdProducto: IdProducto,
-                Precio: Precio,
-                IdMascota: IdMascota,
-                Observacion: Observacion,
-                Cita: Cita,
+                Guia: Guia,
+                Proveedor: Proveedor,
                 Usuario: Usuario
             }),
-            beforeSend: function() {
-                //alert('ok');
-            },
+            beforeSend: function() { },
             success: function(data) {
-                console.log(data);
                 if (data == 1) {
-                    $("#Modal_ListadoBanios").modal("hide");
+                    $("#Modal_EditarCompra").modal("hide");
                     listar();
-                    alert('Baño Editado correctamente');
+                    alert('Compra Editada correctamente');
                 } else {
                     alert('Lo sentimos ocurrio un error en el proceso de edición');
                 }
             },
-            complete: function() {
-                //alert('ok2');
-            }
+            complete: function() {  }
         });
     }
 
 
-    $('#TblAgenda').on('click', '.eliminar', function() {
+    $('#TblCompras').on('click', '.eliminar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
             var bool = confirm("Esta seguro de eliminar el registro ?");
             if (bool) {
-                Eliminar_Banio('EliminarBanio', id)
-                alert('El baño seleccionado fue eliminada correctamente');
+                Eliminar_Compra('EliminarCompra_tblCompra', id)
+                alert('La compra seleccionado fue eliminado correctamente');
             } else {
                 //alert("cancelo la solicitud");
             }
@@ -1399,26 +1161,68 @@ include('modulos/cerrar_sesion.php');
         }
     });
 
-    function Eliminar_Banio(act, codigo) {
+    function Eliminar_Compra(act, codigo) {
         $.ajax({
             type: "POST",
-            url: "modulos/banios.php",
+            url: "modulos/compras.php",
             async: true,
             dataType: "html",
             data: ({
                 action: act,
                 Id: codigo
             }),
-            beforeSend: function() {
-                //alert('ok');
-            },
+            beforeSend: function() { },
             success: function(data) {
                 console.log(data);
-                if (data == 1) {
+                if (data <= 1) {
                     listar();
                 } else {
                     alert('Lo sentimos ocurrio un error en el proceso de edición');
                 }
+            },
+            complete: function() { }
+        });
+    }
+
+
+    $('#TblCompras').on('click', '.ver', function() {
+        Id = $(this).val();
+        console.log($(this).val());
+        console.log(Id);
+        if (Condicion == 1) {
+            console.log($(this).val());
+            Obtener_Tablas_Resumenes_Compras('tablaResumenCompras',Id);
+            $("#Modal_VerCompras").modal("show");
+        } else {
+            alert('El perfil de usurio no esta habilitado para opción');
+        }
+    });
+
+
+    function Obtener_Tablas_Resumenes_Compras(act,Id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/compras.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: Id
+            }),
+            beforeSend: function() {
+                $("#tablaResumenCompra").html('');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                $.each(json, function(i, item) {
+                    $("#tablaResumenCompra").append('<tr>' +
+                        '<td class="text-truncate">' + json[i].Orden + '</td>' +
+                        '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].CompraDetalle_Precio + '</td>' +
+                        '<td class="text-truncate">' + json[i].CompraDetalle_Cantidad + '</td>' +
+                        '<td class="text-truncate">' + json[i].TotalCompra + '</td>');
+                        //'<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>');
+                });
             },
             complete: function() {
                 //alert('ok2');
@@ -1427,19 +1231,13 @@ include('modulos/cerrar_sesion.php');
     }
 
 
+
     $(function() {
 
         Obtener_Nombre();
         Obtener_Condicion();
-        /*
-        if ($_GET("IdCli") === undefined) {
-            console.log('sin valor');
-        } else {
-            IdMascotaExterno = $_GET("IdCli");
-            console.log(IdMascotaExterno);
-        }*/
-        listar();
 
+        listar();
     });
 </script>
 <!-- END. EVENTOS SCRIPT-->

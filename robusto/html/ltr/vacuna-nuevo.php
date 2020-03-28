@@ -1045,7 +1045,6 @@ include('modulos/cerrar_sesion.php');
         if (IdTipoProcesoGrabacion == 0) {
             ProcesoGrabacion(1, 1000000, 1)
         } else {
-            alert($("#CboEstadoVacuna").val());
             if ($("#CboEstadoVacuna").val()==1){
                 ProcesoGrabacion(2, IdVacuna , 1);
             }else{
@@ -1161,7 +1160,7 @@ include('modulos/cerrar_sesion.php');
                         '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
                         '<span aria-hidden="true">&times;</span>' +
                         '</button>' +
-                        '<strong>Vacuna reprogramada correctamente correctamente</strong>' +
+                        '<strong>Vacuna reprogramada correctamente</strong>' +
                         '</div>')
                     }else{
                         $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +

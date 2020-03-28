@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerrar_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -11,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
+    <meta name="author" content="DCCAHUAY">
     <title>Listado Agenda - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
@@ -208,10 +209,10 @@ session_start();
                             <span data-i18n="nav.content.main" class="menu-title">Agenda</span>
                         </a>
                         <ul class="menu-content">
-                            <li>
+                            <li class="active">
                                 <a href="calendario.php" class="menu-item">Calendario</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="listado-agenda.php" class="menu-item">Listado Citas</a>
                             </li>
                         </ul>
@@ -398,10 +399,10 @@ session_start();
                             <span data-i18n="nav.content.main" class="menu-title">Agenda</span>
                         </a>
                         <ul class="menu-content">
-                            <li>
+                            <li class="active">
                                 <a href="calendario.php" class="menu-item">Calendario</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="listado-agenda.php" class="menu-item">Listado Citas</a>
                             </li>
                         </ul>
@@ -569,7 +570,7 @@ session_start();
                             <span data-i18n="nav.content.main" class="menu-title">Agenda</span>
                         </a>
                         <ul class="menu-content">
-                            <li class="active">
+                            <li>
                                 <a href="listado-agenda.php" class="menu-item">Listado Citas</a>
                             </li>
                         </ul>
@@ -619,7 +620,6 @@ session_start();
         ?>
     </div>
     <!--/ main menu-->
-
             <div class="modal fade" id="modal-event" tabindex="-1" role="dialog" aria-labelledby="modal-eventLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -639,7 +639,6 @@ session_start();
                 </div>
             </div>
             </div>
-
 
     <div class="app-content content container-fluid">
         <div class="content-wrapper">
@@ -682,12 +681,10 @@ session_start();
                                 <div class="card-body collapse in">
                                     <div class="table-responsive" >
                                      <div id="calendar"></div> 
-
                                     </div>
                                     <div id="Resultado_Grabacion"></div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -758,10 +755,6 @@ session_start();
 <!-- BEGIN. EVENTOS SCRIPT-->
 <script type="text/javascript">
     var Condicion;
-    var table;
-    var IdMascota = '';
-    var IdMascotaExterno = 0;
-    var ValorRb = 2;
 
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
@@ -831,477 +824,7 @@ session_start();
         }
     }
 
-    $("#BtnNuevo").click(function() {
-        var url = "banio-nuevo.php";
-        $(location).attr('href', url);
-    });
-
-    function Actualizar() {
-        listar();
-    }
-
-    var listar = function() {
-        var url = ""
-        if (IdMascotaExterno == 0) {
-            url = "modulos/agenda_listado.php";
-            //url = "modulos/banios_listado.php?Cond=1&Id=0";
-
-        } else {
-            //url = "modulos/vacunas_listado.php?Cond=2&Id=" + IdMascotaExterno;
-        }
-
-        table = $('#TblAgenda').DataTable({
-            "destroy": true,
-            "order": [
-                [1, "desc"]
-            ],
-            "ajax": {
-                "method": "POST",
-                "url": url,
-            },
-            "columns": [{
-                    "data": "Codigo"
-                },
-                {
-                    "data": "Fecha"
-                },
-                {
-                    "data": "Servicio"
-                },
-                {
-                    "data": "Atencion"
-                },
-                {
-                    "data": "Producto_Nombre"
-                },
-                {
-                    "data": "Mascota_Nombre"
-                },
-                {
-                    "data": "Observacion"
-                },
-                {
-                    "data": "Precio"
-                }
-                /* ,                
-                                {
-                                    "render": function(data, type, row) {
-                                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Codigo + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Codigo + "'><i class='icon-trash-o'></i></button>  </div></div>";
-                                    }
-                                } */
-            ],
-            /* BOTONES DE DATATABLE */
-            dom: 'Bfrtip',
-            buttons: [{
-                    extend: 'excelHtml5',
-                    text: '<i class="icon-file-excel-o"></i> ',
-                    titleAttr: 'Exportar a Excel',
-                    //className: 'btn btn-success'
-                    "oSelectorOpts": {
-                        filter: 'applied',
-                        order: 'current'
-
-                    },
-                },
-                {
-                    extend: 'pdfHtml5',
-                    text: '<i class="icon-file-pdf-o"></i> ',
-                    titleAttr: 'Exportar a PDF',
-                    //className: 'btn btn-danger',
-                    orientation: 'landscape',
-                    //pageSize: 'TABLOID',
-                    exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6]
-                    },
-
-                    //className: 'btn btn-success'
-                    "oSelectorOpts": {
-                        filter: 'applied',
-                        order: 'current'
-                    },
-                },
-                {
-                    extend: 'copyHtml5',
-                    text: '<i class="icon-copy2"></i> ',
-                    titleAttr: 'Copiar',
-                    //className: 'btn btn-info',
-                    //className: 'btn btn-success'
-                    "oSelectorOpts": {
-                        filter: 'applied',
-                        order: 'current'
-                    },
-                },
-            ],
-            "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
-            }
-        });
-
-    }
-
-    $('#TblAgenda').on('click', '.editar', function() {
-        var id = $(this).val();
-        console.log($(this).val());
-        if (Condicion == 1) {
-            Obtener_Banio('MostrarProductoxCondicion', 2);
-            Obtener_Datos_Banio('ObtenerDatosBaniosxId', id);
-            $("#Modal_ListadoBanios").modal("show");
-        } else {
-            alert('El perfil de usuario no esta habilitado para opción');
-        }
-    });
-
-    // Clase Proser
-    function Obtener_Banio(act, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/proser.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                console.log(data);
-                var json = JSON.parse(data);
-                console.log(json);
-                $("#CboProducto").empty();
-                $.each(json, function(i, item) {
-                    $("#CboProducto").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    function Obtener_Datos_Banio(act, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/banios.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                console.log(data);
-                var json = JSON.parse(data);
-                console.log(json);
-                $.each(json, function(i, item) {
-
-                    var DniMascota = json[i].Mascota_Id;
-                    var CodigoDniMascota = '';
-                    if (DniMascota.length == 1) {
-                        CodigoDniMascota = 'M000' + DniMascota;
-                    } else if (DniMascota.length == 2) {
-                        CodigoDniMascota = 'M00' + DniMascota;
-                    } else if (DniMascota.length == 3) {
-                        CodigoDniMascota = 'M0' + DniMascota;
-                    } else {
-                        CodigoDniMascota = 'M' + DniMascota;
-                    }
-                    $('#Txt_Dni').val(CodigoDniMascota);
-                    $('#Txt_Nombre_Dni').html(json[i].Cliente_NombreCompleto);
-                    $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
-                    $('#Txt_CodigoMascota').val(json[i].Mascota_Id); // Mascota_Id (oculto)
-                    Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
-                    $('#CboMascota').val(json[i].Mascota_Id);
-                    $('#CboProducto').val(json[i].Producto_Id);
-                    $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
-                    $('#CboEstado').val(json[i].Banio_Cita);
-                    $('#Txt_Fecha').val(json[i].Banio_Fecha);
-                    $('#Txt_Notas').val(json[i].Banio_Observacion);
-                    $('#Txt_CodigoBanio').val(json[i].Banio_Id);
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    // Clase Mascota
-    function Obtener_Mascotas_x_IdCliente(act, cond, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/mascotas.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                Cond: cond,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                console.log(data);
-                var json = JSON.parse(data);
-                console.log(json);
-                $("#CboMascota").empty();
-                $.each(json, function(i, item) {
-                    $("#CboMascota").append('<option value="' + json[i].Mascota_Id + '">' + json[i].Mascota_Nombre + '</option>');
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-
-    $('#FormularioBanio input').on('change', function() {
-        ValorRb = $('input[name=Dni]:checked', '#FormularioBanio').val();
-        console.log(ValorRb);
-    });
-
-    $('#btnBuscar').click(function() {
-        Obtener_Nombre_x_Dni_Mascota_Cliente('ObtenerNombrexIdClienteMascota', ValorRb, $('#Txt_Dni').val().toUpperCase().trim())
-    });
-    $("#Txt_Dni").keypress(function(e) {
-        if (e.which == 13) {
-            Obtener_Nombre_x_Dni_Mascota_Cliente('ObtenerNombrexIdClienteMascota', ValorRb, $('#Txt_Dni').val().toUpperCase().trim())
-        }
-    });
-
-    // Clase Mascota
-    function Obtener_Nombre_x_Dni_Mascota_Cliente(act, condicion, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/mascotas.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act,
-                Condicion: condicion,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-                console.log(act + ':' + condicion + ':' + id);
-            },
-            success: function(data) {
-                console.log(data);
-                var json = JSON.parse(data);
-                if (json.length != 0) {
-                    if (condicion == 1) {
-                        $.each(json, function(i, item) {
-                            $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
-                            $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
-                        });
-                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
-                    } else if (condicion == 2) {
-                        $.each(json, function(i, item) {
-                            $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
-                            $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
-                            $('#Txt_CodigoMascota').val(json[i].Mascota_Id);
-                        });
-                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
-                        $("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
-                    }
-                } else {
-                    $('#Txt_Nombre_Dni').html('');
-                    $('#Txt_CodigoCliente').val('');
-                    $('#Txt_CodigoMascota').val('');
-                    $("#CboMascota").empty();
-                    alert('No existen registros para mostrar, verifique DNI propietario/mascota');
-                }
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-
-    $("#CboProducto").change(function() {
-        Obtener_Precio('MostrarPrecio', $("#CboProducto").val().trim());
-    });
-
-    // Clase proser
-    function Obtener_Precio(act, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/proser.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                console.log(data);
-                var json = JSON.parse(data);
-                $("#Txt_Precio").empty();
-                $.each(json, function(i, item) {
-                    $("#Txt_Precio").val(json[i].Producto_PrecioVenta);
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    $('#BtnActualizarBanio').click(function() {
-
-        var nombredni = $('#Txt_Nombre_Dni').html();
-        if (nombredni == 0) {
-            alert('El DNI ingresado no existe, verificar el numero por favor o ingrese el DNI por defecto')
-        } else {
-            var Id = ValidaCamposObligatorios(
-                $('#Txt_Dni').val().toUpperCase().trim(),
-                $('#CboMascota').val().toUpperCase().trim(),
-                $('#CboProducto').val().toUpperCase().trim(),
-                $('#Txt_Precio').val().toUpperCase().trim(),
-                $('#Txt_Fecha').val());
-            if (Id == 1) {
-                Editar_Banio("EditarBanio",
-                    $("#Txt_CodigoBanio").val(),
-                    $('#Txt_Fecha').val(),
-                    $("#CboProducto").val().toUpperCase().trim(),
-                    $("#Txt_Precio").val().toUpperCase().trim(),
-                    $("#CboMascota").val().toUpperCase().trim(),
-                    $("#Txt_Notas").val().toUpperCase().trim(),
-                    $("#CboEstado").val(),
-                    '<?php echo $_SESSION['User']; ?>'
-                );
-            }
-        }
-    });
-
-    function ValidaCamposObligatorios(dni, mascota, banio, precio, fecha) {
-        if (dni.length == 0) {
-            alert('El campo DNI es obligatorio');
-            $("#Txt_Dni").focus();
-            return 0;
-        } else {
-            if (mascota.length == 0) {
-                alert('El campo mascota es obligatorio');
-                $("#CboMascota").focus();
-                return 0;
-            } else {
-                if (banio.length == 0) {
-                    alert('El campo baño es obligatorio');
-                    $("#CboProducto").focus();
-                    return 0;
-                } else {
-                    if (precio.length == 0) {
-                        alert('El campo precio es obligatorio');
-                        $("#Txt_Precio").focus();
-                        return 0;
-                    } else {
-                        if (fecha.length == 0) {
-                            alert('El campo fecha es obligatorio')
-                            $('#Txt_Fecha').focus();
-                            return 0;
-                        } else {
-                            return 1;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    function Editar_Banio(act, IdBanio, Fecha, IdProducto, Precio, IdMascota, Observacion, Cita, Usuario) {
-        //console.log('entre al proceso de ecicion baño');
-        $.ajax({
-            type: "POST",
-            url: "modulos/banios.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                IdBanio: IdBanio,
-                Fecha: Fecha,
-                IdProducto: IdProducto,
-                Precio: Precio,
-                IdMascota: IdMascota,
-                Observacion: Observacion,
-                Cita: Cita,
-                Usuario: Usuario
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                console.log(data);
-                if (data == 1) {
-                    $("#Modal_ListadoBanios").modal("hide");
-                    listar();
-                    alert('Baño Editado correctamente');
-                } else {
-                    alert('Lo sentimos ocurrio un error en el proceso de edición');
-                }
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-
-    $('#TblAgenda').on('click', '.eliminar', function() {
-        var id = $(this).val();
-        if (Condicion == 1) {
-            var bool = confirm("Esta seguro de eliminar el registro ?");
-            if (bool) {
-                Eliminar_Banio('EliminarBanio', id)
-                alert('El baño seleccionado fue eliminada correctamente');
-            } else {
-                //alert("cancelo la solicitud");
-            }
-        } else {
-            alert('El perfil de usurio no esta habilitado para opción');
-        }
-    });
-
-    function Eliminar_Banio(act, codigo) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/banios.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: codigo
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                console.log(data);
-                if (data == 1) {
-                    listar();
-                } else {
-                    alert('Lo sentimos ocurrio un error en el proceso de edición');
-                }
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-
-    $(function() {
-
-
+      $(function() {
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next',
@@ -1313,7 +836,6 @@ session_start();
             weekNumbers: false,
             editable: true,
             eventLimit: true, // allow "more" link when too many events 
-
             events: 'modulos/agenda_listado_calendar.php',
 
  /*            events: [
@@ -1420,14 +942,11 @@ session_start();
                 //alert('Has hecho click en: ' + date.format());
             },
             eventClick: function(calEvent, jsEvent, view) {
-                console.log('ts');
                 $('#event-title').text(calEvent.title);
                 $('#event-description').html(calEvent.description);
                 $('#modal-event').modal();
             },
         });
-
-
     });
 
 

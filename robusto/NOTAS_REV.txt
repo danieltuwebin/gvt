@@ -1,0 +1,30 @@
+Revisados
+
+1.login.php                 : OK
+2.index.php                 : OK
+3.vacuna-nuevo.php          : OK
+    Producto_IdTipoPro = 1 AND Producto_IdTipoCat = 1;
+    Cuando se agenda un vacuna no se graba el precio solo inserta registro (evita sumas)
+4.listado-vacuna.php        : OK
+5.cliente-nuevo.php         : OK
+6.listado-cliente.php       : OK
+7.mascota-nuevo.php         : OK
+8.listado-mascota.php       : OK
+9.proser-nuevo.php          : OK
+10.listado-proser.php       : OK
+11.banio-nuevo.php          : OK
+    Producto_IdTipoPro = 2 AND Producto_IdTipoCat = 2;
+    Cuando se agenda un vacuna no se graba el precio solo inserta registro (evita sumas)    
+12.listado-banio.php        : OK
+13.desparacitacion-nuevo.php: OK
+    Producto_IdTipoPro = 3 AND Producto_IdTipoCat = 3;
+    Cuando se agenda un vacuna no se graba el precio solo inserta registro (evita sumas)   
+14.listado-desparacitacion.php:    OK
+15.compra-nuevo.php         : OK
+16.listado-compra.php       : OK
+17.calendario.php           : OK
+18.configuracion-especie.php: OK
+19.configuracion-razas.php  : OK
+20.configuracion-tipoproducto.php: OK
+21.configuracion-categoria.php: OK
+22.configuracion-unidadmedida.php: OK

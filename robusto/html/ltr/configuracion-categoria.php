@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerrar_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -11,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
+    <meta name="author" content="DCCAHUAY">
     <title>Categoria - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
@@ -688,11 +689,14 @@ session_start();
                                                             <button id="btngrabar" type="button" class="btn btn-success mr-1">
                                                                 <i class="icon-check2"></i> Guardar Categoria
                                                             </button>
+                                                            <button id="btnCancelar" type="button" class="btn btn-danger mr-1" style="display: none;">
+                                                                <i class="icon-reply"></i> Cancelar
+                                                            </button>                                                              
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
                                                             <div id="Resultado_Grabacion"></div>
                                                         </div>
@@ -806,23 +810,6 @@ session_start();
     var table;
 
     /* BEGIN FUNCIONES GENERALES */
-    function limpiaForm(miForm) {
-        // recorremos todos los campos que tiene el formulario
-        $(':input', miForm).each(function() {
-            var type = this.type;
-            var tag = this.tagName.toLowerCase();
-            //limpiamos los valores de los campos…
-            if (type == 'text' || type == 'password' || tag == 'textarea' || type == 'hidden')
-                this.value = '';
-            // excepto de los checkboxes y radios, le quitamos el checked
-            // pero su valor no debe ser cambiado
-            else if (type == 'checkbox' || type == 'radio')
-                this.checked = false;
-            // los selects le ponesmos el indice a -
-            else if (tag == 'select')
-                this.selectedIndex = -1;
-        });
-    }
 
     /* END FUNCIONES GENERALES */
 
@@ -843,6 +830,19 @@ session_start();
         }
         ?>
     }
+
+    function Obtener_Codigo_Formateado(id) {
+        if (id.length == 1) {
+            var Cod = 'CT000' + id;
+        } else if (id.length == 2) {
+            var Cod = 'CT00' + id;
+        } else if (id.length == 3) {
+            var Cod = 'CT0' + id;
+        } else {
+            var Cod = 'CT' + id;
+        }
+        return Cod;
+    }     
 
     $('#Salir').click(function() {
         Cerrar_Sesion("salir");
@@ -874,13 +874,15 @@ session_start();
         $("#btnLimpiar").show();
         $("#btnActivar").hide();
         $("#btngrabar").show();
+        $("#btnCancelar").hide();         
     }
 
     function DesactivarBotones() {
         $("#btnLimpiar").hide();
         $("#btnActivar").show();
-        $("#btnActivar").css("display", "block");
+        //$("#btnActivar").css("display", "block");
         $("#btngrabar").hide();
+        $("#btnCancelar").show();         
     }
    
     function Obtener_TipoProducto(act) {
@@ -943,11 +945,11 @@ session_start();
             "columns": [{
                     "render": function(data, type, row) {
                         if (row.Categoria_Id.length == 1) {
-                            var Cod = 'C00' + row.Categoria_Id;
+                            var Cod = 'CT00' + row.Categoria_Id;
                         } else if (row.Categoria_Id.length == 2) {
-                            var Cod = 'C0' + row.Categoria_Id;
+                            var Cod = 'CT0' + row.Categoria_Id;
                         } else {
-                            var Cod = 'C' + row.Categoria_Id;
+                            var Cod = 'CT' + row.Categoria_Id;
                         }
                         return Cod;
                     }
@@ -985,6 +987,9 @@ session_start();
                     extend: 'excelHtml5',
                     text: '<i class="icon-file-excel-o"></i> ',
                     titleAttr: 'Exportar a Excel',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                    },                    
                     //className: 'btn btn-success'
                     "oSelectorOpts": {
                         filter: 'applied',
@@ -1181,6 +1186,12 @@ session_start();
         }
     });
 
+    $('#btnCancelar').click(function() {
+            ActivarBotones();
+            limpiaForm($("#FormularioCategoria"));
+            $("#VistaDetalle").show();
+    });     
+
     function Editar_Categoria(act, codigo, tipoproducto, nombre, notas, usuario) {
         $.ajax({
             type: "POST",
@@ -1237,7 +1248,7 @@ session_start();
     $('#TblCategoria').on('click', '.eliminar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
-            var bool = confirm("Esta seguro de eliminar el registro ?");
+            var bool = confirm("Esta seguro de eliminar el registro "+ Obtener_Codigo_Formateado(id) + " ?");
             if (bool) {
                 Eliminar_Categoria('EliminarCategoria', id)
             } else {
@@ -1264,7 +1275,7 @@ session_start();
             success: function(data) {
                 if (data == 1) {
                     //listar();
-                    alert('Raza eliminada correctamente');
+                    alert('Categoria eliminada correctamente');
                     listar();
                 } else {
                     alert('Lo sentimos ocurrio un error en el proceso de edición');
@@ -1278,20 +1289,16 @@ session_start();
 
 
     $(function() {
-        
         ActivarBotones();
         Obtener_Condicion();
         Obtener_Nombre();
         Obtener_TipoProducto('MostrarTipoProducto');
         listar();
-        
-       
-
-/*         window.setTimeout(function() {
+        window.setTimeout(function() {
             $(".alert").fadeTo(500, 0).slideUp(500, function() {
                 $(this).remove();
             });
-        }, 2000); */
+        }, 2000);        
     });
 </script>
 <!-- END. EVENTOS SCRIPT-->

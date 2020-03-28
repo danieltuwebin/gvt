@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerrar_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -11,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
+    <meta name="author" content="DCCAHUAY">
     <title>Listado Compra - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
@@ -168,7 +169,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -356,7 +357,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -533,7 +534,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -625,12 +626,11 @@ session_start();
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel17">Edición de Compra</h4>
+                    <h4 class="modal-title" id="myModalLabel17"><label id="LblIdCompra">Edición de Compra</label></h4>
                 </div>
                 <div class="modal-body">
                     <form class="form" id="FormularioCompra">
                         <div class="form-body">
-
                             <!--  <h4 class="form-section">Propietario</h4> -->
                             <input type="hidden" id="Txt_Codigo" name="Txt_Codigo">
                             <div class="row">
@@ -678,12 +678,12 @@ session_start();
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel17">Resumen de Compra</h4>
+                    <h4 class="modal-title" id="myModalLabel17"><label id="LblIdResumenCompra">Resumen de Compra</label></h4>
                 </div>
                 <div class="modal-body">
                     <form class="form" id="FormularioCompra">
                         <div class="form-body">
-                        <div class="card-body">
+                            <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-hover mb-0">
                                         <!-- ENCABEZADO -->
@@ -754,8 +754,8 @@ session_start();
                             </div>
                             <br>
 
-                            <div class="card-block">
-                                <div class="card-body collapse in">
+                            <div class="card-body collapse in">
+                                <div class="card-block">
                                     <div class="table-responsive">
                                         <!-- <table id="TblClientes" class="table table-bordered table-striped"> -->
                                         <table id="TblCompras" class="table table-striped table-bordered" style="width:100%">
@@ -903,6 +903,19 @@ session_start();
         ?>
     }
 
+    function Obtener_Codigo_Formateado(id) {
+        if (id.length == 1) {
+            var Cod = 'C000' + id;
+        } else if (id.length == 2) {
+            var Cod = 'C00' + id;
+        } else if (id.length == 3) {
+            var Cod = 'C0' + id;
+        } else {
+            var Cod = 'C' + id;
+        }
+        return Cod;
+    }
+
     //http://jquery-manual.blogspot.com/2013/12/como-obtener-parametros-get-con.html?mensaje=ok
     function $_GET(param) {
         /* Obtener la url completa */
@@ -928,7 +941,6 @@ session_start();
             x++;
         }
     }
-
 
     $("#BtnNuevo").click(function() {
         var url = "compra-nuevo.php";
@@ -993,6 +1005,9 @@ session_start();
                     extend: 'excelHtml5',
                     text: '<i class="icon-file-excel-o"></i> ',
                     titleAttr: 'Exportar a Excel',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6]
+                    },
                     //className: 'btn btn-success'
                     "oSelectorOpts": {
                         filter: 'applied',
@@ -1032,16 +1047,13 @@ session_start();
                 "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
             }
         });
-
     }
-
 
     $('#TblCompras').on('click', '.editar', function() {
         var id = $(this).val();
-        console.log('id--');
-        console.log($(this).val());
         if (Condicion == 1) {
             Obtener_Datos_Compra('MostrarCompraxId', 2, id)
+            $("#LblIdCompra").text("Edición de Compra : " + Obtener_Codigo_Formateado(id));
             $("#Modal_EditarCompra").modal("show");
         } else {
             alert('El perfil de usurio no esta habilitado para opción');
@@ -1061,9 +1073,7 @@ session_start();
             }),
             beforeSend: function() {},
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $.each(json, function(i, item) {
                     $('#Txt_Codigo').val(json[i].Compra_Id)
                     $('#TxtFecha').val(json[i].Compra_Fecha);
@@ -1075,16 +1085,13 @@ session_start();
         });
     }
 
-
     $('#BtnActualizarCompra').click(function() {
         var codigo = $('#Txt_Codigo').val();
-        console.log('dato - ' + codigo);
         var Id = ValidaCamposObligatorios(
             $('#TxtFecha').val(),
             $('#TxtDocumento').val().toUpperCase().trim(),
             $('#TxtProveedor').val().toUpperCase().trim())
         if (Id == 1) {
-            console.log('antes de editar')
             Editar_Compra("EditarCompra",
                 $("#Txt_Codigo").val().toUpperCase().trim(),
                 $('#TxtFecha').val(),
@@ -1131,7 +1138,7 @@ session_start();
                 Proveedor: Proveedor,
                 Usuario: Usuario
             }),
-            beforeSend: function() { },
+            beforeSend: function() {},
             success: function(data) {
                 if (data == 1) {
                     $("#Modal_EditarCompra").modal("hide");
@@ -1141,7 +1148,7 @@ session_start();
                     alert('Lo sentimos ocurrio un error en el proceso de edición');
                 }
             },
-            complete: function() {  }
+            complete: function() {}
         });
     }
 
@@ -1149,7 +1156,7 @@ session_start();
     $('#TblCompras').on('click', '.eliminar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
-            var bool = confirm("Esta seguro de eliminar el registro ?");
+            var bool = confirm("Esta seguro de eliminar el registro " + Obtener_Codigo_Formateado(id) + " ?");
             if (bool) {
                 Eliminar_Compra('EliminarCompra_tblCompra', id)
                 alert('La compra seleccionado fue eliminado correctamente');
@@ -1171,35 +1178,30 @@ session_start();
                 action: act,
                 Id: codigo
             }),
-            beforeSend: function() { },
+            beforeSend: function() {},
             success: function(data) {
-                console.log(data);
                 if (data <= 1) {
                     listar();
                 } else {
                     alert('Lo sentimos ocurrio un error en el proceso de edición');
                 }
             },
-            complete: function() { }
+            complete: function() {}
         });
     }
 
-
     $('#TblCompras').on('click', '.ver', function() {
         Id = $(this).val();
-        console.log($(this).val());
-        console.log(Id);
         if (Condicion == 1) {
-            console.log($(this).val());
-            Obtener_Tablas_Resumenes_Compras('tablaResumenCompras',Id);
+            Obtener_Tablas_Resumenes_Compras('tablaResumenCompras', Id);
+            $("#LblIdResumenCompra").text("Resumen de Compra : " + Obtener_Codigo_Formateado(Id));
             $("#Modal_VerCompras").modal("show");
         } else {
             alert('El perfil de usurio no esta habilitado para opción');
         }
     });
 
-
-    function Obtener_Tablas_Resumenes_Compras(act,Id) {
+    function Obtener_Tablas_Resumenes_Compras(act, Id) {
         $.ajax({
             type: "POST",
             url: "modulos/compras.php",
@@ -1221,7 +1223,7 @@ session_start();
                         '<td class="text-truncate">' + json[i].CompraDetalle_Precio + '</td>' +
                         '<td class="text-truncate">' + json[i].CompraDetalle_Cantidad + '</td>' +
                         '<td class="text-truncate">' + json[i].TotalCompra + '</td>');
-                        //'<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>');
+                    //'<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>');
                 });
             },
             complete: function() {
@@ -1230,13 +1232,9 @@ session_start();
         });
     }
 
-
-
     $(function() {
-
         Obtener_Nombre();
         Obtener_Condicion();
-
         listar();
     });
 </script>

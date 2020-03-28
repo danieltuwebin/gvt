@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerrar_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -11,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
+    <meta name="author" content="DCCAHUAY">
     <title>Listado desparacitación - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
@@ -625,14 +626,13 @@ session_start();
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel17">Edición Desparacitación</h4>
+                    <h4 class="modal-title" id="myModalLabel17"><label id="LblIdDesparacitacion">Edición Desparacitación</label></h4>
                 </div>
                 <div class="modal-body">
                     <form class="form" id="FormularioDesparacitacion">
                         <div class="form-body">
                             <h4 class="form-section">Propietario</h4>
                             <div class="row">
-
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -783,7 +783,7 @@ session_start();
                                 </div>
                             </div>
                             <br>
-
+                            <div class="card-body collapse in">
                             <div class="card-block">
                                 <div class="card-body collapse in">
                                     <div class="table-responsive">
@@ -934,6 +934,19 @@ session_start();
         ?>
     }
 
+    function Obtener_Codigo_Formateado(id) {
+        if (id.length == 1) {
+            var Cod = 'D000' + id;
+        } else if (id.length == 2) {
+            var Cod = 'D00' + id;
+        } else if (id.length == 3) {
+            var Cod = 'D0' + id;
+        } else {
+            var Cod = 'D' + id;
+        }
+        return Cod;
+    }    
+
     //http://jquery-manual.blogspot.com/2013/12/como-obtener-parametros-get-con.html?mensaje=ok
     function $_GET(param) {
         /* Obtener la url completa */
@@ -1041,6 +1054,9 @@ session_start();
                     text: '<i class="icon-file-excel-o"></i> ',
                     titleAttr: 'Exportar a Excel',
                     //className: 'btn btn-success'
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6]
+                    },                    
                     "oSelectorOpts": {
                         filter: 'applied',
                         order: 'current'
@@ -1084,10 +1100,10 @@ session_start();
 
     $('#TblDesparacitacion').on('click', '.editar', function() {
         var id = $(this).val();
-        console.log($(this).val());
         if (Condicion == 1) {
             Obtener_Desparacitacion('MostrarProductoxCondicion', 3);
             Obtener_Datos_Desparacitacion('ObtenerDatosDesparacitacionxId', id);
+            $("#LblIdDesparacitacion").text("Edición Desparacitación : " + Obtener_Codigo_Formateado(id));            
             $("#Modal_ListadoDesparacitacion").modal("show");
         } else {
             alert('El perfil de usuario no esta habilitado para opción');
@@ -1109,9 +1125,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboProducto").empty();
                 $.each(json, function(i, item) {
                     $("#CboProducto").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
@@ -1137,11 +1151,8 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $.each(json, function(i, item) {
-
                     var DniMascota = json[i].Mascota_Id;
                     var CodigoDniMascota = '';
                     if (DniMascota.length == 1) {
@@ -1189,9 +1200,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboMascota").empty();
                 $.each(json, function(i, item) {
                     $("#CboMascota").append('<option value="' + json[i].Mascota_Id + '">' + json[i].Mascota_Nombre + '</option>');
@@ -1206,7 +1215,6 @@ session_start();
 
     $('#FormularioDesparacitacion input').on('change', function() {
         ValorRb = $('input[name=Dni]:checked', '#FormularioDesparacitacion').val();
-        console.log(ValorRb);
     });
 
     $('#btnBuscar').click(function() {
@@ -1232,10 +1240,8 @@ session_start();
             }),
             beforeSend: function() {
                 //alert('ok');
-                console.log(act + ':' + condicion + ':' + id);
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 if (json.length != 0) {
                     if (condicion == 1) {
@@ -1287,7 +1293,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 $("#Txt_Precio").empty();
                 $.each(json, function(i, item) {
@@ -1362,7 +1367,6 @@ session_start();
     }
 
     function Editar_Desparacitacion(act, IdDesparacitacion, Fecha, IdProducto, Precio, IdMascota, Observacion, Cita, Usuario) {
-        //console.log('entre al proceso de ecicion baño');
         $.ajax({
             type: "POST",
             url: "modulos/desparacitacion.php",
@@ -1380,11 +1384,9 @@ session_start();
                 Usuario: Usuario
             }),
             beforeSend: function() {
-                //alert('ok');
-                console.log(act+'-'+IdDesparacitacion+'-'+Fecha+'-'+IdProducto+'-'+Precio+'-'+IdMascota+'-'+Observacion+'-'+Cita+'-'+Usuario);
+                //console.log(act+'-'+IdDesparacitacion+'-'+Fecha+'-'+IdProducto+'-'+Precio+'-'+IdMascota+'-'+Observacion+'-'+Cita+'-'+Usuario);
             },
             success: function(data) {
-                console.log(data);
                 if (data == 1) {
                     $("#Modal_ListadoDesparacitacion").modal("hide");
                     listar();
@@ -1403,7 +1405,7 @@ session_start();
     $('#TblDesparacitacion').on('click', '.eliminar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
-            var bool = confirm("Esta seguro de eliminar el registro ?");
+            var bool = confirm("Esta seguro de eliminar el registro " + Obtener_Codigo_Formateado(id) + " ?");
             if (bool) {
                 Eliminar_Desparacitacion('EliminarDesparacitacion', id)
                 alert('La desparacitación seleccionada fue eliminada correctamente');
@@ -1429,7 +1431,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 if (data == 1) {
                     listar();
                 } else {
@@ -1444,18 +1445,13 @@ session_start();
 
 
     $(function() {
-
         Obtener_Nombre();
         Obtener_Condicion();
-
         if ($_GET("IdCli") === undefined) {
-            console.log('sin valor');
         } else {
             IdMascotaExterno = $_GET("IdCli");
-            console.log(IdMascotaExterno);
         }
         listar();
-
     });
 </script>
 <!-- END. EVENTOS SCRIPT-->

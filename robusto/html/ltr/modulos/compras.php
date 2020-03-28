@@ -52,7 +52,7 @@ if ($_POST['action'] == "GrabarCompra") {
     $myArray = array();
     $sql = "CALL SP_Registrar_TblCompra_TblCompraDetalle('$Condicion','$Fecha','$Guia','$Proveedor','$Observacion','$Usuario','$Sede','$Idcompra')";
     $oCado = new Cado();
-/*     $rst = $oCado->ejecute_sql($sql);
+/*     
     while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
         $myArray[] = $row;
     }
@@ -80,12 +80,12 @@ if ($_POST['action'] == "EliminarCompra") {
 
 if ($_POST['action'] == "CancelarCompra") {
 
-    $Condicion = $_POST['Condicion'];
+    $Idcompra = $_POST['Idcompra'];
     $IdCompraTmp = $_POST['IdCompraTmp'];
+    $Usuario = $_POST['Usuario'];    
 
-    $sql = "CALL SP_Eliminar_TblCompraDetalletmp_tblCompratmp('$Condicion','$IdCompraTmp')";
+    $sql = "CALL SP_Eliminar_TblCompra_Total('$Idcompra','$IdCompraTmp','$Usuario')";
     $oCado = new Cado();
-    $rst = $oCado->ejecute_sql($sql);
 
     //$dt = mysqli_fetch_array($rst);
     //$Codigo = $dt['Codigo'];
@@ -158,6 +158,34 @@ if ($_POST['action'] == "tablaResumenCompras") {
     echo json_encode($myArray);
 }
 
+
+if ($_POST['action'] == "UltimoIdCompra") {
+
+    $sql = "CALL SP_Obtener_TblCompra_UltimoId()";
+    $oCado = new Cado();
+    $rst = $oCado->ejecute_sql($sql);
+
+    $dt = mysqli_fetch_array($rst);
+    $Codigo = $dt['CODIGO'];
+    echo $Codigo;
+}
+
+/*
+if ($_POST['action'] == "ActualizaStock") {
+
+    $Idcompra = $_POST['Idcompra'];    
+    $Usuario = $_POST['Usuario'];
+
+    $sql = "CALL SP_Actualizar_TblAlmacen_CancelamientoCompra('$Idcompra','$Usuario')";
+    $oCado = new Cado();
+    $rst = $oCado->ejecute_sql($sql);
+
+    $rst = $oCado->ejecute_sql($sql);
+    $dt = mysqli_fetch_array($rst);
+    $Codigo = $dt['CODIGO'];
+    echo $Codigo;
+}
+*/
 
 
 

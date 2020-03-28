@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerrar_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -11,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
+    <meta name="author" content="DCCAHUAY">
     <title>Listado baños - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
@@ -63,7 +64,7 @@ session_start();
         $CondicionMnu = $_SESSION['UserPerfil'];
 
         if ($CondicionMnu == 1) { /* PERFIL ADMIN (1) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -168,7 +169,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -251,7 +252,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 2) { /* PERFIL JEFE (2) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -356,7 +357,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -443,7 +444,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 3) { /* PERFIL SOLO LECTURA (3) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -533,7 +534,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -625,7 +626,7 @@ session_start();
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel17">Edición Baño</h4>
+                    <h4 class="modal-title" id="myModalLabel17"><label id="LblIdBanio">Edición Baño</label></h4>
                 </div>
                 <div class="modal-body">
                     <form class="form" id="FormularioBanio">
@@ -700,9 +701,9 @@ session_start();
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                    <label for="CboProducto">Seleccione Baño :</label>
-                                                            <select id="CboProducto" name="CboProducto" class="form-control">
-                                                            </select>
+                                        <label for="CboProducto">Seleccione Baño :</label>
+                                        <select id="CboProducto" name="CboProducto" class="form-control">
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
@@ -756,7 +757,7 @@ session_start();
                 <?php
 
                 if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-                    ?>
+                ?>
                     <div class="content-header-left col-md-3 col-xs-12 mb-1">
                         <button id="BtnNuevo" type="button" class="btn btn-success"><i class="icon-android-add-circle"></i> Nueva Baño</button>
                     </div>
@@ -783,9 +784,9 @@ session_start();
                                 </div>
                             </div>
                             <br>
+                            <div class="card-body collapse in">
+                                <div class="card-block">
 
-                            <div class="card-block">
-                                <div class="card-body collapse in">
                                     <div class="table-responsive">
                                         <!-- <table id="TblBanios" class="table table-bordered table-striped"> -->
                                         <table id="TblBanios" class="table table-striped table-bordered" style="width:100%">
@@ -923,15 +924,28 @@ session_start();
     function Obtener_Condicion() {
         <?php
         if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-            ?>
+        ?>
             Condicion = 1;
         <?php
         } else {
-            ?>
+        ?>
             Condicion = 0;
         <?php
         }
         ?>
+    }
+
+    function Obtener_Codigo_Formateado(id) {
+        if (id.length == 1) {
+            var Cod = 'B000' + id;
+        } else if (id.length == 2) {
+            var Cod = 'B00' + id;
+        } else if (id.length == 3) {
+            var Cod = 'B0' + id;
+        } else {
+            var Cod = 'B' + id;
+        }
+        return Cod;
     }
 
     //http://jquery-manual.blogspot.com/2013/12/como-obtener-parametros-get-con.html?mensaje=ok
@@ -1041,6 +1055,9 @@ session_start();
                     text: '<i class="icon-file-excel-o"></i> ',
                     titleAttr: 'Exportar a Excel',
                     //className: 'btn btn-success'
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6]
+                    },
                     "oSelectorOpts": {
                         filter: 'applied',
                         order: 'current'
@@ -1084,10 +1101,10 @@ session_start();
 
     $('#TblBanios').on('click', '.editar', function() {
         var id = $(this).val();
-        console.log($(this).val());
         if (Condicion == 1) {
             Obtener_Banio('MostrarProductoxCondicion', 2);
             Obtener_Datos_Banio('ObtenerDatosBaniosxId', id);
+            $("#LblIdBanio").text("Edición Baño : " + Obtener_Codigo_Formateado(id));
             $("#Modal_ListadoBanios").modal("show");
         } else {
             alert('El perfil de usuario no esta habilitado para opción');
@@ -1109,9 +1126,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboProducto").empty();
                 $.each(json, function(i, item) {
                     $("#CboProducto").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
@@ -1137,9 +1152,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $.each(json, function(i, item) {
 
                     var DniMascota = json[i].Mascota_Id;
@@ -1163,7 +1176,7 @@ session_start();
                     $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
                     $('#CboEstado').val(json[i].Banio_Cita);
                     $('#Txt_Fecha').val(json[i].Banio_Fecha);
-                    $('#Txt_Notas').val(json[i].Banio_Observacion );
+                    $('#Txt_Notas').val(json[i].Banio_Observacion);
                     $('#Txt_CodigoBanio').val(json[i].Banio_Id);
                 });
             },
@@ -1189,9 +1202,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboMascota").empty();
                 $.each(json, function(i, item) {
                     $("#CboMascota").append('<option value="' + json[i].Mascota_Id + '">' + json[i].Mascota_Nombre + '</option>');
@@ -1206,7 +1217,6 @@ session_start();
 
     $('#FormularioBanio input').on('change', function() {
         ValorRb = $('input[name=Dni]:checked', '#FormularioBanio').val();
-        console.log(ValorRb);
     });
 
     $('#btnBuscar').click(function() {
@@ -1232,10 +1242,8 @@ session_start();
             }),
             beforeSend: function() {
                 //alert('ok');
-                console.log(act + ':' + condicion + ':' + id);
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 if (json.length != 0) {
                     if (condicion == 1) {
@@ -1287,7 +1295,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 $("#Txt_Precio").empty();
                 $.each(json, function(i, item) {
@@ -1362,7 +1369,6 @@ session_start();
     }
 
     function Editar_Banio(act, IdBanio, Fecha, IdProducto, Precio, IdMascota, Observacion, Cita, Usuario) {
-        //console.log('entre al proceso de ecicion baño');
         $.ajax({
             type: "POST",
             url: "modulos/banios.php",
@@ -1383,7 +1389,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 if (data == 1) {
                     $("#Modal_ListadoBanios").modal("hide");
                     listar();
@@ -1402,7 +1407,7 @@ session_start();
     $('#TblBanios').on('click', '.eliminar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
-            var bool = confirm("Esta seguro de eliminar el registro ?");
+            var bool = confirm("Esta seguro de eliminar el registro " + Obtener_Codigo_Formateado(id) + " ?");
             if (bool) {
                 Eliminar_Banio('EliminarBanio', id)
                 alert('El baño seleccionado fue eliminada correctamente');
@@ -1428,7 +1433,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 if (data == 1) {
                     listar();
                 } else {
@@ -1443,18 +1447,12 @@ session_start();
 
 
     $(function() {
-
         Obtener_Nombre();
         Obtener_Condicion();
-
-        if ($_GET("IdCli") === undefined) {
-            console.log('sin valor');
-        } else {
+        if ($_GET("IdCli") === undefined) {} else {
             IdMascotaExterno = $_GET("IdCli");
-            console.log(IdMascotaExterno);
         }
         listar();
-
     });
 </script>
 <!-- END. EVENTOS SCRIPT-->

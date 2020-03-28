@@ -2437,3 +2437,152 @@ LEFT JOIN tblVacunas tv ON tm.Mascota_Id = tv.Vacunas_IdMascota
 LEFT JOIN View_tbl_Atencion va ON tm.Mascota_Id = va.Id_Mascota 
 WHERE tc.Cliente_Dni LIKE '45454242'
 /* ----- */
+
+
+/* --------------- 25032020 ------------------------- */
+DROP PROCEDURE IF EXISTS SP_Registrar_TblVenta;
+DELIMITER $$
+CREATE PROCEDURE SP_Registrar_TblVenta (IN Pint_Kardex INT,
+                                       IN Pdat_Fecha DATE,
+                                       IN Pint_TipoVenta INT,
+                                       IN Pint_TipoPago INT,
+                                       IN Pint_IdMascota INT,
+                                       IN Pint_IdAlmacen INT,
+                                       IN Pflo_Precio FLOAT,
+                                       IN Pflo_Descuento FLOAT,
+                                       IN Pflo_Cantidad FLOAT,
+                                       IN Pflo_PrecioTotal FLOAT,
+                                       IN Pvchr_Observacion VARCHAR(1000),
+                                       IN Pint_Estado INT,
+                                       IN Pvchr_Usuario VARCHAR(100))
+BEGIN
+INSERT INTO tblVenta
+(Venta_IdKardex, Venta_Fecha, Venta_Tipo, Venta_TipoPago, Venta_IdMascota, Venta_IdAlmacen, Venta_Precio, Venta_Descuento, Venta_Cantidad, Venta_PrecioTotal, Venta_Observacion, Venta_Estado, Venta_FechaGra, Venta_UserGrab)
+VALUES 
+(Pint_Kardex, Pdat_Fecha, Pint_TipoVenta, Pint_TipoPago, Pint_IdMascota, Pint_IdAlmacen, Pflo_Precio, Pflo_Descuento, Pflo_Cantidad, Pflo_PrecioTotal, Pvchr_Observacion, Pint_Estado,NOW(), Pvchr_Usuario);
+END $$
+DELIMITER ;
+CALL SP_Registrar_TblVenta (1,'2020-03-25',1,1,1,1,50.05,0,1,50.5,'DESDE BD',1,'WEB')
+
+
+DROP PROCEDURE IF EXISTS SP_Registrar_TblVentaDetalle;
+DELIMITER $$
+CREATE PROCEDURE SP_Registrar_TblVentaDetalle (IN Pint_VentaId INT,
+                                               IN Pint_IdProducto INT,
+                                               IN Pflo_Precio FLOAT,
+                                               IN Pflo_Descuento FLOAT,
+                                               IN Pint_Cantidad INT,
+                                               IN Pflo_PrecioTotal FLOAT,
+                                               IN Pint_Estado INT,
+                                               IN Pvchr_Usuario VARCHAR(100))
+BEGIN
+INSERT INTO tblVentaDetalle
+(VentaDetalle_VentaId, VentaDetalle_IdProducto, VentaDetalle_Precio, VentaDetalle_Descuento, VentaDetalle_Cantidad, VentaDetalle_PrecioTotal, VentaDetalle_Estado, VentaDetalle_FechaGra, VentaDetalle_UserGrab)
+VALUES
+(Pint_VentaId, Pint_IdProducto, Pflo_Precio, Pflo_Descuento, Pint_Cantidad, Pflo_PrecioTotal, Pint_Estado, NOW(), Pvchr_Usuario);
+END $$
+DELIMITER ;
+CALL SP_Registrar_TblVentaDetalle (1,4,50,1.5,1,48.5,1,'WEB')
+
+
+DROP PROCEDURE IF EXISTS SP_Actualizar_TblAlmacen_Stock;
+DELIMITER $$
+CREATE PROCEDURE SP_Actualizar_TblAlmacen_Stock (IN Pint_IdSede INT, IN Pint_IdProducto INT, IN Pflo_Cantidad FLOAT)
+BEGIN
+UPDATE tblAlmacen 
+SET Almacen_Cantidad = (Almacen_Cantidad - Pflo_Cantidad) WHERE Almacen_IdSede = Pint_IdSede AND Almacen_IdProducto = Pint_IdProducto;
+END $$
+DELIMITER ;
+CALL SP_Actualizar_TblAlmacen_Stock (1,4,9)
+
+
+DROP PROCEDURE IF EXISTS SP_Registrar_TblBanio_AfterProcess;
+DELIMITER $$
+CREATE PROCEDURE SP_Registrar_TblBanio_AfterProcess(IN Pint_IdVenta INT,
+                                                  IN Pdat_Fecha DATE,
+                                                  IN Pint_IdProducto INT,
+                                                  IN Pflo_Precio FLOAT,
+                                                  IN Pint_IdMascota INT,
+                                                  IN Pvchr_Observacion VARCHAR(100),
+                                                  IN Pint_Cita INT,
+                                                  IN Pchr_CitaEstado CHAR(1),
+                                                  IN Pint_Estado INT, 
+                                                  IN Pvchr_Usuario VARCHAR(50))
+BEGIN
+INSERT INTO tblBanio (Banio_IdVenta, Banio_Fecha, Banio_IdProducto, Banio_Precio, Banio_IdMascota, Banio_Observacion, Banio_Cita, Banio_CitaEstado, Banio_Estado, Banio_FechaGra, Banio_UserGrab)
+VALUES 
+(Pint_IdVenta, Pdat_Fecha, Pint_IdProducto, Pflo_Precio, Pint_IdMascota, Pvchr_Observacion, Pint_Cita, Pchr_CitaEstado, Pint_Estado, now(), Pvchr_Usuario);
+END $$
+DELIMITER ;
+CALL SP_Registrar_TblBanio_AfterProcess (1,'2020-03-25',4,15.25,1,'OBS',1,'A',1,'WEB2')
+
+
+DROP PROCEDURE IF EXISTS SP_Registrar_TblVacunas_AfterProcess;
+DELIMITER $$
+CREATE PROCEDURE SP_Registrar_TblVacunas_AfterProcess(IN Pint_IdVenta INT,
+                                                  IN Pdat_Fecha DATE,
+                                                  IN Pint_IdProducto INT,
+                                                  IN Pflo_Precio FLOAT,
+                                                  IN Pint_IdMascota INT,
+                                                  IN Pvchr_Observacion VARCHAR(100),
+                                                  IN Pint_Cita INT,
+                                                  IN Pchr_CitaEstado CHAR(1),
+                                                  IN Pint_Estado INT, 
+                                                  IN Pvchr_Usuario VARCHAR(50))
+BEGIN
+INSERT INTO tblVacunas(Vacunas_IdVenta, Vacunas_Fecha, Vacunas_IdProducto, Vacunas_Precio, Vacunas_IdMascota, Vacunas_Observacion, Vacunas_Cita, Vacunas_CitaEstado, Vacunas_Estado, Vacunas_FechaGra, Vacunas_UserGrab)
+VALUES 
+(Pint_IdVenta, Pdat_Fecha, Pint_IdProducto, Pflo_Precio, Pint_IdMascota, Pvchr_Observacion, Pint_Cita, Pchr_CitaEstado, Pint_Estado, now(), Pvchr_Usuario);
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS SP_Registrar_TblDesparacitacion_AfterProcess;
+DELIMITER $$
+CREATE PROCEDURE SP_Registrar_TblDesparacitacion_AfterProcess(IN Pint_IdVenta INT,
+                                                  IN Pdat_Fecha DATE,
+                                                  IN Pint_IdProducto INT,
+                                                  IN Pflo_Precio FLOAT,
+                                                  IN Pint_IdMascota INT,
+                                                  IN Pvchr_Observacion VARCHAR(100),
+                                                  IN Pint_Cita INT,
+                                                  IN Pchr_CitaEstado CHAR(1),
+                                                  IN Pint_Estado INT, 
+                                                  IN Pvchr_Usuario VARCHAR(50))
+BEGIN
+INSERT INTO tblDesparacitacion(Desparacitacion_IdVenta, Desparacitacion_Fecha, Desparacitacion_IdProducto, Desparacitacion_Precio, Desparacitacion_IdMascota, Desparacitacion_Observacion, Desparacitacion_Cita, Desparacitacion_CitaEstado, Desparacitacion_Estado, Desparacitacion_FechaGra, Desparacitacion_UserGrab)
+VALUES 
+(Pint_IdVenta, Pdat_Fecha, Pint_IdProducto, Pflo_Precio, Pint_IdMascota, Pvchr_Observacion, Pint_Cita, Pchr_CitaEstado, Pint_Estado, now(), Pvchr_Usuario);
+END $$
+DELIMITER ;
+
+
+CREATE VIEW View_tbl_Almacen_Stock
+AS
+SELECT Almacen_IdProducto,sum(Almacen_Cantidad) AS Cantidad FROM tblAlmacen group by Almacen_IdProducto
+
+DROP PROCEDURE IF EXISTS SP_Obtener_TblAlmacen_x_Id;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblAlmacen_x_Id(IN Pint_IdProducto INT)
+BEGIN
+SET @numero=0;
+SELECT @numero:=@numero+1 AS Orden,
+ts.Sede_Nombre,
+CASE WHEN LENGTH(ta.Almacen_IdProducto) = 1 THEN CONCAT('PR000',ta.Almacen_IdProducto)
+WHEN LENGTH(ta.Almacen_IdProducto) = 2 THEN CONCAT('PR00',ta.Almacen_IdProducto) 
+WHEN LENGTH(ta.Almacen_IdProducto) = 3 THEN CONCAT('PR0',ta.Almacen_IdProducto)
+ELSE CONCAT('PR',ta.Almacen_IdProducto) END AS IdProducto,
+tp.Producto_Nombre,ta.Almacen_Cantidad FROM tblAlmacen ta
+LEFT JOIN tblSede ts ON ta.Almacen_IdSede = ts.Sede_Id
+LEFT JOIN tblProducto tp ON ta.Almacen_IdProducto = tp.Producto_Id
+WHERE ta.Almacen_IdProducto = Pint_IdProducto;
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS SP_Obtener_TblCompra_UltimoId;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblCompra_UltimoId()
+BEGIN
+SELECT MAX(Compra_Id) AS CODIGO FROM tblCompra;
+END$$
+DELIMITER ;

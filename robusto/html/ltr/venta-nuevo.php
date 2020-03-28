@@ -62,7 +62,7 @@ session_start();
         $CondicionMnu = $_SESSION['UserPerfil'];
 
         if ($CondicionMnu == 1) { /* PERFIL ADMIN (1) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -156,6 +156,19 @@ session_start();
                         </ul>
                     </li>
                     <li class=" nav-item">
+                        <a href="#"><i class="icon-plus2"></i>
+                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li>
+                                <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
+                            </li>
+                            <li>
+                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
+                            </li>
+                        </ul>
+                    </li>                    
+                    <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
                         </a>
@@ -181,19 +194,6 @@ session_start();
                             </li>
                             <li>
                                 <a href="listado-venta.php" class="menu-item">Listado Ventas</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class=" nav-item">
-                        <a href="#"><i class="icon-plus2"></i>
-                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
-                        </a>
-                        <ul class="menu-content">
-                            <li>
-                                <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
-                            </li>
-                            <li>
-                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
                     </li>
@@ -250,7 +250,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 2) { /* PERFIL JEFE (2) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -343,6 +343,19 @@ session_start();
                             </li>
                         </ul>
                     </li>
+                    <li class=" nav-item">
+                        <a href="#"><i class="icon-plus2"></i>
+                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li>
+                                <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
+                            </li>
+                            <li>
+                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
+                            </li>
+                        </ul>
+                    </li>                    
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -371,19 +384,6 @@ session_start();
                             </li>
                             <li>
                                 <a href="listado-venta.php" class="menu-item">Listado Ventas</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class=" nav-item">
-                        <a href="#"><i class="icon-plus2"></i>
-                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
-                        </a>
-                        <ul class="menu-content">
-                            <li>
-                                <a href="atencion-nuevo.php" class="menu-item">Nueva Atención</a>
-                            </li>
-                            <li>
-                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
                     </li>
@@ -442,7 +442,7 @@ session_start();
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 3) { /* PERFIL SOLO LECTURA (3) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -523,6 +523,16 @@ session_start();
                             </li>
                         </ul>
                     </li>
+                    <li class=" nav-item">
+                        <a href="#"><i class="icon-plus2"></i>
+                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
+                        </a>
+                        <ul class="menu-content">
+                            <li>
+                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
+                            </li>
+                        </ul>
+                    </li>                    
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -545,16 +555,6 @@ session_start();
                         <ul class="menu-content">
                             <li>
                                 <a href="listado-venta.php" class="menu-item">Listado Ventas</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class=" nav-item">
-                        <a href="#"><i class="icon-plus2"></i>
-                            <span data-i18n="nav.content.main" class="menu-title">Atenciones</span>
-                        </a>
-                        <ul class="menu-content">
-                            <li>
-                                <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
                     </li>
@@ -748,7 +748,7 @@ session_start();
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                        <label for="TxtProducto">Seleccione Producto :</label>
+                                                            <label for="TxtProducto">Seleccione Producto :</label>
                                                             <input list="productos" style="text-transform:uppercase;" id="TxtProducto" class="form-control" placeholder="Ingrese producto" name="TxtProducto">
                                                             <datalist id="productos" size="400">
                                                                 <!--
@@ -758,13 +758,14 @@ session_start();
                                                                 <option>TGA</option> 
                                                                 -->
                                                             </datalist>
+                                                            <input type="hidden" id="CodigoProducto" name="CodigoProducto">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="Txt_Nombre">Precio</label>
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Ingrese nombre" name="Txt_Nombre" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return soloLetras(event)">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Ingrese nombre" name="Txt_Nombre" onkeyup="javascript:this.value=this.value.toUpperCase();">
                                                             <input type="hidden" id="Txt_Precio" name="Txt_Precio">
                                                         </div>
                                                     </div>
@@ -772,7 +773,7 @@ session_start();
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="Txt_Descuento">Descuento</label>
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Descuento" class="form-control" placeholder="Ingrese nombre" name="Txt_Descuento" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return soloLetras(event)">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Descuento" class="form-control" placeholder="Ingrese nombre" name="Txt_Descuento" onkeyup="javascript:this.value=this.value.toUpperCase();">
                                                             <input type="hidden" id="Txt_Codigo" name="Txt_Codigo">
                                                         </div>
                                                     </div>
@@ -780,7 +781,7 @@ session_start();
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="Txt_Cantidad">Cantidad</label>
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Cantidad" class="form-control" placeholder="Ingrese nombre" name="Txt_Cantidad" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return soloLetras(event)">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Cantidad" class="form-control" placeholder="Ingrese nombre" name="Txt_Cantidad" onkeyup="javascript:this.value=this.value.toUpperCase();">
                                                             <input type="hidden" id="Txt_Codigo" name="Txt_Codigo">
                                                         </div>
                                                     </div>
@@ -796,7 +797,7 @@ session_start();
                                                             <button id="btnActivar" type="button" class="btn btn-warning mr-1" style="display: none;">
                                                                 <i class="icon-check2"></i> Agregar
                                                             </button>
-                                                            <button id="btngrabar" type="button" class="btn btn-success mr-1">
+                                                            <button id="btnAgregar" type="button" class="btn btn-success mr-1">
                                                                 <i class="icon-check2"></i> Agregar
                                                             </button>
                                                         </div>
@@ -844,14 +845,36 @@ session_start();
                                                             <th>Precio</th>
                                                             <th>Descuento</th>
                                                             <th>Cantidad</th>
-                                                            <th>Total</th>                                                            
+                                                            <th>Total</th>
                                                             <th>Administrar</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
+                                                    <tbody id="tablaDetalleVenta">
                                                     </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th colspan="7" style="text-align:right">Total Venta:</th>
+                                                            <th></th>
+                                                        </tr>
+                                                        <!--                                                     <tr>
+                                                        <th colspan="5" style="text-align:right">Cantidad de items:</th>
+                                                        <th><label for="Txt_Cantidad">0</label></th>
+                                                    </tr> -->
+                                                    </tfoot>
                                                 </table>
                                             </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="form-group" style="text-align:center;">
+                                                    <div class="row">
+                                                        <button id="BtnNuevaVenta" type="button" class="btn btn-warning mr-1"><i class="icon-rotate-right"></i> Nueva Venta</button>
+                                                        <button id="BtnGrabarVenta" type="button" class="btn btn-success mr-1"><i class="icon-check-circle"></i> Grabar Venta</button>
+                                                        <button id="BtnCancelarVenta" type="button" class="btn btn-danger mr-1"><i class="icon-times-circle"></i> Cancelar Venta</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -915,7 +938,7 @@ session_start();
 <!-- BEGIN. EVENTOS SCRIPT-->
 <script type="text/javascript">
     var table;
-    var Id_VentaTemporal;
+    var Id_TipoVenta;
 
     /* BEGIN FUNCIONES GENERALES */
     function limpiaForm(miForm) {
@@ -945,11 +968,11 @@ session_start();
     function Obtener_Condicion() {
         <?php
         if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-            ?>
+        ?>
             Condicion = 1;
         <?php
         } else {
-            ?>
+        ?>
             Condicion = 0;
         <?php
         }
@@ -1005,7 +1028,7 @@ session_start();
                 });
             },
             complete: function() {
-               // $("#CboSede option[value=" + CondicionSede + "]").attr("selected", true);
+                // $("#CboSede option[value=" + CondicionSede + "]").attr("selected", true);
             }
         });
     }
@@ -1071,8 +1094,8 @@ session_start();
         });
     }
 
-  // Clase Mascota
-  function Obtener_NombreCliente_NombreMascota(act, id) {
+    // Clase Mascota
+    function Obtener_NombreCliente_NombreMascota(act, id) {
         $.ajax({
             type: "POST",
             url: "modulos/mascotas.php",
@@ -1104,8 +1127,8 @@ session_start();
     }
 
 
-        // Clase Mascota
-        function Obtener_Mascotas_x_IdCliente(act, cond, id) {
+    // Clase Mascota
+    function Obtener_Mascotas_x_IdCliente(act, cond, id) {
         $.ajax({
             type: "POST",
             url: "modulos/mascotas.php",
@@ -1134,8 +1157,71 @@ session_start();
         });
     }
 
+    $('#btnAgregar').click(function() {
 
-    function Obtener_Registros_Tblventatemporal(act,Id ) {
+
+        $("#tablaDetalleVenta").append('<tr>' +
+            '<td class="text-truncate">' + '1' + '</td>' +
+            '<td class="text-truncate">' + $('#CodigoProducto').val() + '</td>' +
+            '<td class="text-truncate">' + $('#TxtProducto').val() + '</td>' +
+            '<td class="text-truncate">' + $('#Txt_Precio').val() + '</td>' +
+            '<td class="text-truncate">' + $('#Txt_Descuento').val() + '</td>' +
+            '<td class="text-truncate">' + $('#Txt_Cantidad').val() + '</td>' +
+            '<td class="text-truncate">' + (($('#Txt_Cantidad').val() * $('#Txt_Precio').val()) - $('#Txt_Descuento').val()) + '</td>' +
+            /* '<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>'); */
+            '<td class="text-truncate"><button id="eliminar" type="button" class="btn btn-danger" value=""><i class="icon-trash-o"></i></button></td> </tr>');
+
+
+        console.log('click en agregar')
+    });
+
+
+    $('#BtnGrabarVenta').click(function() {    
+        console.log('click en agregar...')
+        /*
+        console.log('ProcesoVenta'+ '-' + 
+            $("#CboSede").val() + '-' + 
+            $('#CodigoProducto').val()+ ',' + 
+            $('#Txt_Cantidad').val()+ ',' + 
+            '1'+ ',' + 
+            $('#TxtFecha').val()+ ',' + 
+            Id_TipoVenta+ ',' + 
+            $('#CboTipoPago').val()+ ',' + 
+            $('#CboMascota').val()+ ',' + 
+            $('#Txt_Precio').val()+ ',' + 
+            $('#Txt_Descuento').val()+ ',' + 
+            ($('#Txt_Precio').val() * $('#Txt_Cantidad').val()) - $('#Txt_Descuento').val()+ ',' + 
+            ''+ ',' + 
+            '1'+ ',' + 
+            '<?php echo $_SESSION['User']; ?>'+ ',' + 
+            '1'+ ',' + 
+            'C');
+        */
+            
+            Grabar_Venta_Total_x_Condiciones(
+            'ProcesoVenta',
+            $("#CboSede").val(),
+            $('#CodigoProducto').val(),
+            $('#Txt_Cantidad').val(),
+            '1',
+            $('#TxtFecha').val(),
+            Id_TipoVenta,
+            $('#CboTipoPago').val(),
+            $('#CboMascota').val(),
+            $('#Txt_Precio').val(),
+            $('#Txt_Descuento').val(),
+            ($('#Txt_Precio').val() * $('#Txt_Cantidad').val()) - $('#Txt_Descuento').val(),
+            '',
+            '1',
+            '<?php echo $_SESSION['User']; ?>',
+            '1',
+            'C'
+        )
+    });
+
+
+    function Obtener_Registros_Tblventatemporal(act, Id) {
+
         $.ajax({
             type: "POST",
             url: "modulos/ventas.php",
@@ -1154,26 +1240,88 @@ session_start();
                 var json = JSON.parse(data);
                 console.log(json);
                 $("#CboEspecie").empty();
-                 $.each(json, function(i, item) {
+                $.each(json, function(i, item) {
 
                     $('#TxtFecha').val(json[i].VentaTemporal_Fecha);
-                    //$('#TxtProducto').val(json[i].VentaTemporal_IdProducto);
+                    $('#CodigoProducto').val(json[i].VentaTemporal_IdProducto);
                     $('#TxtProducto').val(json[i].Producto_Nombre);
                     $('#Txt_Precio').val(json[i].VentaTemporal_Precio);
                     $('#Txt_Descuento').val('0.00');
-                    $('#Txt_Cantidad').val('1.00');                    
+                    $('#Txt_Cantidad').val('1.00');
 
-                    
-                    
-                    
+
+
+
                     //$("#CboEspecie").append('<option value="' + json[i].Especie_Id + '">' + json[i].Especie_Nombre + '</option>');
-                }); 
+                });
             },
             complete: function() {
                 //alert('ok2');
             }
         });
     }
+
+
+    function Grabar_Venta_Total_x_Condiciones(act, IdSede, IdProducto, Cantidad, Kardex, Fecha, TipoVenta,
+    TipoPago, IdMascota, Precio, Descuento, PrecioTotal, Observacion, Estado, Usuario, Cita, CitaEstado) {
+
+        console.log(act+'-'+ IdSede+'-'+ IdProducto+'-'+ Cantidad+'-'+ Kardex+'-'+ Fecha+'-'+ TipoVenta+'-'+
+    TipoPago+'-'+ IdMascota+'-'+ Precio+'-'+ Descuento+'-'+ PrecioTotal+'-'+ Observacion+'-'+ Estado+'-'+ Usuario+'-'+ Cita+'-'+ CitaEstado);
+
+        $.ajax({
+            type: "POST",
+            url: "modulos/ventas.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                IdSede: IdSede,
+                IdProducto: IdProducto,
+                Cantidad: Cantidad,
+                Kardex: Kardex,
+                Fecha: Fecha,
+                TipoVenta: TipoVenta,
+                TipoPago: TipoPago,
+                IdMascota: IdMascota,
+                Precio: Precio,
+                Descuento: Descuento,
+                PrecioTotal: PrecioTotal,
+                Observacion: Observacion,
+                Estado: Estado,
+                Usuario: Usuario,
+                Cita: Cita,
+                CitaEstado: CitaEstado
+            }),
+            beforeSend: function() {
+                //console.log(act+'-'+Condicion+'-'+Fecha+'-'+Guia+'-'+Proveedor+'-'+Observacion+'-'+Usuario+'-'+Sede+'-'+Idcompra);
+            },
+            success: function(data) {
+                //console.log("impresion - xx");
+                console.log(data);
+                $("#Resultado_Grabacion").show();
+                if (data == 1) {
+                    $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
+                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                        '<span aria-hidden="true">&times;</span>' +
+                        '</button>' +
+                        '<strong>Nueva compra registrada correctamente</strong>' +
+                        '</div>')
+                } else {
+                    $("#Resultado_Grabacion").html('<div class="alert alert-danger alert-dismissible fade in mb-2" role="alert">' +
+                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                        '<span aria-hidden="true">&times;</span>' +
+                        '</button>' +
+                        '<strong>Lo sentimos ocurrio un error en el proceso de grabación</strong>' +
+                        '</div>')
+                }
+                $("#Resultado_Grabacion").fadeTo(2000, 500).slideUp(500, function() {
+                    $("#Resultado_Grabacion").slideUp(500);
+                });
+            },
+            complete: function() {}
+        });
+    }
+
 
     var listar = function() {
         table = $('#TblVenta').DataTable({
@@ -1541,6 +1689,7 @@ session_start();
 
         console.log($_GET("IdVen"));
         console.log($_GET("IdMas"));
+        console.log($_GET("Tipo"));
 
         Obtener_Sede('MostrarSede');
         $('#TxtFecha').val(MostrarFechaActual());
@@ -1549,6 +1698,7 @@ session_start();
             //SIN VALOR GET
         } else {
             // CON VALOR GET
+            Id_TipoVenta = $_GET("Tipo");
             $("#RbDniM").attr('checked', true);
             $("input[type=radio]").attr('disabled', true);
             $("#Txt_Dni").attr('disabled', true);
@@ -1562,22 +1712,22 @@ session_start();
             console.log('final' + $('#Txt_CodigoCliente').val().trim());
             $("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
 
-            Obtener_Registros_Tblventatemporal('ObtenerRegistrosTblventatemporal',$_GET("IdVen"));
+            Obtener_Registros_Tblventatemporal('ObtenerRegistrosTblventatemporal', $_GET("IdVen"));
 
             //----------------Obtener_NombreCliente_NombreMascota('MostrarNombrecliNombreMas', $_GET("IdMas"));
             //----------------console.log('final' + $('#Txt_CodigoCliente').val().trim());
             //----------------$("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
-        } 
+        }
 
 
 
-/*         ActivarBotones();
-        Obtener_Condicion();
-        Obtener_Nombre();
-        Obtener_Especie('MostrarEspecie');
-        listar(); */
+        /*         ActivarBotones();
+                Obtener_Condicion();
+                Obtener_Nombre();
+                Obtener_Especie('MostrarEspecie');
+                listar(); */
 
-        
+
 
         window.setTimeout(function() {
             $(".alert").fadeTo(500, 0).slideUp(500, function() {
