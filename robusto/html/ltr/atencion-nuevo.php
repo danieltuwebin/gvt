@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerrar_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -11,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
+    <meta name="author" content="DCCAHUAY">
     <title>Nueva Atención - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
@@ -167,7 +168,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -355,7 +356,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -532,7 +533,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -616,28 +617,6 @@ session_start();
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
-    <!-- Modal -->
-    <div class="modal fade text-xs-left" id="Modal_Pregunta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cliente Existente</h5>
-                </div>
-                <div class="modal-body">
-                    <p id="PreguntaCliente"></p>
-                </div>
-                <div class="modal-footer">
-                    <button id="BtnRestaurarCliente" type="button" class="btn btn-success mr-1"><i class="icon-check-circle "></i> Si, Mostrar datos</button>
-                    <button id="BtnActualizarCliente" type="button" class="btn btn-primary mr-1"><i class="icon-minus-circle "></i> No, Actualizar</button>
-                    <button id="BtnCerrarCliente" type="button" class="btn btn-warning mr-1" data-dismiss="modal"><i class="icon-times-circle "></i> Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- / Modal -->
-
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
-
     <div class="app-content content container-fluid">
         <div class="content-wrapper">
             <div class="content-header row">
@@ -668,8 +647,9 @@ session_start();
                                 <div class="card-body collapse in">
                                     <div class="card-block">
                                         <form class="form" id="FormularioAtencion">
-                                            <!--<input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
-                                        <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">    -->
+                                            <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
+                                            <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">
+                                            <input type="hidden" id="Txt_CodigoProducto" name="Txt_CodigoProducto">
                                             <div class="form-body">
                                                 <h4 class="form-section">Propietario</h4>
 
@@ -710,9 +690,6 @@ session_start();
                                                                 <div class="form-group">
                                                                     <h5>
                                                                         <label for="Txt_Nombre_Dni">Nombre propietario :&nbsp;&nbsp; </label><label id="Txt_Nombre_Dni" class="primary"></label>
-                                                                        <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
-                                                                        <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">
-                                                                        <input type="hidden" id="Txt_CodigoProducto" name="Txt_CodigoProducto">
                                                                     </h5>
                                                                 </div>
                                                             </div>
@@ -728,10 +705,20 @@ session_start();
                                                                     </label>
                                                                 </div>
                                                             </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="CboEstadoAtencion">Estado </label>
+                                                                    <select id="CboEstadoAtencion" name="CboEstadoAtencion" class="form-control">
+                                                                        <option value="1" selected="selected">REALIZADO</option>
+                                                                        <option value="3">REPROGRAMADO</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 <br>
 
                                                 <h4 class="form-section">signos Clinicos</h4>
@@ -754,7 +741,7 @@ session_start();
                                                     </div>
                                                     <div class="col-md-1">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_T" class="form-control" placeholder="" name="Txt_T">
+                                                            <input type="number" style="text-transform:uppercase;" id="Txt_T" class="form-control" placeholder="" name="Txt_T">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1">
@@ -764,7 +751,7 @@ session_start();
                                                     </div>
                                                     <div class="col-md-1">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_C" class="form-control" placeholder="" name="Txt_C">
+                                                            <input type="number" style="text-transform:uppercase;" id="Txt_C" class="form-control" placeholder="" name="Txt_C">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1">
@@ -774,7 +761,7 @@ session_start();
                                                     </div>
                                                     <div class="col-md-1">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_FR" class="form-control" placeholder="" name="Txt_FR">
+                                                            <input type="number" style="text-transform:uppercase;" id="Txt_FR" class="form-control" placeholder="" name="Txt_FR">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -888,7 +875,7 @@ session_start();
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Peso" class="form-control" placeholder="" name="Txt_Peso">
+                                                            <input type="number" style="text-transform:uppercase;" id="Txt_Peso" class="form-control" placeholder="" name="Txt_Peso">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -968,7 +955,7 @@ session_start();
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <input type="text" id="Txt_Precio" style="text-transform:uppercase;" class="form-control" name="Txt_Precio" placeholder="">
+                                                            <input type="number" id="Txt_Precio" style="text-transform:uppercase;" class="form-control" name="Txt_Precio" placeholder="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1035,7 +1022,8 @@ session_start();
 <script type="text/javascript">
     var IdMascota = '';
     var ValorRb = 1;
-    var ValorTipoRegistro = 0;
+    var IdTipoProcesoGrabacion = 0;      
+    var IdAtencion;
     /* BEGIN FUNCIONES GENERALES */
 
     /* END FUNCIONES GENERALES */
@@ -1048,44 +1036,18 @@ session_start();
         Cerrar_Sesion("salir");
     });
 
-
     function Actualizar() {
         limpiaForm($("#FormularioAtencion"));
-        //Obtener_Vacunas('MostrarProductoxCondicion', 1);
     }
 
-    // Clase Proser
-    /* function Obtener_Vacunas(act, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/proser.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                console.log(data);
-                var json = JSON.parse(data);
-                console.log(json);
-                $("#CboVacuna").empty();
-                $.each(json, function(i, item) {
-                    $("#CboVacuna").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    } */
+    function Habilita_Desabilita(boolLimpiar, boolGrabar, boolAgendar) {
+        $("#btnLimpiar").attr('disabled', boolLimpiar);
+        $("#btnGrabar").attr('disabled', boolGrabar);
+        $("#btnAgendar").attr('disabled', boolAgendar);
+    }
 
     $("#btnLimpiar").click(function() {
         limpiaForm($("#FormularioAtencion"));
-
     });
 
     // Clase Mascota
@@ -1103,7 +1065,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
                     $('#Txt_Dni').val(json[i].Cliente_Dni);
@@ -1111,7 +1072,6 @@ session_start();
                     $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
                     $('#Txt_CodigoMascota').val(json[i].Mascota_Id);
                     Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
-                    console.log('impr ' + $('#Txt_CodigoCliente').val().trim());
                 });
             },
             complete: function() {
@@ -1136,9 +1096,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboMascota").empty();
                 $.each(json, function(i, item) {
                     $("#CboMascota").append('<option value="' + json[i].Mascota_Id + '">' + json[i].Mascota_Nombre + '</option>');
@@ -1177,10 +1135,8 @@ session_start();
             }),
             beforeSend: function() {
                 //alert('ok');
-                console.log(act + ':' + condicion + ':' + id);
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 if (json.length != 0) {
                     if (condicion == 1) {
@@ -1235,7 +1191,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 $("#Txt_Precio").empty();
                 $.each(json, function(i, item) {
@@ -1249,12 +1204,31 @@ session_start();
     }
 
     $('#btnAgendar').click(function() {
-        ProcesoGrabacion(1, 4000000, 2)
+        if (IdTipoProcesoGrabacion == 0) {
+            ProcesoGrabacion(1, 4000000, 2);
+        } else {
+            if ($("#CboEstadoAtencion").val() == 3) {
+                ProcesoGrabacion(2, IdAtencion, 3);
+            } else {
+                alert('Debe cambiar el estado de la Atención a Reprogramado');
+                $("#CboEstadoAtencion").focus();
+                $("#CboEstadoAtencion").select();
+            }
+        }        
     });
 
-
     $("#btnGrabar").click(function() {
-        ProcesoGrabacion(1, 4000000, 1)
+        if (IdTipoProcesoGrabacion == 0) {
+            ProcesoGrabacion(1, 4000000, 1)
+        } else {
+            if ($("#CboEstadoAtencion").val()==1){
+                ProcesoGrabacion(2, IdAtencion , 1);
+            }else{
+                alert('Debe cambiar el estado de la Atención a Realizado');                
+                $("#CboEstadoAtencion").focus();
+                $("#CboEstadoAtencion").select();
+            }
+        }
     });
 
     function ProcesoGrabacion(tiporegistro, idatencion, idcita) {
@@ -1359,7 +1333,8 @@ session_start();
     function RegistrarAtencion(act, IdTipoRegistro, IdAtencion, Fecha, IdProducto, IdMascota, Sintomas, Atencion_T, Atencion_FC, Atencion_FR, Atencion_sc_Des, Atencion_sc_Muc,
         Atencion_sc_TLLC, Atencion_sc_Vom, Atencion_sc_Dia, Atencion_sc_Gan, Atencion_sc_Pes, Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des,
         Atencion_tr_Obs, Atencion_tr_Pre, Pint_Documento, Pint_Cita, Pint_CitaEstado, Pint_Estado, Pvchr_Usuario, Pint_VentaTipo, Pint_IdAlmacen) {
-        $.ajax({
+        
+            $.ajax({
             type: "POST",
             url: "modulos/atencion.php",
             async: false,
@@ -1394,23 +1369,21 @@ session_start();
                 Pint_Estado: Pint_Estado,
                 Pvchr_Usuario: Pvchr_Usuario,
                 Pint_VentaTipo: Pint_VentaTipo,
-                Pint_IdAlmacen :Pint_IdAlmacen
+                Pint_IdAlmacen: Pint_IdAlmacen
             }),
             beforeSend: function() {
                 //alert('ok');
             },
             success: function(data) {
                 var idtmp;
-                console.log(data);
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
                     idtmp = json[i].CodigoVentaTmp;
-                    console.log(idtmp);
                 });
                 // Redireccionar
                 if (Pint_Cita == 1) {
                     $("#Resultado_Grabacion").html('');
-                    var url = "venta-nuevo.php?IdVen=" + idtmp;
+                    var url = "venta-nuevo.php?IdVen=" + idtmp + "&IdMas=" + $("#CboMascota").val() + "&Tipo=2";
                     $(location).attr('href', url);
                 } else {
                     $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
@@ -1425,11 +1398,10 @@ session_start();
                 });
             },
             complete: function() {
-                //alert('ok2');
+                Habilita_Desabilita(false, true, true);
             }
         });
     }
-
 
     // Clase Proser
     function Obtener_Atencion(act, id) {
@@ -1446,9 +1418,7 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#Txt_CodigoProducto").val();
                 $.each(json, function(i, item) {
                     $("#Txt_CodigoProducto").val(json[i].Producto_Id);
@@ -1460,8 +1430,8 @@ session_start();
         });
     }
 
- // Clase proser
- function Obtener_Precio(act, id) {
+    // Clase proser
+    function Obtener_Precio(act, id) {
         $.ajax({
             type: "POST",
             url: "modulos/proser.php",
@@ -1475,7 +1445,6 @@ session_start();
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 $("#Txt_Precio").empty();
                 $.each(json, function(i, item) {
@@ -1488,10 +1457,57 @@ session_start();
         });
     }
 
-    $(function() {
+    function Obtener_Datos_Atencion(act, id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/atencion.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: id
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                $.each(json, function(i, item) {
+                    $('#Txt_CodigoProducto').val(json[i].Atencion_IdProducto);
+                    $('#Txt_Fecha').val(json[i].Atencion_Fecha);
+                    $('#Txt_T').val(json[i].Atencion_T);
+                    $('#Txt_C').val(json[i].Atencion_FC);
+                    $('#Txt_FR').val(json[i].Atencion_FR);
+                    $('#Txt_Sintomas').val(json[i].Atencion_Sintomas);
+                    $('#Txt_Deshidrat').val(json[i].Atencion_sc_Deshidratacion);
+                    $('#Txt_Mucosa').val(json[i].Atencion_sc_Mucosas);
+                    $('#Txt_Tllc').val(json[i].Atencion_sc_TLLC);
+                    $('#Txt_Vomitos').val(json[i].Atencion_sc_Vomitos);
+                    $('#Txt_Diarrea').val(json[i].Atencion_sc_Diarreas);
+                    $('#Txt_Ganglio').val(json[i].Atencion_sc_Ganglios);
+                    $('#Txt_Peso').val(json[i].Atencion_sc_Peso);
+                    $('#Txt_Dx_Presuntivo').val(json[i].Atencion_dx_Presuntivo);
+                    $('#Txt_Dx_Definitivo').val(json[i].Atencion_dx_Definitivo);
+                    $('#Txt_Dx_Solicitado').val(json[i].Atencion_dx_Solicitado);
+                    $('#Txt_Descripcion').val(json[i].Atencion_tr_Descripcion);
+                    $('#Txt_NotasAdicionales').val(json[i].Atencion_tr_Observacion);
+                    $('#Txt_Precio').val(json[i].Atencion_tr_Precio);
+                    //$('#Txt_CodigoAtencion').val(json[i].Atencion_Id);
+                });
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
 
+
+    $(function() {
+        Habilita_Desabilita(true, false, false);
         Obtener_Atencion('MostrarProductoxCondicion', 4);
+        $("#CboEstadoAtencion").attr('disabled', true);
         Obtener_Precio('MostrarPrecio', $("#Txt_CodigoProducto").val().trim());
+        $('#Txt_Fecha').val(MostrarFechaActual());
 
         if ($_GET("IdMas") === undefined) {
             //SIN VALOR GET
@@ -1502,12 +1518,17 @@ session_start();
             $("#Txt_Dni").attr('disabled', true);
             $("#btnBuscar").attr('disabled', true);
             Obtener_NombreCliente_NombreMascota('MostrarNombrecliNombreMas', $_GET("IdMas"));
-            console.log('final' + $('#Txt_CodigoCliente').val().trim());
             $("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
+            if ($_GET("IdPro") === undefined) {
+                //SIN VALOR GET
+            } else {
+                $("#CboEstadoAtencion").attr('disabled', false);
+                IdAtencion = $_GET("IdPro");
+                Obtener_Datos_Atencion('ObtenerDatosAtencionxId', IdAtencion);
+                IdTipoProcesoGrabacion = 1;
+                $("#btnAgendar").text('Reprogramar');
+            }
         }
-        //EVALUAR
-        //Obtener_Precio('MostrarPrecio', 1);
-
     });
 </script>
 <!-- END. EVENTOS SCRIPT-->

@@ -1238,7 +1238,8 @@ include('modulos/cerrar_sesion.php');
     $(function() {
         Habilita_Desabilita(true,false,false);
         Obtener_Desparacitacion('MostrarProductoxCondicion', 3);
-        $("#CboEstadoDesparacitacion").attr('disabled', true);  
+        $("#CboEstadoDesparacitacion").attr('disabled', true);
+        $('#Txt_Fecha').val(MostrarFechaActual());      
 
         if ($_GET("IdMas") === undefined) {
             //SIN VALOR GET

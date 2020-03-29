@@ -716,6 +716,7 @@ include('modulos/cerrar_sesion.php');
                                     <div class="form-group">
                                         <label for="CboEstado">Estado baño :</label>
                                         <select id="CboEstado" name="CboEstado" class="form-control">
+                                            <option value="1" disabled="disabled">REALIZADO</option>                                         
                                             <option value="2">AGENDADO</option>
                                             <option value="3">REPROGRAMADO</option>
                                         </select>
@@ -1173,8 +1174,13 @@ include('modulos/cerrar_sesion.php');
                     Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
                     $('#CboMascota').val(json[i].Mascota_Id);
                     $('#CboProducto').val(json[i].Producto_Id);
-                    $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
+                    $('#Txt_Precio').val(json[i].Producto_PrecioVenta);                    
                     $('#CboEstado').val(json[i].Banio_Cita);
+                    if (json[i].Banio_Cita == 1){
+                        $("#CboEstado").attr('disabled', true);
+                    }else{
+                        $("#CboEstado").attr('disabled', false);
+                    }                    
                     $('#Txt_Fecha').val(json[i].Banio_Fecha);
                     $('#Txt_Notas').val(json[i].Banio_Observacion);
                     $('#Txt_CodigoBanio').val(json[i].Banio_Id);

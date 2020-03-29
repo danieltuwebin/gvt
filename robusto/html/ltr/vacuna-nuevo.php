@@ -741,7 +741,7 @@ include('modulos/cerrar_sesion.php');
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+                                                                                              
                                                 <div class="form-group">
                                                     <label for="Txt_Notas">Notas</label>
                                                     <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales"></textarea>
@@ -1215,6 +1215,7 @@ include('modulos/cerrar_sesion.php');
         Habilita_Desabilita(true,false,false);
         Obtener_Vacunas('MostrarProductoxCondicion', 1);
         $("#CboEstadoVacuna").attr('disabled', true);
+        $('#Txt_Fecha').val(MostrarFechaActual());
 
         if ($_GET("IdMas") === undefined) {
             //SIN VALOR GET

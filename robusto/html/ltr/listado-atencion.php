@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerrar_sesion.php');
 require('lib_externos/fpdf182/fpdf.php');
 ?>
 <!DOCTYPE html>
@@ -60,9 +61,7 @@ require('lib_externos/fpdf182/fpdf.php');
         <div class="main-menu-header"></div>
         <!-- / main menu header-->
         <?php
-
         $CondicionMnu = $_SESSION['UserPerfil'];
-
         if ($CondicionMnu == 1) { /* PERFIL ADMIN (1) */
         ?>
             <!-- main menu content-->
@@ -626,15 +625,16 @@ require('lib_externos/fpdf182/fpdf.php');
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel17">Edición Atención</h4>
+                    <h4 class="modal-title" id="myModalLabel17"><label id="LblIdAtencion">Edición Atención</label></h4>
                 </div>
                 <div class="modal-body">
                     <form class="form" id="FormularioAtencion">
-                        <!--<input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
-                                        <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">    -->
+                        <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
+                        <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">
+                        <input type="hidden" id="Txt_CodigoProducto" name="Txt_CodigoProducto">
+                        <input type="hidden" id="Txt_CodigoAtencion" name="Txt_CodigoAtencion">
                         <div class="form-body">
                             <h4 class="form-section">Propietario</h4>
-
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="row">
@@ -672,10 +672,6 @@ require('lib_externos/fpdf182/fpdf.php');
                                             <div class="form-group">
                                                 <h5>
                                                     <label for="Txt_Nombre_Dni">Nombre propietario :&nbsp;&nbsp; </label><label id="Txt_Nombre_Dni" class="primary"></label>
-                                                    <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
-                                                    <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">
-                                                    <input type="hidden" id="Txt_CodigoProducto" name="Txt_CodigoProducto">
-                                                    <input type="hidden" id="Txt_CodigoAtencion" name="Txt_CodigoAtencion">
                                                 </h5>
                                             </div>
                                         </div>
@@ -691,16 +687,25 @@ require('lib_externos/fpdf182/fpdf.php');
                                                 </label>
                                             </div>
                                         </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="CboEstadoAtencion">Estado:</label>
+                                                <select id="CboEstadoAtencion" name="CboEstadoAtencion" class="form-control">
+                                                    <option value="1" disabled="disabled">REALIZADO</option>'                                                      
+                                                    <option value="2">AGENDADO</option>
+                                                    <option value="3">REPROGRAMADO</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-
                             <br>
 
                             <h4 class="form-section">signos Clinicos</h4>
-
                             <div class="row">
-
                                 <div class="col-md-1">
                                     <div class="form-group">
                                         <label for="Txt_Fecha">Fecha.</label>
@@ -1021,8 +1026,9 @@ require('lib_externos/fpdf182/fpdf.php');
                             </div>
                             <br>
 
-                            <div class="card-block">
-                                <div class="card-body collapse in">
+                            <div class="card-body collapse in">
+                                <div class="card-block">
+
                                     <div class="table-responsive">
                                         <!-- <table id="TblAtencion" class="table table-bordered table-striped"> -->
                                         <table id="TblAtencion" class="table table-striped table-bordered" style="width:100%">
@@ -1031,7 +1037,7 @@ require('lib_externos/fpdf182/fpdf.php');
                                                     <th>ID</th>
                                                     <th>DNI mascota</th>
                                                     <th>Nombre</th>
-                                                    <th>Fecha</th>
+                                                    <th>Fecha_Atención</th>
                                                     <th>Atención</th>
                                                     <th>Estado Atención</th>
                                                     <th>Observación</th>
@@ -1171,6 +1177,19 @@ require('lib_externos/fpdf182/fpdf.php');
         ?>
     }
 
+    function Obtener_Codigo_Formateado(id) {
+        if (id.length == 1) {
+            var Cod = 'A000' + id;
+        } else if (id.length == 2) {
+            var Cod = 'A00' + id;
+        } else if (id.length == 3) {
+            var Cod = 'A0' + id;
+        } else {
+            var Cod = 'A' + id;
+        }
+        return Cod;
+    }
+
     //http://jquery-manual.blogspot.com/2013/12/como-obtener-parametros-get-con.html?mensaje=ok
     function $_GET(param) {
         /* Obtener la url completa */
@@ -1277,6 +1296,9 @@ require('lib_externos/fpdf182/fpdf.php');
                     extend: 'excelHtml5',
                     text: '<i class="icon-file-excel-o"></i> ',
                     titleAttr: 'Exportar a Excel',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6]
+                    },
                     //className: 'btn btn-success'
                     "oSelectorOpts": {
                         filter: 'applied',
@@ -1321,10 +1343,10 @@ require('lib_externos/fpdf182/fpdf.php');
 
     $('#TblAtencion').on('click', '.editar', function() {
         var id = $(this).val();
-        console.log($(this).val());
         if (Condicion == 1) {
             //Obtener_Vacunas('MostrarProductoxCondicion', 1);
             Obtener_Datos_Atencion('ObtenerDatosAtencionxId', id);
+            $("#LblIdAtencion").text("Edición Atención : " + Obtener_Codigo_Formateado(id));
             $("#Modal_ListadoAtencion").modal("show");
         } else {
             alert('El perfil de usuario no esta habilitado para opción');
@@ -1346,9 +1368,7 @@ require('lib_externos/fpdf182/fpdf.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboVacuna").empty();
                 $.each(json, function(i, item) {
                     $("#CboVacuna").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
@@ -1374,9 +1394,7 @@ require('lib_externos/fpdf182/fpdf.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $.each(json, function(i, item) {
 
                     var DniMascota = json[i].Mascota_Id;
@@ -1396,7 +1414,13 @@ require('lib_externos/fpdf182/fpdf.php');
                     $('#Txt_CodigoMascota').val(json[i].Mascota_Id); // Mascota_Id (oculto)
                     Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
                     $('#CboMascota').val(json[i].Mascota_Id);
-
+                    $('#CboEstadoAtencion').val(json[i].Atencion_Cita);
+                    if (json[i].Atencion_Cita == 1){
+                        $("#CboEstadoAtencion").attr('disabled', true);
+                    }else{
+                        $("#CboEstadoAtencion").attr('disabled', false);
+                    }
+                    
                     $('#Txt_Fecha').val(json[i].Atencion_Fecha);
                     $('#Txt_T').val(json[i].Atencion_T);
                     $('#Txt_C').val(json[i].Atencion_FC);
@@ -1441,9 +1465,7 @@ require('lib_externos/fpdf182/fpdf.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboMascota").empty();
                 $.each(json, function(i, item) {
                     $("#CboMascota").append('<option value="' + json[i].Mascota_Id + '">' + json[i].Mascota_Nombre + '</option>');
@@ -1455,11 +1477,6 @@ require('lib_externos/fpdf182/fpdf.php');
         });
     }
 
-
-    $('#FormularioVacuna input').on('change', function() {
-        ValorRb = $('input[name=Dni]:checked', '#FormularioVacuna').val();
-        console.log(ValorRb);
-    });
 
     $('#btnBuscar').click(function() {
         Obtener_Nombre_x_Dni_Mascota_Cliente('ObtenerNombrexIdClienteMascota', ValorRb, $('#Txt_Dni').val().toUpperCase().trim())
@@ -1484,10 +1501,8 @@ require('lib_externos/fpdf182/fpdf.php');
             }),
             beforeSend: function() {
                 //alert('ok');
-                console.log(act + ':' + condicion + ':' + id);
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 if (json.length != 0) {
                     if (condicion == 1) {
@@ -1539,7 +1554,6 @@ require('lib_externos/fpdf182/fpdf.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 $("#Txt_Precio").empty();
                 $.each(json, function(i, item) {
@@ -1637,20 +1651,10 @@ require('lib_externos/fpdf182/fpdf.php');
         }
     }
 
-
-
-
-
     function Editar_Atencion(act, IdAtencion, Fecha, IdProducto, IdMascota, Sintomas, Atencion_T, Atencion_FC, Atencion_FR,
         Atencion_sc_Des, Atencion_sc_Muc, Atencion_sc_TLLC, Atencion_sc_Vom, Atencion_sc_Dia, Atencion_sc_Gan, Atencion_sc_Pes,
         Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des, Atencion_tr_Obs, Atencion_tr_Pre, Documento,
         Cita, CitaEstado, Estado, Usuario) {
-        console.log('--------------');
-        console.log(act, IdAtencion, Fecha, IdProducto, IdMascota, Sintomas, Atencion_T, Atencion_FC, Atencion_FR,
-            Atencion_sc_Des, Atencion_sc_Muc, Atencion_sc_TLLC, Atencion_sc_Vom, Atencion_sc_Dia, Atencion_sc_Gan, Atencion_sc_Pes,
-            Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des, Atencion_tr_Obs, Atencion_tr_Pre, Documento,
-            Cita, CitaEstado, Estado, Usuario);
-        console.log(IdAtencion + ' cod');
         $.ajax({
             type: "POST",
             url: "modulos/atencion.php",
@@ -1689,7 +1693,6 @@ require('lib_externos/fpdf182/fpdf.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 if (data == 1) {
                     $("#Modal_ListadoAtencion").modal("hide");
                     listar();
@@ -1708,7 +1711,7 @@ require('lib_externos/fpdf182/fpdf.php');
     $('#TblAtencion').on('click', '.eliminar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
-            var bool = confirm("Esta seguro de eliminar el registro ?");
+            var bool = confirm("Esta seguro de eliminar el registro " + Obtener_Codigo_Formateado(id) + " ?");
             if (bool) {
                 Eliminar_Atencion('EliminarAtencion', id)
                 alert('La atención seleccionado fue eliminada correctamente');
@@ -1734,7 +1737,6 @@ require('lib_externos/fpdf182/fpdf.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 if (data == 1) {
                     listar();
                 } else {
@@ -1747,64 +1749,33 @@ require('lib_externos/fpdf182/fpdf.php');
         });
     }
 
-
     $('#TblAtencion').on('click', '.ver', function() {
         var id = $(this).val();
-        console.log($(this).val());
         GenerarPDF();
-
         window.open('atencion_visor.php?Cond=' + id, '_blank');
-        //location.href = 'atencion_visor.php';
-        //window.open('atencion_visor.php?Cond=1', '_blank')
-        //window.open('atencion_visor.php?rz=15', '_blank')
-        /*
-                href="javascript:window.open('facturapago.php?rz=25'
-                &user=<?php echo $usuario; ?>
-                &id=<?php echo $identifier; ?>');" class="btn btn-danger">Exportar Factura a PDF</a></td>
-        */
-
-        /*
-        if (Condicion == 1) {
-            //Obtener_Vacunas('MostrarProductoxCondicion', 1);
-            Obtener_Datos_Atencion('ObtenerDatosAtencionxId', id);
-            $("#Modal_ListadoAtencion").modal("show");
-        } else {
-            alert('El perfil de usuario no esta habilitado para opción');
-        }
-        */
-
     });
 
-
     function GenerarPDF() {
-        console.log('entre');
         $.ajax({
             type: 'POST',
             url: 'atencion_visor.php',
             data: {
                 "saludo": "hola"
             }, //aquí le pasaré datos de controles de HTML
-
             success: function(result) {
                 //$('#resulta').html(result);
-                console.log(result);
             }
         });
     }
 
     $(function() {
-
         Obtener_Nombre();
         Obtener_Condicion();
-
         if ($_GET("IdCli") === undefined) {
-            console.log('sin valor');
         } else {
             IdMascotaExterno = $_GET("IdCli");
-            console.log(IdMascotaExterno);
         }
         listar();
-
     });
 </script>
 <!-- END. EVENTOS SCRIPT-->

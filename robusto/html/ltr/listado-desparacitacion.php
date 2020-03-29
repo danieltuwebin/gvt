@@ -715,6 +715,7 @@ include('modulos/cerrar_sesion.php');
                                     <div class="form-group">
                                         <label for="CboEstado">Estado Desparacitación :</label>
                                         <select id="CboEstado" name="CboEstado" class="form-control">
+                                            <option value="1" disabled="disabled">REALIZADO</option>                                                 
                                             <option value="2">AGENDADO</option>
                                             <option value="3">REPROGRAMADO</option>
                                         </select>
@@ -1173,6 +1174,11 @@ include('modulos/cerrar_sesion.php');
                     $('#CboProducto').val(json[i].Producto_Id);
                     $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
                     $('#CboEstado').val(json[i].Desparacitacion_Cita);
+                    if (json[i].Desparacitacion_Cita == 1){
+                        $("#CboEstado").attr('disabled', true);
+                    }else{
+                        $("#CboEstado").attr('disabled', false);
+                    }                     
                     $('#Txt_Fecha').val(json[i].Desparacitacion_Fecha);
                     $('#Txt_Notas').val(json[i].Desparacitacion_Observacion );
                     $('#Txt_CodigoDesparacitacion').val(json[i].Desparacitacion_Id);

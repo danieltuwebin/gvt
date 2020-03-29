@@ -1237,7 +1237,8 @@ include('modulos/cerrar_sesion.php');
     $(function() {
         Habilita_Desabilita(true,false,false);
         Obtener_Banio('MostrarProductoxCondicion', 2);
-        $("#CboEstadoBanio").attr('disabled', true);        
+        $("#CboEstadoBanio").attr('disabled', true);
+        $('#Txt_Fecha').val(MostrarFechaActual());        
 
         if ($_GET("IdMas") === undefined) {
             //SIN VALOR GET

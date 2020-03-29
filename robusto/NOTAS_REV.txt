@@ -28,3 +28,5 @@ Revisados
 20.configuracion-tipoproducto.php: OK
 21.configuracion-categoria.php: OK
 22.configuracion-unidadmedida.php: OK
+23.atencion-nuevo.php       : OK
+24.listado-atencion.php     : OK

@@ -716,6 +716,7 @@ include('modulos/cerrar_sesion.php');
                                     <div class="form-group">
                                         <label for="CboEstadoVacuna">Estado vacuna :</label>
                                         <select id="CboEstadoVacuna" name="CboEstadoVacuna" class="form-control">
+                                            <option value="1" disabled="disabled">REALIZADO</option>'                                            
                                             <option value="2">AGENDADO</option>
                                             <option value="3">REPROGRAMADO</option>
                                         </select>
@@ -1168,7 +1169,12 @@ include('modulos/cerrar_sesion.php');
                     $('#CboMascota').val(json[i].Mascota_Id);
                     $('#CboVacuna').val(json[i].Producto_Id);
                     $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
-                    $('#CboEstadoVacuna').val(json[i].Vacunas_Cita);
+                    $('#CboEstadoVacuna').val(json[i].Vacunas_Cita);                    
+                    if (json[i].Vacunas_Cita == 1){
+                        $("#CboEstadoVacuna").attr('disabled', true);
+                    }else{
+                        $("#CboEstadoVacuna").attr('disabled', false);
+                    }
                     $('#Txt_Fecha').val(json[i].Vacunas_Fecha);
                     $('#Txt_Notas').val(json[i].Vacunas_Observacion);
                     $('#Txt_CodigoVacuna').val(json[i].Vacunas_Id);
