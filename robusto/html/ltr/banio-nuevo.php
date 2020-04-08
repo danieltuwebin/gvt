@@ -833,7 +833,8 @@ include('modulos/cerrar_sesion.php');
     var IdMascota = '';
     var ValorRb = 1;
     var IdTipoProcesoGrabacion = 0;    
-    var IdBanio = 0;    
+    var IdBanio = 0;
+    var IdAgendado = 0;      
     /* BEGIN FUNCIONES GENERALES */
 
     /* END FUNCIONES GENERALES */
@@ -1088,6 +1089,7 @@ include('modulos/cerrar_sesion.php');
                 $('#Txt_Precio').val().toUpperCase().trim(),
                 $('#Txt_Fecha').val());
             if (Id == 1) {
+                localStorage.setItem('Observacion',$("#Txt_Notas").val());                
                 Registrar_Banio("GrabarBanio",
                     tiporegistro,
                     idbanio,
@@ -1174,7 +1176,8 @@ include('modulos/cerrar_sesion.php');
                 // Redireccionar
                 if (Cita == 1) {
                     $("#Resultado_Grabacion").html('');
-                    var url = "venta-nuevo.php?IdVen=" + idtmp + "&IdMas=" + $("#CboMascota").val() + "&Tipo=2";
+                    var url = "venta-nuevo.php?IdVen=" + idtmp + "&IdMas=" + $("#CboMascota").val() + "&Tipo=2"+ "&Pro=" + IdBanio + "&A=" + IdAgendado;
+                    //var url = "venta-nuevo.php?IdVen=" + idtmp +"&IdMas=" + $("#CboMascota").val() + "&Tipo=1" + "&Pro=" + IdVacuna + "&A=" + IdAgendado;                    
                     $(location).attr('href', url);
                 } else {
                     if (IdTipoProcesoGrabacion == 1) {
@@ -1225,6 +1228,7 @@ include('modulos/cerrar_sesion.php');
                     $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
                     $('#Txt_Fecha').val(json[i].Banio_Fecha);
                     $('#Txt_Notas').val(json[i].Banio_Observacion);
+                    localStorage.setItem('Observacion',json[i].Banio_Observacion);                    
                 });
             },
             complete: function() {
@@ -1255,6 +1259,7 @@ include('modulos/cerrar_sesion.php');
             } else {
                 $("#CboEstadoBanio").attr('disabled', false);
                 IdBanio = $_GET("IdPro");
+                IdAgendado = 1; // 1 : siginifica si - no agendado (valor por defecto)                
                 Obtener_Datos_Banio('ObtenerDatosBaniosxId', IdBanio);
                 IdTipoProcesoGrabacion = 1;
                 $("#btnAgendar").text('Reprogramar');

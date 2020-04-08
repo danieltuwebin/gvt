@@ -1169,7 +1169,8 @@ include('modulos/cerrar_sesion.php');
                     $('#CboMascota').val(json[i].Mascota_Id);
                     $('#CboVacuna').val(json[i].Producto_Id);
                     $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
-                    $('#CboEstadoVacuna').val(json[i].Vacunas_Cita);                    
+                    $('#CboEstadoVacuna').val(json[i].Vacunas_Cita);   
+                    //console.log('estado : ' + json[i].Vacunas_Cita);               
                     if (json[i].Vacunas_Cita == 1){
                         $("#CboEstadoVacuna").attr('disabled', true);
                     }else{

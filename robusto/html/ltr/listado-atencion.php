@@ -717,21 +717,20 @@ require('lib_externos/fpdf182/fpdf.php');
                                     </div>
                                 </div>
 
-                                <div class="col-md-1">
+<!--                                 <div class="col-md-1">
                                     <div class="form-group">
                                         <label for="Txt_Fecha">Estado.</label>
                                     </div>
-                                </div>
+                                </div> -->
 
-                                <div class="col-md-6">
+<!--                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <label class="display-inline" for="CboEstado">
-                                            <!-- <label class="display-inline-block" for="CboVacuna">S : -->
                                             <select id="CboEstado" name="CboEstado" class="form-control">
                                             </select>
                                         </label>
                                     </div>
-                                </div>
+                                </div> -->
 
                             </div>
 

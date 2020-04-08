@@ -46,13 +46,15 @@ if ($_POST['action'] == "GrabarAtencion") {
     $Pint_Estado = $_POST['Pint_Estado'];
     $Pvchr_Usuario = $_POST['Pvchr_Usuario'];
     $Pint_VentaTipo = $_POST['Pint_VentaTipo'];
-    $Pint_IdAlmacen = $_POST['Pint_IdAlmacen'];    
+    $Pint_IdAlmacen = $_POST['Pint_IdAlmacen'];
+    $Pint_IdVBDA = $_POST['Pint_IdVBDA'];       
 
     $myArray = array();
-    $sql = "CALL SP_Registrar_TblAtencion('$IdTipoRegistro','$IdAtencion','$Fecha','$IdProducto','$IdMascota','$Sintomas','$Atencion_T','$Atencion_FC','$Atencion_FR',
-    '$Atencion_sc_Des','$Atencion_sc_Muc','$Atencion_sc_TLLC','$Atencion_sc_Vom','$Atencion_sc_Dia','$Atencion_sc_Gan','$Atencion_sc_Pes','$Atencion_dx_Pre',
-    '$Atencion_dx_Def','$Atencion_dx_Sol','$Atencion_tr_Des','$Atencion_tr_Obs','$Atencion_tr_Pre','$Pint_Documento','$Pint_Cita','$Pint_CitaEstado',
-    '$Pint_Estado','$Pvchr_Usuario','$Pint_VentaTipo','$Pint_IdAlmacen')";
+    $sql = "CALL SP_Registrar_TblAtencion('$IdTipoRegistro','$IdAtencion','$Fecha','$IdProducto','$IdMascota','$Sintomas',
+    '$Atencion_T','$Atencion_FC','$Atencion_FR','$Atencion_sc_Des','$Atencion_sc_Muc','$Atencion_sc_TLLC',
+    '$Atencion_sc_Vom','$Atencion_sc_Dia','$Atencion_sc_Gan','$Atencion_sc_Pes','$Atencion_dx_Pre', '$Atencion_dx_Def',
+    '$Atencion_dx_Sol','$Atencion_tr_Des','$Atencion_tr_Obs','$Atencion_tr_Pre','$Pint_Documento','$Pint_Cita',
+    '$Pint_CitaEstado', '$Pint_Estado','$Pvchr_Usuario','$Pint_VentaTipo','$Pint_IdAlmacen','$Pint_IdVBDA')";
     $oCado = new Cado();
     $rst = $oCado->ejecute_sql($sql);
     while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {

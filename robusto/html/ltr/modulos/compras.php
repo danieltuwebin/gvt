@@ -135,14 +135,14 @@ if ($_POST['action'] == "EditarCompra") {
 if ($_POST['action'] == "EliminarCompra_tblCompra") {
 
     $Id = $_POST['Id'];
-    $sql = "CALL SP_Eliminar_TblCompra('$Id')";
+    $usuario = $_POST['usuario'];
+    $sql = "CALL SP_Actualizar_TblAlmacen_Por_EliminacionCompra('$Id','$usuario')";
+    //$sql = "CALL SP_Eliminar_TblCompra('$usuario')";
     $oCado = new Cado();
     $rst = $oCado->ejecute_sql($sql);
-
-    //$dt = mysqli_fetch_array($rst);
-    //$Codigo = $dt['Codigo'];
-
-    echo $rst;
+    $dt = mysqli_fetch_array($rst);
+    $Codigo = $dt['CODIGO'];
+    echo $Codigo;
 }
 
 

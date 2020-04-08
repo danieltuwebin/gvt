@@ -14,11 +14,11 @@ Revisados
 10.listado-proser.php       : OK
 11.banio-nuevo.php          : OK
     Producto_IdTipoPro = 2 AND Producto_IdTipoCat = 2;
-    Cuando se agenda un vacuna no se graba el precio solo inserta registro (evita sumas)    
+    Cuando se agenda un baño no se graba el precio solo inserta registro (evita sumas)    
 12.listado-banio.php        : OK
 13.desparacitacion-nuevo.php: OK
     Producto_IdTipoPro = 3 AND Producto_IdTipoCat = 3;
-    Cuando se agenda un vacuna no se graba el precio solo inserta registro (evita sumas)   
+    Cuando se agenda una desparacitacion no se graba el precio solo inserta registro (evita sumas)   
 14.listado-desparacitacion.php:    OK
 15.compra-nuevo.php         : OK
 16.listado-compra.php       : OK
@@ -29,4 +29,16 @@ Revisados
 21.configuracion-categoria.php: OK
 22.configuracion-unidadmedida.php: OK
 23.atencion-nuevo.php       : OK
+    Producto_IdTipoPro = 3 AND Producto_IdTipoCat = 3;
+    Cuando se agenda una atencion SI SUMA
 24.listado-atencion.php     : OK
+
+
+
+
+**********
+AGREGAR NOTIFICACIONES CORREO - SELECCIONADO - RANGO DE DIAS MAX 50
+AGREGAR MOVIMIENTOS PRODUCTOS - PRODUCTO-SEDE
+MOVER PRODUCTOS
+
+**********

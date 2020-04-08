@@ -1358,7 +1358,7 @@ include('modulos/cerrar_sesion.php');
         limpiaForm($("#FormularioCompra"));
         ActivarBotones();
         $("#Resultado_Grabacion").hide();
-        Obtener_Especie('MostrarEspecie');
+        //Obtener_Especie('MostrarEspecie');
     }
 
     $("#btnLimpiar").click(function() {

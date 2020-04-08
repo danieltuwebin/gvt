@@ -1158,7 +1158,7 @@ include('modulos/cerrar_sesion.php');
         if (Condicion == 1) {
             var bool = confirm("Esta seguro de eliminar el registro " + Obtener_Codigo_Formateado(id) + " ?");
             if (bool) {
-                Eliminar_Compra('EliminarCompra_tblCompra', id)
+                Eliminar_Compra('EliminarCompra_tblCompra', id,'<?php echo $_SESSION['User']; ?>')
                 alert('La compra seleccionado fue eliminado correctamente');
             } else {
                 //alert("cancelo la solicitud");
@@ -1168,7 +1168,7 @@ include('modulos/cerrar_sesion.php');
         }
     });
 
-    function Eliminar_Compra(act, codigo) {
+    function Eliminar_Compra(act, codigo, usuario) {
         $.ajax({
             type: "POST",
             url: "modulos/compras.php",
@@ -1176,14 +1176,16 @@ include('modulos/cerrar_sesion.php');
             dataType: "html",
             data: ({
                 action: act,
-                Id: codigo
+                Id: codigo,
+                usuario: usuario
             }),
             beforeSend: function() {},
             success: function(data) {
+                console.log(data);
                 if (data <= 1) {
                     listar();
                 } else {
-                    alert('Lo sentimos ocurrio un error en el proceso de edición');
+                    alert('Lo sentimos ocurrio un error en el proceso de edición, ');
                 }
             },
             complete: function() {}

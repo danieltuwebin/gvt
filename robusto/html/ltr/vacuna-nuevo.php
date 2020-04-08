@@ -811,6 +811,7 @@ include('modulos/cerrar_sesion.php');
     var ValorRb = 1;
     var IdTipoProcesoGrabacion = 0;
     var IdVacuna = 0;
+    var IdAgendado = 0;
 
     /* BEGIN FUNCIONES GENERALES */
 
@@ -1067,6 +1068,7 @@ include('modulos/cerrar_sesion.php');
                 $('#Txt_Precio').val().toUpperCase().trim(),
                 $('#Txt_Fecha').val());
             if (Id == 1) {
+                localStorage.setItem('Observacion',$("#Txt_Notas").val());
                 RegistrarVacuna("GrabarVacuna",
                     tiporegistro,
                     idvacuna,
@@ -1152,7 +1154,7 @@ include('modulos/cerrar_sesion.php');
                 // Redireccionar
                 if (Cita == 1) {
                     $("#Resultado_Grabacion").html('');
-                    var url = "venta-nuevo.php?IdVen=" + idtmp +"&IdMas=" + $("#CboMascota").val() + "&Tipo=2";
+                    var url = "venta-nuevo.php?IdVen=" + idtmp +"&IdMas=" + $("#CboMascota").val() + "&Tipo=1" + "&Pro=" + IdVacuna + "&A=" + IdAgendado;
                     $(location).attr('href', url);
                 } else {
                     if (IdTipoProcesoGrabacion == 1){
@@ -1202,11 +1204,14 @@ include('modulos/cerrar_sesion.php');
                     $("#CboVacuna").attr('disabled', true);
                     $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
                     $('#Txt_Fecha').val(json[i].Vacunas_Fecha);
-                    $('#Txt_Notas').val(json[i].Vacunas_Observacion);
+                    $('#Txt_Notas').val(json[i].Vacunas_Observacion);                    
+                    localStorage.setItem('Observacion',json[i].Vacunas_Observacion);
                 });
             },
             complete: function() {
-                //alert('ok2');
+                //alert('ok2');                
+                //localStorage.setItem('Nombre', 'Jose Luis Ccahuay');
+
             }
         });
     }
@@ -1232,6 +1237,7 @@ include('modulos/cerrar_sesion.php');
             } else {
                 $("#CboEstadoVacuna").attr('disabled', false);
                 IdVacuna = $_GET("IdPro");
+                IdAgendado = 1; // 1 : siginifica si - no agendado (valor por defecto)
                 Obtener_Datos_Vacuna('ObtenerDatosVacunasxId', IdVacuna);
                 IdTipoProcesoGrabacion = 1;
                 $("#btnAgendar").text('Reprogramar');

@@ -835,7 +835,8 @@ include('modulos/cerrar_sesion.php');
     var IdMascota = '';
     var ValorRb = 1;
     var IdTipoProcesoGrabacion = 0;
-    var IdBanio = 0;
+    var IdDesparacitacion = 0;
+    var IdAgendado = 0;
     /* BEGIN FUNCIONES GENERALES */
 
     /* END FUNCIONES GENERALES */
@@ -1055,7 +1056,7 @@ include('modulos/cerrar_sesion.php');
             ProcesoGrabacion(1, 3000000, 2)
         } else {
             if ($("#CboEstadoDesparacitacion").val() == 3) {
-                ProcesoGrabacion(2, IdBanio, 3);
+                ProcesoGrabacion(2, IdDesparacitacion, 3);
             } else {
                 alert('Debe cambiar el estado del baño a Reprogramado');
                 $("#CboEstadoDesparacitacion").focus();
@@ -1070,7 +1071,7 @@ include('modulos/cerrar_sesion.php');
             ProcesoGrabacion(1, 3000000, 1)
         } else {
             if ($("#CboEstadoDesparacitacion").val() == 1) {
-                ProcesoGrabacion(2, IdBanio, 1);
+                ProcesoGrabacion(2, IdDesparacitacion, 1);
             } else {
                 alert('Debe cambiar el estado del baño a Realizado');
                 $("#CboEstadoDesparacitacion").focus();
@@ -1091,6 +1092,7 @@ include('modulos/cerrar_sesion.php');
                 $('#Txt_Precio').val().toUpperCase().trim(),
                 $('#Txt_Fecha').val());
             if (Id == 1) {
+                localStorage.setItem('Observacion',$("#Txt_Notas").val());                
                 Registrar_Desparacitacion("GrabarDesparacitacion",
                     tiporegistro,
                     iddesparacitacion,
@@ -1176,7 +1178,8 @@ include('modulos/cerrar_sesion.php');
                 // Redireccionar
                 if (Cita == 1) {
                     $("#Resultado_Grabacion").html('');
-                    var url = "venta-nuevo.php?IdVen=" + idtmp + "&IdMas=" + $("#CboMascota").val() + "&Tipo=2";                    
+                    var url = "venta-nuevo.php?IdVen=" + idtmp + "&IdMas=" + $("#CboMascota").val() + "&Tipo=3";
+                    var url = "venta-nuevo.php?IdVen=" + idtmp +"&IdMas=" + $("#CboMascota").val() + "&Tipo=3" + "&Pro=" + IdDesparacitacion + "&A=" + IdAgendado;                                      
                     $(location).attr('href', url);
                 } else {
                     if (IdTipoProcesoGrabacion == 1) {
@@ -1227,6 +1230,7 @@ include('modulos/cerrar_sesion.php');
                     $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
                     $('#Txt_Fecha').val(json[i].Desparacitacion_Fecha);
                     $('#Txt_Notas').val(json[i].Desparacitacion_Observacion);
+                    localStorage.setItem('Observacion',json[i].Desparacitacion_Observacion);                    
                 });
             },
             complete: function() {
@@ -1255,8 +1259,9 @@ include('modulos/cerrar_sesion.php');
                 //SIN VALOR GET
             } else {
                 $("#CboEstadoDesparacitacion").attr('disabled', false);
-                IdBanio = $_GET("IdPro");
-                Obtener_Datos_Desparacitacion('ObtenerDatosDesparacitacionxId', IdBanio);
+                IdDesparacitacion = $_GET("IdPro");
+                IdAgendado = 1; // 1 : siginifica si - no agendado (valor por defecto)                
+                Obtener_Datos_Desparacitacion('ObtenerDatosDesparacitacionxId', IdDesparacitacion);
                 IdTipoProcesoGrabacion = 1;
                 $("#btnAgendar").text('Reprogramar');
             }                       

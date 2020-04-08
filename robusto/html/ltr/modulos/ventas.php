@@ -124,34 +124,86 @@ if ($_POST['action'] == "ObtenerRegistrosTblventatemporal") {
 
 
 
-if ($_POST['action'] == "ProcesoVenta") {
+if ($_POST['action'] == "GrabarVentaTmp") {
    
+    $IdVenta = $_POST['IdVenta'];
     $IdSede = $_POST['IdSede'];
     $IdProducto = $_POST['IdProducto'];
     $Cantidad = $_POST['Cantidad'];
-    $Kardex = $_POST['Kardex'];
-    $Fecha = $_POST['Fecha'];
-    $TipoVenta = $_POST['TipoVenta'];
-    $TipoPago = $_POST['TipoPago'];
-    $IdMascota = $_POST['IdMascota'];
     $Precio = $_POST['Precio'];
     $Descuento = $_POST['Descuento'];
     $PrecioTotal = $_POST['PrecioTotal'];
-    $Observacion = $_POST['Observacion'];
-    $Estado = $_POST['Estado'];
     $Usuario = $_POST['Usuario'];
-    $Cita = $_POST['Cita'];
-    $CitaEstado = $_POST['CitaEstado'];
                                         
     $myArray = array();
-    $sql = "CALL SP_ProcesoVenta('$IdSede','$IdProducto','$Cantidad','$Kardex','$Fecha',
-    '$TipoVenta','$TipoPago'  ,'$IdMascota','$Precio','$Descuento','$PrecioTotal','$Observacion','$Estado','$Usuario','$Cita','$CitaEstado')";
+    $sql = "CALL SP_ProcesoVenta_Tmp('$IdVenta','$IdSede','$IdProducto','$Cantidad','$Precio',
+    '$Descuento','$PrecioTotal' ,'$Usuario')";
     $oCado = new Cado();
-/*     $rst = $oCado->ejecute_sql($sql);
+    $rst = $oCado->ejecute_sql($sql);
     while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
         $myArray[] = $row;
     }
-    echo json_encode($myArray); */
+    echo json_encode($myArray);
+}
+
+
+if ($_POST['action'] == "EliminarVenta") {
+
+    $Id = $_POST['Id'];
+    $sql = "CALL SP_Eliminar_TblVentaDetalle_tmp('$Id')";
+    $oCado = new Cado();
+    $rst = $oCado->ejecute_sql($sql);
+
+    //$dt = mysqli_fetch_array($rst);
+    //$Codigo = $dt['Codigo'];
+
+    echo $rst;
+}
+
+
+if ($_POST['action'] == "GrabarVenta") {
+   
+    $idVentatmp = $_POST['idVentatmp'];
+    $idVBDA = $_POST['idVBDA'];
+    $idAgendado = $_POST['idAgendado'];
+    $idProducto = $_POST['idProducto'];
+    $idKardex = $_POST['idKardex'];
+    $fecha = $_POST['fecha'];
+    $idTipoVenta = $_POST['idTipoVenta'];
+    $idTipoPago = $_POST['idTipoPago'];
+    $idMascota = $_POST['idMascota'];
+    $idAlmacen = $_POST['idAlmacen'];
+    $observacion = $_POST['observacion'];
+    $estado = $_POST['estado'];
+    $usuario = $_POST['usuario'];          
+
+    $myArray = array();
+    $sql = "CALL SP_Registrar_TblVenta_TblVentaDetalle('$idVentatmp','$idVBDA','$idAgendado','$idProducto','$idKardex','$fecha','$idTipoVenta',
+    '$idTipoPago','$idMascota','$idAlmacen','$observacion','$estado','$usuario')";
+    $oCado = new Cado();
+    $rst = $oCado->ejecute_sql($sql);
+    while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+        $myArray[] = $row;
+    }
+    echo json_encode($myArray);
+}
+
+if ($_POST['action'] == "CancelarVenta") {
+
+    $IdVenta = $_POST['IdVenta'];
+    $IdVentatmp = $_POST['IdVentatmp'];
+    $Usuario = $_POST['Usuario'];
+    $IdVBDA = $_POST['IdVBDA'];   
+    $ProcesoVBDA = $_POST['ProcesoVBDA'];   
+    $Atencion_Agen = $_POST['Atencion_Agen'];
+    $IdTipoVenta = $_POST['IdTipoVenta'];       
+
+    $sql = "CALL SP_Eliminar_TblVenta_Total('$IdVenta','$IdVentatmp','$Usuario','$IdVBDA','$ProcesoVBDA','$Atencion_Agen','$IdTipoVenta')";
+    $oCado = new Cado();
+
+    //$dt = mysqli_fetch_array($rst);
+    //$Codigo = $dt['Codigo'];
+
     $rst = $oCado->ejecute_sql($sql);
     $dt = mysqli_fetch_array($rst);
     $Codigo = $dt['CODIGO'];
@@ -159,6 +211,66 @@ if ($_POST['action'] == "ProcesoVenta") {
 }
 
 
+if ($_POST['action'] == "MostrarVentasxId") {
+
+    $Condicion = $_POST["Condicion"];
+    $Id = $_POST["Id"];
+    
+    $myArray = array();
+    $sql = "CALL SP_Obtener_TblVenta_All_x_Condicion('$Condicion','$Id')";
+    $oCado = new Cado();
+    $rst = $oCado->ejecute_sql($sql);
+    while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+        $myArray[] = $row;
+    }
+    echo json_encode($myArray);
+}
+
+if ($_POST['action'] == "EditarVenta") {
+
+    $Codigo = $_POST['Codigo'];
+    $Fecha = $_POST['Fecha'];
+    $Sede = $_POST['Sede'];     
+    $Tipo_Pago = $_POST['Tipo_Pago'];
+    $Usuario = $_POST['Usuario'];
+
+    $sql = "CALL SP_Actualizar_TblVenta_Validando_Stock('$Codigo', '$Fecha', '$Sede', '$Tipo_Pago', '$Usuario')";
+    $oCado = new Cado();
+    $rst = $oCado->ejecute_sql($sql);
+
+    //$dt = mysqli_fetch_array($rst);
+    //$Codigo = $dt['Codigo'];
+
+    echo $rst;
+}
+
+
+
+if ($_POST['action'] == "EliminarVenta_tblVenta") {
+
+    $Id = $_POST['Id'];
+    $usuario = $_POST['usuario'];
+    $sql = "CALL SP_Actualizar_TblAlmacen_Por_EliminacionVenta('$Id','$usuario')";
+    //$sql = "CALL SP_Eliminar_TblCompra('$usuario')";
+    $oCado = new Cado();
+    $rst = $oCado->ejecute_sql($sql);
+    $dt = mysqli_fetch_array($rst);
+    $Codigo = $dt['CODIGO'];
+    echo $Codigo;
+}
+
+
+if ($_POST['action'] == "tablaResumenVentas") {
+    $Id = $_POST['Id'];
+    $myArray = array();
+    $sql = "CALL SP_Obtener_TblVentaDetalle_x_IdVenta('$Id')";
+    $oCado = new Cado();
+    $rst = $oCado->ejecute_sql($sql);
+    while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+        $myArray[] = $row;
+    }
+    echo json_encode($myArray);
+}
 
 
 
