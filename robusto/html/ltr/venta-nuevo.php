@@ -1,6 +1,7 @@
 <?php
 // start a session
 session_start();
+include('modulos/cerrar_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -11,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
+    <meta name="author" content="DCCAHUAY">
     <title>Nueva Venta - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
@@ -167,7 +168,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -355,7 +356,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -532,7 +533,7 @@ session_start();
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -649,10 +650,8 @@ session_start();
                                 </div>
                                 <div class="card-body collapse in">
                                     <div class="card-block">
-                                        <form class="form" id="FormularioRaza">
+                                        <form class="form" id="FormularioVenta">
                                             <div class="form-body">
-
-
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="row">
@@ -745,7 +744,6 @@ session_start();
                                                 </div>
 
                                                 <div class="row">
-
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="TxtProducto">Seleccione Producto :</label>
@@ -761,42 +759,32 @@ session_start();
                                                             <input type="hidden" id="CodigoProducto" name="CodigoProducto">
                                                         </div>
                                                     </div>
-
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="Txt_Nombre">Precio</label>
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="Ingrese nombre" name="Txt_Nombre" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                                                            <input type="number" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="0" name="Txt_Nombre">
                                                             <input type="hidden" id="Txt_Precio" name="Txt_Precio">
                                                         </div>
                                                     </div>
-
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="Txt_Descuento">Descuento</label>
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Descuento" class="form-control" placeholder="Ingrese nombre" name="Txt_Descuento" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                                                            <input type="number" style="text-transform:uppercase;" id="Txt_Descuento" class="form-control" placeholder="0" name="Txt_Descuento">
                                                             <input type="hidden" id="Txt_Codigo" name="Txt_Codigo">
                                                         </div>
                                                     </div>
-
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="Txt_Cantidad">Cantidad</label>
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Cantidad" class="form-control" placeholder="Ingrese nombre" name="Txt_Cantidad" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                                                            <input type="number" style="text-transform:uppercase;" id="Txt_Cantidad" class="form-control" placeholder="0" name="Txt_Cantidad">
                                                             <input type="hidden" id="Txt_Codigo" name="Txt_Codigo">
                                                         </div>
                                                     </div>
-
                                                 </div>
 
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <button id="btnLimpiar" type="button" class="btn btn-info mr-1">
-                                                                <i class="icon-reload"></i> Nuevo
-                                                            </button>
-                                                            <button id="btnActivar" type="button" class="btn btn-warning mr-1" style="display: none;">
-                                                                <i class="icon-check2"></i> Agregar
-                                                            </button>
                                                             <button id="btnAgregar" type="button" class="btn btn-success mr-1">
                                                                 <i class="icon-check2"></i> Agregar
                                                             </button>
@@ -819,11 +807,10 @@ session_start();
 
                         <div id="VistaDetalle">
                             <!-- Div para ocultar -->
-
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title" id="basic-layout-form">Listado de Razas</h4>
+                                        <h4 class="card-title" id="basic-layout-form">Listado de Productos</h4>
                                         <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                                         <div class="heading-elements">
                                             <ul class="list-inline mb-0">
@@ -839,17 +826,18 @@ session_start();
                                                 <table id="TblVenta" class="table table-striped table-bordered nowrap" style="width:100%">
                                                     <thead class="bg-info">
                                                         <tr>
-                                                            <th>Nro.</th>
-                                                            <th>Id</th>
-                                                            <th>Producto</th>
-                                                            <th>Precio</th>
-                                                            <th>Descuento</th>
-                                                            <th>Cantidad</th>
-                                                            <th>Total</th>
-                                                            <th>Administrar</th>
+                                                            <th style="width: 5%;">Nro</th>
+                                                            <th style="width: 5%;">Id</th>
+                                                            <th style="width: 50%;">Producto</th>
+                                                            <th style="width: 7%;">P.uni.</th>
+                                                            <th style="width: 7%;">Cantidad</th>                                                            
+                                                            <th style="width: 7%;">P.tot.</th>                                                            
+                                                            <th style="width: 7%;">Desc.</th>
+                                                            <th style="width: 7%;">Total</th>
+                                                            <th style="width: 5%;">&nbsp;&nbsp;X</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="tablaDetalleVenta">
+                                                    <tbody>
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
@@ -872,16 +860,12 @@ session_start();
                                                         <button id="BtnCancelarVenta" type="button" class="btn btn-danger mr-1"><i class="icon-times-circle"></i> Cancelar Venta</button>
                                                     </div>
                                                 </div>
-
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                 </section>
                 <!-- // Basic form layout section end -->
@@ -937,30 +921,19 @@ session_start();
 
 <!-- BEGIN. EVENTOS SCRIPT-->
 <script type="text/javascript">
+    var IdMascota = '';
+    var ValorRb = 1;
     var table;
-    var Id_TipoVenta;
-
-    /* BEGIN FUNCIONES GENERALES */
-    function limpiaForm(miForm) {
-        // recorremos todos los campos que tiene el formulario
-        $(':input', miForm).each(function() {
-            var type = this.type;
-            var tag = this.tagName.toLowerCase();
-            //limpiamos los valores de los campos…
-            if (type == 'text' || type == 'password' || tag == 'textarea' || type == 'hidden')
-                this.value = '';
-            // excepto de los checkboxes y radios, le quitamos el checked
-            // pero su valor no debe ser cambiado
-            else if (type == 'checkbox' || type == 'radio')
-                this.checked = false;
-            // los selects le ponesmos el indice a -
-            else if (tag == 'select')
-                this.selectedIndex = -1;
-        });
-    }
-
-    /* END FUNCIONES GENERALES */
-
+    var IdVentaTmp = 0;
+    var Id_TipoVenta=0;
+    var IdProducto_VBDA=0;
+    var IdAgendado = 0;
+    var Observacion_Final;
+    var CodigoVenta_Elminacion;
+    var CodigoVenta_Servicio;
+    var IdentifProcesoCancelacVenta=0;
+    var ProcesoVBDA_CancelarCompra=0;
+    var IdVenta_temporal=0;
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
     }
@@ -978,7 +951,6 @@ session_start();
         }
         ?>
     }
-
     $('#Salir').click(function() {
         Cerrar_Sesion("salir");
     });
@@ -1005,9 +977,35 @@ session_start();
         });
     }
 
+    function Habilita_Desabilita(boolLimpiar, boolGrabar, boolCancelar) {
+        $("#BtnNuevaVenta").attr('disabled', boolLimpiar);
+        $("#BtnGrabarVenta").attr('disabled', boolGrabar);
+        $("#BtnCancelarVenta").attr('disabled', boolCancelar);
+    }
+
+    function Habilita_Desabilita_Controles_TipoVenta(bool) {
+        $("#CboMascota").attr('disabled', bool);
+        $("#TxtProducto").attr('disabled', bool);
+        $("#Txt_Cantidad").attr('disabled', bool);
+    }
 
 
-    /* INICIO */
+    function Habilita_Desabilita_Controles(boolSede,boolTipPago,boolFec,boolPro,boolPre,boolDes,boolCan,boolTabla) {
+        $("#CboSede").attr('disabled', boolSede);
+        $("#CboTipoPago").attr('disabled', boolTipPago);        
+        $("#TxtFecha").attr('disabled', boolFec);
+
+        $("#TxtProducto").attr('disabled', boolPro);
+        $("#Txt_Precio").attr('disabled', boolPre);
+        $("#Txt_Descuento").attr('disabled', boolDes);
+        $("#Txt_Cantidad").attr('disabled', boolCan);
+        //$("#TxtCantidad").attr('disabled', bool);
+        //$("#BtnAgregar").attr('disabled', bool);
+        //$("#TblCompra").attr('disabled', bool);  
+        $("#TblVenta").find("*").attr("disabled", boolTabla);
+    }
+
+    /* INICIO FUNCIONES */
     function Obtener_Sede(act) {
         $.ajax({
             type: "POST",
@@ -1038,7 +1036,6 @@ session_start();
         console.log('%' + $("#TxtProducto").val() + '%');
         Obtener_Producto('MostrarProductoxNombre', '%' + $("#TxtProducto").val() + '%', 1);
     });
-
     $("#TxtProducto").change(function() {
         var value = $('#TxtProducto').val();
         Obtener_Precio('MostrarPrecio', $('#productos [value="' + value + '"]').data('value'));
@@ -1094,6 +1091,7 @@ session_start();
         });
     }
 
+
     // Clase Mascota
     function Obtener_NombreCliente_NombreMascota(act, id) {
         $.ajax({
@@ -1117,7 +1115,6 @@ session_start();
                     $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
                     $('#Txt_CodigoMascota').val(json[i].Mascota_Id);
                     Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
-                    console.log('impr ' + $('#Txt_CodigoCliente').val().trim());
                 });
             },
             complete: function() {
@@ -1125,8 +1122,6 @@ session_start();
             }
         });
     }
-
-
     // Clase Mascota
     function Obtener_Mascotas_x_IdCliente(act, cond, id) {
         $.ajax({
@@ -1157,71 +1152,8 @@ session_start();
         });
     }
 
-    $('#btnAgregar').click(function() {
-
-
-        $("#tablaDetalleVenta").append('<tr>' +
-            '<td class="text-truncate">' + '1' + '</td>' +
-            '<td class="text-truncate">' + $('#CodigoProducto').val() + '</td>' +
-            '<td class="text-truncate">' + $('#TxtProducto').val() + '</td>' +
-            '<td class="text-truncate">' + $('#Txt_Precio').val() + '</td>' +
-            '<td class="text-truncate">' + $('#Txt_Descuento').val() + '</td>' +
-            '<td class="text-truncate">' + $('#Txt_Cantidad').val() + '</td>' +
-            '<td class="text-truncate">' + (($('#Txt_Cantidad').val() * $('#Txt_Precio').val()) - $('#Txt_Descuento').val()) + '</td>' +
-            /* '<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>'); */
-            '<td class="text-truncate"><button id="eliminar" type="button" class="btn btn-danger" value=""><i class="icon-trash-o"></i></button></td> </tr>');
-
-
-        console.log('click en agregar')
-    });
-
-
-    $('#BtnGrabarVenta').click(function() {    
-        console.log('click en agregar...')
-        /*
-        console.log('ProcesoVenta'+ '-' + 
-            $("#CboSede").val() + '-' + 
-            $('#CodigoProducto').val()+ ',' + 
-            $('#Txt_Cantidad').val()+ ',' + 
-            '1'+ ',' + 
-            $('#TxtFecha').val()+ ',' + 
-            Id_TipoVenta+ ',' + 
-            $('#CboTipoPago').val()+ ',' + 
-            $('#CboMascota').val()+ ',' + 
-            $('#Txt_Precio').val()+ ',' + 
-            $('#Txt_Descuento').val()+ ',' + 
-            ($('#Txt_Precio').val() * $('#Txt_Cantidad').val()) - $('#Txt_Descuento').val()+ ',' + 
-            ''+ ',' + 
-            '1'+ ',' + 
-            '<?php echo $_SESSION['User']; ?>'+ ',' + 
-            '1'+ ',' + 
-            'C');
-        */
-            
-            Grabar_Venta_Total_x_Condiciones(
-            'ProcesoVenta',
-            $("#CboSede").val(),
-            $('#CodigoProducto').val(),
-            $('#Txt_Cantidad').val(),
-            '1',
-            $('#TxtFecha').val(),
-            Id_TipoVenta,
-            $('#CboTipoPago').val(),
-            $('#CboMascota').val(),
-            $('#Txt_Precio').val(),
-            $('#Txt_Descuento').val(),
-            ($('#Txt_Precio').val() * $('#Txt_Cantidad').val()) - $('#Txt_Descuento').val(),
-            '',
-            '1',
-            '<?php echo $_SESSION['User']; ?>',
-            '1',
-            'C'
-        )
-    });
-
 
     function Obtener_Registros_Tblventatemporal(act, Id) {
-
         $.ajax({
             type: "POST",
             url: "modulos/ventas.php",
@@ -1241,18 +1173,12 @@ session_start();
                 console.log(json);
                 $("#CboEspecie").empty();
                 $.each(json, function(i, item) {
-
                     $('#TxtFecha').val(json[i].VentaTemporal_Fecha);
                     $('#CodigoProducto').val(json[i].VentaTemporal_IdProducto);
                     $('#TxtProducto').val(json[i].Producto_Nombre);
                     $('#Txt_Precio').val(json[i].VentaTemporal_Precio);
                     $('#Txt_Descuento').val('0.00');
                     $('#Txt_Cantidad').val('1.00');
-
-
-
-
-                    //$("#CboEspecie").append('<option value="' + json[i].Especie_Id + '">' + json[i].Especie_Nombre + '</option>');
                 });
             },
             complete: function() {
@@ -1262,11 +1188,339 @@ session_start();
     }
 
 
-    function Grabar_Venta_Total_x_Condiciones(act, IdSede, IdProducto, Cantidad, Kardex, Fecha, TipoVenta,
-    TipoPago, IdMascota, Precio, Descuento, PrecioTotal, Observacion, Estado, Usuario, Cita, CitaEstado) {
+    //Controles independientes
+    $('#FormularioVenta input').on('change', function() {
+        ValorRb = $('input[name=Dni]:checked', '#FormularioVenta').val();
+    });
 
-        console.log(act+'-'+ IdSede+'-'+ IdProducto+'-'+ Cantidad+'-'+ Kardex+'-'+ Fecha+'-'+ TipoVenta+'-'+
-    TipoPago+'-'+ IdMascota+'-'+ Precio+'-'+ Descuento+'-'+ PrecioTotal+'-'+ Observacion+'-'+ Estado+'-'+ Usuario+'-'+ Cita+'-'+ CitaEstado);
+    $('#btnBuscar').click(function() {
+        Obtener_Nombre_x_Dni_Mascota_Cliente('ObtenerNombrexIdClienteMascota', ValorRb, $('#Txt_Dni').val().toUpperCase().trim())
+    });
+    $("#Txt_Dni").keypress(function(e) {
+        if (e.which == 13) {
+            Obtener_Nombre_x_Dni_Mascota_Cliente('ObtenerNombrexIdClienteMascota', ValorRb, $('#Txt_Dni').val().toUpperCase().trim())
+        }
+    });
+
+    // Clase Mascota
+    function Obtener_Nombre_x_Dni_Mascota_Cliente(act, condicion, id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/mascotas.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                Condicion: condicion,
+                Id: id
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                if (json.length != 0) {
+                    if (condicion == 1) {
+                        $.each(json, function(i, item) {
+                            $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
+                            $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
+                        });
+                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
+                    } else if (condicion == 2) {
+                        $.each(json, function(i, item) {
+                            $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
+                            $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
+                            $('#Txt_CodigoMascota').val(json[i].Mascota_Id);
+                        });
+                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
+                        $("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
+                    }
+                } else {
+                    $('#Txt_Nombre_Dni').html('');
+                    $('#Txt_CodigoCliente').val('');
+                    $('#Txt_CodigoMascota').val('');
+                    $("#CboMascota").empty();
+                    alert('No existen registros para mostrar, verifique DNI propietario/mascota');
+                }
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+    $('#btnAgregar').click(function() {
+        var Descuento = 0;
+        var Codigo = 0;
+        if ($('#Txt_Descuento').val() !== 0) {
+            Descuento = $('#Txt_Descuento').val();
+        }
+        if (Id_TipoVenta == 1 || Id_TipoVenta == 2 || Id_TipoVenta == 3 || Id_TipoVenta == 4) {
+            Codigo = $('#CodigoProducto').val();
+            $("#btnAgregar").hide();
+            // establecer el proceso ** Pint_ProcesoVBDA **
+            ProcesoVBDA_CancelarCompra = 1;
+            // establecer el proceso ** Pint_ProcesoVBDA **
+        } else {
+            Codigo = $('#productos [value="' + $('#TxtProducto').val() + '"]').data('value');
+        }
+
+        if ($("#Txt_Cantidad").val() > 0) {
+            if ($("#TxtProducto").val() !== '') {
+                Grabar_Venta_Tmp('GrabarVentaTmp', IdVentaTmp, $("#CboSede").val(), Codigo, $('#Txt_Cantidad').val(),
+                    ($('#Txt_Precio').val() * $('#Txt_Cantidad').val()).toFixed(2),
+                    ($('#Txt_Descuento').val() * $('#Txt_Cantidad').val()).toFixed(2),
+                    (( $('#Txt_Precio').val() - Descuento) * $('#Txt_Cantidad').val()).toFixed(2),
+                    '<?php echo $_SESSION['User']; ?>');
+
+                /* limpiar controles */
+                /*
+                Habilita_Desabilita(false, false, true);
+                $("#TxtProducto").val('');
+                $("#Txt_Precio").val('');
+                $("#Txt_Descuento").val('');
+                $("#Txt_Cantidad").val('');
+                */
+            } else {
+                alert('Debe seleccionar un producto');
+            }
+        } else {
+            alert('La cantidad de productos tiene que se mayor a 1');
+        }
+    });
+
+
+    function Grabar_Venta_Tmp(act, IdVenta, IdSede, IdProducto, Cantidad, Precio, Descuento, PrecioTotal, Usuario) {
+        console.log(act+','+ IdVenta+','+ IdSede+','+ IdProducto+','+  Cantidad+','+ Precio+','+ Descuento+','+ PrecioTotal+','+ Usuario);
+        var Estado = 0;
+        $.ajax({
+            type: "POST",
+            url: "modulos/ventas.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                IdVenta: IdVenta,
+                IdSede: IdSede,
+                IdProducto: IdProducto,
+                Cantidad: Cantidad,
+                Precio: Precio,
+                Descuento: Descuento,
+                PrecioTotal: PrecioTotal,
+                Usuario: Usuario
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                console.log('--------------');
+                var json = JSON.parse(data);
+                console.log(json);
+                $.each(json, function(i, item) {
+                    IdVentaTmp = json[i].CODIGO;
+                    console.log('cod ' + IdVentaTmp);
+                    Estado = json[i].ESTADO;
+                });
+            },
+            complete: function() {
+                if (Estado == 1 || Estado == 2) {
+                    listar();
+                    if (Id_TipoVenta == 1 || Id_TipoVenta == 2 || Id_TipoVenta == 3 || Id_TipoVenta == 4) {
+                        Habilita_Desabilita_Controles(false,false,false,true,true,true,true,false);
+                        Habilita_Desabilita(true, false, true);
+                    }else{
+                        $("#TxtProducto").val('');
+                        $("#Txt_Precio").val('');
+                        $("#Txt_Descuento").val('');
+                        $("#Txt_Cantidad").val('');
+                        Habilita_Desabilita(false, false, true);
+                    }
+                    //Habilita_Desabilita(false, false, true);
+                } else if (Estado == 0) {
+                    alert('El producto ' + $('#TxtProducto').val() + ' ya ha sido seleccionado, seleccione otro por favor')
+                } else if (Estado == 3) {
+                    alert('El producto ' + $('#TxtProducto').val() + ' seleccionado, no cuenta con stock disponible')
+                }
+            }
+        });
+    }
+
+    var listar = function() {
+        console.log(IdVentaTmp);
+        table = $('#TblVenta').DataTable({
+            "destroy": true,
+            "searching": false,
+            "paging": false,
+            "infoEmpty": false,
+            "info": false,
+            "ordering": false,
+            "ajax": {
+                "method": "POST",
+                //"url": "modulos/ventas_listado.php?Id=" + IdVentaTmp+"&Precio=" + PrecioUnitTemporal,
+                "url": "modulos/ventas_listado.php?Id=" + IdVentaTmp,                
+            },
+            "columns": [{
+                    "data": "Orden"
+                },
+                {
+                    "data": "VentaDetalle_tmp_Id"
+                },
+                {
+                    "data": "Producto_Nombre"
+                },
+                {
+                    "data": "VentaDetalle_tmp_PrecioUnit"
+                },
+                {
+                    "data": "VentaDetalle_tmp_Cantidad"
+                },                
+                {
+                    "data": "VentaDetalle_tmp_Precio"
+                },
+                {
+                    "data": "VentaDetalle_tmp_Descuento"
+                },
+                {
+                    "data": "PrecioTotal"
+                },
+                {
+                    "render": function(data, type, row) {
+                        return "<div class='form-group center-block' ><div class='btn-group btn-group-sm' role='group'>" +
+                            "<button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.VentaDetalle_tmp_Id + "'><i class='icon-trash-o'></i></button>" +
+                            "</div></div>";
+                    }
+                }
+
+            ],
+            "footerCallback": function(row, data, start, end, display) {
+                var api = this.api(),
+                    data;
+                // Remove the formatting to get integer data for summation
+                var intVal = function(i) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                        i : 0;
+                };
+                // Total over all pages
+                total = api
+                    .column(7)
+                    .data()
+                    .reduce(function(a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+                // Total over this page
+                // Update footer
+                $(api.column(7).footer()).html(
+                    'S/. ' + total.toFixed(2)
+                );
+            },
+            /* BOTONES DE DATATABLE */
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+            }
+        });
+    }
+
+    $('#TblVenta').on('click', '.eliminar', function() {
+        var id = $(this).val();
+            var bool = confirm("Esta seguro de eliminar el registro ?");
+            if (bool) {
+                //console.log('respuesta positiva ' + id);
+                Eliminar_Venta('EliminarVenta', id)
+                if (Id_TipoVenta == 1 || Id_TipoVenta == 2 || Id_TipoVenta == 3 || Id_TipoVenta == 4) {
+                    Habilita_Desabilita(true, true, true);
+                    Habilita_Desabilita_Controles(false,false,false,true,false,false,true,false);
+                        // establecer el proceso ** Pint_ProcesoVBDA **
+                        ProcesoVBDA_CancelarCompra = 0;
+                        // establecer el proceso ** Pint_ProcesoVBDA **
+                    }
+                //alert('El cliente seleccionado fue eliminado correctamente');
+            } else {
+                //alert("cancelo la solicitud");
+            }
+    });
+
+    function Eliminar_Venta(act, codigo) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/ventas.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: codigo
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                if (data == 1) {
+                    //listar();
+                    //----alert('Venta eliminada correctamente');
+                    listar();
+                } else {
+                    alert('Lo sentimos ocurrio un error en el proceso de eliminación');
+                }
+            },
+            complete: function() {
+                //alert('ok2');
+                if (Id_TipoVenta == 1 || Id_TipoVenta == 2 || Id_TipoVenta == 3 || Id_TipoVenta == 4) {
+                    $("#btnAgregar").show();
+                }                
+            }
+        });
+    }
+
+
+    $('#BtnNuevaVenta').click(function() {
+        if (Id_TipoVenta == 1 || Id_TipoVenta == 2 || Id_TipoVenta == 3 || Id_TipoVenta == 4) {
+            if (IdentifProcesoCancelacVenta == 0){
+                var URLactual = jQuery(location).attr('href');
+                console.log(URLactual);
+                $(location).attr('href', URLactual);
+            }else{
+                var url = "venta-nuevo.php";
+                $(location).attr('href', url);
+            }
+        } else {
+            var url = "venta-nuevo.php";
+            $(location).attr('href', url);
+        }
+    })
+
+
+    $('#BtnGrabarVenta').click(function() {
+        //console.log(localStorage.getItem('Observacion'));
+
+
+        console.log('click en agregar...')
+
+        if (Id_TipoVenta==4 && IdAgendado ==0){
+            IdProducto_VBDA = IdVenta_temporal;
+        }
+
+         Grabar_Venta(
+            'GrabarVenta',
+            IdVentaTmp,
+            IdProducto_VBDA,
+            IdAgendado,
+            $('#CodigoProducto').val(),
+            1,
+            $('#TxtFecha').val(),         
+            Id_TipoVenta,
+            $('#CboTipoPago').val(),
+            $('#CboMascota').val(),
+            $("#CboSede").val() ,   
+            Observacion_Final,
+            1,
+            '<?php echo $_SESSION['User']; ?>'
+        ) 
+    });
+
+
+    function Grabar_Venta(act, idVentatmp, idVBDA, idAgendado, idProducto, idKardex, fecha, idTipoVenta,
+        idTipoPago, idMascota, idAlmacen, observacion, estado, usuario) {
+            console.log(act+','+ idVentatmp+','+ idVBDA+','+ idAgendado+','+ idProducto+','+ idKardex+','+ fecha+','+ idTipoVenta+','+
+        idTipoPago+','+ idMascota+','+ idAlmacen+','+ observacion+','+ estado+','+ usuario)
 
         $.ajax({
             type: "POST",
@@ -1275,22 +1529,19 @@ session_start();
             dataType: "html",
             data: ({
                 action: act,
-                IdSede: IdSede,
-                IdProducto: IdProducto,
-                Cantidad: Cantidad,
-                Kardex: Kardex,
-                Fecha: Fecha,
-                TipoVenta: TipoVenta,
-                TipoPago: TipoPago,
-                IdMascota: IdMascota,
-                Precio: Precio,
-                Descuento: Descuento,
-                PrecioTotal: PrecioTotal,
-                Observacion: Observacion,
-                Estado: Estado,
-                Usuario: Usuario,
-                Cita: Cita,
-                CitaEstado: CitaEstado
+                idVentatmp: idVentatmp,
+                idVBDA: idVBDA,
+                idAgendado: idAgendado,
+                idProducto: idProducto,
+                idKardex: idKardex,
+                fecha: fecha,
+                idTipoVenta: idTipoVenta,
+                idTipoPago: idTipoPago,
+                idMascota: idMascota,
+                idAlmacen: idAlmacen,
+                observacion: observacion,
+                estado: estado,
+                usuario: usuario
             }),
             beforeSend: function() {
                 //console.log(act+'-'+Condicion+'-'+Fecha+'-'+Guia+'-'+Proveedor+'-'+Observacion+'-'+Usuario+'-'+Sede+'-'+Idcompra);
@@ -1298,150 +1549,98 @@ session_start();
             success: function(data) {
                 //console.log("impresion - xx");
                 console.log(data);
+                var json = JSON.parse(data);
+                $.each(json, function(i, item) {
+                    CodigoVenta_Elminacion = json[i].CODIGO;
+                    CodigoVenta_Servicio = json[i].CODIGO_SERVICIO;
+                });
+                //.---------------------------------------------------------------------------------------------------
+                IdentifProcesoCancelacVenta= 1;
+                Habilita_Desabilita(false, true, false);
+                Habilita_Desabilita_Controles(true,true,true,true,true,true,true,true);
                 $("#Resultado_Grabacion").show();
-                if (data == 1) {
                     $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
                         '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
                         '<span aria-hidden="true">&times;</span>' +
                         '</button>' +
-                        '<strong>Nueva compra registrada correctamente</strong>' +
+                        '<strong>Venta registrada correctamente</strong>' +
                         '</div>')
-                } else {
-                    $("#Resultado_Grabacion").html('<div class="alert alert-danger alert-dismissible fade in mb-2" role="alert">' +
-                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                        '<span aria-hidden="true">&times;</span>' +
-                        '</button>' +
-                        '<strong>Lo sentimos ocurrio un error en el proceso de grabación</strong>' +
-                        '</div>')
-                }
                 $("#Resultado_Grabacion").fadeTo(2000, 500).slideUp(500, function() {
                     $("#Resultado_Grabacion").slideUp(500);
                 });
+            },
+            error : function(xhr, status) {
+                alert('Error al procesar los datos contacte al administrador de sistemas');
             },
             complete: function() {}
         });
     }
 
 
-    var listar = function() {
-        table = $('#TblVenta').DataTable({
-            "destroy": true,
-            "ajax": {
-                "method": "POST",
-                "url": "modulos/raza_listado.php"
-                //"dataSrc": ""
-            },
-            /* OCULTAR COLUMNAS */
-            /*
-                            "columnDefs": [{
-                                    "targets": [2],
-                                    "visible": false,
-                                    "searchable": false
-                                },
-                                {
-                                    "targets": [3],
-                                    "visible": false
-                                }
-                            ],
-            */
-            /*  END OCULTAR COLUMNAS*/
-            "columnDefs": [{
-                    "targets": [0, 1, 2, 3, 4, 5],
-                    "className": "dt-body-left"
-                },
-                {
-                    "targets": [6],
-                    "className": "dt-body-center"
-                }
-            ],
-            "columns": [{
-                    "render": function(data, type, row) {
-                        if (row.Raza_Id.length == 1) {
-                            var Cod = 'R00' + row.Raza_Id;
-                        } else if (row.Raza_Id.length == 2) {
-                            var Cod = 'R0' + row.Raza_Id;
-                        } else {
-                            var Cod = 'R' + row.Raza_Id;
-                        }
-                        return Cod;
-                    }
-                },
-                {
-                    "data": "Especie_Nombre"
-                },
-                {
-                    "data": "Raza_Nombre"
-                },
-                {
-                    "data": "Raza_Estado"
-                },
-                {
-                    "data": "Raza_Fecha"
-                },
-                {
-                    "data": "Raza_User"
-                },
-                {
-                    "render": function(data, type, row) {
-                        return "<div class='form-group center-block' ><div class='btn-group btn-group-sm' role='group'>" +
-                            "<button type='button' id='editar' class='editar btn btn-warning' value='" + row.Raza_Id + "'><i class='icon-pencil3'></i></button>" +
-                            "<button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Raza_Id + "'><i class='icon-trash-o'></i></button>" +
-                            "</div></div>";
-                    }
-                }
-            ],
-            /* BOTONES DE DATATABLE */
-            dom: 'Bfrtip',
-            buttons: [{
-                    extend: 'excelHtml5',
-                    text: '<i class="icon-file-excel-o"></i> ',
-                    titleAttr: 'Exportar a Excel',
-                    //className: 'btn btn-success'
-                    "oSelectorOpts": {
-                        filter: 'applied',
-                        order: 'current'
-                    },
-                },
-                {
-                    extend: 'pdfHtml5',
-                    text: '<i class="icon-file-pdf-o"></i> ',
-                    titleAttr: 'Exportar a PDF',
-                    className: 'btn btn-danger',
-                    orientation: 'landscape',
-                    //pageSize: 'TABLOID',
-                    exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5]
-                    },
+    $("#BtnCancelarVenta").click(function() {
+        var bool = confirm("Esta seguro de cancelar la venta ?");
+        if (bool) {
+            Cancelar_Venta('CancelarVenta',
+             CodigoVenta_Elminacion,
+              IdVentaTmp,
+              '<?php echo $_SESSION['User']; ?>',
+              CodigoVenta_Servicio,
+              ProcesoVBDA_CancelarCompra,
+              IdAgendado,
+              Id_TipoVenta
+              )
+        } else {
+            //alert("cancelo la solicitud");
+        }
+    });
 
-                    //className: 'btn btn-success'
-                    "oSelectorOpts": {
-                        filter: 'applied',
-                        order: 'current'
-                    },
-                },
-                {
-                    extend: 'copyHtml5',
-                    text: '<i class="icon-copy2"></i> ',
-                    titleAttr: 'Copiar',
-                    className: 'btn btn-info',
-                    //className: 'btn btn-success'
-                    "oSelectorOpts": {
-                        filter: 'applied',
-                        order: 'current'
-                    },
-                },
-            ],
-            "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
-            }
+    function Cancelar_Venta(act, IdVenta, IdVentatmp, Usuario, IdVBDA, ProcesoVBDA, Atencion_Agen, IdTipoVenta){
+        console.log(act+','+IdVenta+','+IdVentatmp+','+Usuario+','+IdVBDA+','+ProcesoVBDA+','+Atencion_Agen+','+IdTipoVenta);
+        $.ajax({
+            type: "POST",
+            url: "modulos/ventas.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                IdVenta: IdVenta,
+                IdVentatmp: IdVentatmp,
+                Usuario: Usuario,
+                IdVBDA: IdVBDA,
+                ProcesoVBDA: ProcesoVBDA,
+                Atencion_Agen: Atencion_Agen,
+                IdTipoVenta: IdTipoVenta                                             
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                var json = JSON.parse(data);
+                if (data == 1) {
+                    alert('Venta cancelada Correctamente');
+                    var url = "venta-nuevo.php";
+                    $(location).attr('href', url);
+                } else {
+                    alert('Lo sentimos ocurrio un error en el proceso de eliminación');
+                }
+            },
+            complete: function() {}
         });
     }
 
+
+
+
+
+
+
+
+
+    
+
     function Actualizar_Nuevo() {
-        limpiaForm($("#FormularioRaza"));
+        limpiaForm($("#FormularioVenta"));
         ActivarBotones();
         $("#Resultado_Grabacion").hide();
-        Obtener_Especie('MostrarEspecie');
+        //Obtener_Especie('MostrarEspecie');
     }
 
     function Actualizar_Listado() {
@@ -1465,7 +1664,7 @@ session_start();
     }
 
     $("#btnLimpiar").click(function() {
-        limpiaForm($("#FormularioRaza"));
+        limpiaForm($("#FormularioVenta"));
         $("#Resultado_Grabacion").hide();
     });
 
@@ -1640,59 +1839,21 @@ session_start();
         });
     }
 
-    $('#TblVenta').on('click', '.eliminar', function() {
-        var id = $(this).val();
-        if (Condicion == 1) {
-            var bool = confirm("Esta seguro de eliminar el registro ?");
-            if (bool) {
-                //console.log('respuesta positiva ' + id);
-                Eliminar_Raza('EliminarRaza', id)
-                //alert('El cliente seleccionado fue eliminado correctamente');
-            } else {
-                //alert("cancelo la solicitud");
-            }
-        } else {
-            alert('El perfil de usurio no esta habilitado para opción');
-        }
-    });
-
-    function Eliminar_Raza(act, codigo) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/conf_raza.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: codigo
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                if (data == 1) {
-                    //listar();
-                    alert('Raza eliminada correctamente');
-                    listar();
-                } else {
-                    alert('Lo sentimos ocurrio un error en el proceso de edición');
-                }
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
 
     $(function() {
 
         console.log($_GET("IdVen"));
         console.log($_GET("IdMas"));
         console.log($_GET("Tipo"));
+        console.log($_GET("Pro"));
+        Observacion_Final= localStorage.getItem('Observacion');
+                //var firstName = localStorage.getItem('Observacion');
+                //console.log('Hola, mi nombre es ' + firstName)        
 
         Obtener_Sede('MostrarSede');
         $('#TxtFecha').val(MostrarFechaActual());
+
+        Habilita_Desabilita(true, true, true);
 
         if ($_GET("IdVen") === undefined) {
             //SIN VALOR GET
@@ -1711,22 +1872,19 @@ session_start();
             Obtener_NombreCliente_NombreMascota('MostrarNombrecliNombreMas', $_GET("IdMas"));
             console.log('final' + $('#Txt_CodigoCliente').val().trim());
             $("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
-
+            IdVenta_temporal = $_GET("IdVen");
             Obtener_Registros_Tblventatemporal('ObtenerRegistrosTblventatemporal', $_GET("IdVen"));
+            Habilita_Desabilita_Controles_TipoVenta(true);
 
-            //----------------Obtener_NombreCliente_NombreMascota('MostrarNombrecliNombreMas', $_GET("IdMas"));
-            //----------------console.log('final' + $('#Txt_CodigoCliente').val().trim());
-            //----------------$("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
+            if ($_GET("Pro") === undefined) {
+                //SIN VALOR GET
+            } else {
+                //ALMACENA ID DE LA TABLA A LA QUE SE QUIERE TRABAJAR VIENE DEL MODULO INDEX
+                IdProducto_VBDA = $_GET("Pro");
+                IdAgendado = $_GET("A");
+
+            }
         }
-
-
-
-        /*         ActivarBotones();
-                Obtener_Condicion();
-                Obtener_Nombre();
-                Obtener_Especie('MostrarEspecie');
-                listar(); */
-
 
 
         window.setTimeout(function() {

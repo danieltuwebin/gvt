@@ -795,9 +795,9 @@ include('modulos/cerrar_sesion.php');
                                                     <th>ID</th>
                                                     <th>DNI mascota</th>
                                                     <th>Nombre</th>
-                                                    <th>Fecha</th>
+                                                    <th>Fecha_Despar.</th>
                                                     <th>Desparacitación</th>
-                                                    <th>Estado Desparacitación</th>
+                                                    <th>Estado</th>
                                                     <th>Observación</th>
                                                     <th>Administrar</th>
                                                 </tr>

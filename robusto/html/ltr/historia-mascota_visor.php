@@ -227,7 +227,7 @@ class PDF extends FPDF
                     $this->SetX(20);
                     $this->SetFont('Arial','',9);
                     $this->MultiCell(165,5,utf8_decode($col),0, 'J');                    
-                    $this->Ln();
+                    $this->Ln(1);
                 }
                 if($cont==4){
                     $this->SetFont('Arial','B',9);                    
@@ -272,23 +272,24 @@ class PDF extends FPDF
                     $this->Cell(18);
                     $this->SetFont('Arial','',9);                    
                     $this->Cell(10 ,5,$col,0,0);
+                    $this->Ln();                    
                 } 
                 if($cont==8){
-                    $this->Cell(3);
+                    $this->Cell(10); 
                     $this->SetFont('Arial','B',9);
                     $this->Cell(13 ,5,utf8_decode('MUCOSAS :'),0,0);
                     $this->Cell(6);
                     $this->SetFont('Arial','',9);                    
-                    $this->Cell(10 ,5,$col,0,0);
+                    $this->Cell(35 ,5,$col,0,0);
                 }  
                 if($cont==9){
-                    $this->Cell(3);
+                    $this->Cell(10);
                     $this->SetFont('Arial','B',9);
                     $this->Cell(10 ,5,utf8_decode('TLLC :'),0,0);
                     $this->Cell(1);
                     $this->SetFont('Arial','',9);                    
                     $this->Cell(10 ,5,$col,0,0);
-                    $this->Ln();                    
+                  
                 }  
                 if($cont==10){
                     $this->Cell(10);
@@ -305,9 +306,28 @@ class PDF extends FPDF
                     $this->Cell(4);
                     $this->SetFont('Arial','',9);                    
                     $this->Cell(10 ,5,$col,0,0);
-                    $this->Ln(10);                    
-                }   
+                    $this->Ln();                    
+                }
+
                 if($cont==12){
+                    $this->Cell(10);
+                    $this->SetFont('Arial','B',9);
+                    $this->Cell(15 ,5,utf8_decode('GANGLIOS :'),0,0);
+                    $this->Cell(3);
+                    $this->SetFont('Arial','',9);                    
+                    $this->Cell(45 ,5,$col,0,0);                  
+                }
+                if($cont==13){
+                    $this->Cell(3);
+                    $this->SetFont('Arial','B',9);
+                    $this->Cell(10 ,5,utf8_decode('PESO :'),0,0);
+                    $this->Cell(4);
+                    $this->SetFont('Arial','',9);                    
+                    $this->Cell(10 ,5,$col,0,0);
+                    $this->Ln();                    
+                }                
+                
+                if($cont==14){
                     $this->Cell(10);
                     $this->SetFont('Arial','B',9);
                     $this->Cell(165 ,5,utf8_decode('DIAGNOSTICOS'),1,0);
@@ -316,29 +336,35 @@ class PDF extends FPDF
                     $this->SetFont('Arial','B',9);                    
                     $this->Cell(30 ,5,utf8_decode('DX. PRESUNTIVO  : '),0,0);
                     $this->Cell(1);
+                    $this->SetX(51);                    
                     $this->SetFont('Arial','',9);  
-                    $this->Cell(30 ,5,utf8_decode($col),0,0);
-                    $this->Ln();
+                    //$this->Cell(30 ,5,utf8_decode($col),0,0);
+                    $this->MultiCell(13,5,utf8_decode($col),0, 'J');                    
+                    //$this->Ln(1);
                 }
-                if($cont==13){
+                if($cont==15){
                     $this->Cell(10);
                     $this->SetFont('Arial','B',9);                    
                     $this->Cell(30 ,5,utf8_decode('DX. DEFINITIVO     : '),0,0);
                     $this->Cell(1);
+                    $this->SetX(51);                      
                     $this->SetFont('Arial','',9);  
-                    $this->Cell(30 ,5,utf8_decode($col),0,0);
-                    $this->Ln();
+                    //$this->Cell(30 ,5,utf8_decode($col),0,0);
+                    $this->MultiCell(130,5,utf8_decode($col),0, 'J');                       
+                    //$this->Ln(1);
                 }  
-                if($cont==14){
+                if($cont==16){
                     $this->Cell(10);
                     $this->SetFont('Arial','B',9);                    
                     $this->Cell(30 ,5,utf8_decode('DX. SOLICITADO   : '),0,0);
                     $this->Cell(1);
+                    $this->SetX(51);                       
                     $this->SetFont('Arial','',9);  
-                    $this->Cell(30 ,5,utf8_decode($col),0,0);
-                    $this->Ln(10);
+                    //$this->Cell(30 ,5,utf8_decode($col),0,0);
+                    $this->MultiCell(130,5,utf8_decode($col),0, 'J');                         
+                    $this->Ln(1);
                 } 
-                if($cont==15){ 
+                if($cont==17){ 
                     $this->SetFont('Arial','B',9);                    
                     $this->Cell(10);
                     $this->Cell(165 ,5,utf8_decode('TRATAMIENTO'),1,0);
@@ -352,7 +378,7 @@ class PDF extends FPDF
                     $this->MultiCell(165,5,utf8_decode($col),0, 'J'); 
                     //$this->Ln();                  
                 }  
-                if($cont==16){
+                if($cont==18){
                     $this->Cell(10);
                     $this->SetFont('Arial','B',9);                    
                     $this->Cell(30 ,5,utf8_decode('NOTAS ADICIONALES  : '),0,0);

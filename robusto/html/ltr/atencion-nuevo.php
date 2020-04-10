@@ -776,41 +776,16 @@ include('modulos/cerrar_sesion.php');
                                                     </div>
                                                 </div>
 
-                                                <!-- <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="form-inline">
-                                                            <div class="form-group">
-                                                                <label for="Txt_T">T.&nbsp;&nbsp;</label>
-                                                                <input type="text" style="text-transform:uppercase;" id="Txt_T" class="form-control" placeholder="" name="Txt_T">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-inline">
-                                                            <div class="form-group">
-                                                                <label for="Txt_C">F.C.&nbsp;&nbsp;</label>
-                                                                <input type="text" style="text-transform:uppercase;" id="Txt_C" class="form-control" placeholder="" name="Txt_C">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-inline">
-                                                            <div class="form-group">
-                                                                <label for="Txt_FR">F.R.&nbsp;&nbsp;</label>
-                                                                <input type="text" style="text-transform:uppercase;" id="Txt_FR" class="form-control" placeholder="" name="Txt_FR">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
+ 
                                                 <div class="row">
                                                     <div class="col-md-1">
                                                         <div class="form-group">
                                                             <label for="Txt_Deshidrat">Deshidrat.&nbsp;</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-1">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Deshidrat" class="form-control" placeholder="" name="Txt_Deshidrat">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Deshidrat" class="form-control" placeholder="" name="Txt_Deshidrat" maxlength="4">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1">
@@ -818,47 +793,44 @@ include('modulos/cerrar_sesion.php');
                                                             <label for="Txt_Mucosa">Mucosa.&nbsp;</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Mucosa" class="form-control" placeholder="" name="Txt_Mucosa">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Mucosa" class="form-control" placeholder="" name="Txt_Mucosa" maxlength="10">
                                                         </div>
                                                     </div>
-                                                </div>
-
-                                                <div class="row">
                                                     <div class="col-md-1">
                                                         <div class="form-group">
                                                             <label for="Txt_Tllc">Tllc.&nbsp;</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-1">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Tllc" class="form-control" placeholder="" name="Txt_Tllc">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Tllc" class="form-control" placeholder="" name="Txt_Tllc" maxlength="5">
                                                         </div>
-                                                    </div>
+                                                    </div>   
                                                     <div class="col-md-1">
                                                         <div class="form-group">
                                                             <label for="Txt_Vomitos">Vomitos.&nbsp;</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-1">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Vomitos" class="form-control" placeholder="" name="Txt_Vomitos">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Vomitos" class="form-control" placeholder="" name="Txt_Vomitos" maxlength="2">
                                                         </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
+                                                    </div>  
                                                     <div class="col-md-1">
                                                         <div class="form-group">
                                                             <label for="Txt_Diarrea">Diarrea.&nbsp;</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-1">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Diarrea" class="form-control" placeholder="" name="Txt_Diarrea">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Diarrea" class="form-control" placeholder="" name="Txt_Diarrea" maxlength="2">
                                                         </div>
-                                                    </div>
+                                                    </div>                                                                                                                                                       
+                                                </div>
+
+                                                <div class="row">
                                                     <div class="col-md-1">
                                                         <div class="form-group">
                                                             <label for="Txt_Ganglio">Ganglio.&nbsp;</label>
@@ -866,7 +838,7 @@ include('modulos/cerrar_sesion.php');
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Ganglio" class="form-control" placeholder="" name="Txt_Ganglio">
+                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Ganglio" class="form-control" placeholder="" name="Txt_Ganglio" maxlength="15">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1">
@@ -874,9 +846,9 @@ include('modulos/cerrar_sesion.php');
                                                             <label for="Txt_Peso">Peso.&nbsp;</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <input type="number" style="text-transform:uppercase;" id="Txt_Peso" class="form-control" placeholder="" name="Txt_Peso">
+                                                            <input type="number" style="text-transform:uppercase;" id="Txt_Peso" class="form-control" placeholder="" name="Txt_Peso" maxlength="2">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1294,7 +1266,8 @@ include('modulos/cerrar_sesion.php');
     }
 
     function ValidaCamposObligatorios(sintomas, temp, peso, dxpresuntivo, descripcion, notasadicionales) {
-        if (sintomas.length == 0) {
+        return 1;
+/*         if (sintomas.length == 0) {
             alert('El campo sintomas es obligatorio');
             $("#Txt_Sintomas").focus();
             return 0;
@@ -1331,7 +1304,7 @@ include('modulos/cerrar_sesion.php');
                     }
                 }
             }
-        }
+        } */
     }
 
     function RegistrarAtencion(act, IdTipoRegistro, IdAtencion, Fecha, IdProducto, IdMascota, Sintomas, Atencion_T, Atencion_FC, Atencion_FR, Atencion_sc_Des, Atencion_sc_Muc,
