@@ -121,6 +121,9 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
+                            <li>
+                                <a href="listado-movimientos.php" class="menu-item">Kardex Producto-Serv.</a>
+                            </li>                             
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -224,9 +227,6 @@ include('modulos/cerrar_sesion.php');
                         <ul class="menu-content">
                             <li>
                                 <a href="historia-mascota.php" class="menu-item">Historia Clinica Mascota</a>
-                            </li>
-                            <li>
-                                <a href="historia-cliente.php" class="menu-item">Historia Clinica Cliente</a>
                             </li>
                         </ul>
                     </li>
@@ -309,6 +309,9 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
+                            <li>
+                                <a href="listado-movimientos.php" class="menu-item">Kardex Producto-Serv.</a>
+                            </li>                             
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -415,9 +418,6 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="historia-mascota.php" class="menu-item">Historia Clinica Mascota</a>
                             </li>
-                            <li>
-                                <a href="historia-cliente.php" class="menu-item">Historia Clinica Cliente</a>
-                            </li>
                         </ul>
                     </li>
                     <!--
@@ -497,6 +497,9 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
+                            <li>
+                                <a href="listado-movimientos.php" class="menu-item">Kardex Producto-Serv.</a>
+                            </li>                             
                         </ul>
                     </li>
                     -->
@@ -582,9 +585,6 @@ include('modulos/cerrar_sesion.php');
                         <ul class="menu-content">
                             <li>
                                 <a href="historia-mascota.php" class="menu-item">Historia Clinica Mascota</a>
-                            </li>
-                            <li>
-                                <a href="historia-cliente.php" class="menu-item">Historia Clinica Cliente</a>
                             </li>
                         </ul>
                     </li>

@@ -222,9 +222,6 @@ session_start();
                             <li>
                                 <a href="historia-mascota.php" class="menu-item">Historia Clinica Mascota</a>
                             </li>
-                            <li>
-                                <a href="historia-cliente.php" class="menu-item">Historia Clinica Cliente</a>
-                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -415,9 +412,6 @@ session_start();
                             <li>
                                 <a href="historia-mascota.php" class="menu-item">Historia Clinica Mascota</a>
                             </li>
-                            <li>
-                                <a href="historia-cliente.php" class="menu-item">Historia Clinica Cliente</a>
-                            </li>
                         </ul>
                     </li>
                     <!--
@@ -585,9 +579,6 @@ session_start();
                         <ul class="menu-content">
                             <li>
                                 <a href="historia-mascota.php" class="menu-item">Historia Clinica Mascota</a>
-                            </li>
-                            <li>
-                                <a href="historia-cliente.php" class="menu-item">Historia Clinica Cliente</a>
                             </li>
                         </ul>
                     </li>

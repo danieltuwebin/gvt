@@ -116,6 +116,9 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
+                            <li>
+                                <a href="listado-movimientos.php" class="menu-item">Kardex Producto-Serv.</a>
+                            </li>                             
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -220,9 +223,6 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="historia-mascota.php" class="menu-item">Historia Clinica Mascota</a>
                             </li>
-                            <li>
-                                <a href="historia-cliente.php" class="menu-item">Historia Clinica Cliente</a>
-                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -304,6 +304,9 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
+                            <li>
+                                <a href="listado-movimientos.php" class="menu-item">Kardex Producto-Serv.</a>
+                            </li>                             
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -410,9 +413,6 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="historia-mascota.php" class="menu-item">Historia Clinica Mascota</a>
                             </li>
-                            <li>
-                                <a href="historia-cliente.php" class="menu-item">Historia Clinica Cliente</a>
-                            </li>
                         </ul>
                     </li>
                     <!--
@@ -492,6 +492,9 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
+                            <li>
+                                <a href="listado-movimientos.php" class="menu-item">Kardex Producto-Serv.</a>
+                            </li>                             
                         </ul>
                     </li>
                     -->
@@ -577,9 +580,6 @@ include('modulos/cerrar_sesion.php');
                         <ul class="menu-content">
                             <li>
                                 <a href="historia-mascota.php" class="menu-item">Historia Clinica Mascota</a>
-                            </li>
-                            <li>
-                                <a href="historia-cliente.php" class="menu-item">Historia Clinica Cliente</a>
                             </li>
                         </ul>
                     </li>
@@ -951,7 +951,6 @@ include('modulos/cerrar_sesion.php');
         }
     }
 
-
    /* INICIO FUNCIONES */
    function Obtener_Sede(act) {
         $.ajax({
@@ -976,10 +975,6 @@ include('modulos/cerrar_sesion.php');
         });
     }
     
-
-
-
-
     $("#BtnNuevo").click(function() {
         var url = "venta-nuevo.php";
         $(location).attr('href', url);
@@ -991,7 +986,6 @@ include('modulos/cerrar_sesion.php');
 
     var listar = function() {
         var url = "modulos/ventas_listado_general.php?Cond=1&Id=0";
-
         table = $('#TblVentas').DataTable({
             "destroy": true,
             "ajax": {
@@ -1088,7 +1082,6 @@ include('modulos/cerrar_sesion.php');
 
     }
 
-
     $('#TblVentas').on('click', '.editar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
@@ -1124,7 +1117,6 @@ include('modulos/cerrar_sesion.php');
             complete: function() {}
         });
     }
-
 
     $('#BtnActualizarVenta').click(function() {
         var codigo = $('#Txt_Codigo').val();
@@ -1193,7 +1185,6 @@ include('modulos/cerrar_sesion.php');
         });
     }
 
-
     $('#TblVentas').on('click', '.eliminar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
@@ -1233,7 +1224,6 @@ include('modulos/cerrar_sesion.php');
         });
     }
 
-
     $('#TblVentas').on('click', '.ver', function() {
         Id = $(this).val();
         if (Condicion == 1) {
@@ -1244,7 +1234,6 @@ include('modulos/cerrar_sesion.php');
             alert('El perfil de usurio no esta habilitado para opción');
         }
     });
-
 
     function Obtener_Tablas_Resumenes_Ventas(act,Id) {
         $.ajax({
@@ -1278,8 +1267,6 @@ include('modulos/cerrar_sesion.php');
             }
         });
     }
-
-
 
     $(function() {
 

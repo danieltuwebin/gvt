@@ -32,6 +32,8 @@ Revisados
     Producto_IdTipoPro = 3 AND Producto_IdTipoCat = 3;
     Cuando se agenda una atencion SI SUMA
 24.listado-atencion.php     : OK
+25.venta-nuevo.php          : OK
+26.listado-venta.php        : OK
 
 
 

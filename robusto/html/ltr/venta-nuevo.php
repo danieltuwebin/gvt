@@ -115,6 +115,9 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
+                            <li>
+                                <a href="listado-movimientos.php" class="menu-item">Kardex Producto-Serv.</a>
+                            </li>                             
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -218,9 +221,6 @@ include('modulos/cerrar_sesion.php');
                         <ul class="menu-content">
                             <li>
                                 <a href="historia-mascota.php" class="menu-item">Historia Clinica Mascota</a>
-                            </li>
-                            <li>
-                                <a href="historia-cliente.php" class="menu-item">Historia Clinica Cliente</a>
                             </li>
                         </ul>
                     </li>
@@ -303,6 +303,9 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
+                            <li>
+                                <a href="listado-movimientos.php" class="menu-item">Kardex Producto-Serv.</a>
+                            </li>                             
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -409,9 +412,6 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="historia-mascota.php" class="menu-item">Historia Clinica Mascota</a>
                             </li>
-                            <li>
-                                <a href="historia-cliente.php" class="menu-item">Historia Clinica Cliente</a>
-                            </li>
                         </ul>
                     </li>
                     <!--
@@ -491,6 +491,9 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
+                            <li>
+                                <a href="listado-movimientos.php" class="menu-item">Kardex Producto-Serv.</a>
+                            </li>                             
                         </ul>
                     </li>
                     -->
@@ -576,9 +579,6 @@ include('modulos/cerrar_sesion.php');
                         <ul class="menu-content">
                             <li>
                                 <a href="historia-mascota.php" class="menu-item">Historia Clinica Mascota</a>
-                            </li>
-                            <li>
-                                <a href="historia-cliente.php" class="menu-item">Historia Clinica Cliente</a>
                             </li>
                         </ul>
                     </li>
@@ -700,19 +700,11 @@ include('modulos/cerrar_sesion.php');
                                                             <div class="col-md-6">
                                                                 <div class="input-group">
                                                                     <label class="display-inline" for="CboMascota">Seleccione nombre mascota :
-                                                                        <!-- <label class="display-inline-block" for="CboVacuna">S : -->
                                                                         <select id="CboMascota" name="CboMascota" class="form-control">
                                                                         </select>
                                                                     </label>
                                                                 </div>
                                                             </div>
-                                                            <!--                                                             <div class="col-md-6">
-                                                                <div class="input-group">
-                                                                    <label class="display-inline" for="Txt_Fecha">Fecha de Nacimiento :
-                                                                        <input id="Txt_Fecha" type="date" class="form-control">
-                                                                    </label>
-                                                                </div>
-                                                            </div> -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -844,10 +836,6 @@ include('modulos/cerrar_sesion.php');
                                                             <th colspan="7" style="text-align:right">Total Venta:</th>
                                                             <th></th>
                                                         </tr>
-                                                        <!--                                                     <tr>
-                                                        <th colspan="5" style="text-align:right">Cantidad de items:</th>
-                                                        <th><label for="Txt_Cantidad">0</label></th>
-                                                    </tr> -->
                                                     </tfoot>
                                                 </table>
                                             </div>
@@ -989,12 +977,10 @@ include('modulos/cerrar_sesion.php');
         $("#Txt_Cantidad").attr('disabled', bool);
     }
 
-
     function Habilita_Desabilita_Controles(boolSede,boolTipPago,boolFec,boolPro,boolPre,boolDes,boolCan,boolTabla) {
         $("#CboSede").attr('disabled', boolSede);
         $("#CboTipoPago").attr('disabled', boolTipPago);        
         $("#TxtFecha").attr('disabled', boolFec);
-
         $("#TxtProducto").attr('disabled', boolPro);
         $("#Txt_Precio").attr('disabled', boolPre);
         $("#Txt_Descuento").attr('disabled', boolDes);
@@ -1017,9 +1003,7 @@ include('modulos/cerrar_sesion.php');
             }),
             beforeSend: function() {},
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboSede").empty();
                 $.each(json, function(i, item) {
                     $("#CboSede").append('<option value="' + json[i].Sede_Id + '">' + json[i].Sede_Nombre + '</option>');
@@ -1033,7 +1017,6 @@ include('modulos/cerrar_sesion.php');
 
 
     $("#TxtProducto").keyup(function() {
-        console.log('%' + $("#TxtProducto").val() + '%');
         Obtener_Producto('MostrarProductoxNombre', '%' + $("#TxtProducto").val() + '%', 1);
     });
     $("#TxtProducto").change(function() {
@@ -1080,7 +1063,6 @@ include('modulos/cerrar_sesion.php');
             }),
             beforeSend: function() {},
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 $("#Txt_Precio").empty();
                 $.each(json, function(i, item) {
@@ -1107,7 +1089,6 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
                     $('#Txt_Dni').val(json[i].Cliente_Dni);
@@ -1138,9 +1119,7 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboMascota").empty();
                 $.each(json, function(i, item) {
                     $("#CboMascota").append('<option value="' + json[i].Mascota_Id + '">' + json[i].Mascota_Nombre + '</option>');
@@ -1151,7 +1130,6 @@ include('modulos/cerrar_sesion.php');
             }
         });
     }
-
 
     function Obtener_Registros_Tblventatemporal(act, Id) {
         $.ajax({
@@ -1167,10 +1145,7 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log('obtener_venta_temp');
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboEspecie").empty();
                 $.each(json, function(i, item) {
                     $('#TxtFecha').val(json[i].VentaTemporal_Fecha);
@@ -1186,7 +1161,6 @@ include('modulos/cerrar_sesion.php');
             }
         });
     }
-
 
     //Controles independientes
     $('#FormularioVenta input').on('change', function() {
@@ -1272,15 +1246,6 @@ include('modulos/cerrar_sesion.php');
                     ($('#Txt_Descuento').val() * $('#Txt_Cantidad').val()).toFixed(2),
                     (( $('#Txt_Precio').val() - Descuento) * $('#Txt_Cantidad').val()).toFixed(2),
                     '<?php echo $_SESSION['User']; ?>');
-
-                /* limpiar controles */
-                /*
-                Habilita_Desabilita(false, false, true);
-                $("#TxtProducto").val('');
-                $("#Txt_Precio").val('');
-                $("#Txt_Descuento").val('');
-                $("#Txt_Cantidad").val('');
-                */
             } else {
                 alert('Debe seleccionar un producto');
             }
@@ -1291,7 +1256,7 @@ include('modulos/cerrar_sesion.php');
 
 
     function Grabar_Venta_Tmp(act, IdVenta, IdSede, IdProducto, Cantidad, Precio, Descuento, PrecioTotal, Usuario) {
-        console.log(act+','+ IdVenta+','+ IdSede+','+ IdProducto+','+  Cantidad+','+ Precio+','+ Descuento+','+ PrecioTotal+','+ Usuario);
+        //console.log(act+','+ IdVenta+','+ IdSede+','+ IdProducto+','+  Cantidad+','+ Precio+','+ Descuento+','+ PrecioTotal+','+ Usuario);
         var Estado = 0;
         $.ajax({
             type: "POST",
@@ -1311,12 +1276,9 @@ include('modulos/cerrar_sesion.php');
             }),
             beforeSend: function() {},
             success: function(data) {
-                console.log('--------------');
                 var json = JSON.parse(data);
-                console.log(json);
                 $.each(json, function(i, item) {
                     IdVentaTmp = json[i].CODIGO;
-                    console.log('cod ' + IdVentaTmp);
                     Estado = json[i].ESTADO;
                 });
             },
@@ -1344,7 +1306,6 @@ include('modulos/cerrar_sesion.php');
     }
 
     var listar = function() {
-        console.log(IdVentaTmp);
         table = $('#TblVenta').DataTable({
             "destroy": true,
             "searching": false,
@@ -1424,7 +1385,6 @@ include('modulos/cerrar_sesion.php');
         var id = $(this).val();
             var bool = confirm("Esta seguro de eliminar el registro ?");
             if (bool) {
-                //console.log('respuesta positiva ' + id);
                 Eliminar_Venta('EliminarVenta', id)
                 if (Id_TipoVenta == 1 || Id_TipoVenta == 2 || Id_TipoVenta == 3 || Id_TipoVenta == 4) {
                     Habilita_Desabilita(true, true, true);
@@ -1475,7 +1435,6 @@ include('modulos/cerrar_sesion.php');
         if (Id_TipoVenta == 1 || Id_TipoVenta == 2 || Id_TipoVenta == 3 || Id_TipoVenta == 4) {
             if (IdentifProcesoCancelacVenta == 0){
                 var URLactual = jQuery(location).attr('href');
-                console.log(URLactual);
                 $(location).attr('href', URLactual);
             }else{
                 var url = "venta-nuevo.php";
@@ -1489,11 +1448,6 @@ include('modulos/cerrar_sesion.php');
 
 
     $('#BtnGrabarVenta').click(function() {
-        //console.log(localStorage.getItem('Observacion'));
-
-
-        console.log('click en agregar...')
-
         if (Id_TipoVenta==4 && IdAgendado ==0){
             IdProducto_VBDA = IdVenta_temporal;
         }
@@ -1519,8 +1473,8 @@ include('modulos/cerrar_sesion.php');
 
     function Grabar_Venta(act, idVentatmp, idVBDA, idAgendado, idProducto, idKardex, fecha, idTipoVenta,
         idTipoPago, idMascota, idAlmacen, observacion, estado, usuario) {
-            console.log(act+','+ idVentatmp+','+ idVBDA+','+ idAgendado+','+ idProducto+','+ idKardex+','+ fecha+','+ idTipoVenta+','+
-        idTipoPago+','+ idMascota+','+ idAlmacen+','+ observacion+','+ estado+','+ usuario)
+            /*console.log(act+','+ idVentatmp+','+ idVBDA+','+ idAgendado+','+ idProducto+','+ idKardex+','+ fecha+','+ idTipoVenta+','+
+        idTipoPago+','+ idMascota+','+ idAlmacen+','+ observacion+','+ estado+','+ usuario)*/
 
         $.ajax({
             type: "POST",
@@ -1547,8 +1501,6 @@ include('modulos/cerrar_sesion.php');
                 //console.log(act+'-'+Condicion+'-'+Fecha+'-'+Guia+'-'+Proveedor+'-'+Observacion+'-'+Usuario+'-'+Sede+'-'+Idcompra);
             },
             success: function(data) {
-                //console.log("impresion - xx");
-                console.log(data);
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
                     CodigoVenta_Elminacion = json[i].CODIGO;
@@ -1595,7 +1547,7 @@ include('modulos/cerrar_sesion.php');
     });
 
     function Cancelar_Venta(act, IdVenta, IdVentatmp, Usuario, IdVBDA, ProcesoVBDA, Atencion_Agen, IdTipoVenta){
-        console.log(act+','+IdVenta+','+IdVentatmp+','+Usuario+','+IdVBDA+','+ProcesoVBDA+','+Atencion_Agen+','+IdTipoVenta);
+        //console.log(act+','+IdVenta+','+IdVentatmp+','+Usuario+','+IdVBDA+','+ProcesoVBDA+','+Atencion_Agen+','+IdTipoVenta);
         $.ajax({
             type: "POST",
             url: "modulos/ventas.php",
@@ -1626,21 +1578,12 @@ include('modulos/cerrar_sesion.php');
         });
     }
 
-
-
-
-
-
-
-
-
-    
+   
 
     function Actualizar_Nuevo() {
         limpiaForm($("#FormularioVenta"));
         ActivarBotones();
         $("#Resultado_Grabacion").hide();
-        //Obtener_Especie('MostrarEspecie');
     }
 
     function Actualizar_Listado() {
@@ -1668,187 +1611,8 @@ include('modulos/cerrar_sesion.php');
         $("#Resultado_Grabacion").hide();
     });
 
-    $("#btngrabar").click(function() {
-        console.log('btng');
-        var Id = ValidaCamposObligatorios($('#Txt_Nombre').val().trim(), $("#CboEspecie").val().trim());
-        if (Id == 1) {
-            Grabar_Raza("GrabarRaza",
-                $("#CboEspecie").val().trim(),
-                $("#Txt_Nombre").val().trim(),
-                '<?php echo $_SESSION['User']; ?>'
-            );
-            listar();
-        }
-    });
-
-    function Grabar_Raza(act, especie, nombre, usuario) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/conf_raza.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act,
-                Especie: especie,
-                Nombre: nombre,
-                Usuario: usuario
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                console.log(data);
-                $("#Resultado_Grabacion").show();
-                if (data == 1) {
-                    $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
-                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                        '<span aria-hidden="true">&times;</span>' +
-                        '</button>' +
-                        '<strong>Nueva raza registrada correctamente</strong>' +
-                        '</div>')
-                } else if (data == 2) {
-                    $("#Resultado_Grabacion").html('<div class="alert alert-warning alert-dismissible fade in mb-2" role="alert">' +
-                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                        '<span aria-hidden="true">&times;</span>' +
-                        '</button>' +
-                        '<strong>No se grabo el registro, la raza ya existe en el sistema</strong>' +
-                        '</div>')
-                } else {
-                    $("#Resultado_Grabacion").html('<div class="alert alert-danger alert-dismissible fade in mb-2" role="alert">' +
-                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                        '<span aria-hidden="true">&times;</span>' +
-                        '</button>' +
-                        '<strong>Lo sentimos ocurrio un error en el proceso de grabación</strong>' +
-                        '</div>')
-                }
-                $("#Resultado_Grabacion").fadeTo(2000, 500).slideUp(500, function() {
-                    $("#Resultado_Grabacion").slideUp(500);
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    $('#TblVenta').on('click', '.editar', function() {
-        var id = $(this).val();
-        console.log($(this).val());
-        if (Condicion == 1) {
-            Obtener_Datos_Raza('MostrarRazaxId', id);
-            DesactivarBotones();
-            $("#VistaDetalle").hide();
-        } else {
-            alert('El perfil de usurio no esta habilitado para opción');
-        }
-    });
-
-    function Obtener_Datos_Raza(act, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/conf_raza.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                $.each(json, function(i, item) {
-                    $('#Txt_Codigo').val(json[i].Raza_Id);
-                    $('#Txt_Nombre').val(json[i].Raza_Nombre);
-                    $("#CboEspecie option[value=" + json[i].Raza_IdEspecie + "]").attr("selected", true);
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    $('#btnActivar').click(function() {
-        var Id = ValidaCamposObligatorios($('#Txt_Nombre').val().trim(), $("#CboEspecie").val().trim());
-        if (Id == 1) {
-            Editar_Raza("EditarRaza",
-                $("#Txt_Nombre").val().trim(),
-                $("#CboEspecie").val().trim(),
-                '<?php echo $_SESSION['User']; ?>',
-                $('#Txt_Codigo').val().trim()
-            )
-            $("#Resultado_Grabacion").show();
-            ActivarBotones();
-            $("#VistaDetalle").show();
-        }
-    });
-
-    function Editar_Raza(act, nombre, especie, usuario, codigo) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/conf_raza.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act,
-                Nombre: nombre,
-                Especie: especie,
-                Usuario: usuario,
-                Codigo: codigo
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                console.log(data);
-                if (data == 1) {
-                    $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
-                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                        '<span aria-hidden="true">&times;</span>' +
-                        '</button>' +
-                        '<strong>Se actualizo la raza correctamente</strong>' +
-                        '</div>')
-                    listar();
-                    $("#Txt_Nombre").val('');
-                    //$("#Txt_Notas").val('');
-
-                } else if (data == 2) {
-                    $("#Resultado_Grabacion").html('<div class="alert alert-warning alert-dismissible fade in mb-2" role="alert">' +
-                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                        '<span aria-hidden="true">&times;</span>' +
-                        '</button>' +
-                        '<strong>No se actualizo, la raza ya existe en el sistema</strong>' +
-                        '</div>')
-                } else {
-                    $("#Resultado_Grabacion").html('<div class="alert alert-danger alert-dismissible fade in mb-2" role="alert">' +
-                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                        '<span aria-hidden="true">&times;</span>' +
-                        '</button>' +
-                        '<strong>Lo sentimos ocurrio un error en el proceso de grabación</strong>' +
-                        '</div>')
-                }
-                $("#Resultado_Grabacion").fadeTo(2000, 500).slideUp(500, function() {
-                    $("#Resultado_Grabacion").slideUp(500);
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-
     $(function() {
-
-        console.log($_GET("IdVen"));
-        console.log($_GET("IdMas"));
-        console.log($_GET("Tipo"));
-        console.log($_GET("Pro"));
-        Observacion_Final= localStorage.getItem('Observacion');
-                //var firstName = localStorage.getItem('Observacion');
-                //console.log('Hola, mi nombre es ' + firstName)        
+        Observacion_Final= localStorage.getItem('Observacion');  
 
         Obtener_Sede('MostrarSede');
         $('#TxtFecha').val(MostrarFechaActual());
@@ -1870,7 +1634,6 @@ include('modulos/cerrar_sesion.php');
             $("#Txt_Dni").attr('disabled', true);
             $("#btnBuscar").attr('disabled', true);
             Obtener_NombreCliente_NombreMascota('MostrarNombrecliNombreMas', $_GET("IdMas"));
-            console.log('final' + $('#Txt_CodigoCliente').val().trim());
             $("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
             IdVenta_temporal = $_GET("IdVen");
             Obtener_Registros_Tblventatemporal('ObtenerRegistrosTblventatemporal', $_GET("IdVen"));
@@ -1882,10 +1645,8 @@ include('modulos/cerrar_sesion.php');
                 //ALMACENA ID DE LA TABLA A LA QUE SE QUIERE TRABAJAR VIENE DEL MODULO INDEX
                 IdProducto_VBDA = $_GET("Pro");
                 IdAgendado = $_GET("A");
-
             }
         }
-
 
         window.setTimeout(function() {
             $(".alert").fadeTo(500, 0).slideUp(500, function() {
