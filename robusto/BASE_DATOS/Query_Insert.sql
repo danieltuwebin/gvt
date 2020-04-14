@@ -3364,3 +3364,140 @@ LEFT JOIN tblCliente tc ON tm.Mascota_IdCliente = tc.Cliente_Id
 WHERE tv.Vacunas_Estado = 1 AND tv.Vacunas_IdMascota = Pint_IdMascota AND Vacunas_Cita = 1;
 END$$
 DELIMITER ;
+
+
+CREATE TABLE tblIngresosEgresos(
+	IngEgr_Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    IngEgr_Fecha DATE NOT NULL,
+    IngEgr_Tipo INT,
+    IngEgr_Monto FLOAT,
+    IngEgr_Documento VARCHAR(50),
+    IngEgr_Observacion VARCHAR(500),
+    IngEgr_FechaGra DATETIME,
+    IngEgr_UserGrab VARCHAR(50)
+)
+
+
+
+
+
+-----------
+-------------------------
+
+DROP PROCEDURE IF EXISTS SP_Obtener_tblIngresosEgresos_All;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_tblIngresosEgresos_All()
+BEGIN
+SELECT @numero:=@numero+1 AS Orden,
+1 AS CODIGO,CONCAT('V',Venta_Id) as ID,Venta_Fecha AS FECHA,'VENTA' AS TIPO_VENTA,
+case when length(Venta_Id) = 1 then concat('VT000',Venta_Id) 
+when length(Venta_Id) = 2 then concat('VT00',Venta_Id) 
+when length(Venta_Id) = 3 then concat('VT0',Venta_Id) 
+when length(Venta_Id) = 4 then concat('V',Venta_Id) else 'ERROR' end AS CODIGO_VENTA,
+Venta_PrecioTotal AS PRECIO_VENTA,'-' AS TIPO_COMPRA,'-'  AS CODIGO_COMPRA,'-' AS PRECIO_COMPRA  FROM tblVenta where Venta_Fecha = '2020-04-08'
+UNION
+SET @numero=0;
+SELECT @numero:=@numero+1 AS Orden,
+2,CONCAT('C',Compra_Id) as ID,Compra_Fecha AS FECHA,'-','-','-','COMPRA' AS TIPO,
+case when length(Compra_Id) = 1 then concat('CO000',Compra_Id) 
+when length(Compra_Id) = 2 then concat('CO00',Compra_Id) 
+when length(Compra_Id) = 3 then concat('CO0',Compra_Id) 
+when length(Compra_Id) = 4 then concat('CO',Compra_Id) else 'ERROR' end AS Codigo,
+Compra_PrecioTotal FROM tblCompra where Compra_Fecha = '2020-04-08';
+END$$
+DELIMITER ;
+
+-
+DROP PROCEDURE IF EXISTS SP_Obtener_tblIngresosEgresos_All;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_tblIngresosEgresos_All()
+BEGIN
+SET @numero=0;
+SELECT @numero:=@numero+1 AS Orden,
+NRO, ID, FECHA, TIPO_VENTA, CODIGO_VENTA, PRECIO_VENTA, TIPO_COMPRA, CODIGO_COMPRA, PRECIO_COMPRA, OBSERVACION FROM View_CuadroCaja;
+END$$
+DELIMITER ;
+
+-
+
+
+
+DROP PROCEDURE IF EXISTS SP_Registrar_TblIngresosEgresos_All;
+DELIMITER $$
+CREATE PROCEDURE SP_Registrar_TblIngresosEgresos_All(IN Pdate_Fecha DATE, 
+                                                     IN Pint_Tipo INT,
+                                                     IN Pflo_Monto FLOAT,
+                                                     IN Pvchr_Documento VARCHAR(30),
+                                                     IN Pvchr_Observacion VARCHAR(100),
+                                                     IN Pdat_FecGrabacion DATETIME,
+                                                     IN Pdat_UserGrabacion VARCHAR(50))
+BEGIN
+INSERT INTO tblIngresosEgresos
+(IngEgr_Fecha, IngEgr_Tipo, IngEgr_Monto, IngEgr_Documento, IngEgr_Observacion, IngEgr_FechaGra, IngEgr_UserGrab) 
+VALUES
+(Pdate_Fecha, Pint_Tipo, Pflo_Monto, Pvchr_Documento, Pvchr_Observacion, Pdat_FecGrabacion, Pdat_UserGrabacion);
+END $$
+DELIMITER ;
+
+
+
+DROP VIEW IF EXISTS View_CuadroCaja;
+CREATE VIEW View_CuadroCaja
+AS
+SELECT 1 ,CONCAT('V',Venta_Id) as ID,Venta_Fecha AS FECHA,'VENTA' AS TIPO_VENTA,
+case when length(Venta_Id) = 1 then concat('VT000',Venta_Id) 
+when length(Venta_Id) = 2 then concat('VT00',Venta_Id) 
+when length(Venta_Id) = 3 then concat('VT0',Venta_Id) 
+when length(Venta_Id) = 4 then concat('V',Venta_Id) else 'ERROR' end AS CODIGO_VENTA,
+ROUND(Venta_PrecioTotal,2) AS PRECIO_VENTA,'--' AS TIPO_COMPRA,'--'  AS CODIGO_COMPRA,'--' AS PRECIO_COMPRA,
+Venta_Observacion AS OBSERVACION
+FROM tblVenta where Venta_Fecha = '2020-04-08'
+UNION
+SELECT 2,CONCAT('C',Compra_Id) as ID,Compra_Fecha AS FECHA,'--','--','--','COMPRA' AS TIPO,
+case when length(Compra_Id) = 1 then concat('CO000',Compra_Id) 
+when length(Compra_Id) = 2 then concat('CO00',Compra_Id) 
+when length(Compra_Id) = 3 then concat('CO0',Compra_Id) 
+when length(Compra_Id) = 4 then concat('CO',Compra_Id) else 'ERROR' end AS Codigo,
+ROUND(Compra_PrecioTotal,2),
+Compra_Observacion
+FROM tblCompra where Compra_Fecha = '2020-04-08'
+UNION
+-- SALIDA 
+SELECT 3,CONCAT('I',IngEgr_Id),IngEgr_Fecha,'RETIRO','--',
+ROUND(IngEgr_Monto,2),'--','--','--',IngEgr_Observacion FROM tblIngresosEgresos WHERE IngEgr_Tipo = 2
+UNION
+-- INGRESO
+SELECT 4,CONCAT('I',IngEgr_Id),IngEgr_Fecha,'--','--','--','INGRESO','--',
+ROUND(IngEgr_Monto,2), IngEgr_Observacion FROM tblIngresosEgresos WHERE IngEgr_Tipo = 1;
+
+
+
+DROP PROCEDURE IF EXISTS SP_Registrar_TblIngresosEgresos;
+DELIMITER $$
+CREATE PROCEDURE SP_Registrar_TblIngresosEgresos(IN Pdate_Fecha DATE, 
+                                                     IN Pint_Tipo INT,
+                                                     IN Pflo_Monto FLOAT,
+                                                     IN Pvchr_Documento VARCHAR(30),
+                                                     IN Pvchr_Observacion VARCHAR(100),
+                                                     IN Pvhcr_UserGrabacion VARCHAR(50))
+BEGIN
+DECLARE NUMERO INT;
+INSERT INTO tblIngresosEgresos
+  (IngEgr_Fecha
+ , IngEgr_Tipo
+ , IngEgr_Monto
+ , IngEgr_Documento
+ , IngEgr_Observacion
+ , IngEgr_FechaGra
+ , IngEgr_UserGrab) 
+VALUES
+  (Pdate_Fecha
+ , Pint_Tipo
+ , Pflo_Monto
+ , Pvchr_Documento
+ , Pvchr_Observacion
+ , NOW(),
+   Pvhcr_UserGrabacion);
+ SELECT IngEgr_Id FROM tblIngresosEgresos ORDER BY IngEgr_Id DESC LIMIT 1;
+END $$
+DELIMITER ;

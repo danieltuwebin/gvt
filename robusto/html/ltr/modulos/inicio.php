@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once("../../config/Cado.php");
 
 
@@ -81,15 +81,6 @@ if ($_POST['action'] == "tablaResumenAtenciones") {
 
 
 
-
-
-
-
-
-
-
-
-
 if ($_POST['action'] == "MostrarSede") {
     $myArray = array();
     $sql = "CALL SP_Obtener_TblSede_all()";
@@ -100,4 +91,10 @@ if ($_POST['action'] == "MostrarSede") {
     }
     echo json_encode($myArray);
 }
+
+
+if ($_POST['action'] == "MostrarSede_Usuario") {
+    //echo '150';
+    echo $_SESSION['IdAlmacen'];  
+    }
 
