@@ -366,8 +366,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                         </ul>
                     </li>
-                    <!--
-                    <li class=" nav-item">
+                    <!-- <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
                         </a>
@@ -379,8 +378,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-compra.php" class="menu-item">Listado Compras</a>
                             </li>
                         </ul>
-                    </li>
-                    -->
+                    </li> -->
                     <li class=" nav-item">
                         <a href="#"><i class="icon-cart4"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Ventas</span>
@@ -420,7 +418,6 @@ include('modulos/cerrar_sesion.php');
                             </li>
                         </ul>
                     </li>
-                    <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-cog"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Configuración</span>
@@ -443,7 +440,6 @@ include('modulos/cerrar_sesion.php');
                             </li>
                         </ul>
                     </li>
-                    -->
                 </ul>
             </div>
             <!-- / main menu-->
