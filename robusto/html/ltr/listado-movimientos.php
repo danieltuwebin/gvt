@@ -645,7 +645,6 @@ include('modulos/cerrar_sesion.php');
 
                             <div class="row">
 
-
                                 <div class="col-xs-12 col-md-2">
                                     <div class="form-group">
                                         <label for="Txt_Cantidad">Cantidad</label>
@@ -653,22 +652,18 @@ include('modulos/cerrar_sesion.php');
                                         <input type="hidden" id="Txt_Codigo" name="Txt_Codigo">
                                     </div>
                                 </div>
-
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="Txt_Fecha">Fecha </label>
                                         <input id="Txt_Fecha" type="date" class="form-control">
                                     </div>
                                 </div>
-
-
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="CboSede">Seleccione Sede</label>
                                         <select id="CboSede" name="CboSede" class="form-control"></select>
                                     </div>
                                 </div>
-
 
                             </div>
 
@@ -726,7 +721,6 @@ include('modulos/cerrar_sesion.php');
                                             <div class="form-body">
 
                                                 <div class="row">
-
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="TxtProducto">Seleccione Producto :</label>
@@ -743,34 +737,18 @@ include('modulos/cerrar_sesion.php');
                                                     </div>
 
                                                     <div class="col-md-2">
-
                                                         <div class="form-group">
                                                             <br>
                                                             <label for=""></label>
-                                                            <!-- <label class="display-inline-block" for="Botones">&nbsp; </label><br> -->
                                                             <button id="btnBuscar" class="btn btn-warning mr-1" type="button"> <i class="icon-search5"></i> Buscar</button>
                                                         </div>
                                                     </div>
 
-
-
-
-
                                                 </div>
-
 
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="card">
-                                                            <!--                                                         <div class="card-header">
-                                                            <h4 class="card-title">Proximas Atenciones</h4>
-                                                            <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-                                                            <div class="heading-elements">
-                                                                <ul class="list-inline mb-0">
-                                                                    <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div> -->
                                                             <div class="card-body">
                                                                 <div class="table-responsive">
                                                                     <table class="table table-hover mb-0">
@@ -808,8 +786,6 @@ include('modulos/cerrar_sesion.php');
                                 </div>
                             </div>
                         </div>
-
-
 
                     </div>
                 </section>
@@ -876,7 +852,6 @@ include('modulos/cerrar_sesion.php');
     var table;
     var IdProducto;
 
-
     /* BEGIN FUNCIONES GENERALES */
 
     /* END FUNCIONES GENERALES */
@@ -925,8 +900,6 @@ include('modulos/cerrar_sesion.php');
         });
     }
 
-
-
     function Obtener_Producto(act, nombre, sede) {
         var lista = '';
         $.ajax({
@@ -958,19 +931,13 @@ include('modulos/cerrar_sesion.php');
         Obtener_Producto('MostrarProductoxNombre', '%' + $("#TxtProducto").val() + '%', 1);
     });
     $("#TxtProducto").change(function() {
-        //var value = $('#TxtProducto').val();
         IdProducto = $('#productos [value="' + $('#TxtProducto').val() + '"]').data('value');
-        console.log(IdProducto);
-        //Obtener_Precio('MostrarPrecio', $('#productos [value="' + value + '"]').data('value'));
     });
 
 
     $('#btnBuscar').click(function() {
         Obtener_Tablas_Detalle_Producto('tablaResumenDetalleProducto', IdProducto);
     });
-
-
-
 
     function Obtener_Tablas_Detalle_Producto(act, Id) {
         $.ajax({
@@ -990,7 +957,6 @@ include('modulos/cerrar_sesion.php');
                 var sede;
                 $.each(json, function(i, item) {
                     sede = json[i].Producto_Id;
-                    console.log('-- ' + sede);
                     $("#tablaResumenDetalleProducto").append('<tr>' +
                         '<td class="text-truncate">' + json[i].Orden + '</td>' +
                         '<td class="text-truncate">' + json[i].Sede_Nombre + '</td>' +
@@ -998,17 +964,6 @@ include('modulos/cerrar_sesion.php');
                         '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
                         '<td class="text-truncate">' + json[i].Almacen_Cantidad + '</td>' +
                         '<td class="text-truncate"> <button onclick="CambiarSede(' + json[i].Almacen_Id + ',' + json[i].Almacen_Cantidad + ',' + json[i].Sede_Id + ',' + json[i].Producto_Id + ');" id="btnMover" name="btnMover" class="btn btn-success mr-1" type="button"> MOVER</button> </td>' + '</tr>');
-                    /*                         '<td class="text-truncate">'+
-                                            '<button onclick="CambiarSede('" +  sede  +"');" id="btnMover" name="btnMover" class="btn btn-success mr-1" type="button">'+
-                                            'MOVER' +
-                                            '</button> </td>' + '</tr>'); */
-
-                    //ts.Sede_Id
-
-                    //'<td class="text-truncate"> <button onclick="CambiarSede('+json[i].Almacen_Id+','+json[i].Almacen_Cantidad+','+json[i].Sede_Nombre +');" id="btnMover" name="btnMover" class="btn btn-success mr-1" type="button"> MOVER</button> </td>' + '</tr>');
-                    //'<td class="text-truncate"> <button onclick="editarFila(this);" id="btnMover" name="btnMover" class="btn btn-success mr-1" type="button" value="' + json[i].Almacen_Id + '"> MOVER</button> </td>' + '</tr>');
-                    //'<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Mover' + '</button> </td>' + '</tr>');
-                    //'<td class="text-truncate"><a class="btn btn-success btn-sm" href="vacuna-nuevo.php?IdMas=' + json[i].Mascota_Id + '&IdPro=' + json[i].Vacunas_Id + '">' + 'Atender' + '</a> </td> </tr>');
                 });
                 /* <span onClick="dataUser(3,'admin');" style="cursor: pointer">Ver Usuario</span> */
             },
@@ -1018,44 +973,19 @@ include('modulos/cerrar_sesion.php');
         });
     }
 
-
-    $('#btnMover').click(function() {
-        //Obtener_Tablas_Detalle_Producto('tablaResumenDetalleProducto',IdProducto);
-        //alert($(this).val());
-    });
-
-    /*     function CambiarSede(sede, cantidad, nombre){
-            console.log(sede);
-            console.log(cantidad);
-            console.log(nombre);
-            //alert($(this).val());
-            //alert(sede, + ' -- ' + cantidad);
-            $('#lblSede').html(nombre);
-            $('#lblCantidad').html(cantidad);
-            $('#Modal_Movimiento').modal("show");
-        }
-     */
-
     function CambiarSede(almacen, cantidad, sede, producto) {
-        console.log(sede);
-        console.log(cantidad);
         $('#Txt_Fecha').val(MostrarFechaActual());
         $('#lblCantidad').html(cantidad);
         $('#CodigoAlmacen').val(almacen);
         $('#CodigoProducto').val(producto);
         $('#IdAlmacenAnterior').val(sede);
-        
         Obtener_Sede_x_Id('MostrarSede_x_Id', sede)
         Obtener_Sede('MostrarSede');
         $('#Modal_Movimiento').modal("show");
-
     }
-
-
 
     /* INICIO FUNCIONES */
     function Obtener_Sede_x_Id(act, id) {
-        console.log(id);
         $.ajax({
             type: "POST",
             url: "modulos/inicio.php",
@@ -1067,13 +997,10 @@ include('modulos/cerrar_sesion.php');
             }),
             beforeSend: function() {},
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 //$("#CboSede").empty();
                 $.each(json, function(i, item) {
-                    console.log(json[i].Sede_Nombre)
                     $('#lblSede').html(json[i].Sede_Nombre);
-                    //$("#CboSede").append('<option value="' + json[i].Sede_Id + '">' + json[i].Sede_Nombre + '</option>');
                 });
             },
             complete: function() {
@@ -1105,31 +1032,14 @@ include('modulos/cerrar_sesion.php');
         });
     }
 
-
-
-
-
-
-
-
-
-
-
     $("#BtnGrabar").click(function() {
-        console.log('btng');
         ProcesoGrabacion();
     });
 
     function ProcesoGrabacion() {
-
         if ($('#Txt_Cantidad').val() != 0) {
-            alert('ingrese');
-
             if ($('#Txt_Cantidad').val() <= $('#lblCantidad').html()) {
-                alert('ok');
-
-
-           RegistrarMovimiento(
+            RegistrarMovimiento(
                "GrabarMovimiento",
                $("#Txt_Fecha").val(),
                $('#CodigoAlmacen').val(),
@@ -1139,23 +1049,16 @@ include('modulos/cerrar_sesion.php');
                '<?php echo $_SESSION['User']; ?>',
                $('#CodigoProducto').val(),
                $('#IdAlmacenAnterior').val());                 
-
-
-
             } else {
-                alert('error');
+                alert('La cantidad ingresada es mayor al stock del almacen');
             }
-
         } else {
-            alert('error');
+            alert('La cantidad ingresada debe ser mayor a cero');
         }
-
     }
 
-
     function RegistrarMovimiento(act, Fecha, Almacen, SedeNueva, Cantidad, Observacion, UserGrabacion, Producto, SedeAnterior) {
-        console.log(act + '-' +  Fecha + '-' +  SedeAnterior + '-' +  SedeNueva + '-' +  Cantidad + '-' +  Observacion + '-' +  UserGrabacion +'-'+ Producto);
-        //console.log(act + '-' + Fecha + '-' + Movimiento + '-' + Documento + '-' + Monto + '-' + Notas);
+        //console.log(act + '-' +  Fecha + '-' +  SedeAnterior + '-' +  SedeNueva + '-' +  Cantidad + '-' +  Observacion + '-' +  UserGrabacion +'-'+ Producto);
         $.ajax({
             type: "POST",
             url: "modulos/movimientos.php",
@@ -1176,10 +1079,6 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
-/*                 $('#Txt_Codigo').val(data);
-                $("#Resultado_Grabacion").show();
-                $("#Resultado_Grabacion").html(''); */
                 if (data == 1) {
                     alert('Se realizó el cambio de almacen correctamente');
                     Obtener_Tablas_Detalle_Producto('tablaResumenDetalleProducto', IdProducto);
@@ -1198,8 +1097,6 @@ include('modulos/cerrar_sesion.php');
     }
 
     var listar = function() {
-        console.log($('#Txt_FechaInicial').val() + ',' + $('#Txt_FechaFinal').val() + ',' + $("#CboSede_Bus").val());
-
         var url = "modulos/cuadro-venta_listado.php?fi=" + $('#Txt_FechaInicial').val() + "&ff=" + $('#Txt_FechaFinal').val() + "&s=" + $("#CboSede_Bus").val();
         table = $('#TblMovimientos').DataTable({
             "destroy": true,
@@ -1223,9 +1120,7 @@ include('modulos/cerrar_sesion.php');
             "order": [
                 [1, 'asc']
             ],
-
             /*  END OCULTAR COLUMNAS*/
-
             "columnDefs": [{
                     "targets": [0, 1, 2, 3, 4, 6, 8],
                     "className": "dt-body-left"
@@ -1235,7 +1130,6 @@ include('modulos/cerrar_sesion.php');
                     "className": "dt-body-center"
                 }
             ],
-
             "columns": [{
                     "data": "Orden"
                 },
@@ -1298,7 +1192,6 @@ include('modulos/cerrar_sesion.php');
                     exportOptions: {
                         columns: [0, 1, 2, 3, 4, 5, 6, 7]
                     },
-
                     //className: 'btn btn-success'
                     "oSelectorOpts": {
                         filter: 'applied',
@@ -1353,9 +1246,7 @@ include('modulos/cerrar_sesion.php');
                 $(api.column(7).footer()).html(
                     'S/. ' + total_2.toFixed(2)
                 );
-
             },
-
             "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
             }
@@ -1370,15 +1261,9 @@ include('modulos/cerrar_sesion.php');
         limpiaForm($("#FormularioMovimientos"));
         DesactivarBotones(true, false, true);
         $("#CboTipoMovimiento option[value=1]").attr("selected", true);
-        console.log(IdSede);
-        console.log('sede : ' + $('#CboSede').val());
-        //$("#CboSede option[value=" + IdSede + "]").attr("selected", true);
         $("#CboSede").val(IdSede)
-        console.log('sede : ' + $('#CboSede').val());
         $("#Resultado_Grabacion").hide();
     }
-
-
 
     function Actualizar_Nuevo() {
         //limpiaForm($("#FormularioMovimientos"));
@@ -1396,7 +1281,6 @@ include('modulos/cerrar_sesion.php');
     });
 
     function Eliminar_CuadroVenta(act, codigo) {
-        console.log(act + '-' + codigo);
         $.ajax({
             type: "POST",
             url: "modulos/cuadro-venta.php",
@@ -1427,7 +1311,6 @@ include('modulos/cerrar_sesion.php');
     }
 
     function MuestraAlert() {
-        console.log('soy alerta');
         setTimeout(function() {
             //alert("Hello");
             if (!table.data().count()) {
@@ -1445,19 +1328,8 @@ include('modulos/cerrar_sesion.php');
 
     $(function() {
 
-               //$('#Txt_Fecha').val(MostrarFechaActual());
-          /*        $('#Txt_FechaInicial').val(MostrarFechaActual());
-                $('#Txt_FechaFinal').val(MostrarFechaActual()); */
-        /*         Obtener_Sede('MostrarSede');
-                Obtener_Sede_2('MostrarSede'); */
-        //Obtener_Sede_Usuario('MostrarSede_Usuario');
-        //listar();
-        //DesactivarBotones(true, false, true);
-
         Obtener_Condicion();
         Obtener_Nombre();
-
-        //MuestraAlert();
 
         window.setTimeout(function() {
             $(".alert").fadeTo(500, 0).slideUp(500, function() {

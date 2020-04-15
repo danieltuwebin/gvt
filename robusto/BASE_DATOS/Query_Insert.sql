@@ -3520,3 +3520,47 @@ BEGIN
 SELECT Sede_Id,Sede_Nombre FROM tblSede WHERE Sede_Estado = 1 AND Sede_Id = Pint_IdSede;
 END$$
 DELIMITER ;    
+
+
+DROP PROCEDURE IF EXISTS SP_Registrar_TblMovimiento;
+DELIMITER $$
+CREATE PROCEDURE SP_Registrar_TblMovimiento(IN Pdate_Fecha DATE, 
+                                            IN Pint_Almacen INT,
+                                            IN Pint_SedeNueva INT,
+                                            IN Pflo_Cantidad FLOAT,
+                                            IN Pvchr_Observacion VARCHAR(1000),
+                                            IN Pvhcr_UserGrabacion VARCHAR(50),
+                                            IN Pint_Producto INT,
+                                            IN Pint_SedeAnterior INT)
+BEGIN
+	-- DISMINUIR ALMACEN
+  UPDATE tblAlmacen 
+  SET Almacen_Cantidad = Almacen_Cantidad - Pflo_Cantidad, Almacen_FechaGrab_Edicion = NOW(), Almacen_UserGrab_Edicion = Pvhcr_UserGrabacion
+  WHERE Almacen_Id = Pint_Almacen AND Almacen_Estado = 1;
+	-- AUMENTAR ALMACEN
+  	IF EXISTS(SELECT * FROM tblAlmacen 
+              WHERE Almacen_IdSede = Pint_SedeNueva AND Almacen_IdProducto = Pint_Producto AND Almacen_Estado = 1)THEN
+  	UPDATE tblAlmacen 
+  	SET Almacen_Cantidad = Almacen_Cantidad + Pflo_Cantidad, Almacen_FechaGrab_Edicion = NOW(), Almacen_UserGrab_Edicion = Pvhcr_UserGrabacion
+  	WHERE Almacen_IdSede = Pint_SedeNueva AND Almacen_IdProducto = Pint_Producto AND Almacen_Estado = 1;
+  ELSE
+	INSERT INTO tblAlmacen(Almacen_IdKardex, Almacen_IdProducto, Almacen_Cantidad, Almacen_IdSede, Almacen_Observacion, Almacen_Estado, Almacen_FechaGra, Almacen_UserGrab)
+    VALUES (0,Pint_Producto,Pflo_Cantidad,Pint_SedeNueva,Pvchr_Observacion,1,NOW(),Pvhcr_UserGrabacion);
+  END IF;
+
+INSERT INTO tblMovimiento(Movimiento_fecha
+                          , Movimiento_sedeAnterior
+                          , Movimiento_SedeNueva
+                          , Movimiento_Cantidad
+                          , Movimiento_Observacion
+                          , Movimiento_Usuario
+                          , Movimiento_FechaGrabacion) 
+VALUES (Pdate_Fecha
+        ,Pint_SedeAnterior
+        ,Pint_SedeNueva
+        ,Pflo_Cantidad
+        ,Pvchr_Observacion
+        ,Pvhcr_UserGrabacion,NOW());
+SELECT '1' AS CODIGO;
+END $$
+DELIMITER ;

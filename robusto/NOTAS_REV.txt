@@ -34,6 +34,9 @@ Revisados
 24.listado-atencion.php     : OK
 25.venta-nuevo.php          : OK
 26.listado-venta.php        : OK
+27.listado-movimientos      : OK
+28.listado-agenda.php       : OK
+29.cuadro-venta.php         : OK
 
 
 

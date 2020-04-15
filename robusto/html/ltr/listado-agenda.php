@@ -1065,7 +1065,6 @@ include('modulos/cerrar_sesion.php');
 
     $('#TblAgenda').on('click', '.editar', function() {
         var id = $(this).val();
-        console.log($(this).val());
         if (Condicion == 1) {
             Obtener_Banio('MostrarProductoxCondicion', 2);
             Obtener_Datos_Banio('ObtenerDatosBaniosxId', id);
@@ -1090,9 +1089,7 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboProducto").empty();
                 $.each(json, function(i, item) {
                     $("#CboProducto").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
@@ -1118,9 +1115,7 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $.each(json, function(i, item) {
 
                     var DniMascota = json[i].Mascota_Id;
@@ -1170,9 +1165,7 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
-                console.log(json);
                 $("#CboMascota").empty();
                 $.each(json, function(i, item) {
                     $("#CboMascota").append('<option value="' + json[i].Mascota_Id + '">' + json[i].Mascota_Nombre + '</option>');
@@ -1187,7 +1180,6 @@ include('modulos/cerrar_sesion.php');
 
     $('#FormularioBanio input').on('change', function() {
         ValorRb = $('input[name=Dni]:checked', '#FormularioBanio').val();
-        console.log(ValorRb);
     });
 
     $('#btnBuscar').click(function() {
@@ -1213,10 +1205,8 @@ include('modulos/cerrar_sesion.php');
             }),
             beforeSend: function() {
                 //alert('ok');
-                console.log(act + ':' + condicion + ':' + id);
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 if (json.length != 0) {
                     if (condicion == 1) {
@@ -1268,7 +1258,6 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 var json = JSON.parse(data);
                 $("#Txt_Precio").empty();
                 $.each(json, function(i, item) {
@@ -1364,7 +1353,6 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 if (data == 1) {
                     $("#Modal_ListadoBanios").modal("hide");
                     listar();
@@ -1409,7 +1397,6 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 if (data == 1) {
                     listar();
                 } else {
@@ -1427,13 +1414,7 @@ include('modulos/cerrar_sesion.php');
 
         Obtener_Nombre();
         Obtener_Condicion();
-        /*
-        if ($_GET("IdCli") === undefined) {
-            console.log('sin valor');
-        } else {
-            IdMascotaExterno = $_GET("IdCli");
-            console.log(IdMascotaExterno);
-        }*/
+
         listar();
 
     });

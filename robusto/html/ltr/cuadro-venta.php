@@ -998,7 +998,6 @@ include('modulos/cerrar_sesion.php');
             beforeSend: function() {},
             success: function(data) {
                 IdSede = data;
-                console.log(IdSede);
                 $("#CboSede option[value=" + IdSede + "]").attr("selected", true);
                 $("#CboSede_Bus option[value=" + IdSede + "]").attr("selected", true);
             },
@@ -1016,7 +1015,6 @@ include('modulos/cerrar_sesion.php');
     }
 
     $("#btngrabar").click(function() {
-        console.log('btng');
         ProcesoGrabacion();
     });
 
@@ -1063,7 +1061,6 @@ include('modulos/cerrar_sesion.php');
                         return 0;
                     } else {
                         return 1;
-                        console.log('retorna 1');
                     }
                 }
             }
@@ -1071,7 +1068,7 @@ include('modulos/cerrar_sesion.php');
     }
 
     function RegistrarCuadroVenta(act, Fecha, Movimiento, Documento, Monto, Notas, Sede, Usuario) {
-        console.log(act+'-'+ Fecha+'-'+ Movimiento+'-'+ Documento+'-'+ Monto+'-'+ Notas);
+        //console.log(act+'-'+ Fecha+'-'+ Movimiento+'-'+ Documento+'-'+ Monto+'-'+ Notas);
         $.ajax({
             type: "POST",
             url: "modulos/cuadro-venta.php",
@@ -1091,7 +1088,6 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok');
             },
             success: function(data) {
-                console.log(data);
                 $('#Txt_Codigo').val(data);
                 $("#Resultado_Grabacion").show();
                 $("#Resultado_Grabacion").html('');
@@ -1123,8 +1119,6 @@ include('modulos/cerrar_sesion.php');
     }
 
     var listar = function() {
-        console.log($('#Txt_FechaInicial').val() + ',' + $('#Txt_FechaFinal').val() + ',' +$("#CboSede_Bus").val());
-
         var url = "modulos/cuadro-venta_listado.php?fi=" + $('#Txt_FechaInicial').val() + "&ff=" + $('#Txt_FechaFinal').val() + "&s=" +$("#CboSede_Bus").val();
         table = $('#TblMovimientos').DataTable({
             "destroy": true,
@@ -1295,11 +1289,7 @@ include('modulos/cerrar_sesion.php');
         limpiaForm($("#FormularioMovimientos"));
         DesactivarBotones(true, false, true);
         $("#CboTipoMovimiento option[value=1]").attr("selected", true);
-        console.log(IdSede);
-        console.log('sede : ' + $('#CboSede').val()  );
-        //$("#CboSede option[value=" + IdSede + "]").attr("selected", true);
         $("#CboSede").val(IdSede)
-        console.log('sede : ' + $('#CboSede').val()  );
         $("#Resultado_Grabacion").hide();
     }
 
@@ -1324,7 +1314,6 @@ include('modulos/cerrar_sesion.php');
     });
 
     function Eliminar_CuadroVenta(act, codigo) {
-        console.log(act+'-'+codigo);
         $.ajax({
             type: "POST",
             url: "modulos/cuadro-venta.php",
@@ -1355,7 +1344,6 @@ include('modulos/cerrar_sesion.php');
     }
 
     function MuestraAlert() {
-        console.log('soy alerta');
         setTimeout(function() {
             //alert("Hello");
             if (!table.data().count()) {
