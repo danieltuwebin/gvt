@@ -116,7 +116,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
                             <li>
-                                <a href="listado-movimientos.php" class="menu-item">Kardex Producto-Serv.</a>
+                                <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
                             </li>                             
                         </ul>
                     </li>
@@ -157,9 +157,7 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="listado-desparacitacion.php" class="menu-item">Listado Desparacitaciones</a>
                             </li>
-                            <li>
-                                <a href="listado-movimientos.php" class="menu-item">Kardex Producto-Serv.</a>
-                            </li>                             
+                        
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -307,7 +305,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
                             <li>
-                                <a href="listado-movimientos.php" class="menu-item">Kardex Producto-Serv.</a>
+                                <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
                             </li>                             
                         </ul>
                     </li>
@@ -495,7 +493,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
                             <li>
-                                <a href="listado-movimientos.php" class="menu-item">Kardex Producto-Serv.</a>
+                                <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
                             </li>                             
                         </ul>
                     </li>

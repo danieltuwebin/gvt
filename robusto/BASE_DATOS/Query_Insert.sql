@@ -3501,3 +3501,22 @@ VALUES
  SELECT IngEgr_Id FROM tblIngresosEgresos ORDER BY IngEgr_Id DESC LIMIT 1;
 END $$
 DELIMITER ;
+
+
+CREATE TABLE tblMovimiento(
+	Movimiento_Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Movimiento_fecha DATE,
+    Movimiento_sedeAnterior INT,
+    Movimiento_SedeNueva INT,
+    Movimiento_Cantidad FLOAT,
+    Movimiento_Observacion VARCHAR(100),
+    Movimiento_Usuario VARCHAR(50),
+    Movimiento_FechaGrabacion DATETIME)
+
+
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblSede_Nombre_x_Id(IN Pint_IdSede INT)
+BEGIN
+SELECT Sede_Id,Sede_Nombre FROM tblSede WHERE Sede_Estado = 1 AND Sede_Id = Pint_IdSede;
+END$$
+DELIMITER ;    

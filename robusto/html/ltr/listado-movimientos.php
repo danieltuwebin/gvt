@@ -13,7 +13,7 @@ include('modulos/cerrar_sesion.php');
     <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="DCCAHUAY">
-    <title>Listado desparacitación - Sistema Vet. TuWebIn</title>
+    <title>Movimientos Productos/servicios - Sistema Vet. TuWebIn</title>
     <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/gavet-icon-60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/gavet-icon-76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="../../app-assets/images/ico/gavet-icon-120.png">
@@ -38,7 +38,6 @@ include('modulos/cerrar_sesion.php');
     <!-- BEGIN Page Level CSS-->
     <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/menu/menu-types/vertical-overlay-menu.css">
-    <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/colors/palette-tooltip.css">
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
@@ -64,7 +63,7 @@ include('modulos/cerrar_sesion.php');
         $CondicionMnu = $_SESSION['UserPerfil'];
 
         if ($CondicionMnu == 1) { /* PERFIL ADMIN (1) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -116,9 +115,9 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -155,7 +154,7 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="desparacitacion-nuevo.php" class="menu-item">Nueva Desparacitación</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="listado-desparacitacion.php" class="menu-item">Listado Desparacitaciones</a>
                             </li>
                         </ul>
@@ -172,7 +171,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -252,7 +251,7 @@ include('modulos/cerrar_sesion.php');
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 2) { /* PERFIL JEFE (2) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -272,7 +271,7 @@ include('modulos/cerrar_sesion.php');
                             <span data-i18n="nav.content.main" class="menu-title">Clientes</span>
                         </a>
                         <ul class="menu-content">
-                            <li>
+                            <li class="active">
                                 <a href="cliente-nuevo.php" class="menu-item">Nuevo Cliente</a>
                             </li>
                             <li>
@@ -304,9 +303,9 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -343,7 +342,7 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="desparacitacion-nuevo.php" class="menu-item">Nueva Desparacitación</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="listado-desparacitacion.php" class="menu-item">Listado Desparacitaciones</a>
                             </li>
                         </ul>
@@ -360,7 +359,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -444,7 +443,7 @@ include('modulos/cerrar_sesion.php');
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 3) { /* PERFIL SOLO LECTURA (3) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -492,7 +491,7 @@ include('modulos/cerrar_sesion.php');
                             <li>
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
                             </li>                             
                         </ul>
@@ -523,7 +522,7 @@ include('modulos/cerrar_sesion.php');
                             <span data-i18n="nav.content.main" class="menu-title">Desparacitación</span>
                         </a>
                         <ul class="menu-content">
-                            <li  class="active">
+                            <li>
                                 <a href="listado-desparacitacion.php" class="menu-item">Listado Desparacitaciones</a>
                             </li>
                         </ul>
@@ -537,7 +536,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -619,128 +618,79 @@ include('modulos/cerrar_sesion.php');
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
     <!-- Modal -->
-    <div class="modal fade text-xs-left" id="Modal_ListadoDesparacitacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
+    <div class="modal fade text-xs-left" id="Modal_Movimiento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel17"><label id="LblIdDesparacitacion">Edición Desparacitación</label></h4>
+                    <h4 class="modal-title" id="myModalLabel17"><label id="LblIdProser">Cambiar Almacen</label></h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form" id="FormularioDesparacitacion">
+                    <form class="form" id="FormularioMovimiento">
+                    <input type="hidden" id="CodigoAlmacen" name="CodigoAlmacen">
+                    <input type="hidden" id="CodigoProducto" name="CodigoProducto">
+                    <input type="hidden" id="IdAlmacenAnterior" name="IdAlmacenAnterior">                    
                         <div class="form-body">
-                            <h4 class="form-section">Propietario</h4>
+
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="input-group">
-                                                <label for="Txt_Buscar_Dni"><strong>Buscar Por :</strong></label>
-                                                <label class="display-inline-block custom-control custom-radio ml-1">
-                                                    <input type="radio" id="RbDniP" name="Dni" class="custom-control-input" value="1">
-                                                    <span class="custom-control-indicator"></span>
-                                                    <span class="custom-control-description ml-0">DNI Propietario</span>
-                                                </label>
-                                                <label class="display-inline-block custom-control custom-radio">
-                                                    <input type="radio" id="RbDniM" name="Dni" class="custom-control-input" value="2" checked>
-                                                    <span class="custom-control-indicator"></span>
-                                                    <span class="custom-control-description ml-0">DNI Mascota</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="text" id="Txt_Dni" class="form-control" placeholder="Ingrese DNI" name="Txt_Dni">
-                                                    <span class="input-group-btn">
-                                                        <button id="btnBuscar" class="btn btn-warning mr-1" type="button"> <i class="icon-search5"></i> Buscar</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <h5>
-                                                    <label for="Txt_Nombre_Dni">Nombre propietario :&nbsp;&nbsp; </label><label id="Txt_Nombre_Dni" class="primary"></label>
-                                                    <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
-                                                    <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">
-                                                    <input type="hidden" id="Txt_CodigoDesparacitacion" name="Txt_CodigoDesparacitacion">
-                                                </h5>
-                                            </div>
-                                        </div>
+                                <div class="col-xs-12 col-md-3">
+                                    <div class="form-group">
+                                        <b>SEDE ACTUAL : </b><label id="lblSede" name="lblSede"></label>
                                     </div>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <label for="CboMascota">Seleccione nombre mascota :
-                                                    <!-- <label class="display-inline" for="CboMascota">Seleccione nombre mascota : -->
-                                                    <!-- <label class="display-inline-block" for="CboProducto">S : -->
-                                                    <select id="CboMascota" name="CboMascota" class="form-control">
-                                                    </select>
-                                                </label>
-                                            </div>
-                                        </div>
+                                <div class="col-xs-12 col-md-3">
+                                    <div class="form-group">
+                                        <b>CANTIDAD ACTUAL : </b><label id="lblCantidad" name="lblCantidad"></label>
                                     </div>
                                 </div>
-
                             </div>
 
-                            <br>
-                            <h4 class="form-section">Datos de Mascota</h4>
-
                             <div class="row">
-                                <div class="col-md-5">
+
+
+                                <div class="col-xs-12 col-md-2">
                                     <div class="form-group">
-                                    <label for="CboProducto">Seleccione Desparacitación :</label>
-                                                            <select id="CboProducto" name="CboProducto" class="form-control">
-                                                            </select>
+                                        <label for="Txt_Cantidad">Cantidad</label>
+                                        <input type="number" id="Txt_Cantidad" class="form-control" placeholder="0" value="0" name="Cantidad">
+                                        <input type="hidden" id="Txt_Codigo" name="Txt_Codigo">
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="Txt_Precio">Precio</label>
-                                        <input type="text" style="text-transform:uppercase;" id="Txt_Precio" class="form-control" placeholder="00.00" name="Txt_Precio">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="CboEstado">Estado Desparacitación :</label>
-                                        <select id="CboEstado" name="CboEstado" class="form-control">
-                                            <option value="1" disabled="disabled">REALIZADO</option>                                                 
-                                            <option value="2">AGENDADO</option>
-                                            <option value="3">REPROGRAMADO</option>
-                                        </select>
-                                    </div>
-                                </div>
+
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="Txt_Fecha">Fecha Vacunación </label>
+                                        <label for="Txt_Fecha">Fecha </label>
                                         <input id="Txt_Fecha" type="date" class="form-control">
                                     </div>
                                 </div>
+
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="CboSede">Seleccione Sede</label>
+                                        <select id="CboSede" name="CboSede" class="form-control"></select>
+                                    </div>
+                                </div>
+
+
                             </div>
 
-                            <div class="form-group">
-                                <label for="Txt_Notas">Notas</label>
-                                <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales"></textarea>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Txt_Notas">Notas</label>
+                                        <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales" onkeyup="javascript:this.value=this.value.toUpperCase();"></textarea>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <div class="row">
-                        <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">Cerrar</button>
-                        <button id="BtnActualizarDesparacitacion" type="button" class="btn btn-success mr-1"><i class="icon-edit2"></i>Grabar Edición</button>
-                    </div>
+                    <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">Cerrar</button>
+                    <button id="BtnGrabar" type="button" class="btn btn-success mr-1"><i class="icon-edit2"></i>Grabar Cambio</button>
                 </div>
             </div>
         </div>
@@ -751,68 +701,123 @@ include('modulos/cerrar_sesion.php');
     <div class="app-content content container-fluid">
         <div class="content-wrapper">
             <div class="content-header row">
-                <div class="content-header-left col-md-3 col-xs-12 mb-1">
-                    <h2 class="content-header-title">Listado de Desparacitación</h2>
+                <div class="content-header-left col-md-6 col-xs-12 mb-1">
+                    <h2 class="content-header-title">Mover Productos</h2>
                 </div>
-                <?php
-
-                if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-                    ?>
-                    <div class="content-header-left col-md-3 col-xs-12 mb-1">
-                        <button id="BtnNuevo" type="button" class="btn btn-success"><i class="icon-android-add-circle"></i> Nueva Desparacitación</button>
-                    </div>
-                <?php
-                }
-                ?>
-
             </div>
             <div class="content-body">
-                <!-- Bordered striped start -->
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Desparacitación</h4>
-                                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-                                <div class="heading-elements">
-                                    <ul class="list-inline mb-0">
-                                        <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
-                                        <li onclick="Actualizar()"><a data-action="reload"><i class="icon-reload"></i></a></li>
-                                        <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
-                                        <!-- <li><a data-action="close"><i class="icon-cross2"></i></a></li> -->
-                                    </ul>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="card-body collapse in">
-                            <div class="card-block">
-                                <div class="card-body collapse in">
-                                    <div class="table-responsive">
-                                        <!-- <table id="TblDesparacitacion" class="table table-bordered table-striped"> -->
-                                        <table id="TblDesparacitacion" class="table table-striped table-bordered" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>DNI mascota</th>
-                                                    <th>Nombre</th>
-                                                    <th>Fecha_Despar.</th>
-                                                    <th>Desparacitación</th>
-                                                    <th>Estado</th>
-                                                    <th>Observación</th>
-                                                    <th>Administrar</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div id="Resultado_Grabacion"></div>
-                                </div>
-                            </div>
+                <!-- Basic form layout section start -->
+                <section id="basic-form-layouts">
+                    <div class="row match-height">
 
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title" id="basic-layout-form">Productos / Servicios</h4>
+                                    <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+                                            <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                                            <li onclick="Actualizar_Nuevo()"><a data-action="reload"><i class="icon-reload"></i></a></li>
+                                            <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body collapse in">
+                                    <div class="card-block">
+                                        <form class="form" id="FormularioMovimientos">
+                                            <input type="hidden" id="Txt_Codigo" name="Txt_Codigo">
+                                            <div class="form-body">
+
+                                                <div class="row">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="TxtProducto">Seleccione Producto :</label>
+                                                            <input list="productos" style="text-transform:uppercase;" id="TxtProducto" class="form-control" placeholder="Ingrese producto" name="TxtProducto">
+                                                            <datalist id="productos" size="400">
+                                                                <!--
+                                                                <option>PNG</option>
+                                                                <option>JPEG</option>
+                                                                <option>GIF</option>
+                                                                <option>TGA</option> 
+                                                                -->
+                                                            </datalist>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+
+                                                        <div class="form-group">
+                                                            <br>
+                                                            <label for=""></label>
+                                                            <!-- <label class="display-inline-block" for="Botones">&nbsp; </label><br> -->
+                                                            <button id="btnBuscar" class="btn btn-warning mr-1" type="button"> <i class="icon-search5"></i> Buscar</button>
+                                                        </div>
+                                                    </div>
+
+
+
+
+
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="card">
+                                                            <!--                                                         <div class="card-header">
+                                                            <h4 class="card-title">Proximas Atenciones</h4>
+                                                            <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                                            <div class="heading-elements">
+                                                                <ul class="list-inline mb-0">
+                                                                    <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div> -->
+                                                            <div class="card-body">
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-hover mb-0">
+                                                                        <!-- ENCABEZADO -->
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th style="width: 5%;">Nro.</th>
+                                                                                <th style="width: 10%;">Sede</th>
+                                                                                <th style="width: 10%;">Codigo</th>
+                                                                                <th style="width: 40%;">Nombre</th>
+                                                                                <th style="width: 10%;">Cantidad</th>
+                                                                                <th style="width: 15%;">Cambiar Sede</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <!-- DETALLE -->
+                                                                        <tbody id="tablaResumenDetalleProducto">
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div id="Resultado_Grabacion"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+
+
                     </div>
-                </div>
+                </section>
+                <!-- // Basic form layout section end -->
             </div>
         </div>
     </div>
@@ -826,14 +831,10 @@ include('modulos/cerrar_sesion.php');
     <br>
     <br>
 
-
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
-
-
     <?php
     require_once("includes_html/footer.php");
     ?>
-    
+
     <!-- BEGIN VENDOR JS-->
     <script src="../../app-assets/js/core/libraries/jquery.min.js" type="text/javascript"></script>
     <script src="../../app-assets/vendors/js/ui/tether.min.js" type="text/javascript"></script>
@@ -852,7 +853,6 @@ include('modulos/cerrar_sesion.php');
     <script src="../../app-assets/js/core/app.js" type="text/javascript"></script>
     <!-- END ROBUST JS-->
     <!-- BEGIN PAGE LEVEL JS-->
-    <script src="../../app-assets/js/scripts/tooltip/tooltip.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
 
     <!-- BEGIN PROPIOS JS-->
@@ -873,28 +873,34 @@ include('modulos/cerrar_sesion.php');
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/b-1.5.6/b-html5-1.5.6/datatables.min.js"></script>
     <!-- END DATATABLE JS-->
-
 </body>
-
-
-<!-- css de ejemplo clases -->
-<style type="text/css">
-    .linea_buttons {
-        display: inline-block;
-    }
-</style>
-<!-- / css de ejemplo clases -->
 
 <!-- BEGIN. EVENTOS SCRIPT-->
 <script type="text/javascript">
-    var Condicion;
     var table;
-    var IdMascota = '';
-    var IdMascotaExterno = 0;
-    var ValorRb = 2;
+    var IdProducto;
+
+
+    /* BEGIN FUNCIONES GENERALES */
+
+    /* END FUNCIONES GENERALES */
 
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
+    }
+
+    function Obtener_Condicion() {
+        <?php
+        if ($CondicionMnu == 1 || $CondicionMnu == 2) {
+        ?>
+            Condicion = 1;
+        <?php
+        } else {
+        ?>
+            Condicion = 0;
+        <?php
+        }
+        ?>
     }
 
     $('#Salir').click(function() {
@@ -910,7 +916,9 @@ include('modulos/cerrar_sesion.php');
             data: ({
                 action: act
             }),
-            beforeSend: function() {},
+            beforeSend: function() {
+
+            },
             success: function(data) {
                 var url = "login.php";
                 $(location).attr('href', url);
@@ -921,132 +929,353 @@ include('modulos/cerrar_sesion.php');
         });
     }
 
-    function Obtener_Condicion() {
-        <?php
-        if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-            ?>
-            Condicion = 1;
-        <?php
-        } else {
-            ?>
-            Condicion = 0;
-        <?php
-        }
-        ?>
-    }
 
-    function Obtener_Codigo_Formateado(id) {
-        if (id.length == 1) {
-            var Cod = 'D000' + id;
-        } else if (id.length == 2) {
-            var Cod = 'D00' + id;
-        } else if (id.length == 3) {
-            var Cod = 'D0' + id;
-        } else {
-            var Cod = 'D' + id;
-        }
-        return Cod;
-    }    
 
-    //http://jquery-manual.blogspot.com/2013/12/como-obtener-parametros-get-con.html?mensaje=ok
-    function $_GET(param) {
-        /* Obtener la url completa */
-        url = document.URL;
-        /* Buscar a partir del signo de interrogación ? */
-        url = String(url.match(/\?+.+/));
-        /* limpiar la cadena quitándole el signo ? */
-        url = url.replace("?", "");
-        /* Crear un array con parametro=valor */
-        url = url.split("&");
-        /* 
-        Recorrer el array url --> obtener el valor y dividirlo en dos partes a través del signo = 
-        0 = parametro
-        1 = valor
-        Si el parámetro existe devolver su valor
-        */
-        x = 0;
-        while (x < url.length) {
-            p = url[x].split("=");
-            if (p[0] == param) {
-                return decodeURIComponent(p[1]);
+    function Obtener_Producto(act, nombre, sede) {
+        var lista = '';
+        $.ajax({
+            type: "POST",
+            url: "modulos/compras.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                Nombre: nombre,
+                Sede: sede
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                var json = JSON.parse(data);
+                $("#productos").empty();
+                $.each(json, function(i, item) {
+                    lista = lista + '<option data-value="' + json[i].Producto_Id + '" value="' + json[i].Producto_Nombre + '" style="display:inline-block; width:400px;"> <span> ' + '' + '</span> </option>';
+                    //lista = lista + '<option data-value="' + json[i].Producto_Id + '" value="' + json[i].Producto_Nombre + '" style="display:inline-block; width:400px;"> <span> S/. ' + json[i].Producto_PrecioVenta + '</span> <span>&nbsp;&nbsp;&nbsp;&nbsp; Stock : ' + json[i].Almacen_Cantidad + '</span> </option>';
+                });
+            },
+            complete: function() {
+                $("#productos").html(lista);
             }
-            x++;
-        }
+        });
     }
 
-    $("#BtnNuevo").click(function() {
-        var url = "desparacitacion-nuevo.php";
-        $(location).attr('href', url);
+    $("#TxtProducto").keyup(function() {
+        Obtener_Producto('MostrarProductoxNombre', '%' + $("#TxtProducto").val() + '%', 1);
+    });
+    $("#TxtProducto").change(function() {
+        //var value = $('#TxtProducto').val();
+        IdProducto = $('#productos [value="' + $('#TxtProducto').val() + '"]').data('value');
+        console.log(IdProducto);
+        //Obtener_Precio('MostrarPrecio', $('#productos [value="' + value + '"]').data('value'));
     });
 
-    function Actualizar() {
-        listar();
+
+    $('#btnBuscar').click(function() {
+        Obtener_Tablas_Detalle_Producto('tablaResumenDetalleProducto', IdProducto);
+    });
+
+
+
+
+    function Obtener_Tablas_Detalle_Producto(act, Id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/proser.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: Id
+            }),
+            beforeSend: function() {
+                $("#tablaResumenDetalleProducto").html('');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                var sede;
+                $.each(json, function(i, item) {
+                    sede = json[i].Producto_Id;
+                    console.log('-- ' + sede);
+                    $("#tablaResumenDetalleProducto").append('<tr>' +
+                        '<td class="text-truncate">' + json[i].Orden + '</td>' +
+                        '<td class="text-truncate">' + json[i].Sede_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].IdProducto + '</td>' +
+                        '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].Almacen_Cantidad + '</td>' +
+                        '<td class="text-truncate"> <button onclick="CambiarSede(' + json[i].Almacen_Id + ',' + json[i].Almacen_Cantidad + ',' + json[i].Sede_Id + ',' + json[i].Producto_Id + ');" id="btnMover" name="btnMover" class="btn btn-success mr-1" type="button"> MOVER</button> </td>' + '</tr>');
+                    /*                         '<td class="text-truncate">'+
+                                            '<button onclick="CambiarSede('" +  sede  +"');" id="btnMover" name="btnMover" class="btn btn-success mr-1" type="button">'+
+                                            'MOVER' +
+                                            '</button> </td>' + '</tr>'); */
+
+                    //ts.Sede_Id
+
+                    //'<td class="text-truncate"> <button onclick="CambiarSede('+json[i].Almacen_Id+','+json[i].Almacen_Cantidad+','+json[i].Sede_Nombre +');" id="btnMover" name="btnMover" class="btn btn-success mr-1" type="button"> MOVER</button> </td>' + '</tr>');
+                    //'<td class="text-truncate"> <button onclick="editarFila(this);" id="btnMover" name="btnMover" class="btn btn-success mr-1" type="button" value="' + json[i].Almacen_Id + '"> MOVER</button> </td>' + '</tr>');
+                    //'<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Mover' + '</button> </td>' + '</tr>');
+                    //'<td class="text-truncate"><a class="btn btn-success btn-sm" href="vacuna-nuevo.php?IdMas=' + json[i].Mascota_Id + '&IdPro=' + json[i].Vacunas_Id + '">' + 'Atender' + '</a> </td> </tr>');
+                });
+                /* <span onClick="dataUser(3,'admin');" style="cursor: pointer">Ver Usuario</span> */
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+
+    $('#btnMover').click(function() {
+        //Obtener_Tablas_Detalle_Producto('tablaResumenDetalleProducto',IdProducto);
+        //alert($(this).val());
+    });
+
+    /*     function CambiarSede(sede, cantidad, nombre){
+            console.log(sede);
+            console.log(cantidad);
+            console.log(nombre);
+            //alert($(this).val());
+            //alert(sede, + ' -- ' + cantidad);
+            $('#lblSede').html(nombre);
+            $('#lblCantidad').html(cantidad);
+            $('#Modal_Movimiento').modal("show");
+        }
+     */
+
+    function CambiarSede(almacen, cantidad, sede, producto) {
+        console.log(sede);
+        console.log(cantidad);
+        $('#Txt_Fecha').val(MostrarFechaActual());
+        $('#lblCantidad').html(cantidad);
+        $('#CodigoAlmacen').val(almacen);
+        $('#CodigoProducto').val(producto);
+        $('#IdAlmacenAnterior').val(sede);
+        
+        Obtener_Sede_x_Id('MostrarSede_x_Id', sede)
+        Obtener_Sede('MostrarSede');
+        $('#Modal_Movimiento').modal("show");
+
+    }
+
+
+
+    /* INICIO FUNCIONES */
+    function Obtener_Sede_x_Id(act, id) {
+        console.log(id);
+        $.ajax({
+            type: "POST",
+            url: "modulos/inicio.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: id
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                console.log(data);
+                var json = JSON.parse(data);
+                //$("#CboSede").empty();
+                $.each(json, function(i, item) {
+                    console.log(json[i].Sede_Nombre)
+                    $('#lblSede').html(json[i].Sede_Nombre);
+                    //$("#CboSede").append('<option value="' + json[i].Sede_Id + '">' + json[i].Sede_Nombre + '</option>');
+                });
+            },
+            complete: function() {
+                // $("#CboSede option[value=" + CondicionSede + "]").attr("selected", true);
+            }
+        });
+    }
+
+    function Obtener_Sede(act) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/inicio.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                var json = JSON.parse(data);
+                $("#CboSede").empty();
+                $.each(json, function(i, item) {
+                    $("#CboSede").append('<option value="' + json[i].Sede_Id + '">' + json[i].Sede_Nombre + '</option>');
+                });
+            },
+            complete: function() {
+                // $("#CboSede option[value=" + CondicionSede + "]").attr("selected", true);
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+    $("#BtnGrabar").click(function() {
+        console.log('btng');
+        ProcesoGrabacion();
+    });
+
+    function ProcesoGrabacion() {
+
+        if ($('#Txt_Cantidad').val() != 0) {
+            alert('ingrese');
+
+            if ($('#Txt_Cantidad').val() <= $('#lblCantidad').html()) {
+                alert('ok');
+
+
+           RegistrarMovimiento(
+               "GrabarMovimiento",
+               $("#Txt_Fecha").val(),
+               $('#CodigoAlmacen').val(),
+               $('#CboSede').val(),
+               $('#Txt_Cantidad').val(),
+               $('#Txt_Notas').val(),
+               '<?php echo $_SESSION['User']; ?>',
+               $('#CodigoProducto').val(),
+               $('#IdAlmacenAnterior').val());                 
+
+
+
+            } else {
+                alert('error');
+            }
+
+        } else {
+            alert('error');
+        }
+
+    }
+
+
+    function RegistrarMovimiento(act, Fecha, Almacen, SedeNueva, Cantidad, Observacion, UserGrabacion, Producto, SedeAnterior) {
+        console.log(act + '-' +  Fecha + '-' +  SedeAnterior + '-' +  SedeNueva + '-' +  Cantidad + '-' +  Observacion + '-' +  UserGrabacion +'-'+ Producto);
+        //console.log(act + '-' + Fecha + '-' + Movimiento + '-' + Documento + '-' + Monto + '-' + Notas);
+        $.ajax({
+            type: "POST",
+            url: "modulos/movimientos.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                Fecha: Fecha,
+                Almacen: Almacen,
+                SedeNueva: SedeNueva,
+                Cantidad: Cantidad,
+                Observacion: Observacion,
+                UserGrabacion: UserGrabacion,
+                Producto:Producto,
+                SedeAnterior: SedeAnterior,                
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                console.log(data);
+/*                 $('#Txt_Codigo').val(data);
+                $("#Resultado_Grabacion").show();
+                $("#Resultado_Grabacion").html(''); */
+                if (data == 1) {
+                    alert('Se realizó el cambio de almacen correctamente');
+                    Obtener_Tablas_Detalle_Producto('tablaResumenDetalleProducto', IdProducto);
+                    $('#Txt_Cantidad').val('')
+                    $('#Txt_Notas').val('')
+                    $('#Modal_Movimiento').modal("hide");
+                } else {
+                    alert('Ocurrio un error en el proceso de cambio de almacen');
+                }
+
+            },
+            complete: function() {
+                //Habilita_Desabilita(false,true,true);
+            }
+        });
     }
 
     var listar = function() {
-        var url = ""
-        if (IdMascotaExterno == 0) {
-            url = "modulos/desparacitacion_listado.php?Cond=1&Id=0";
-        } else {
-            //url = "modulos/vacunas_listado.php?Cond=2&Id=" + IdMascotaExterno;
-        }
+        console.log($('#Txt_FechaInicial').val() + ',' + $('#Txt_FechaFinal').val() + ',' + $("#CboSede_Bus").val());
 
-        table = $('#TblDesparacitacion').DataTable({
+        var url = "modulos/cuadro-venta_listado.php?fi=" + $('#Txt_FechaInicial').val() + "&ff=" + $('#Txt_FechaFinal').val() + "&s=" + $("#CboSede_Bus").val();
+        table = $('#TblMovimientos').DataTable({
             "destroy": true,
+            "iDisplayLength": 100,
             "ajax": {
                 "method": "POST",
                 "url": url,
+                //"dataSrc": ""
             },
-            "columns": [{
-                    //"data": "Desparacitacion_Id"
-                    "render": function(data, type, row) {
-                        if (row.Desparacitacion_Id.length == 1) {
-                            var Cod = 'D000' + row.Desparacitacion_Id;
-                        } else if (row.Desparacitacion_Id.length == 2) {
-                            var Cod = 'D00' + row.Desparacitacion_Id;
-                        } else if (row.Desparacitacion_Id.length == 3) {
-                            var Cod = 'D0' + row.Desparacitacion_Id;
-                        } else {
-                            var Cod = 'D' + row.Desparacitacion_Id;
-                        }
-                        return Cod;
-                    }
+            /* OCULTAR COLUMNAS */
+
+            "columnDefs": [{
+                "targets": [0],
+                //"visible": false,
+                "searchable": false,
+                "orderable": false,
+                //"pageLength": 50,
+                "paging": false,
+
+            }, ],
+            "order": [
+                [1, 'asc']
+            ],
+
+            /*  END OCULTAR COLUMNAS*/
+
+            "columnDefs": [{
+                    "targets": [0, 1, 2, 3, 4, 6, 8],
+                    "className": "dt-body-left"
                 },
                 {
-                    //"data": "Mascota_Id"
-                    "render": function(data, type, row) {
-                        if (row.Mascota_Id.length == 1) {
-                            var Cod = 'M000' + row.Mascota_Id;
-                        } else if (row.Mascota_Id.length == 2) {
-                            var Cod = 'M00' + row.Mascota_Id;
-                        } else if (row.Mascota_Id.length == 3) {
-                            var Cod = 'M0' + row.Mascota_Id;
-                        } else {
-                            var Cod = 'M' + row.Mascota_Id;
-                        }
-                        return Cod;
-                    }
-                },
-                {
-                    "data": "Mascota_Nombre"
-                },
-                {
-                    "data": "Desparacitacion_Fecha"
-                },
-                {
-                    "data": "Producto_Nombre"
-                },
-                {
-                    "data": "Desparacitacion_Cita"
-                },
-                {
-                    "data": "Desparacitacion_Observacion"
-                },
-                {
-                    "render": function(data, type, row) {
-                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Desparacitacion_Id + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Desparacitacion_Id + "'><i class='icon-trash-o'></i></button>  </div></div>";
-                    }
+                    "targets": [5, 7],
+                    "className": "dt-body-center"
                 }
+            ],
+
+            "columns": [{
+                    "data": "Orden"
+                },
+                {
+                    "data": "FECHA"
+                },
+                {
+                    "data": "Sede_Nombre"
+                },
+                {
+                    "data": "TIPO"
+                },
+                {
+                    "data": "CODIGO_VENTA"
+                },
+                {
+                    "data": "PRECIO_VENTA"
+                },
+                {
+                    "data": "CODIGO_COMPRA"
+                },
+                {
+                    "data": "PRECIO_COMPRA"
+                },
+                {
+                    "data": "OBSERVACION"
+                }
+                /*
+                {
+                    "render": function(data, type, row) {
+                        return "<div class='form-group center-block' ><div class='btn-group btn-group-sm' role='group'>" +
+                            "<button type='button' id='editar' class='editar btn btn-warning' value='" + row.Categoria_Id + "'><i class='icon-pencil3'></i></button>" +
+                            "<button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Categoria_Id + "'><i class='icon-trash-o'></i></button>" +
+                            "</div></div>";
+                    }
+                }*/
             ],
             /* BOTONES DE DATATABLE */
             dom: 'Bfrtip',
@@ -1054,10 +1283,10 @@ include('modulos/cerrar_sesion.php');
                     extend: 'excelHtml5',
                     text: '<i class="icon-file-excel-o"></i> ',
                     titleAttr: 'Exportar a Excel',
-                    //className: 'btn btn-success'
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6]
-                    },                    
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                    },
+                    //className: 'btn btn-success'
                     "oSelectorOpts": {
                         filter: 'applied',
                         order: 'current'
@@ -1067,11 +1296,11 @@ include('modulos/cerrar_sesion.php');
                     extend: 'pdfHtml5',
                     text: '<i class="icon-file-pdf-o"></i> ',
                     titleAttr: 'Exportar a PDF',
-                    //className: 'btn btn-danger',
+                    className: 'btn btn-danger',
                     orientation: 'landscape',
                     //pageSize: 'TABLOID',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6]
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7]
                     },
 
                     //className: 'btn btn-success'
@@ -1084,7 +1313,7 @@ include('modulos/cerrar_sesion.php');
                     extend: 'copyHtml5',
                     text: '<i class="icon-copy2"></i> ',
                     titleAttr: 'Copiar',
-                    //className: 'btn btn-info',
+                    className: 'btn btn-info',
                     //className: 'btn btn-success'
                     "oSelectorOpts": {
                         filter: 'applied',
@@ -1092,341 +1321,89 @@ include('modulos/cerrar_sesion.php');
                     },
                 },
             ],
+            "footerCallback": function(row, data, start, end, display) {
+                var api = this.api(),
+                    data;
+                // Remove the formatting to get integer data for summation
+                var intVal = function(i) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                        i : 0;
+                };
+
+                // Total over all pages
+                total = api
+                    .column(5)
+                    .data()
+                    .reduce(function(a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+                // Total over this page
+                // Update footer
+                $(api.column(5).footer()).html(
+                    'S/. ' + total.toFixed(2)
+                );
+
+                // Total over all pages
+                total_2 = api
+                    .column(7)
+                    .data()
+                    .reduce(function(a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+                // Total over this page
+                // Update footer
+                $(api.column(7).footer()).html(
+                    'S/. ' + total_2.toFixed(2)
+                );
+
+            },
+
             "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
             }
         });
-
     }
 
-    $('#TblDesparacitacion').on('click', '.editar', function() {
-        var id = $(this).val();
-        if (Condicion == 1) {
-            Obtener_Desparacitacion('MostrarProductoxCondicion', 3);
-            Obtener_Datos_Desparacitacion('ObtenerDatosDesparacitacionxId', id);
-            $("#LblIdDesparacitacion").text("Edición Desparacitación : " + Obtener_Codigo_Formateado(id));            
-            $("#Modal_ListadoDesparacitacion").modal("show");
-        } else {
-            alert('El perfil de usuario no esta habilitado para opción');
-        }
+    $("#btnLimpiar").click(function() {
+        DespuesDeCancelar();
     });
 
-    // Clase Proser
-    function Obtener_Desparacitacion(act, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/proser.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                $("#CboProducto").empty();
-                $.each(json, function(i, item) {
-                    $("#CboProducto").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    function Obtener_Datos_Desparacitacion(act, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/desparacitacion.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                $.each(json, function(i, item) {
-                    var DniMascota = json[i].Mascota_Id;
-                    var CodigoDniMascota = '';
-                    if (DniMascota.length == 1) {
-                        CodigoDniMascota = 'M000' + DniMascota;
-                    } else if (DniMascota.length == 2) {
-                        CodigoDniMascota = 'M00' + DniMascota;
-                    } else if (DniMascota.length == 3) {
-                        CodigoDniMascota = 'M0' + DniMascota;
-                    } else {
-                        CodigoDniMascota = 'M' + DniMascota;
-                    }
-                    $('#Txt_Dni').val(CodigoDniMascota);
-                    $('#Txt_Nombre_Dni').html(json[i].Cliente_NombreCompleto);
-                    $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
-                    $('#Txt_CodigoMascota').val(json[i].Mascota_Id); // Mascota_Id (oculto)
-                    Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
-                    $('#CboMascota').val(json[i].Mascota_Id);
-                    $('#CboProducto').val(json[i].Producto_Id);
-                    $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
-                    $('#CboEstado').val(json[i].Desparacitacion_Cita);
-                    if (json[i].Desparacitacion_Cita == 1){
-                        $("#CboEstado").attr('disabled', true);
-                    }else{
-                        $("#CboEstado").attr('disabled', false);
-                    }                     
-                    $('#Txt_Fecha').val(json[i].Desparacitacion_Fecha);
-                    $('#Txt_Notas').val(json[i].Desparacitacion_Observacion );
-                    $('#Txt_CodigoDesparacitacion').val(json[i].Desparacitacion_Id);
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    // Clase Mascota
-    function Obtener_Mascotas_x_IdCliente(act, cond, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/mascotas.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                Cond: cond,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                $("#CboMascota").empty();
-                $.each(json, function(i, item) {
-                    $("#CboMascota").append('<option value="' + json[i].Mascota_Id + '">' + json[i].Mascota_Nombre + '</option>');
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
+    function DespuesDeCancelar() {
+        limpiaForm($("#FormularioMovimientos"));
+        DesactivarBotones(true, false, true);
+        $("#CboTipoMovimiento option[value=1]").attr("selected", true);
+        console.log(IdSede);
+        console.log('sede : ' + $('#CboSede').val());
+        //$("#CboSede option[value=" + IdSede + "]").attr("selected", true);
+        $("#CboSede").val(IdSede)
+        console.log('sede : ' + $('#CboSede').val());
+        $("#Resultado_Grabacion").hide();
     }
 
 
-    $('#FormularioDesparacitacion input').on('change', function() {
-        ValorRb = $('input[name=Dni]:checked', '#FormularioDesparacitacion').val();
+
+    function Actualizar_Nuevo() {
+        //limpiaForm($("#FormularioMovimientos"));
+        DesactivarBotones(true, false, true);
+        $("#Resultado_Grabacion").hide();
+    }
+
+    function Actualizar_Listado() {
+        listar();
+        MuestraAlert();
+    }
+
+    $("#btnCancelar").click(function() {
+        Eliminar_CuadroVenta('EliminarCuadroVenta', $("#Txt_Codigo").val());
     });
 
-    $('#btnBuscar').click(function() {
-        Obtener_Nombre_x_Dni_Mascota_Cliente('ObtenerNombrexIdClienteMascota', ValorRb, $('#Txt_Dni').val().toUpperCase().trim())
-    });
-    $("#Txt_Dni").keypress(function(e) {
-        if (e.which == 13) {
-            Obtener_Nombre_x_Dni_Mascota_Cliente('ObtenerNombrexIdClienteMascota', ValorRb, $('#Txt_Dni').val().toUpperCase().trim())
-        }
-    });
-
-    // Clase Mascota
-    function Obtener_Nombre_x_Dni_Mascota_Cliente(act, condicion, id) {
+    function Eliminar_CuadroVenta(act, codigo) {
+        console.log(act + '-' + codigo);
         $.ajax({
             type: "POST",
-            url: "modulos/mascotas.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act,
-                Condicion: condicion,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                if (json.length != 0) {
-                    if (condicion == 1) {
-                        $.each(json, function(i, item) {
-                            $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
-                            $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
-                        });
-                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
-                    } else if (condicion == 2) {
-                        $.each(json, function(i, item) {
-                            $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
-                            $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
-                            $('#Txt_CodigoMascota').val(json[i].Mascota_Id);
-                        });
-                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
-                        $("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
-                    }
-                } else {
-                    $('#Txt_Nombre_Dni').html('');
-                    $('#Txt_CodigoCliente').val('');
-                    $('#Txt_CodigoMascota').val('');
-                    $("#CboMascota").empty();
-                    alert('No existen registros para mostrar, verifique DNI propietario/mascota');
-                }
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-
-    $("#CboProducto").change(function() {
-        Obtener_Precio('MostrarPrecio', $("#CboProducto").val().trim());
-    });
-
-    // Clase proser
-    function Obtener_Precio(act, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/proser.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                $("#Txt_Precio").empty();
-                $.each(json, function(i, item) {
-                    $("#Txt_Precio").val(json[i].Producto_PrecioVenta);
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    $('#BtnActualizarDesparacitacion').click(function() {
-
-        var nombredni = $('#Txt_Nombre_Dni').html();
-        if (nombredni == 0) {
-            alert('El DNI ingresado no existe, verificar el numero por favor o ingrese el DNI por defecto')
-        } else {
-            var Id = ValidaCamposObligatorios(
-                $('#Txt_Dni').val().toUpperCase().trim(),
-                $('#CboMascota').val().toUpperCase().trim(),
-                $('#CboProducto').val().toUpperCase().trim(),
-                $('#Txt_Precio').val().toUpperCase().trim(),
-                $('#Txt_Fecha').val());
-            if (Id == 1) {
-                Editar_Desparacitacion("EditarDesparacitacion",
-                    $("#Txt_CodigoDesparacitacion").val(),
-                    $('#Txt_Fecha').val(),
-                    $("#CboProducto").val().toUpperCase().trim(),
-                    $("#Txt_Precio").val().toUpperCase().trim(),
-                    $("#CboMascota").val().toUpperCase().trim(),
-                    $("#Txt_Notas").val().toUpperCase().trim(),
-                    $("#CboEstado").val(),
-                    '<?php echo $_SESSION['User']; ?>'
-                );
-            }
-        }
-    });
-
-    function ValidaCamposObligatorios(dni, mascota, desparacitacion, precio, fecha) {
-        if (dni.length == 0) {
-            alert('El campo DNI es obligatorio');
-            $("#Txt_Dni").focus();
-            return 0;
-        } else {
-            if (mascota.length == 0) {
-                alert('El campo mascota es obligatorio');
-                $("#CboMascota").focus();
-                return 0;
-            } else {
-                if (desparacitacion.length == 0) {
-                    alert('El campo desparacitación es obligatorio');
-                    $("#CboProducto").focus();
-                    return 0;
-                } else {
-                    if (precio.length == 0) {
-                        alert('El campo precio es obligatorio');
-                        $("#Txt_Precio").focus();
-                        return 0;
-                    } else {
-                        if (fecha.length == 0) {
-                            alert('El campo fecha es obligatorio')
-                            $('#Txt_Fecha').focus();
-                            return 0;
-                        } else {
-                            return 1;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    function Editar_Desparacitacion(act, IdDesparacitacion, Fecha, IdProducto, Precio, IdMascota, Observacion, Cita, Usuario) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/desparacitacion.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                IdDesparacitacion: IdDesparacitacion,
-                Fecha: Fecha,
-                IdProducto: IdProducto,
-                Precio: Precio,
-                IdMascota: IdMascota,
-                Observacion: Observacion,
-                Cita: Cita,
-                Usuario: Usuario
-            }),
-            beforeSend: function() {
-                //console.log(act+'-'+IdDesparacitacion+'-'+Fecha+'-'+IdProducto+'-'+Precio+'-'+IdMascota+'-'+Observacion+'-'+Cita+'-'+Usuario);
-            },
-            success: function(data) {
-                if (data == 1) {
-                    $("#Modal_ListadoDesparacitacion").modal("hide");
-                    listar();
-                    alert('Desparacitación Editado correctamente');
-                } else {
-                    alert('Lo sentimos ocurrio un error en el proceso de edición');
-                }
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-
-    $('#TblDesparacitacion').on('click', '.eliminar', function() {
-        var id = $(this).val();
-        if (Condicion == 1) {
-            var bool = confirm("Esta seguro de eliminar el registro " + Obtener_Codigo_Formateado(id) + " ?");
-            if (bool) {
-                Eliminar_Desparacitacion('EliminarDesparacitacion', id)
-                alert('La desparacitación seleccionada fue eliminada correctamente');
-            } else {
-                //alert("cancelo la solicitud");
-            }
-        } else {
-            alert('El perfil de usurio no esta habilitado para opción');
-        }
-    });
-
-    function Eliminar_Desparacitacion(act, codigo) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/desparacitacion.php",
+            url: "modulos/cuadro-venta.php",
             async: true,
             dataType: "html",
             data: ({
@@ -1438,6 +1415,10 @@ include('modulos/cerrar_sesion.php');
             },
             success: function(data) {
                 if (data == 1) {
+                    //listar();
+                    alert('Registro eliminado correctamente');
+                    DesactivarBotones(true, false, true);
+                    DespuesDeCancelar();
                     listar();
                 } else {
                     alert('Lo sentimos ocurrio un error en el proceso de edición');
@@ -1449,15 +1430,44 @@ include('modulos/cerrar_sesion.php');
         });
     }
 
+    function MuestraAlert() {
+        console.log('soy alerta');
+        setTimeout(function() {
+            //alert("Hello");
+            if (!table.data().count()) {
+                $("#Resultado_Grabacion_2").html('<div class="alert alert-danger alert-dismissible fade in mb-2" role="alert">' +
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                    '<span aria-hidden="true">&times;</span>' +
+                    '</button>' +
+                    '<strong>El cliente seleccionado, no registra mascotas en el sistema.</strong>' +
+                    '</div>')
+            } else {
+                $("#Resultado_Grabacion_2").html('')
+            }
+        }, 3000);
+    }
 
     $(function() {
-        Obtener_Nombre();
+
+               //$('#Txt_Fecha').val(MostrarFechaActual());
+          /*        $('#Txt_FechaInicial').val(MostrarFechaActual());
+                $('#Txt_FechaFinal').val(MostrarFechaActual()); */
+        /*         Obtener_Sede('MostrarSede');
+                Obtener_Sede_2('MostrarSede'); */
+        //Obtener_Sede_Usuario('MostrarSede_Usuario');
+        //listar();
+        //DesactivarBotones(true, false, true);
+
         Obtener_Condicion();
-        if ($_GET("IdCli") === undefined) {
-        } else {
-            IdMascotaExterno = $_GET("IdCli");
-        }
-        listar();
+        Obtener_Nombre();
+
+        //MuestraAlert();
+
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                $(this).remove();
+            });
+        }, 2000);
     });
 </script>
 <!-- END. EVENTOS SCRIPT-->

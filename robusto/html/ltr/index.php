@@ -117,7 +117,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
                             <li>
-                                <a href="listado-movimientos.php" class="menu-item">Kardex Producto-Serv.</a>
+                                <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
                             </li>                            
                         </ul>
                     </li>
@@ -305,7 +305,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
                             <li>
-                                <a href="listado-movimientos.php" class="menu-item">Kardex Producto-Serv.</a>
+                                <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
                             </li>                             
                         </ul>
                     </li>
@@ -493,7 +493,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-proser.php" class="menu-item">Listado Producto-Serv.</a>
                             </li>
                             <li>
-                                <a href="listado-movimientos.php" class="menu-item">Kardex Producto-Serv.</a>
+                                <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
                             </li>                             
                         </ul>
                     </li>
@@ -749,8 +749,8 @@ include('modulos/cerrar_sesion.php');
                                         <!-- ENCABEZADO -->
                                         <thead>
                                             <tr>
-                                                <th>Codigo</th>
                                                 <th>Mascota</th>
+                                                <th>Celular</th>
                                                 <th>Tipo de Vacuna</th>
                                                 <th>Fecha</th>
                                                 <th> </th>
@@ -781,8 +781,8 @@ include('modulos/cerrar_sesion.php');
                                         <!-- ENCABEZADO -->
                                         <thead>
                                             <tr>
-                                                <th>Codigo</th>
                                                 <th>Mascota</th>
+                                                <th>Celular</th>
                                                 <th>Tipo Baño</th>
                                                 <th>Fecha</th>
                                                 <th> </th>
@@ -813,9 +813,9 @@ include('modulos/cerrar_sesion.php');
                                         <!-- ENCABEZADO -->
                                         <thead>
                                             <tr>
-                                                <th>Codigo</th>
                                                 <th>Mascota</th>
-                                                <th>Tipo de Desparacitacion</th>
+                                                <th>Celular</th>
+                                                <th>Desparacitacion</th>
                                                 <th>Fecha</th>
                                                 <th> </th>
                                             </tr>
@@ -845,8 +845,8 @@ include('modulos/cerrar_sesion.php');
                                         <!-- ENCABEZADO -->
                                         <thead>
                                             <tr>
-                                                <th>Codigo</th>
                                                 <th>Mascota</th>
+                                                <th>Celular</th>
                                                 <th>Tipo Atención</th>
                                                 <th>Fecha</th>
                                                 <th> </th>
@@ -977,8 +977,8 @@ include('modulos/cerrar_sesion.php');
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
                     $("#tablaResumenVacunas").append('<tr>' +
-                        '<td class="text-truncate">' + json[i].Vacunas_Id + '</td>' +
-                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +                    
+                        '<td class="text-truncate">' + json[i].Cliente_TelefonoCel + '</td>' +
                         '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
                         '<td class="text-truncate">' + json[i].Vacunas_Fecha + '</td>' +
                         '<td class="text-truncate"><a class="btn btn-success btn-sm" href="vacuna-nuevo.php?IdMas=' + json[i].Mascota_Id + '&IdPro=' + json[i].Vacunas_Id + '">' + 'Atender' + '</a> </td> </tr>');
@@ -1006,8 +1006,8 @@ include('modulos/cerrar_sesion.php');
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
                     $("#tablaResumenBanios").append('<tr>' +
-                        '<td class="text-truncate">' + json[i].Banio_Id + '</td>' +
-                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +                    
+                        '<td class="text-truncate">' + json[i].Cliente_TelefonoCel + '</td>' +
                         '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
                         '<td class="text-truncate">' + json[i].Banio_Fecha + '</td>' +
                         '<td class="text-truncate"><a class="btn btn-success btn-sm" href="banio-nuevo.php?IdMas=' + json[i].Mascota_Id + '&IdPro=' + json[i].Banio_Id + '">' + 'Atender' + '</a> </td> </tr>');
@@ -1035,8 +1035,8 @@ include('modulos/cerrar_sesion.php');
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
                     $("#tablaResumenDesparacitacion").append('<tr>' +
-                        '<td class="text-truncate">' + json[i].Desparacitacion_Id + '</td>' +
-                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +                    
+                        '<td class="text-truncate">' + json[i].Cliente_TelefonoCel + '</td>' +
                         '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
                         '<td class="text-truncate">' + json[i].Desparacitacion_Fecha + '</td>' +
                         '<td class="text-truncate"><a class="btn btn-success btn-sm" href="desparacitacion-nuevo.php?IdMas=' + json[i].Mascota_Id + '&IdPro=' + json[i].Desparacitacion_Id + '">' + 'Atender' + '</a> </td> </tr>');
@@ -1064,8 +1064,8 @@ include('modulos/cerrar_sesion.php');
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
                     $("#tablaResumenAtenciones").append('<tr>' +
-                        '<td class="text-truncate">' + json[i].Atencion_Id + '</td>' +
-                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +                    
+                        '<td class="text-truncate">' + json[i].Cliente_TelefonoCel	+ '</td>' +
                         '<td class="text-truncate">' + json[i].Atencion + '</td>' +
                         '<td class="text-truncate">' + json[i].Atencion_Fecha + '</td>' +
                         '<td class="text-truncate"><a class="btn btn-success btn-sm" href="atencion-nuevo.php?IdMas=' + json[i].Mascota_Id + '&IdPro=' + json[i].Atencion_Id + '">' + 'Atender' + '</a> </td> </tr>');
