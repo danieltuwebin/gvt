@@ -1252,7 +1252,7 @@ include('modulos/cerrar_sesion.php');
 
 
     function Grabar_Venta_Tmp(act, IdVenta, IdSede, IdProducto, Cantidad, Precio, Descuento, PrecioTotal, Usuario) {
-        //console.log(act+','+ IdVenta+','+ IdSede+','+ IdProducto+','+  Cantidad+','+ Precio+','+ Descuento+','+ PrecioTotal+','+ Usuario);
+        console.log(act+','+ IdVenta+','+ IdSede+','+ IdProducto+','+  Cantidad+','+ Precio+','+ Descuento+','+ PrecioTotal+','+ Usuario);
         var Estado = 0;
         $.ajax({
             type: "POST",
@@ -1296,6 +1296,8 @@ include('modulos/cerrar_sesion.php');
                     alert('El producto ' + $('#TxtProducto').val() + ' ya ha sido seleccionado, seleccione otro por favor')
                 } else if (Estado == 3) {
                     alert('El producto ' + $('#TxtProducto').val() + ' seleccionado, no cuenta con stock disponible')
+                } else if (Estado == 4) {
+                    alert('El producto ' + $('#TxtProducto').val() + ' seleccionado, no se encuentra en el almacen')
                 }
             }
         });

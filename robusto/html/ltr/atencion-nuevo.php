@@ -117,7 +117,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -305,7 +305,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -646,7 +646,7 @@ include('modulos/cerrar_sesion.php');
                                             <input type="hidden" id="Txt_CodigoCliente" name="Txt_CodigoCliente">
                                             <input type="hidden" id="Txt_CodigoMascota" name="Txt_CodigoMascota">
                                             <input type="hidden" id="Txt_CodigoProducto" name="Txt_CodigoProducto">
-                                            <input type="hidden" id="Txt_CodigoAtencion" name="Txt_CodigoAtencion">                                            
+                                            <input type="hidden" id="Txt_CodigoAtencion" name="Txt_CodigoAtencion">
                                             <div class="form-body">
                                                 <h4 class="form-section">Propietario</h4>
 
@@ -681,7 +681,6 @@ include('modulos/cerrar_sesion.php');
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
@@ -691,7 +690,6 @@ include('modulos/cerrar_sesion.php');
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="input-group">
@@ -702,63 +700,62 @@ include('modulos/cerrar_sesion.php');
                                                                     </label>
                                                                 </div>
                                                             </div>
-
                                                             <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="CboEstadoAtencion">Estado </label>
-                                                                    <select id="CboEstadoAtencion" name="CboEstadoAtencion" class="form-control">
-                                                                        <option value="1" selected="selected">REALIZADO</option>
-                                                                        <option value="3">REPROGRAMADO</option>
-                                                                    </select>
+                                                                <div class="input-group">
+                                                                    <label for="CboEstadoAtencion">Estado
+                                                                        <select id="CboEstadoAtencion" name="CboEstadoAtencion" class="form-control">
+                                                                            <option value="1" selected="selected">REALIZADO</option>
+                                                                            <option value="3">REPROGRAMADO</option>
+                                                                        </select>
+                                                                    </label>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <br>
 
-                                                <h4 class="form-section">signos Clinicos</h4>
-
+                                                <h4 class="form-section">Tipo de Atención</h4>
                                                 <div class="row">
-                                                    <div class="col-md-1">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label for="Txt_Fecha">Fecha.</label>
+                                                            <label for="CboAtencion">Seleccione Atención :</label>
+                                                            <select id="CboAtencion" name="CboAtencion" class="form-control">
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
+                                                            <label for="Txt_Precio">Costo de Atención.</label>
+                                                            <input type="number" id="Txt_Precio" style="text-transform:uppercase;" class="form-control" name="Txt_Precio" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <h4 class="form-section">signos Clinicos</h4>
+                                                <div class="row">
+                                                    <div class="col-md-3 col-sm-12">
+                                                        <div class="form-group form-inline">
+                                                            <label for="Txt_Fecha">Fecha : &nbsp;&nbsp;</label>
                                                             <input type="date" style="text-transform:uppercase;" id="Txt_Fecha" class="form-control" placeholder="" name="Txt_Fecha">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_T">T.&nbsp;&nbsp;</label>
+                                                    <div class="col-md-3 col-sm-4">
+                                                        <div class="form-group form-inline">
+                                                            <label for="Txt_T">T. : &nbsp;&nbsp;</label>
+                                                            <input type="number" style="text-transform:uppercase;" id="Txt_T" class="form-control" placeholder="" name="Txt_T" maxlength="3">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <input type="number" style="text-transform:uppercase;" id="Txt_T" class="form-control" placeholder="" name="Txt_T">
+                                                    <div class="col-md-3 col-sm-4">
+                                                        <div class="form-group form-inline">
+                                                            <label for="Txt_C">F.C. : &nbsp;&nbsp;</label>
+                                                            <input type="number" style="text-transform:uppercase;" id="Txt_C" class="form-control" placeholder="" name="Txt_C" maxlength="3">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_C">F.C.&nbsp;&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <input type="number" style="text-transform:uppercase;" id="Txt_C" class="form-control" placeholder="" name="Txt_C">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_FR">F.R.&nbsp;&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <input type="number" style="text-transform:uppercase;" id="Txt_FR" class="form-control" placeholder="" name="Txt_FR">
+                                                    <div class="col-md-3 col-sm-4">
+                                                        <div class="form-group form-inline">
+                                                            <label for="Txt_FR">F.R. : &nbsp;&nbsp;</label>
+                                                            <input type="number" style="text-transform:uppercase;" id="Txt_FR" class="form-control" placeholder="" name="Txt_FR" maxlength="3">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -772,123 +769,88 @@ include('modulos/cerrar_sesion.php');
                                                     </div>
                                                 </div>
 
- 
                                                 <div class="row">
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Deshidrat">Deshidrat.&nbsp;</label>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group ">
+                                                            Deshidrat : <input type="text" style="text-transform:uppercase;" id="Txt_Deshidrat" class="form-control" placeholder="" name="Txt_Deshidrat" maxlength="4">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-1">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Deshidrat" class="form-control" placeholder="" name="Txt_Deshidrat" maxlength="4">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Mucosa">Mucosa.&nbsp;</label>
+                                                            Mucosa : <input type="text" style="text-transform:uppercase;" id="Txt_Mucosa" class="form-control" placeholder="" name="Txt_Mucosa" maxlength="10">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Mucosa" class="form-control" placeholder="" name="Txt_Mucosa" maxlength="10">
+                                                            Tllc : <input type="text" style="text-transform:uppercase;" id="Txt_Tllc" class="form-control" placeholder="" name="Txt_Tllc" maxlength="5">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-1">
+                                                    <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <label for="Txt_Tllc">Tllc.&nbsp;</label>
+                                                            Vomitos : <input type="text" style="text-transform:uppercase;" id="Txt_Vomitos" class="form-control" placeholder="" name="Txt_Vomitos" maxlength="2">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-1">
+                                                    <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Tllc" class="form-control" placeholder="" name="Txt_Tllc" maxlength="5">
-                                                        </div>
-                                                    </div>   
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Vomitos">Vomitos.&nbsp;</label>
+                                                            Diarrea : <input type="text" style="text-transform:uppercase;" id="Txt_Diarrea" class="form-control" placeholder="" name="Txt_Diarrea" maxlength="2">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Vomitos" class="form-control" placeholder="" name="Txt_Vomitos" maxlength="2">
-                                                        </div>
-                                                    </div>  
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Diarrea">Diarrea.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Diarrea" class="form-control" placeholder="" name="Txt_Diarrea" maxlength="2">
-                                                        </div>
-                                                    </div>                                                                                                                                                       
                                                 </div>
 
                                                 <div class="row">
-                                                    <div class="col-md-1">
+                                                    <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="Txt_Ganglio">Ganglio.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Ganglio" class="form-control" placeholder="" name="Txt_Ganglio" maxlength="15">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Peso">Peso.&nbsp;</label>
+                                                            Ganglio : <input type="text" style="text-transform:uppercase;" id="Txt_Ganglio" class="form-control" placeholder="" name="Txt_Ganglio" maxlength="15">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <input type="number" style="text-transform:uppercase;" id="Txt_Peso" class="form-control" placeholder="" name="Txt_Peso" maxlength="2">
+                                                            Peso : <input type="number" style="text-transform:uppercase;" id="Txt_Peso" class="form-control" placeholder="" name="Txt_Peso" maxlength="2">
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <h4 class="form-section">Diagnostico</h4>
-
                                                 <div class="row">
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-2 col-sm-4">
                                                         <div class="form-group">
                                                             <label for="Txt_Dx_Presuntivo">Dx Presuntivo.&nbsp;</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-10">
+                                                    <div class="col-md-10 col-sm-8">
                                                         <div class="form-group">
                                                             <input type="text" style="text-transform:uppercase;" id="Txt_Dx_Presuntivo" class="form-control" placeholder="" name="Txt_Dx_Presuntivo">
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                    <div class="col-md-2">
+                                                <div class="row">
+                                                    <div class="col-md-2 col-sm-4">
                                                         <div class="form-group">
                                                             <label for="Txt_Dx_Definitivo">Dx Definitivo.&nbsp;</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-10">
+                                                    <div class="col-md-10 col-sm-8">
                                                         <div class="form-group">
                                                             <input type="text" style="text-transform:uppercase;" id="Txt_Dx_Definitivo" class="form-control" placeholder="" name="Txt_Dx_Definitivo">
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                    <div class="col-md-2">
+                                                <div class="row">
+                                                    <div class="col-md-2 col-sm-4">
                                                         <div class="form-group">
                                                             <label for="Txt_Dx_Solicitado">Dx Solicitado.&nbsp;</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-10">
+                                                    <div class="col-md-10 col-sm-8">
                                                         <div class="form-group">
                                                             <input type="text" style="text-transform:uppercase;" id="Txt_Dx_Solicitado" class="form-control" placeholder="" name="Txt_Dx_Solicitado">
                                                         </div>
                                                     </div>
-
                                                 </div>
 
                                                 <h4 class="form-section">Tratamiento</h4>
-
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         <div class="form-group">
@@ -912,21 +874,6 @@ include('modulos/cerrar_sesion.php');
                                                         </div>
                                                     </div>
 
-                                                </div>
-
-                                                <h4 class="form-section">Precio</h4>
-
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Precio">Costo de Atención.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <input type="number" id="Txt_Precio" style="text-transform:uppercase;" class="form-control" name="Txt_Precio" placeholder="">
-                                                        </div>
-                                                    </div>
                                                 </div>
 
                                             </div>
@@ -991,9 +938,10 @@ include('modulos/cerrar_sesion.php');
 <script type="text/javascript">
     var IdMascota = '';
     var ValorRb = 1;
-    var IdTipoProcesoGrabacion = 0;      
+    var IdTipoProcesoGrabacion = 0;
     var IdAtencion;
-    var IdAgendado = 0;    
+    var IdAgendado = 0;
+    var IdSede = 0;
     /* BEGIN FUNCIONES GENERALES */
 
     /* END FUNCIONES GENERALES */
@@ -1016,9 +964,50 @@ include('modulos/cerrar_sesion.php');
         $("#btnAgendar").attr('disabled', boolAgendar);
     }
 
-    $("#btnLimpiar").click(function() {
-        limpiaForm($("#FormularioAtencion"));
-    });
+    function Obtener_Sede_Usuario(act) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/inicio.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                IdSede = data;
+            },
+            complete: function() {
+            }
+        });
+    }
+
+    function Obtener_Atencion(act, id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/proser.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: id
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                $("#CboAtencion").empty();
+                $("#CboAtencion").append('<option selected="true" disabled="disabled">SELECCIONE ATENCIÓN</option>');
+                $.each(json, function(i, item) {
+                    $("#CboAtencion").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
+                });
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
 
     // Clase Mascota
     function Obtener_NombreCliente_NombreMascota(act, id) {
@@ -1142,8 +1131,10 @@ include('modulos/cerrar_sesion.php');
         $('#Txt_CodigoMascota').val($("#CboMascota").val());
     });
 
-    $("#CboVacuna").change(function() {
-        Obtener_Precio('MostrarPrecio', $("#CboVacuna").val().trim());
+    $("#CboAtencion").change(function() {
+        Obtener_Precio('MostrarPrecio', $("#CboAtencion").val().trim());
+        $("#Txt_CodigoProducto").val($("#CboAtencion").val().trim());
+
     });
 
     // Clase proser
@@ -1151,7 +1142,7 @@ include('modulos/cerrar_sesion.php');
         $.ajax({
             type: "POST",
             url: "modulos/proser.php",
-            async: true,
+            async: false,
             dataType: "html",
             data: ({
                 action: act,
@@ -1184,17 +1175,17 @@ include('modulos/cerrar_sesion.php');
                 $("#CboEstadoAtencion").focus();
                 $("#CboEstadoAtencion").select();
             }
-        }        
+        }
     });
 
     $("#btnGrabar").click(function() {
         if (IdTipoProcesoGrabacion == 0) {
             ProcesoGrabacion(1, 4000000, 1)
         } else {
-            if ($("#CboEstadoAtencion").val()==1){
-                ProcesoGrabacion(2, IdAtencion , 1);
-            }else{
-                alert('Debe cambiar el estado de la Atención a Realizado');                
+            if ($("#CboEstadoAtencion").val() == 1) {
+                ProcesoGrabacion(2, IdAtencion, 1);
+            } else {
+                alert('Debe cambiar el estado de la Atención a Realizado');
                 $("#CboEstadoAtencion").focus();
                 $("#CboEstadoAtencion").select();
             }
@@ -1222,7 +1213,7 @@ include('modulos/cerrar_sesion.php');
                 $('#Txt_Descripcion').val().toUpperCase().trim(),
                 $('#Txt_NotasAdicionales').val().toUpperCase().trim())
             if (Id == 1) {
-                localStorage.setItem('Observacion',$("#Txt_NotasAdicionales").val());
+                localStorage.setItem('Observacion', $("#Txt_NotasAdicionales").val());
                 RegistrarAtencion("GrabarAtencion",
                     tiporegistro,
                     idatencion,
@@ -1255,7 +1246,7 @@ include('modulos/cerrar_sesion.php');
                     '<?php echo $_SESSION['User']; ?>',
                     '1',
                     '<?php echo $_SESSION['IdAlmacen']; ?>',
-                    $('#Txt_CodigoAtencion').val()                
+                    $('#Txt_CodigoAtencion').val()
                 );
             }
         }
@@ -1263,51 +1254,51 @@ include('modulos/cerrar_sesion.php');
 
     function ValidaCamposObligatorios(sintomas, temp, peso, dxpresuntivo, descripcion, notasadicionales) {
         return 1;
-/*         if (sintomas.length == 0) {
-            alert('El campo sintomas es obligatorio');
-            $("#Txt_Sintomas").focus();
-            return 0;
-        } else {
-            if (temp.length == 0) {
-                alert('El campo temperatura es obligatorio');
-                $("#Txt_T").focus();
-                return 0;
-            } else {
-                if (peso.length == 0) {
-                    alert('El campo peso es obligatorio');
-                    $("#Txt_Peso").focus();
+        /*         if (sintomas.length == 0) {
+                    alert('El campo sintomas es obligatorio');
+                    $("#Txt_Sintomas").focus();
                     return 0;
                 } else {
-                    if (dxpresuntivo.length == 0) {
-                        alert('El campo Dx. presuntivo es obligatorio');
-                        $("#Txt_Dx_Presuntivo").focus();
+                    if (temp.length == 0) {
+                        alert('El campo temperatura es obligatorio');
+                        $("#Txt_T").focus();
                         return 0;
                     } else {
-                        if (descripcion.length == 0) {
-                            alert('El campo descripción es obligatorio')
-                            $('#Txt_Descripcion').focus();
+                        if (peso.length == 0) {
+                            alert('El campo peso es obligatorio');
+                            $("#Txt_Peso").focus();
                             return 0;
                         } else {
-                            if (notasadicionales.length == 0) {
-                                alert('El campo notas adicionales es obligatorio');
-                                $('#Txt_NotasAdicionales').focus();
+                            if (dxpresuntivo.length == 0) {
+                                alert('El campo Dx. presuntivo es obligatorio');
+                                $("#Txt_Dx_Presuntivo").focus();
                                 return 0;
                             } else {
-                                return 1;
-                            }
+                                if (descripcion.length == 0) {
+                                    alert('El campo descripción es obligatorio')
+                                    $('#Txt_Descripcion').focus();
+                                    return 0;
+                                } else {
+                                    if (notasadicionales.length == 0) {
+                                        alert('El campo notas adicionales es obligatorio');
+                                        $('#Txt_NotasAdicionales').focus();
+                                        return 0;
+                                    } else {
+                                        return 1;
+                                    }
 
+                                }
+                            }
                         }
                     }
-                }
-            }
-        } */
+                } */
     }
 
     function RegistrarAtencion(act, IdTipoRegistro, IdAtencion, Fecha, IdProducto, IdMascota, Sintomas, Atencion_T, Atencion_FC, Atencion_FR, Atencion_sc_Des, Atencion_sc_Muc,
         Atencion_sc_TLLC, Atencion_sc_Vom, Atencion_sc_Dia, Atencion_sc_Gan, Atencion_sc_Pes, Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des,
-        Atencion_tr_Obs, Atencion_tr_Pre, Pint_Documento, Pint_Cita, Pint_CitaEstado, Pint_Estado, Pvchr_Usuario, Pint_VentaTipo, Pint_IdAlmacen,Pint_IdVBDA) {
-        
-            $.ajax({
+        Atencion_tr_Obs, Atencion_tr_Pre, Pint_Documento, Pint_Cita, Pint_CitaEstado, Pint_Estado, Pvchr_Usuario, Pint_VentaTipo, Pint_IdAlmacen, Pint_IdVBDA) {
+
+        $.ajax({
             type: "POST",
             url: "modulos/atencion.php",
             async: false,
@@ -1355,10 +1346,10 @@ include('modulos/cerrar_sesion.php');
                     idtmp = json[i].CodigoVentaTmp;
                 });
                 // Redireccionar
-                 if (Pint_Cita == 1) {
+                if (Pint_Cita == 1) {
                     $("#Resultado_Grabacion").html('');
                     //var url = "venta-nuevo.php?IdVen=" + idtmp +"&IdMas=" + $("#CboMascota").val() + "&Tipo=4";
-                    var url = "venta-nuevo.php?IdVen=" + idtmp +"&IdMas=" + $("#CboMascota").val() + "&Tipo=4" + "&Pro=" + IdAtencion + "&A=" + IdAgendado;                    
+                    var url = "venta-nuevo.php?IdVen=" + idtmp + "&IdMas=" + $("#CboMascota").val() + "&Tipo=4" + "&Pro=" + IdAtencion + "&A=" + IdAgendado;
                     $(location).attr('href', url);
                 } else {
                     $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
@@ -1379,7 +1370,7 @@ include('modulos/cerrar_sesion.php');
     }
 
     // Clase Proser
-    function Obtener_Atencion(act, id) {
+    /* function Obtener_Atencion(act, id) {
         $.ajax({
             type: "POST",
             url: "modulos/proser.php",
@@ -1403,34 +1394,8 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok2');
             }
         });
-    }
+    } */
 
-    // Clase proser
-    function Obtener_Precio(act, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/proser.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                $("#Txt_Precio").empty();
-                $.each(json, function(i, item) {
-                    $("#Txt_Precio").val(json[i].Producto_PrecioVenta);
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
 
     function Obtener_Datos_Atencion(act, id) {
         $.ajax({
@@ -1448,7 +1413,12 @@ include('modulos/cerrar_sesion.php');
             success: function(data) {
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
+                    //$('#Txt_CodigoProducto').val(json[i].Atencion_IdProducto);
+
                     $('#Txt_CodigoProducto').val(json[i].Atencion_IdProducto);
+                    $("#CboAtencion option[value=" + $('#Txt_CodigoProducto').val() + "]").attr("selected", true);
+                    $("#CboAtencion").attr('disabled', true);
+
                     $('#Txt_Fecha').val(json[i].Atencion_Fecha);
                     $('#Txt_T').val(json[i].Atencion_T);
                     $('#Txt_C').val(json[i].Atencion_FC);
@@ -1467,7 +1437,7 @@ include('modulos/cerrar_sesion.php');
                     $('#Txt_Descripcion').val(json[i].Atencion_tr_Descripcion);
                     $('#Txt_NotasAdicionales').val(json[i].Atencion_tr_Observacion);
                     $('#Txt_Precio').val(json[i].Atencion_tr_Precio);
-                    localStorage.setItem('Txt_NotasAdicionales',json[i].Atencion_tr_Observacion);                    
+                    localStorage.setItem('Txt_NotasAdicionales', json[i].Atencion_tr_Observacion);
                     // nuevo
                     $('#Txt_CodigoAtencion').val(json[i].Atencion_IdVenta);
                 });
@@ -1478,12 +1448,16 @@ include('modulos/cerrar_sesion.php');
         });
     }
 
+    $("#btnLimpiar").click(function() {
+        limpiaForm($("#FormularioAtencion"));
+    });
 
     $(function() {
         Habilita_Desabilita(true, false, false);
-        Obtener_Atencion('MostrarProductoxCondicion', 4);
+        Obtener_Sede_Usuario('MostrarSede_Usuario');
+        Obtener_Atencion('MostrarProductoxCondicion_Atencion', IdSede);
         $("#CboEstadoAtencion").attr('disabled', true);
-        Obtener_Precio('MostrarPrecio', $("#Txt_CodigoProducto").val().trim());
+        //----Obtener_Precio('MostrarPrecio', $("#Txt_CodigoProducto").val().trim());
         $('#Txt_Fecha').val(MostrarFechaActual());
 
         if ($_GET("IdMas") === undefined) {

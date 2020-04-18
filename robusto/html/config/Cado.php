@@ -5,19 +5,6 @@ class Cado{
     var $Clave;
     var $BaseDatos;
 
-    /* BASE DE DATOS CON INFORMACION FUNCIONANDO OK*/
-    /*
-    function __construct(){
-        $this->Servidor = 'localhost'; $this->Usuario = 'demos_dbapp'; $this->Clave = 'PflG0RRDlbSI';
-        $this->BaseDatos ="demos_dbapp_3";
-    }*/
-    
-
-    
-    function __construct(){
-        $this->Servidor = 'localhost'; $this->Usuario = 'gavet_admin'; $this->Clave = '[Q*$y*~2)nqz';
-        $this->BaseDatos ="gavet_db";
-    }
     
 
     function conectar() {

@@ -32,9 +32,10 @@ if ($_POST['action'] == "MostrarRaza") {
 if ($_POST['action'] == "MostrarNombrexDni") {
 
     $Dni = $_POST['Dni'];
+    $Condicion = $_POST['Condicion'];
     
     $myArray = array();
-    $sql = "CALL SP_Obtener_TblClientes_SoloNombre_x_Dni('$Dni')";
+    $sql = "CALL SP_Obtener_TblClientes_SoloNombre_x_Dni('$Dni','$Condicion')";
     $oCado = new Cado();
     $rst = $oCado->ejecute_sql($sql);
 

@@ -988,7 +988,7 @@ include('modulos/cerrar_sesion.php');
                 var json = JSON.parse(data);
                 $("#Txt_Precio").empty();
                 $.each(json, function(i, item) {
-                    $("#Txt_Precio").val(json[i].Producto_PrecioVenta);
+                    $("#Txt_Precio").val(json[i].Producto_PrecioCompra);
                 });
             },
             complete: function() {}

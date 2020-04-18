@@ -1,35 +1,4 @@
 
-REQ 
-
-1. En la pantalla principal deben haber 4 resumenes 
-    baños
-    vacunas
-    atenciones
-    desparacitacion
-
-CLAVE GAVET :   10467644021@
-            :   mjk125@jio
-
-
-
-// ACCESOS
-
-http://186.64.116.55/whm
-http://186.64.116.55/cpanel
-tuwebinc
-
-http://186.64.116.55/~gavet/html/ltr/index.php
-
-http://186.64.116.55/~gavet/html/ltr/login.php
-
-http://186.64.116.55/~gavet/presta
-----
---
----
-https://presta.tuwebin.com/adminpresta1
-
----
-https://www.youtube.com/watch?v=RRegIKu-z3k
 
 
 

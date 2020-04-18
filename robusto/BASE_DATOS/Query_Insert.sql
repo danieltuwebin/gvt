@@ -3564,3 +3564,466 @@ VALUES (Pdate_Fecha
 SELECT '1' AS CODIGO;
 END $$
 DELIMITER ;
+
+-------------------------- ULTMOS CAMBIOS
+PROSER
+
+
+DROP PROCEDURE IF EXISTS SP_Registrar_TblBanio;
+DELIMITER $$
+CREATE PROCEDURE `SP_Registrar_TblBanio`(IN `Pint_IdTipoRegistro` INT, IN `Pint_Idbanio` INT, IN `Pdat_Fecha` DATE, IN `Pint_IdProducto` INT, IN `Pflo_Precio` FLOAT, IN `Pint_IdMascota` INT, IN `Pvchr_Observacion` VARCHAR(100), IN `Pint_Cita` INT, IN `Pvchr_Usuario` VARCHAR(50), IN `Pint_VentaTipo` INT, IN `Pflo_Cantidad` FLOAT, IN `Pint_IdAlmacen` INT)
+BEGIN
+DECLARE IdVentaTemporal INT;
+DECLARE IdAlmacen INT;
+DECLARE IdValidaStock INT;
+IF Pint_IdTipoRegistro = 1 THEN
+   IF Pint_Cita = 1 THEN /* Registrar */
+		SET IdValidaStock = (SELECT COUNT(*) AS ID_VALIDA FROM tblProducto WHERE Producto_IdTipoPro = 2 AND Producto_IdTipoCat = 2 AND Producto_Id =  Pint_IdProducto);
+	   /*VALIDAR QUE EXISTE STOCK*/
+	   IF (SELECT Almacen_Cantidad FROM tblAlmacen WHERE Almacen_IdProducto = Pint_IdProducto AND Almacen_IdSede = Pint_IdAlmacen) >= 1 OR IdValidaStock > 0 THEN
+		   INSERT INTO tblVentaTemporal (VentaTemporal_IdTipoRegistro, VentaTemporal_Id_vbda, VentaTemporal_Fecha, VentaTemporal_IdProducto, VentaTemporal_Precio,
+										 VentaTemporal_IdMascota, VentaTemporal_Observacion, VentaTemporal_Cita, VentaTemporal_Usuario, VentaTemporal_VentaTipo,
+										 VentaTemporal_Cantidad, VentaTemporal_IdAlmacen, VentaTemporal_Estado,VentaTemporal_FechaGra)
+										 VALUES
+										(Pint_IdTipoRegistro, Pint_Idbanio, Pdat_Fecha, Pint_IdProducto, Pflo_Precio,
+										 Pint_IdMascota, Pvchr_Observacion, Pint_Cita, Pvchr_Usuario, Pint_VentaTipo,
+										 Pflo_Cantidad, Pint_IdAlmacen, 1,NOW());
+		   /* OBTIENE ID DE VENTATEMPORAL */
+		   SET IdVentaTemporal =(SELECT MAX(VentaTemporal_Id) FROM tblVentaTemporal);
+		   SELECT '1' AS Codigo,IdVentaTemporal AS CodigoVentaTmp;
+	   ELSE
+			SELECT '3' AS Codigo,'0' AS CodigoVentaTmp;
+	   END IF;
+   ELSEIF Pint_Cita = 2 THEN /* Agendar */
+	   /*INSERTA TBL VACUNAS*/
+	   INSERT INTO tblBanio
+	   (Banio_Fecha, Banio_IdProducto, Banio_IdMascota, Banio_Observacion, Banio_Cita, Banio_CitaEstado, Banio_Estado, Banio_FechaGra, Banio_UserGrab)
+		VALUES
+	   (Pdat_Fecha, Pint_IdProducto, Pint_IdMascota, Pvchr_Observacion, Pint_Cita, 'A', 1, now(), Pvchr_Usuario);
+	   SELECT '1' AS Codigo,'0' AS CodigoVentaTmp;
+   END IF;
+ELSEIF Pint_IdTipoRegistro = 2 THEN
+   IF Pint_Cita = 1 THEN
+   /*VALIDAR QUE EXISTE STOCK*/
+   SET IdValidaStock = (SELECT COUNT(*) AS ID_VALIDA FROM tblProducto WHERE Producto_IdTipoPro = 2 AND Producto_IdTipoCat = 2 AND Producto_Id =  Pint_IdProducto);
+   IF (SELECT Almacen_Cantidad FROM tblAlmacen WHERE Almacen_IdProducto = Pint_IdProducto AND Almacen_IdSede = Pint_IdAlmacen) >= 1 OR IdValidaStock > 0 THEN
+   INSERT INTO tblVentaTemporal (VentaTemporal_IdTipoRegistro, VentaTemporal_Id_vbda, VentaTemporal_Fecha, VentaTemporal_IdProducto, VentaTemporal_Precio,
+                                 VentaTemporal_IdMascota, VentaTemporal_Observacion, VentaTemporal_Cita, VentaTemporal_Usuario, VentaTemporal_VentaTipo,
+                                 VentaTemporal_Cantidad, VentaTemporal_IdAlmacen, VentaTemporal_Estado,VentaTemporal_FechaGra)
+                                 VALUES
+                                (Pint_IdTipoRegistro, Pint_Idbanio, Pdat_Fecha, Pint_IdProducto, Pflo_Precio,
+                                 Pint_IdMascota, Pvchr_Observacion, Pint_Cita, Pvchr_Usuario, Pint_VentaTipo,
+                                 Pflo_Cantidad, Pint_IdAlmacen, 1,NOW());
+   /* OBTIENE ID DE VENTATEMPORAL */
+   SET IdVentaTemporal =(SELECT MAX(VentaTemporal_Id) FROM tblVentaTemporal);
+   SELECT '2' AS Codigo,IdVentaTemporal AS CodigoVentaTmp;
+   ELSE
+   SELECT '3' AS Codigo,'0' AS CodigoVentaTmp;
+   END IF;
+   ELSEIF Pint_Cita = 2 THEN
+   /* cod 2 */
+   SELECT '3' AS Codigo,'1' AS CodigoVenta;
+   ELSEIF Pint_Cita = 3 THEN
+   /* ACTUALIZA TBL VACUNA */
+   UPDATE tblBanio SET
+   Banio_Fecha = Pdat_Fecha,
+   Banio_Observacion = Pvchr_Observacion,
+   Banio_Cita = 3,
+   Banio_FechaGrab_Edicion = NOW(),
+   Banio_UserGrab_Edicion = Pvchr_Usuario    
+   WHERE Banio_Id = Pint_Idbanio;
+   SELECT '2' AS Codigo,'0' AS CodigoVenta;
+   END IF;
+END IF;
+END $$
+DELIMITER ;
+
+------- ******
+
+DROP FUNCTION IF EXISTS FUN_Valida_CodigoProducto;
+DELIMITER $$
+CREATE FUNCTION FUN_Valida_CodigoProducto(Pint_IdProducto INT) RETURNS INT NOT DETERMINISTIC NO SQL SQL SECURITY DEFINER 
+BEGIN
+ /* DEVULEVE VALOR 1 : SE TIENE QUE VALIDAR STOCK -- 0: NO SE VALIDA EL STOCK */
+ DECLARE Id INT DEFAULT 0;
+ 
+	IF (SELECT COUNT(*) AS ID_VALIDA FROM tblProducto 
+        WHERE Producto_IdTipoPro = 2 AND Producto_IdTipoCat = 2 AND Producto_Id =  Pint_IdProducto) > 0 THEN
+	SET Id = 1;
+	ELSEIF  (SELECT COUNT(*) AS ID_VALIDA FROM tblProducto
+             WHERE Producto_IdTipoPro = 3 AND Producto_IdTipoCat = 3 AND Producto_Id =  Pint_IdProducto) > 0 THEN
+	SET Id = 1;	
+	ELSEIF (SELECT COUNT(*) AS ID_VALIDA FROM tblProducto 
+            WHERE Producto_IdTipoPro = 4 AND Producto_IdTipoCat = 4 AND Producto_Id =  Pint_IdProducto) > 0 THEN
+	SET Id = 1;
+	ELSE
+	SET Id = 0;
+	END IF;
+
+  RETURN Id;
+       
+END$$
+DELIMITER ;
+
+-------***
+
+DROP PROCEDURE IF EXISTS SP_ProcesoVenta_Tmp;
+DELIMITER $$
+CREATE PROCEDURE `SP_ProcesoVenta_Tmp`(IN `Pint_IdVentaTmp` INT, IN `Pint_IdSede` INT, IN `Pint_IdProducto` INT, IN `Pflo_Cantidad` FLOAT, IN `Pflo_Precio` FLOAT, IN `Pflo_Descuento` FLOAT, IN `Pflo_PrecioTotal` FLOAT, IN `Pvchr_Usuario` VARCHAR(100))
+BEGIN
+DECLARE IdVentaTmp INT;
+DECLARE IdValidaStock INT;
+SET IdValidaStock  = (SELECT FUN_Valida_CodigoProducto(Pint_IdProducto));
+-- VALIDA QUE EXISTA EL PRODUCTO EN EL ALMACEN
+IF EXISTS(SELECT * FROM tblAlmacen WHERE Almacen_IdSede = Pint_IdSede AND Almacen_IdProducto = Pint_IdProducto AND Almacen_Estado = 1) THEN
+	IF (SELECT Almacen_Cantidad FROM tblAlmacen WHERE Almacen_IdSede = Pint_IdSede AND Almacen_IdProducto = Pint_IdProducto ) >= Pflo_Cantidad OR IdValidaStock = 0 THEN
+		CALL SP_Actualizar_TblAlmacen_Stock (Pint_IdSede, Pint_IdProducto, Pflo_Cantidad);
+		IF Pint_IdVentaTmp = 0 THEN
+		  /* NUEVO REGISTRO - RETURN ESTADO(1) */
+			INSERT INTO tblVenta_tmp(Venta_tmp_FechaGra, Venta_tmp_UserGrab) VALUES (NOW(),Pvchr_Usuario);
+			 SET IdVentaTmp = (SELECT MAX(Venta_tmp_Id) FROM tblVenta_tmp);
+			INSERT INTO tblVentaDetalle_tmp(VentaDetalle_tmp_VentaId, VentaDetalle_tmp_IdProducto, VentaDetalle_tmp_Precio, VentaDetalle_tmp_Descuento, VentaDetalle_tmp_Cantidad, VentaDetalle_tmp_PrecioTotal, VentaDetalle_tmp_FechaGra, VentaDetalle_tmp_UserGrab)
+			 VALUES (IdVentaTmp,Pint_IdProducto,Pflo_Precio,Pflo_Descuento,Pflo_Cantidad,Pflo_PrecioTotal,NOW(),Pvchr_Usuario);  
+			SELECT IdVentaTmp AS CODIGO,'1' AS ESTADO;
+		ELSE
+		   IF EXISTS(SELECT VentaDetalle_tmp_Id FROM tblVentaDetalle_tmp WHERE VentaDetalle_tmp_VentaId = Pint_IdVentaTmp AND VentaDetalle_tmp_IdProducto = Pint_IdProducto) THEN
+		/* PRODUCTO EXISTENTE RET (0) */
+			   SELECT Pint_IdVentaTmp AS CODIGO, '0' AS ESTADO;
+		   ELSE
+		/* EXISTENTE AGREGAR REGISTRO RET (2) */
+			  INSERT INTO tblVentaDetalle_tmp(VentaDetalle_tmp_VentaId, VentaDetalle_tmp_IdProducto, VentaDetalle_tmp_Precio, VentaDetalle_tmp_Descuento, VentaDetalle_tmp_Cantidad, VentaDetalle_tmp_PrecioTotal, VentaDetalle_tmp_FechaGra, VentaDetalle_tmp_UserGrab)
+			  VALUES (Pint_IdVentaTmp,Pint_IdProducto,Pflo_Precio,Pflo_Descuento,Pflo_Cantidad,Pflo_PrecioTotal,NOW(),Pvchr_Usuario);
+			  SELECT Pint_IdVentaTmp AS CODIGO,'2' AS ESTADO;
+			END IF;
+		END IF;
+	ELSE
+	/* NO HAY STOCK (3) */
+	SELECT '3' as CODIGO,'3' AS ESTADO;
+	END IF;
+ELSE
+	/* NO HAY REGISTROS DEL PRODUCTO EN EL ALMACEN(4) */
+	SELECT '4' as CODIGO,'4' AS ESTADO;
+END IF;
+END $$
+DELIMITER ;
+
+---------****
+
+-- show create procedure SP_Obtener_TblClientes_SoloNombre_x_Dni
+DROP PROCEDURE IF EXISTS SP_Obtener_TblClientes_SoloNombre_x_Dni;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblClientes_SoloNombre_x_Dni(IN Pvchr_Dni VARCHAR(10),IN Pint_Condicion INT)
+BEGIN
+IF Pint_Condicion = 1 THEN
+
+	IF EXISTS(SELECT * FROM tblCliente WHERE Cliente_Dni = Pvchr_Dni AND Cliente_Estado = 1) THEN
+   SELECT Cliente_Id,CONCAT(Cliente_Nombre,' ',Cliente_Apellido) AS Cliente_Nombre FROM tblCliente
+   WHERE Cliente_Estado = 1 AND Cliente_Dni = Pvchr_Dni;
+    ELSE
+   SELECT '0' AS Cliente_Id,'EL CLIENTE NO EXISTE O HA SIDO ELIMINADO' AS Cliente_Nombre;
+    END IF;
+    
+ELSEIF Pint_Condicion = 2 THEN
+
+	IF EXISTS(SELECT * FROM tblCliente WHERE Cliente_TelefonoCel = Pvchr_Dni AND Cliente_Estado = 1) THEN
+   SELECT Cliente_Id,CONCAT(Cliente_Nombre,' ',Cliente_Apellido) AS Cliente_Nombre FROM tblCliente
+   WHERE Cliente_Estado = 1 AND Cliente_TelefonoCel = Pvchr_Dni;
+    ELSE
+   SELECT '0' AS Cliente_Id,'EL CLIENTE NO EXISTE O HA SIDO ELIMINADO' AS Cliente_Nombre;
+    END IF;
+
+END IF;
+END $$
+DELIMITER ;
+
+----- ****
+
+DROP PROCEDURE IF EXISTS SP_Obtener_TblProducto_Solo_Vacunas_ConStock;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblProducto_Solo_Vacunas_ConStock (IN Pint_IdSede INT)
+BEGIN
+SELECT tp.Producto_Id,tp.Producto_Nombre
+FROM tblProducto tp LEFT JOIN tblAlmacen ta ON tp.Producto_Id = ta.Almacen_IdProducto  
+WHERE tp.Producto_Estado = 1 AND tp.Producto_IdTipoPro = 1 AND tp.Producto_IdTipoCat = 1 
+AND ta.Almacen_IdSede = Pint_IdSede AND ta.Almacen_Cantidad > 0;
+END $$
+DELIMITER ;
+
+------******
+
+DROP PROCEDURE IF EXISTS SP_Registrar_TblDesparacitacion;
+DELIMITER $$
+CREATE PROCEDURE `SP_Registrar_TblDesparacitacion`(IN `Pint_IdTipoRegistro` INT, IN `Pint_Iddesparacitacion` INT, IN `Pdat_Fecha` DATE, IN `Pint_IdProducto` INT, IN `Pflo_Precio` FLOAT, IN `Pint_IdMascota` INT, IN `Pvchr_Observacion` VARCHAR(100), IN `Pint_Cita` INT, IN `Pvchr_Usuario` VARCHAR(50), IN `Pint_VentaTipo` INT, IN `Pflo_Cantidad` FLOAT, IN `Pint_IdAlmacen` INT)
+BEGIN
+DECLARE IdVentaTemporal INT;
+DECLARE IdAlmacen INT;
+DECLARE IdValidaStock INT;
+IF Pint_IdTipoRegistro = 1 THEN
+   IF Pint_Cita = 1 THEN /* Registrar */
+   SET IdValidaStock = (SELECT COUNT(*) AS ID_VALIDA FROM tblProducto WHERE Producto_IdTipoPro = 3 AND Producto_IdTipoCat = 3 AND Producto_Id =  Pint_IdProducto);
+   /*VALIDAR QUE EXISTE STOCK*/
+   IF (SELECT Almacen_Cantidad FROM tblAlmacen WHERE Almacen_IdProducto = Pint_IdProducto AND Almacen_IdSede = Pint_IdAlmacen) >= 1 OR IdValidaStock > 0 THEN
+   INSERT INTO tblVentaTemporal (VentaTemporal_IdTipoRegistro, VentaTemporal_Id_vbda, VentaTemporal_Fecha, VentaTemporal_IdProducto, VentaTemporal_Precio,
+                                 VentaTemporal_IdMascota, VentaTemporal_Observacion, VentaTemporal_Cita, VentaTemporal_Usuario, VentaTemporal_VentaTipo,
+                                 VentaTemporal_Cantidad, VentaTemporal_IdAlmacen, VentaTemporal_Estado,VentaTemporal_FechaGra)
+                                 VALUES
+                                (Pint_IdTipoRegistro, Pint_Iddesparacitacion, Pdat_Fecha, Pint_IdProducto, Pflo_Precio,
+                                 Pint_IdMascota, Pvchr_Observacion, Pint_Cita, Pvchr_Usuario, Pint_VentaTipo,
+                                 Pflo_Cantidad, Pint_IdAlmacen, 1,NOW());
+   /* OBTIENE ID DE VENTATEMPORAL */
+   SET IdVentaTemporal =(SELECT MAX(VentaTemporal_Id) FROM tblVentaTemporal);
+   SELECT '1' AS Codigo,IdVentaTemporal AS CodigoVentaTmp;
+   ELSE
+   SELECT '3' AS Codigo,'0' AS CodigoVentaTmp;
+   END IF;
+   ELSEIF Pint_Cita = 2 THEN /* Agendar */
+   /*INSERTA TBL VACUNAS*/
+   INSERT INTO tblDesparacitacion
+   (Desparacitacion_Fecha, Desparacitacion_IdProducto, Desparacitacion_IdMascota, Desparacitacion_Observacion, Desparacitacion_Cita, Desparacitacion_CitaEstado, Desparacitacion_Estado, Desparacitacion_FechaGra, Desparacitacion_UserGrab)
+    VALUES
+   (Pdat_Fecha, Pint_IdProducto, Pint_IdMascota, Pvchr_Observacion, Pint_Cita, 'A', 1, now(), Pvchr_Usuario);
+   SELECT '1' AS Codigo,'0' AS CodigoVentaTmp;
+   END IF;
+ELSEIF Pint_IdTipoRegistro = 2 THEN
+   IF Pint_Cita = 1 THEN
+   /*VALIDAR QUE EXISTE STOCK*/
+   SET IdValidaStock = (SELECT COUNT(*) AS ID_VALIDA FROM tblProducto WHERE Producto_IdTipoPro = 3 AND Producto_IdTipoCat = 3 AND Producto_Id =  Pint_IdProducto);
+   IF (SELECT Almacen_Cantidad FROM tblAlmacen WHERE Almacen_IdProducto = Pint_IdProducto AND Almacen_IdSede = Pint_IdAlmacen) >= 1 OR IdValidaStock > 0 THEN
+   INSERT INTO tblVentaTemporal (VentaTemporal_IdTipoRegistro, VentaTemporal_Id_vbda, VentaTemporal_Fecha, VentaTemporal_IdProducto, VentaTemporal_Precio,
+                                 VentaTemporal_IdMascota, VentaTemporal_Observacion, VentaTemporal_Cita, VentaTemporal_Usuario, VentaTemporal_VentaTipo,
+                                 VentaTemporal_Cantidad, VentaTemporal_IdAlmacen, VentaTemporal_Estado,VentaTemporal_FechaGra)
+                                 VALUES
+                                (Pint_IdTipoRegistro, Pint_Iddesparacitacion, Pdat_Fecha, Pint_IdProducto, Pflo_Precio,
+                                 Pint_IdMascota, Pvchr_Observacion, Pint_Cita, Pvchr_Usuario, Pint_VentaTipo,
+                                 Pflo_Cantidad, Pint_IdAlmacen, 1,NOW());
+   /* OBTIENE ID DE VENTATEMPORAL */
+   SET IdVentaTemporal =(SELECT MAX(VentaTemporal_Id) FROM tblVentaTemporal);
+   SELECT '2' AS Codigo,IdVentaTemporal AS CodigoVentaTmp;
+   ELSE
+   SELECT '3' AS Codigo,'0' AS CodigoVentaTmp;
+   END IF;
+   ELSEIF Pint_Cita = 2 THEN
+   /* cod 2 */
+   SELECT '3' AS Codigo,'1' AS CodigoVenta;
+   ELSEIF Pint_Cita = 3 THEN
+   /* ACTUALIZA TBL VACUNA */
+   UPDATE tblDesparacitacion SET
+   Desparacitacion_Fecha = Pdat_Fecha,
+   Desparacitacion_Observacion = Pvchr_Observacion,
+   Desparacitacion_Cita = 3,
+   Desparacitacion_FechaGrab_Edicion = NOW(),
+   Desparacitacion_UserGrab_Edicion = Pvchr_Usuario    
+   WHERE Desparacitacion_Id = Pint_Iddesparacitacion;
+   SELECT '2' AS Codigo,'0' AS CodigoVenta;
+   END IF;
+END IF;
+END $$
+DELIMITER ;
+
+-------- *****
+
+DROP PROCEDURE IF EXISTS SP_Obtener_TblProducto_Solo_Atencion_ConStock;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblProducto_Solo_Atencion_ConStock (IN Pint_IdSede INT)
+BEGIN
+SELECT tp.Producto_Id,tp.Producto_Nombre
+FROM tblProducto tp LEFT JOIN tblAlmacen ta ON tp.Producto_Id = ta.Almacen_IdProducto  
+WHERE tp.Producto_Estado = 1 AND tp.Producto_IdTipoPro = 4 AND ta.Almacen_IdSede = Pint_IdSede AND ta.Almacen_Cantidad > 0
+UNION
+SELECT tp.Producto_Id,tp.Producto_Nombre
+FROM tblProducto tp LEFT JOIN tblAlmacen ta ON tp.Producto_Id = ta.Almacen_IdProducto  
+WHERE tp.Producto_Estado = 1 AND tp.Producto_IdTipoPro = 4 AND tp.Producto_IdTipoCat = 4 
+AND ta.Almacen_IdSede = Pint_IdSede;
+END $$
+DELIMITER ;
+
+
+-------- *****
+
+DROP PROCEDURE IF EXISTS SP_Registrar_TblAtencion;
+DELIMITER $$
+CREATE PROCEDURE `SP_Registrar_TblAtencion`(IN Pint_IdTipoRegistro INT,
+                                              IN Pint_IdAtencion INT,                                                  
+                                              IN Pdat_Fecha DATE,
+											  IN Pint_IdProducto INT,
+                                              IN Pint_IdMascota INT,
+                                              IN Pvchr_Sintomas VARCHAR(3000),                                                
+                                              IN Pvchr_Atencion_T VARCHAR(100),
+                                              IN Pvchr_Atencion_FC VARCHAR(100),
+                                              IN Pvchr_Atencion_FR VARCHAR(100),                                                  
+                                              IN Pvchr_Atencion_sc_Des VARCHAR(100),
+                                              IN Pvchr_Atencion_sc_Muc VARCHAR(100),
+                                              IN Pvchr_Atencion_sc_TLLC VARCHAR(100),
+                                              IN Pvchr_Atencion_sc_Vom VARCHAR(100),
+                                              IN Pvchr_Atencion_sc_Dia VARCHAR(100),
+                                              IN Pvchr_Atencion_sc_Gan VARCHAR(100),
+                                              IN Pvchr_Atencion_sc_Pes VARCHAR(50),                                                  
+                                              IN Pvchr_Atencion_dx_Pre VARCHAR(150),
+                                              IN Pvchr_Atencion_dx_Def VARCHAR(150),
+                                              IN Pvchr_Atencion_dx_Sol VARCHAR(150),
+                                              IN Pvchr_Atencion_tr_Des VARCHAR(150),
+                                              IN Pvchr_Atencion_tr_Obs VARCHAR(150),
+                                              IN Pflo_Atencion_tr_Pre FLOAT,
+                                              IN Pint_Documento INT,
+                                              IN Pint_Cita INT,
+                                              IN Pchr_CitaEstado CHAR(1),
+                                              IN Pint_Estado INT,                                                
+                                              IN Pvchr_Usuario VARCHAR(100),
+                                              IN Pint_VentaTipo INT,
+                                              IN Pint_IdAlmacen INT,
+                                              IN Pint_IdVBDA INT)
+BEGIN
+DECLARE IdVentaTemporal INT;
+DECLARE Pflo_Cantidad FLOAT;
+DECLARE IdAtencionTemporal INT;
+DECLARE IdValidaStock INT;
+
+SET Pflo_Cantidad = 1;
+
+IF Pint_IdTipoRegistro = 1 THEN
+
+	IF Pint_Cita = 1 THEN /* REGISTRAR NUEVO */
+   SET IdValidaStock = (SELECT COUNT(*) AS ID_VALIDA FROM tblProducto WHERE Producto_IdTipoPro = 3 AND Producto_IdTipoCat = 3 AND Producto_Id =  Pint_IdProducto);	
+	IF (SELECT Almacen_Cantidad FROM tblAlmacen WHERE Almacen_IdProducto = Pint_IdProducto AND Almacen_IdSede = Pint_IdAlmacen) >= 1 OR IdValidaStock > 0 THEN
+	 INSERT INTO tblAtencionTemporal
+	 (Atencion_IdVenta, Atencion_Fecha, Atencion_IdProducto, Atencion_IdMascota, Atencion_Sintomas,Atencion_T, Atencion_FC, Atencion_FR,
+	 Atencion_sc_Deshidratacion, Atencion_sc_Mucosas, Atencion_sc_TLLC, Atencion_sc_Vomitos, Atencion_sc_Diarreas, Atencion_sc_Ganglios, Atencion_sc_Peso,
+	 Atencion_dx_Presuntivo, Atencion_dx_Definitivo, Atencion_dx_Solicitado,Atencion_tr_Descripcion, Atencion_tr_Observacion, Atencion_tr_Precio,
+	 Atencion_IdDocumento, Atencion_Cita, Atencion_CitaEstado, Atencion_Estado, Atencion_FechaGra, Atencion_UserGrab)
+	 VALUES
+	(Pint_IdAtencion, Pdat_Fecha, Pint_IdProducto, Pint_IdMascota, Pvchr_Sintomas,Pvchr_Atencion_T, Pvchr_Atencion_FC, Pvchr_Atencion_FR,
+	 Pvchr_Atencion_sc_Des, Pvchr_Atencion_sc_Muc, Pvchr_Atencion_sc_TLLC, Pvchr_Atencion_sc_Vom, Pvchr_Atencion_sc_Dia, Pvchr_Atencion_sc_Gan, Pvchr_Atencion_sc_Pes,
+	 Pvchr_Atencion_dx_Pre, Pvchr_Atencion_dx_Def, Pvchr_Atencion_dx_Sol,Pvchr_Atencion_tr_Des, Pvchr_Atencion_tr_Obs, Pflo_Atencion_tr_Pre,
+	 Pint_Documento, Pint_Cita, Pchr_CitaEstado, Pint_Estado,NOW(), Pvchr_Usuario);
+	 SET IdAtencionTemporal = (SELECT Atencion_Id FROM tblAtencionTemporal ORDER BY Atencion_Id DESC LIMIT 1 );
+	 INSERT INTO tblVentaTemporal (VentaTemporal_IdTipoRegistro, VentaTemporal_Id_vbda, VentaTemporal_Fecha, VentaTemporal_IdProducto, VentaTemporal_Precio,
+	 VentaTemporal_IdMascota, VentaTemporal_Observacion, VentaTemporal_Cita, VentaTemporal_Usuario, VentaTemporal_VentaTipo,
+	 VentaTemporal_Cantidad, VentaTemporal_IdAlmacen, VentaTemporal_Estado,VentaTemporal_FechaGra)
+	  VALUES
+	 (Pint_IdTipoRegistro, IdAtencionTemporal, Pdat_Fecha, Pint_IdProducto, Pflo_Atencion_tr_Pre,
+	  Pint_IdMascota, Pvchr_Atencion_tr_Obs, Pint_Cita, Pvchr_Usuario, Pint_VentaTipo,
+	  Pflo_Cantidad, Pint_IdAlmacen, 1,NOW());
+
+	 /* OBTIENE ID DE VENTATEMPORAL */
+	 SET IdVentaTemporal =(SELECT MAX(VentaTemporal_Id) FROM tblVentaTemporal);
+	 SELECT '1' AS Codigo,IdVentaTemporal AS CodigoVentaTmp;
+	ELSE
+	 SELECT '3' AS Codigo,'0' AS CodigoVentaTmp;
+	END IF;
+ELSEIF Pint_Cita = 2 THEN /* AGENDAR */
+		INSERT INTO tblAtencionTemporal
+		(Atencion_IdVenta, Atencion_Fecha, Atencion_IdProducto, Atencion_IdMascota, Atencion_Sintomas,Atencion_T, Atencion_FC, Atencion_FR,
+		 Atencion_sc_Deshidratacion, Atencion_sc_Mucosas, Atencion_sc_TLLC, Atencion_sc_Vomitos, Atencion_sc_Diarreas, Atencion_sc_Ganglios, Atencion_sc_Peso,
+		 Atencion_dx_Presuntivo, Atencion_dx_Definitivo, Atencion_dx_Solicitado,Atencion_tr_Descripcion, Atencion_tr_Observacion, Atencion_tr_Precio,
+		 Atencion_IdDocumento, Atencion_Cita, Atencion_CitaEstado, Atencion_Estado, Atencion_FechaGra, Atencion_UserGrab)
+		VALUES
+		(Pint_IdAtencion, Pdat_Fecha, Pint_IdProducto, Pint_IdMascota, Pvchr_Sintomas,Pvchr_Atencion_T, Pvchr_Atencion_FC, Pvchr_Atencion_FR,
+		 Pvchr_Atencion_sc_Des, Pvchr_Atencion_sc_Muc, Pvchr_Atencion_sc_TLLC, Pvchr_Atencion_sc_Vom, Pvchr_Atencion_sc_Dia, Pvchr_Atencion_sc_Gan, Pvchr_Atencion_sc_Pes,
+		 Pvchr_Atencion_dx_Pre, Pvchr_Atencion_dx_Def, Pvchr_Atencion_dx_Sol,Pvchr_Atencion_tr_Des, Pvchr_Atencion_tr_Obs, Pflo_Atencion_tr_Pre,
+		 Pint_Documento, Pint_Cita, Pchr_CitaEstado, Pint_Estado,NOW(), Pvchr_Usuario);
+		SET IdAtencionTemporal = (SELECT Atencion_Id FROM tblAtencionTemporal ORDER BY Atencion_Id DESC LIMIT 1 );
+
+		/*INSERTA TBL ATENCION*/
+		INSERT INTO tblAtencion
+		(Atencion_IdVenta, Atencion_Fecha, Atencion_IdProducto, Atencion_IdMascota, Atencion_Sintomas,Atencion_T, Atencion_FC, Atencion_FR,
+		 Atencion_sc_Deshidratacion, Atencion_sc_Mucosas, Atencion_sc_TLLC, Atencion_sc_Vomitos, Atencion_sc_Diarreas, Atencion_sc_Ganglios, Atencion_sc_Peso,
+		 Atencion_dx_Presuntivo, Atencion_dx_Definitivo, Atencion_dx_Solicitado,Atencion_tr_Descripcion, Atencion_tr_Observacion, Atencion_tr_Precio,
+		 Atencion_IdDocumento, Atencion_Cita, Atencion_CitaEstado, Atencion_Estado, Atencion_FechaGra, Atencion_UserGrab)
+		VALUES
+		(IdAtencionTemporal, Pdat_Fecha, Pint_IdProducto, Pint_IdMascota, Pvchr_Sintomas, Pvchr_Atencion_T, Pvchr_Atencion_FC, Pvchr_Atencion_FR,
+		 Pvchr_Atencion_sc_Des, Pvchr_Atencion_sc_Muc, Pvchr_Atencion_sc_TLLC, Pvchr_Atencion_sc_Vom, Pvchr_Atencion_sc_Dia, Pvchr_Atencion_sc_Gan, Pvchr_Atencion_sc_Pes,
+		 Pvchr_Atencion_dx_Pre, Pvchr_Atencion_dx_Def, Pvchr_Atencion_dx_Sol, Pvchr_Atencion_tr_Des, Pvchr_Atencion_tr_Obs, Pflo_Atencion_tr_Pre,
+		 Pint_Documento, Pint_Cita, Pchr_CitaEstado, Pint_Estado,NOW(), Pvchr_Usuario);
+		SELECT '1' AS Codigo,'0' AS CodigoVentaTmp;
+END IF;
+
+ELSEIF Pint_IdTipoRegistro = 2 THEN
+
+	IF Pint_Cita = 1 THEN /* REGISTRAR VENTA CON DATO AGENDADO */
+		SET IdValidaStock = (SELECT COUNT(*) AS ID_VALIDA FROM tblProducto WHERE Producto_IdTipoPro = 3 AND Producto_IdTipoCat = 3 AND Producto_Id =  Pint_IdProducto);	
+		
+		IF (SELECT Almacen_Cantidad FROM tblAlmacen WHERE Almacen_IdProducto = Pint_IdProducto AND Almacen_IdSede = Pint_IdAlmacen) >= 1 OR IdValidaStock > 0 THEN 
+		
+		INSERT INTO tblVentaTemporal (VentaTemporal_IdTipoRegistro, VentaTemporal_Id_vbda, VentaTemporal_Fecha, VentaTemporal_IdProducto, VentaTemporal_Precio,
+		 VentaTemporal_IdMascota, VentaTemporal_Observacion, VentaTemporal_Cita, VentaTemporal_Usuario, VentaTemporal_VentaTipo,
+		 VentaTemporal_Cantidad, VentaTemporal_IdAlmacen, VentaTemporal_Estado,VentaTemporal_FechaGra)
+		  VALUES
+		 (Pint_IdTipoRegistro, Pint_IdVBDA, Pdat_Fecha, Pint_IdProducto, Pflo_Atencion_tr_Pre,
+		  Pint_IdMascota, Pvchr_Atencion_tr_Obs, Pint_Cita, Pvchr_Usuario, Pint_VentaTipo,
+		  Pflo_Cantidad, Pint_IdAlmacen, 1,NOW());
+		
+		
+		/* Actualiza */
+		UPDATE tblAtencion SET 
+		Atencion_Fecha=Pdat_Fecha,
+		Atencion_Sintomas=Pvchr_Sintomas,
+		Atencion_T=Pvchr_Atencion_T,
+		Atencion_FC=Pvchr_Atencion_FC,
+		Atencion_FR=Pvchr_Atencion_FR,
+		Atencion_sc_Deshidratacion=Pvchr_Atencion_sc_Des,
+		Atencion_sc_Mucosas=Pvchr_Atencion_sc_Muc,
+		Atencion_sc_TLLC=Pvchr_Atencion_sc_TLLC,
+		Atencion_sc_Vomitos=Pvchr_Atencion_sc_Vom,
+		Atencion_sc_Diarreas=Pvchr_Atencion_sc_Dia,
+		Atencion_sc_Ganglios=Pvchr_Atencion_sc_Gan,
+		Atencion_sc_Peso=Pvchr_Atencion_sc_Pes,
+		Atencion_dx_Presuntivo=Pvchr_Atencion_dx_Pre,
+		Atencion_dx_Definitivo=Pvchr_Atencion_dx_Def,
+		Atencion_dx_Solicitado=Pvchr_Atencion_dx_Sol,
+		Atencion_tr_Descripcion=Pvchr_Atencion_tr_Des,
+		Atencion_tr_Observacion=Pvchr_Atencion_tr_Obs,
+		Atencion_tr_Precio=Pflo_Atencion_tr_Pre,
+		Atencion_IdDocumento=1,
+		Atencion_Cita=1,
+		Atencion_CitaEstado='C',
+		Atencion_FechaGrab_Edicion=NOW(),
+		Atencion_UserGrab_Edicion=Pvchr_Usuario WHERE Atencion_Id = Pint_IdAtencion;
+		/* fin actualzia */
+		
+		SET IdVentaTemporal =(SELECT MAX(VentaTemporal_Id) FROM tblVentaTemporal);
+		SELECT '2' AS Codigo,IdVentaTemporal AS CodigoVentaTmp;
+		ELSE
+		SELECT '3' AS Codigo,'0' AS CodigoVentaTmp;
+		END IF;
+		
+	ELSEIF Pint_Cita = 2 THEN
+		/* cod 2 */
+		SELECT '3' AS Codigo,'1' AS CodigoVenta;
+		ELSEIF Pint_Cita = 3 THEN /* AGENDAR REPROGRAMACION */
+		UPDATE tblAtencion
+		SET -- Atencion_Id=[value-1],
+		-- Atencion_IdVenta=[value-2],
+		Atencion_Fecha=Pdat_Fecha,
+		-- Atencion_IdProducto=[value-4],
+		-- Atencion_IdMascota=[value-5],
+		Atencion_Sintomas=Pvchr_Sintomas,
+		Atencion_T=Pvchr_Atencion_T,
+		Atencion_FC=Pvchr_Atencion_FC,
+		Atencion_FR=Pvchr_Atencion_FR,
+		Atencion_sc_Deshidratacion=Pvchr_Atencion_sc_Des,
+		Atencion_sc_Mucosas=Pvchr_Atencion_sc_Muc,
+		Atencion_sc_TLLC=Pvchr_Atencion_sc_TLLC,
+		Atencion_sc_Vomitos=Pvchr_Atencion_sc_Vom,
+		Atencion_sc_Diarreas=Pvchr_Atencion_sc_Dia,
+		Atencion_sc_Ganglios=Pvchr_Atencion_sc_Gan,
+		Atencion_sc_Peso=Pvchr_Atencion_sc_Pes,
+		Atencion_dx_Presuntivo=Pvchr_Atencion_dx_Pre,
+		Atencion_dx_Definitivo=Pvchr_Atencion_dx_Def,
+		Atencion_dx_Solicitado=Pvchr_Atencion_dx_Sol,
+		Atencion_tr_Descripcion=Pvchr_Atencion_tr_Des,
+		Atencion_tr_Observacion=Pvchr_Atencion_tr_Obs,
+		Atencion_tr_Precio=Pflo_Atencion_tr_Pre,
+		Atencion_IdDocumento=1,
+		Atencion_Cita=3,
+		Atencion_CitaEstado='C',
+		-- Atencion_Estado=[value-26],
+		-- Atencion_FechaGra=[value-27],
+		-- Atencion_UserGrab=[value-28],
+		Atencion_FechaGrab_Edicion=NOW(),
+		Atencion_UserGrab_Edicion=Pvchr_Usuario WHERE Atencion_Id = Pint_IdAtencion;
+		SELECT '2' AS Codigo,'0' AS CodigoVenta;
+	END IF;
+
+END IF;
+END $$
+DELIMITER ;

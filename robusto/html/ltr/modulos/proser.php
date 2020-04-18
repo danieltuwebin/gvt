@@ -177,6 +177,40 @@ if ($_POST['action'] == "MostrarPrecio") {
     echo json_encode($myArray);
 }
 
+
+
+
+if ($_POST['action'] == "MostrarProductoxCondicion_Vacunas") {
+
+    $Id = $_POST['Id'];
+
+    $myArray = array();
+    $sql = "CALL SP_Obtener_TblProducto_Solo_Vacunas_ConStock('$Id')";
+    $oCado = new Cado();
+    $rst = $oCado->ejecute_sql($sql);
+    while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+        $myArray[] = $row;
+    }
+    echo json_encode($myArray);
+}
+
+
+if ($_POST['action'] == "MostrarProductoxCondicion_Atencion") {
+
+    $Id = $_POST['Id'];
+
+    $myArray = array();
+    $sql = "CALL SP_Obtener_TblProducto_Solo_Atencion_ConStock('$Id')";
+    $oCado = new Cado();
+    $rst = $oCado->ejecute_sql($sql);
+    while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
+        $myArray[] = $row;
+    }
+    echo json_encode($myArray);
+}
+
+
+
 /********************************************************/
 
 

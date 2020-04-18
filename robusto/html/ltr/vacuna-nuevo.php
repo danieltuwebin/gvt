@@ -652,6 +652,7 @@ include('modulos/cerrar_sesion.php');
                                                 <h4 class="form-section">Propietario</h4>
                                                 <div class="row">
                                                     <div class="col-md-6">
+
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="input-group">
@@ -810,6 +811,7 @@ include('modulos/cerrar_sesion.php');
     var IdTipoProcesoGrabacion = 0;
     var IdVacuna = 0;
     var IdAgendado = 0;
+    var IdSede = 0;
 
     /* BEGIN FUNCIONES GENERALES */
 
@@ -833,6 +835,28 @@ include('modulos/cerrar_sesion.php');
     }    
 
     /* END FUNCIONES GENERALES */
+
+    function Obtener_Sede_Usuario(act) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/inicio.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                IdSede = data;
+                /* $("#CboSede option[value=" + IdSede + "]").attr("selected", true);
+                $("#CboSede_Bus option[value=" + IdSede + "]").attr("selected", true); */
+            },
+            complete: function() {
+                // $("#CboSede option[value=" + CondicionSede + "]").attr("selected", true);
+                listar();
+            }
+        });
+    }
 
 
     // Clase Proser
@@ -1216,7 +1240,10 @@ include('modulos/cerrar_sesion.php');
 
     $(function() {
         Habilita_Desabilita(true,false,false);
-        Obtener_Vacunas('MostrarProductoxCondicion', 1);
+        
+        Obtener_Sede_Usuario('MostrarSede_Usuario');
+
+        Obtener_Vacunas('MostrarProductoxCondicion_Vacunas', IdSede);
         $("#CboEstadoVacuna").attr('disabled', true);
         $('#Txt_Fecha').val(MostrarFechaActual());
 

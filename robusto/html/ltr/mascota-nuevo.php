@@ -63,7 +63,7 @@ include('modulos/cerrar_sesion.php');
         $CondicionMnu = $_SESSION['UserPerfil'];
 
         if ($CondicionMnu == 1) { /* PERFIL ADMIN (1) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -117,7 +117,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -171,7 +171,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -251,7 +251,7 @@ include('modulos/cerrar_sesion.php');
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 2) { /* PERFIL JEFE (2) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -305,7 +305,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -359,7 +359,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--<li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -439,7 +439,7 @@ include('modulos/cerrar_sesion.php');
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 3) { /* PERFIL SOLO LECTURA (3) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -532,7 +532,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -638,32 +638,71 @@ include('modulos/cerrar_sesion.php');
                                             <!--<li><a data-action="close"><i class="icon-cross2"></i></a></li>-->
                                         </ul>
                                     </div>
-                                </div>                              
+                                </div>
 
                                 <div class="card-body collapse in">
                                     <div class="card-block">
                                         <form class="form" id="FormularioMascota">
                                             <div class="form-body">
-                                            <h4 class="form-section">Propietario</h4>
+                                                <h4 class="form-section">Propietario</h4>
+
                                                 <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <input type="text" id="Txt_Dni" class="form-control" placeholder="Ingrese Nro. DNI" name="Txt_Dni" onkeypress="return SoloNumeros(event);">
-                                                                <span class="input-group-btn">
-                                                                    <button id="btnBuscar" class="btn btn-warning mr-1" type="button"> <i class="icon-search5"></i> Buscar</button>
-                                                                </span>
+                                                    <div class="col-md-8">
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group">
+                                                                    <label for="Txt_Buscar_Dni"><strong>Seleccione:</strong></label>
+                                                                    <label class="display-inline-block custom-control custom-radio ml-1">
+                                                                        <input type="radio" id="RbDniP" name="Dni" class="custom-control-input" value="1" checked>
+                                                                        <span class="custom-control-indicator"></span>
+                                                                        <span class="custom-control-description ml-0">DNI Propietario</span>
+                                                                    </label>
+                                                                    <label class="display-inline-block custom-control custom-radio">
+                                                                        <input type="radio" id="RbDniM" name="Dni" class="custom-control-input" value="2">
+                                                                        <span class="custom-control-indicator"></span>
+                                                                        <span class="custom-control-description ml-0">Celular Propietario</span>
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <h5>
-                                                                <label for="Txt_Nombre_Dni">Nombre propietario :&nbsp;&nbsp; </label><label id="Txt_Nombre_Dni" class="primary"></label>
-                                                            </h5>
+
+                                                        <!-- <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <input type="text" id="Txt_Dni" class="form-control" placeholder="Ingrese Nro. DNI" name="Txt_Dni>
+                                                                <span class=" input-group-btn">
+                                                                        <button id="btnBuscar" class="btn btn-warning mr-1" type="button"> <i class="icon-search5"></i> Buscar</button>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
+
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <input type="text" id="Txt_Dni" class="form-control" placeholder="Ingrese Nro. DNI" name="Txt_Dni">
+                                                                        <span class="input-group-btn">
+                                                                            <button id="btnBuscar" class="btn btn-warning mr-1" type="button"> <i class="icon-search5"></i> Buscar</button>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>                                                        
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <h5>
+                                                                        <label for="Txt_Nombre_Dni">Nombre propietario :&nbsp;&nbsp; </label><label id="Txt_Nombre_Dni" class="primary"></label>
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
                                                         </div>
+
                                                     </div>
                                                 </div>
                                                 <br>
@@ -725,7 +764,7 @@ include('modulos/cerrar_sesion.php');
 
                                                 <div class="form-group">
                                                     <label for="Txt_Notas">Notas</label>
-                                                    <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales" ></textarea>
+                                                    <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales"></textarea>
                                                 </div>
 
                                             </div>
@@ -784,6 +823,7 @@ include('modulos/cerrar_sesion.php');
 
 <!-- BEGIN. EVENTOS SCRIPT-->
 <script type="text/javascript">
+    var ValorRb = 1;
     /* BEGIN FUNCIONES GENERALES */
 
     /* END FUNCIONES GENERALES */
@@ -796,11 +836,11 @@ include('modulos/cerrar_sesion.php');
         Cerrar_Sesion("salir");
     });
 
-    function Habilita_Desabilita(boolLimpiar,boolGrabar) {
+    function Habilita_Desabilita(boolLimpiar, boolGrabar) {
         $("#btnLimpiar").attr('disabled', boolLimpiar);
         $("#btnGrabar").attr('disabled', boolGrabar);
         //$("#btnAgendar").attr('disabled', boolAgendar);
-    }       
+    }
 
     function Actualizar() {
         limpiaForm($("#FormularioMascota"));
@@ -864,17 +904,34 @@ include('modulos/cerrar_sesion.php');
         });
     }
 
+    $('#FormularioMascota input').on('change', function() {
+        ValorRb = $('input[name=Dni]:checked', '#FormularioMascota').val();
+    });
+
     $('#btnBuscar').click(function() {
-        Obtener_Nombre_x_Dni('MostrarNombrexDni', $('#Txt_Dni').val().trim())
+        Obtener_Nombre_x_Dni('MostrarNombrexDni', ValorRb, $('#Txt_Dni').val().toUpperCase().trim());
+        //console.log(Convierte_CodigoVisible_En_CodigoInterno($('#Txt_Dni').val().toUpperCase().trim(),ValorRb));
     });
 
     $("#Txt_Dni").keypress(function(e) {
         if (e.which == 13) {
-            Obtener_Nombre_x_Dni('MostrarNombrexDni', $('#Txt_Dni').val().trim())
+            Obtener_Nombre_x_Dni('MostrarNombrexDni', ValorRb, $('#Txt_Dni').val().toUpperCase().trim());
+            //console.log( Convierte_CodigoVisible_En_CodigoInterno($('#Txt_Dni').val().toUpperCase().trim(),ValorRb));
         }
     });
 
-    function Obtener_Nombre_x_Dni(act, dni) {
+    /*
+    function Convierte_CodigoVisible_En_CodigoInterno(dni, condicion) {
+        var texto; //= dni;
+        if (condicion == 1) {
+            return dni;
+        } else if (condicion == 2) {
+            texto = dni.substr(1, dni.length - 1);
+            return texto;
+        }
+    }*/
+
+    function Obtener_Nombre_x_Dni(act, condicion, dni) {
         $.ajax({
             type: "POST",
             url: "modulos/mascotas.php",
@@ -882,6 +939,7 @@ include('modulos/cerrar_sesion.php');
             dataType: "html",
             data: ({
                 action: act,
+                Condicion: condicion,
                 Dni: dni
             }),
             beforeSend: function() {
@@ -999,14 +1057,14 @@ include('modulos/cerrar_sesion.php');
                 });
             },
             complete: function() {
-                Habilita_Desabilita(false,true);
+                Habilita_Desabilita(false, true);
             }
         });
     }
 
     $("#btnLimpiar").click(function() {
         limpiaForm($("#FormularioMascota"));
-        Habilita_Desabilita(true,false);
+        Habilita_Desabilita(true, false);
         $("#Txt_Nombre_Dni").html('');
         Obtener_Especie('MostrarEspecie');
         Obtener_Raza('MostrarRaza', 1)
@@ -1018,7 +1076,7 @@ include('modulos/cerrar_sesion.php');
 
     $(function() {
         Obtener_Nombre();
-        Habilita_Desabilita(true,false)
+        Habilita_Desabilita(true, false)
         Obtener_Especie('MostrarEspecie');
         Obtener_Raza('MostrarRaza', 1)
         $("#CboEspecie").change(function() {
