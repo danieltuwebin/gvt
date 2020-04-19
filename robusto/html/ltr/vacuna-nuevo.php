@@ -825,7 +825,8 @@ include('modulos/cerrar_sesion.php');
 
     function Actualizar() {
         limpiaForm($("#FormularioVacuna"));
-        Obtener_Vacunas('MostrarProductoxCondicion', 1);
+        
+        Obtener_Vacunas('MostrarProductoxCondicion_Vacunas', IdSede);
     }
 
     function Habilita_Desabilita(boolLimpiar,boolGrabar,boolAgendar) {
@@ -853,7 +854,7 @@ include('modulos/cerrar_sesion.php');
             },
             complete: function() {
                 // $("#CboSede option[value=" + CondicionSede + "]").attr("selected", true);
-                listar();
+                //listar();
             }
         });
     }

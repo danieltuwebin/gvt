@@ -833,6 +833,7 @@ include('modulos/cerrar_sesion.php');
     var IdTipoProcesoGrabacion = 0;
     var IdDesparacitacion = 0;
     var IdAgendado = 0;
+    var IdSede = 0;      
     /* BEGIN FUNCIONES GENERALES */
 
     /* END FUNCIONES GENERALES */
@@ -847,7 +848,7 @@ include('modulos/cerrar_sesion.php');
 
     function Actualizar() {
         limpiaForm($("#FormularioDesparacitacion"));
-        Obtener_Desparacitacion('MostrarProductoxCondicion', 3);
+        Obtener_Desparacitacion('MostrarProductoxCondicion', 3,IdSede);
     }
 
     function Habilita_Desabilita(boolLimpiar, boolGrabar, boolAgendar) {
@@ -856,8 +857,30 @@ include('modulos/cerrar_sesion.php');
         $("#btnAgendar").attr('disabled', boolAgendar);
     }
 
+    function Obtener_Sede_Usuario(act) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/inicio.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                IdSede = data;
+                /* $("#CboSede option[value=" + IdSede + "]").attr("selected", true);
+                $("#CboSede_Bus option[value=" + IdSede + "]").attr("selected", true); */
+            },
+            complete: function() {
+                // $("#CboSede option[value=" + CondicionSede + "]").attr("selected", true);
+                //listar();
+            }
+        });
+    }    
+
     // Clase Proser
-    function Obtener_Desparacitacion(act, id) {
+    function Obtener_Desparacitacion(act, id, sede) {
         $.ajax({
             type: "POST",
             url: "modulos/proser.php",
@@ -865,7 +888,8 @@ include('modulos/cerrar_sesion.php');
             dataType: "html",
             data: ({
                 action: act,
-                Id: id
+                Id: id,
+                Sede: sede
             }),
             beforeSend: function() {
                 //alert('ok');
@@ -1237,7 +1261,8 @@ include('modulos/cerrar_sesion.php');
 
     $(function() {
         Habilita_Desabilita(true,false,false);
-        Obtener_Desparacitacion('MostrarProductoxCondicion', 3);
+        Obtener_Sede_Usuario('MostrarSede_Usuario');
+        Obtener_Desparacitacion('MostrarProductoxCondicion', 3,IdSede);
         $("#CboEstadoDesparacitacion").attr('disabled', true);
         $('#Txt_Fecha').val(MostrarFechaActual());      
 

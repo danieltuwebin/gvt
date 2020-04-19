@@ -744,10 +744,11 @@ include('modulos/cerrar_sesion.php');
                 <div class="modal-footer" style="text-align:center;">
                     <div class="row">
                         <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">Cerrar</button>
-                        <button id="BtnVerVacunas" type="button" class="btn btn-success mr-1" onclick="LinkVacunas(IdMascota)"><i class="icon-eyedropper"></i> Nueva Vacuna</button>
-                        <button id="BtnVerBanios" type="button" class="btn btn-success mr-1" onclick="LinkBanios(IdMascota)"><i class="icon-droplet"></i> Nuevo Baño</button>
-                        <button id="BtnVerDesparacittacion" type="button" class="btn btn-success mr-1" onclick="LinkDesparacitacion(IdMascota)"><i class="icon-folder-plus"></i> Nueva Desparacitación</button>
-                        <button id="BtnVerAtencion" type="button" class="btn btn-success mr-1" onclick="LinkAtencion(IdMascota)"><i class="icon-plus2"></i> Nueva Atención</button>
+                        <button id="BtnVerVacunas" type="button" class="btn btn-success mr-1" onclick="LinkVacunas(IdMascota)"><i class="icon-eyedropper"></i>&nbsp;&nbsp;Vacuna</button>
+                        <button id="BtnVerBanios" type="button" class="btn btn-success mr-1" onclick="LinkBanios(IdMascota)"><i class="icon-droplet"></i>&nbsp;&nbsp;Baño</button>
+                        <button id="BtnVerDesparacittacion" type="button" class="btn btn-success mr-1" onclick="LinkDesparacitacion(IdMascota)"><i class="icon-folder-plus"></i>&nbsp;&nbsp;Desparacitación</button>
+                        <button id="BtnVerAtencion" type="button" class="btn btn-success mr-1" onclick="LinkAtencion(IdMascota)"><i class="icon-plus2"></i>&nbsp;&nbsp;Atención</button>
+                        <button id="BtnVerventa" type="button" class="btn btn-success mr-1" onclick="LinkVenta(IdMascota)"><i class="icon-cart4"></i>&nbsp;&nbsp;Venta</button>                        
                     </div>
                 </div>
             </div>
@@ -1415,8 +1416,13 @@ include('modulos/cerrar_sesion.php');
 
     function LinkAtencion(IdMascota) {
         var url = "atencion-nuevo.php?IdMas=" + IdMascota;
-        $(location).attr('href', url);
-    }     
+        $(location).attr('href', url);        
+    }
+
+    function LinkVenta(IdMascota){
+        var url = "venta-nuevo.php?IdMas=" + IdMascota;
+        $(location).attr('href', url);  
+    }
 
 
 

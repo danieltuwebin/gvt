@@ -732,7 +732,7 @@ include('modulos/cerrar_sesion.php');
                 if ($CondicionMnu == 1 || $CondicionMnu == 2) {
                 ?>
                     <div class="content-header-left col-md-3 col-xs-12 mb-1">
-                        <button id="BtnNuevo" type="button" class="btn btn-success"><i class="icon-android-add-circle"></i> Nueva Compra</button>
+                        <button id="BtnNuevo" type="button" class="btn btn-success"><i class="icon-android-add-circle"></i> Nueva Venta</button>
                     </div>
                 <?php
                 }

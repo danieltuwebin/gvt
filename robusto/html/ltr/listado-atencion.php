@@ -117,7 +117,7 @@ require('lib_externos/fpdf182/fpdf.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -305,7 +305,7 @@ require('lib_externos/fpdf182/fpdf.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -688,7 +688,7 @@ require('lib_externos/fpdf182/fpdf.php');
                                             <div class="form-group">
                                                 <label for="CboEstadoAtencion">Estado:</label>
                                                 <select id="CboEstadoAtencion" name="CboEstadoAtencion" class="form-control">
-                                                    <option value="1" disabled="disabled">REALIZADO</option>'                                                      
+                                                    <option value="1" disabled="disabled">REALIZADO</option>'
                                                     <option value="2">AGENDADO</option>
                                                     <option value="3">REPROGRAMADO</option>
                                                 </select>
@@ -699,6 +699,23 @@ require('lib_externos/fpdf182/fpdf.php');
                                 </div>
                             </div>
                             <br>
+
+                            <h4 class="form-section">Tipo de Atención</h4>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="CboAtencion">Seleccione Atención :</label>
+                                        <select id="CboAtencion" name="CboAtencion" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="Txt_Precio">Costo de Atención.</label>
+                                        <input type="number" id="Txt_Precio" style="text-transform:uppercase;" class="form-control" name="Txt_Precio" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
 
                             <h4 class="form-section">signos Clinicos</h4>
                             <div class="row">
@@ -713,34 +730,12 @@ require('lib_externos/fpdf182/fpdf.php');
                                     </div>
                                 </div>
 
-<!--                                 <div class="col-md-1">
-                                    <div class="form-group">
-                                        <label for="Txt_Fecha">Estado.</label>
-                                    </div>
-                                </div> -->
 
-<!--                                 <div class="col-md-6">
-                                    <div class="input-group">
-                                        <label class="display-inline" for="CboEstado">
-                                            <select id="CboEstado" name="CboEstado" class="form-control">
-                                            </select>
-                                        </label>
-                                    </div>
-                                </div> -->
 
                             </div>
 
                             <div class="row">
-                                <!--                                 <div class="col-md-1">
-                                    <div class="form-group">
-                                        <label for="Txt_Fecha">Fecha.</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <input type="date" style="text-transform:uppercase;" id="Txt_Fecha" class="form-control" placeholder="" name="Txt_Fecha">
-                                    </div>
-                                </div> -->
+
                                 <div class="col-md-1">
                                     <div class="form-group">
                                         <label for="Txt_T">T.&nbsp;&nbsp;</label>
@@ -782,107 +777,82 @@ require('lib_externos/fpdf182/fpdf.php');
                                 </div>
                             </div>
 
-                            <!-- <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="form-inline">
-                                                            <div class="form-group">
-                                                                <label for="Txt_T">T.&nbsp;&nbsp;</label>
-                                                                <input type="text" style="text-transform:uppercase;" id="Txt_T" class="form-control" placeholder="" name="Txt_T">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-inline">
-                                                            <div class="form-group">
-                                                                <label for="Txt_C">F.C.&nbsp;&nbsp;</label>
-                                                                <input type="text" style="text-transform:uppercase;" id="Txt_C" class="form-control" placeholder="" name="Txt_C">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-inline">
-                                                            <div class="form-group">
-                                                                <label for="Txt_FR">F.R.&nbsp;&nbsp;</label>
-                                                                <input type="text" style="text-transform:uppercase;" id="Txt_FR" class="form-control" placeholder="" name="Txt_FR">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Deshidrat">Deshidrat.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Deshidrat" class="form-control" placeholder="" name="Txt_Deshidrat" maxlength="4">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Mucosa">Mucosa.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Mucosa" class="form-control" placeholder="" name="Txt_Mucosa" maxlength="10">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Tllc">Tllc.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Tllc" class="form-control" placeholder="" name="Txt_Tllc" maxlength="5">
-                                                        </div>
-                                                    </div>   
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Vomitos">Vomitos.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Vomitos" class="form-control" placeholder="" name="Txt_Vomitos" maxlength="2">
-                                                        </div>
-                                                    </div>  
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Diarrea">Diarrea.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Diarrea" class="form-control" placeholder="" name="Txt_Diarrea" maxlength="2">
-                                                        </div>
-                                                    </div>                                                                                                                                                       
-                                                </div>
 
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Ganglio">Ganglio.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <input type="text" style="text-transform:uppercase;" id="Txt_Ganglio" class="form-control" placeholder="" name="Txt_Ganglio" maxlength="15">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="Txt_Peso">Peso.&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            <input type="number" style="text-transform:uppercase;" id="Txt_Peso" class="form-control" placeholder="" name="Txt_Peso" maxlength="2">
-                                                        </div>
-                                                    </div>
-                                                </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_Deshidrat">Deshidrat.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Deshidrat" class="form-control" placeholder="" name="Txt_Deshidrat" maxlength="4">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_Mucosa">Mucosa.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Mucosa" class="form-control" placeholder="" name="Txt_Mucosa" maxlength="10">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_Tllc">Tllc.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Tllc" class="form-control" placeholder="" name="Txt_Tllc" maxlength="5">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_Vomitos">Vomitos.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Vomitos" class="form-control" placeholder="" name="Txt_Vomitos" maxlength="2">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_Diarrea">Diarrea.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Diarrea" class="form-control" placeholder="" name="Txt_Diarrea" maxlength="2">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_Ganglio">Ganglio.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" style="text-transform:uppercase;" id="Txt_Ganglio" class="form-control" placeholder="" name="Txt_Ganglio" maxlength="15">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="Txt_Peso">Peso.&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <input type="number" style="text-transform:uppercase;" id="Txt_Peso" class="form-control" placeholder="" name="Txt_Peso" maxlength="2">
+                                    </div>
+                                </div>
+                            </div>
 
                             <h4 class="form-section">Diagnostico</h4>
 
@@ -947,21 +917,6 @@ require('lib_externos/fpdf182/fpdf.php');
                                     </div>
                                 </div>
 
-                            </div>
-
-                            <h4 class="form-section">Precio</h4>
-
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="Txt_Precio">Costo de Atención.&nbsp;</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <input type="text" id="Txt_Precio" style="text-transform:uppercase;" class="form-control" name="Txt_Precio" placeholder="">
-                                    </div>
-                                </div>
                             </div>
 
                         </div>
@@ -1126,6 +1081,7 @@ require('lib_externos/fpdf182/fpdf.php');
     var IdMascota = '';
     var IdMascotaExterno = 0;
     var ValorRb = 2;
+    var IdSede = 0;
 
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
@@ -1206,6 +1162,23 @@ require('lib_externos/fpdf182/fpdf.php');
             }
             x++;
         }
+    }
+
+    function Obtener_Sede_Usuario(act) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/inicio.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                IdSede = data;
+            },
+            complete: function() {}
+        });
     }
 
     $("#BtnNuevo").click(function() {
@@ -1337,6 +1310,7 @@ require('lib_externos/fpdf182/fpdf.php');
         var id = $(this).val();
         if (Condicion == 1) {
             //Obtener_Vacunas('MostrarProductoxCondicion', 1);
+            Obtener_Atencion('MostrarProductoxCondicion_Atencion', IdSede);            
             Obtener_Datos_Atencion('ObtenerDatosAtencionxId', id);
             $("#LblIdAtencion").text("Edición Atención : " + Obtener_Codigo_Formateado(id));
             $("#Modal_ListadoAtencion").modal("show");
@@ -1346,7 +1320,7 @@ require('lib_externos/fpdf182/fpdf.php');
     });
 
     // Clase Proser
-    function Obtener_Vacunas(act, id) {
+    function Obtener_Atencion(act, id) {
         $.ajax({
             type: "POST",
             url: "modulos/proser.php",
@@ -1361,9 +1335,10 @@ require('lib_externos/fpdf182/fpdf.php');
             },
             success: function(data) {
                 var json = JSON.parse(data);
-                $("#CboVacuna").empty();
+                $("#CboAtencion").empty();
+                $("#CboAtencion").append('<option selected="true" disabled="disabled">SELECCIONE ATENCIÓN</option>');
                 $.each(json, function(i, item) {
-                    $("#CboVacuna").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
+                    $("#CboAtencion").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
                 });
             },
             complete: function() {
@@ -1407,12 +1382,12 @@ require('lib_externos/fpdf182/fpdf.php');
                     Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
                     $('#CboMascota').val(json[i].Mascota_Id);
                     $('#CboEstadoAtencion').val(json[i].Atencion_Cita);
-                    if (json[i].Atencion_Cita == 1){
+                    if (json[i].Atencion_Cita == 1) {
                         $("#CboEstadoAtencion").attr('disabled', true);
-                    }else{
+                    } else {
                         $("#CboEstadoAtencion").attr('disabled', false);
                     }
-                    
+
                     $('#Txt_Fecha').val(json[i].Atencion_Fecha);
                     $('#Txt_T').val(json[i].Atencion_T);
                     $('#Txt_C').val(json[i].Atencion_FC);
@@ -1432,7 +1407,11 @@ require('lib_externos/fpdf182/fpdf.php');
                     $('#Txt_NotasAdicionales').val(json[i].Atencion_tr_Observacion);
                     $('#Txt_Precio').val(json[i].Atencion_tr_Precio);
 
-                    $('#Txt_CodigoProducto').val(json[i].Atencion_IdProducto)
+                    //$('#Txt_CodigoProducto').val(json[i].Atencion_IdProducto)
+                    $('#Txt_CodigoProducto').val(json[i].Atencion_IdProducto);
+                    $("#CboAtencion option[value=" + $('#Txt_CodigoProducto').val() + "]").attr("selected", true);
+                    $("#CboAtencion").attr('disabled', true);
+
                     $('#Txt_CodigoAtencion').val(json[i].Atencion_Id);
                 });
             },
@@ -1650,10 +1629,10 @@ require('lib_externos/fpdf182/fpdf.php');
         Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des, Atencion_tr_Obs, Atencion_tr_Pre, Documento,
         Cita, CitaEstado, Estado, Usuario) {
 
-            console.log(act+'-'+ IdAtencion+'-'+ Fecha+'-prod__'+ IdProducto+'-'+ IdMascota+'-'+ Sintomas+'-'+ Atencion_T+'-'+ Atencion_FC+'-'+ Atencion_FR+'-'+
-        Atencion_sc_Des+'-'+ Atencion_sc_Muc+'-'+ Atencion_sc_TLLC+'-'+ Atencion_sc_Vom+'-'+ Atencion_sc_Dia+'-'+ Atencion_sc_Gan+'-'+ Atencion_sc_Pes+'-'+
-        Atencion_dx_Pre+'-'+ Atencion_dx_Def+'-'+ Atencion_dx_Sol+'-'+ Atencion_tr_Des+'-'+ Atencion_tr_Obs+'-'+ Atencion_tr_Pre+'-'+ Documento+'-'+
-        Cita+'-'+ CitaEstado+'-'+ Estado+'-'+ Usuario);
+        /* console.log(act + '-' + IdAtencion + '-' + Fecha + '-prod__' + IdProducto + '-' + IdMascota + '-' + Sintomas + '-' + Atencion_T + '-' + Atencion_FC + '-' + Atencion_FR + '-' +
+            Atencion_sc_Des + '-' + Atencion_sc_Muc + '-' + Atencion_sc_TLLC + '-' + Atencion_sc_Vom + '-' + Atencion_sc_Dia + '-' + Atencion_sc_Gan + '-' + Atencion_sc_Pes + '-' +
+            Atencion_dx_Pre + '-' + Atencion_dx_Def + '-' + Atencion_dx_Sol + '-' + Atencion_tr_Des + '-' + Atencion_tr_Obs + '-' + Atencion_tr_Pre + '-' + Documento + '-' +
+            Cita + '-' + CitaEstado + '-' + Estado + '-' + Usuario); */
 
         $.ajax({
             type: "POST",
@@ -1771,8 +1750,8 @@ require('lib_externos/fpdf182/fpdf.php');
     $(function() {
         Obtener_Nombre();
         Obtener_Condicion();
-        if ($_GET("IdCli") === undefined) {
-        } else {
+        Obtener_Sede_Usuario('MostrarSede_Usuario');
+        if ($_GET("IdCli") === undefined) {} else {
             IdMascotaExterno = $_GET("IdCli");
         }
         listar();

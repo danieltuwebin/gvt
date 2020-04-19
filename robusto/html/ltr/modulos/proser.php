@@ -151,9 +151,10 @@ if ($_POST['action'] == "tablaResumenDetalleProducto") {
 if ($_POST['action'] == "MostrarProductoxCondicion") {
 
     $Id = $_POST['Id'];
+    $Sede = $_POST['Sede'];
 
     $myArray = array();
-    $sql = "CALL SP_Obtener_TblProducto_Inpendendientes('$Id')";
+    $sql = "CALL SP_Obtener_TblProducto_Inpendendientes('$Id','$Sede')";
     $oCado = new Cado();
     $rst = $oCado->ejecute_sql($sql);
     while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {

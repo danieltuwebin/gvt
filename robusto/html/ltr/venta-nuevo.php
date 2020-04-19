@@ -1252,7 +1252,7 @@ include('modulos/cerrar_sesion.php');
 
 
     function Grabar_Venta_Tmp(act, IdVenta, IdSede, IdProducto, Cantidad, Precio, Descuento, PrecioTotal, Usuario) {
-        console.log(act+','+ IdVenta+','+ IdSede+','+ IdProducto+','+  Cantidad+','+ Precio+','+ Descuento+','+ PrecioTotal+','+ Usuario);
+        //console.log(act+','+ IdVenta+','+ IdSede+','+ IdProducto+','+  Cantidad+','+ Precio+','+ Descuento+','+ PrecioTotal+','+ Usuario);
         var Estado = 0;
         $.ajax({
             type: "POST",
@@ -1619,6 +1619,12 @@ include('modulos/cerrar_sesion.php');
 
         if ($_GET("IdVen") === undefined) {
             //SIN VALOR GET
+            if ($_GET("IdMas") === undefined) {
+                //SIN VALOR GET
+            }else{
+                Obtener_NombreCliente_NombreMascota('MostrarNombrecliNombreMas', $_GET("IdMas"));
+            }
+           
         } else {
             // CON VALOR GET
             Id_TipoVenta = $_GET("Tipo");

@@ -886,6 +886,7 @@ include('modulos/cerrar_sesion.php');
     var IdMascota = '';
     var IdMascotaExterno = 0;
     var ValorRb = 2;
+    var IdSede;
 
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
@@ -966,6 +967,28 @@ include('modulos/cerrar_sesion.php');
             var Cod = 'V' + id;
         }
         return Cod;
+    }
+
+    function Obtener_Sede_Usuario(act) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/inicio.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                IdSede = data;
+                /* $("#CboSede option[value=" + IdSede + "]").attr("selected", true);
+                $("#CboSede_Bus option[value=" + IdSede + "]").attr("selected", true); */
+            },
+            complete: function() {
+                // $("#CboSede option[value=" + CondicionSede + "]").attr("selected", true);
+                //listar();
+            }
+        });
     }    
 
     $("#BtnNuevo").click(function() {
@@ -1095,6 +1118,7 @@ include('modulos/cerrar_sesion.php');
         var id = $(this).val();
         if (Condicion == 1) {
             Obtener_Vacunas('MostrarProductoxCondicion', 1);
+            //Obtener_Vacunas('MostrarProductoxCondicion_Vacunas', IdSede);
             Obtener_Datos_Vacuna('ObtenerDatosVacunasxId', id);
             $("#LblIdVacuna").text("Edición Vacuna : " + Obtener_Codigo_Formateado(id));  
             $("#Modal_ListadoVacunas").modal("show");
@@ -1128,7 +1152,8 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok2');
             }
         });
-    }
+    }   
+    
 
     function Obtener_Datos_Vacuna(act, id) {
         $.ajax({
@@ -1447,6 +1472,7 @@ include('modulos/cerrar_sesion.php');
 
         Obtener_Nombre();
         Obtener_Condicion();
+        Obtener_Sede_Usuario('MostrarSede_Usuario');
 
         if ($_GET("IdCli") === undefined) {
             //console.log('sin valor');

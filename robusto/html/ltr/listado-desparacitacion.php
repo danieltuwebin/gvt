@@ -888,6 +888,7 @@ include('modulos/cerrar_sesion.php');
     var IdMascota = '';
     var IdMascotaExterno = 0;
     var ValorRb = 2;
+    var IdSede = 0;         
 
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
@@ -968,6 +969,26 @@ include('modulos/cerrar_sesion.php');
             }
             x++;
         }
+    }
+
+    function Obtener_Sede_Usuario(act) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/inicio.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                IdSede = data;
+                c
+            },
+            complete: function() {
+                //listar();
+            }
+        });
     }
 
     $("#BtnNuevo").click(function() {
@@ -1098,7 +1119,8 @@ include('modulos/cerrar_sesion.php');
     $('#TblDesparacitacion').on('click', '.editar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
-            Obtener_Desparacitacion('MostrarProductoxCondicion', 3);
+            //Obtener_Desparacitacion('MostrarProductoxCondicion', 3);
+            Obtener_Desparacitacion('MostrarProductoxCondicion', 3, IdSede);
             Obtener_Datos_Desparacitacion('ObtenerDatosDesparacitacionxId', id);
             $("#LblIdDesparacitacion").text("Edición Desparacitación : " + Obtener_Codigo_Formateado(id));            
             $("#Modal_ListadoDesparacitacion").modal("show");
@@ -1108,7 +1130,7 @@ include('modulos/cerrar_sesion.php');
     });
 
     // Clase Proser
-    function Obtener_Desparacitacion(act, id) {
+    function Obtener_Desparacitacion(act, id, sede) {
         $.ajax({
             type: "POST",
             url: "modulos/proser.php",
@@ -1116,7 +1138,8 @@ include('modulos/cerrar_sesion.php');
             dataType: "html",
             data: ({
                 action: act,
-                Id: id
+                Id: id,
+                Sede: sede
             }),
             beforeSend: function() {
                 //alert('ok');
@@ -1449,6 +1472,7 @@ include('modulos/cerrar_sesion.php');
     $(function() {
         Obtener_Nombre();
         Obtener_Condicion();
+        Obtener_Sede_Usuario('MostrarSede_Usuario');        
         if ($_GET("IdCli") === undefined) {
         } else {
             IdMascotaExterno = $_GET("IdCli");
