@@ -1254,6 +1254,7 @@ include('modulos/cerrar_sesion.php');
     function Grabar_Venta_Tmp(act, IdVenta, IdSede, IdProducto, Cantidad, Precio, Descuento, PrecioTotal, Usuario) {
         //console.log(act+','+ IdVenta+','+ IdSede+','+ IdProducto+','+  Cantidad+','+ Precio+','+ Descuento+','+ PrecioTotal+','+ Usuario);
         var Estado = 0;
+        
         $.ajax({
             type: "POST",
             url: "modulos/ventas.php",
@@ -1301,6 +1302,7 @@ include('modulos/cerrar_sesion.php');
                 }
             }
         });
+        
     }
 
     var listar = function() {

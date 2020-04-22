@@ -930,6 +930,7 @@ include('modulos/cerrar_sesion.php');
                 {
                     "data": "TipoProducto_Fecha"
                 },
+                /* CON LA FUNCION ELIMINAR
                 {
                     "render": function(data, type, row) {
                         return "<div class='form-group center-block' ><div class='btn-group btn-group-sm' role='group'>" +
@@ -937,7 +938,14 @@ include('modulos/cerrar_sesion.php');
                             "<button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.TipoProducto_Id + "'><i class='icon-trash-o'></i></button>" +
                             "</div></div>";
                     }
-                }
+                }*/
+                {
+                    "render": function(data, type, row) {
+                        return "<div class='form-group center-block' ><div class='btn-group btn-group-sm' role='group'>" +
+                            "<button type='button' id='editar' class='editar btn btn-warning' value='" + row.TipoProducto_Id + "'><i class='icon-pencil3'></i></button>" +
+                            "</div></div>";
+                    }
+                }                
             ],
             /* BOTONES DE DATATABLE */
             dom: 'Bfrtip',

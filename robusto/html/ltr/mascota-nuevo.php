@@ -1079,9 +1079,10 @@ include('modulos/cerrar_sesion.php');
         Habilita_Desabilita(true, false)
         Obtener_Especie('MostrarEspecie');
         Obtener_Raza('MostrarRaza', 1)
+
         $("#CboEspecie").change(function() {
             Obtener_Raza('MostrarRaza', $('#CboEspecie').val());
-        });
+        }); 
 
     });
 </script>

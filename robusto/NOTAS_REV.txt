@@ -75,4 +75,10 @@ __________________________ version 3.0 -----------------------------------------
 1. ADICION DE BOTON EN EL LISTADO DE MASCOTA QUE REDIRECCIONA AL MODULO DE VENTA NUEVA
 2. CORRECCION DE REGISTRO DE NUEVO CLIENTE SIN EL DNI (CELULAR)
 3. CORR DEL MODULO DE VENTAS - CAMBIO SP
-__________________________ version 2.0 -------------------------------------------
+__________________________ version 4.0 -------------------------------------------
+
+
+__________________________ version 4.0 -------------------------------------------
+1. CORRECCION DEL SP VENTA
+2. SE QUITO LOS BOTONES DE ELIMINACION DEL MODULO DE CONFIGURACIÓN
+__________________________ version 4.0 -------------------------------------------
