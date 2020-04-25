@@ -339,7 +339,7 @@ class PDF extends FPDF
                     $this->SetX(51);                    
                     $this->SetFont('Arial','',9);  
                     //$this->Cell(30 ,5,utf8_decode($col),0,0);
-                    $this->MultiCell(13,5,utf8_decode($col),0, 'J');                    
+                    $this->MultiCell(130,5,utf8_decode($col),0, 'J');                    
                     //$this->Ln(1);
                 }
                 if($cont==15){
@@ -453,8 +453,13 @@ $pdf->Cell(15 ,5,'Raza',0,0);
 $pdf->Cell(10 ,5,utf8_decode($p_raza),0,0);
 $pdf->Cell(49);
 $pdf->Cell(15 ,5,utf8_decode('Dirección'),0,0);
-$pdf->Cell(10 ,5,utf8_decode($pr_direccion),0,0);
-$pdf->Ln(5);
+//$pdf->Cell(10 ,5,utf8_decode($pr_direccion),0,0);
+
+                 
+$pdf->SetX(128);
+$pdf->MultiCell(65,5,utf8_decode($pr_direccion),0, 'J'); 
+
+$pdf->Ln(1);
 
 $pdf->Cell(30);
 $pdf->Cell(15 ,5,'Sexo',0,0);

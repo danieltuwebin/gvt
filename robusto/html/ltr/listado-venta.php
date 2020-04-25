@@ -118,7 +118,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -172,7 +172,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -306,7 +306,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -360,7 +360,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!-- <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -533,7 +533,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -554,7 +554,7 @@ include('modulos/cerrar_sesion.php');
                             <span data-i18n="nav.content.main" class="menu-title">Ventas</span>
                         </a>
                         <ul class="menu-content">
-                            <li  class="active">
+                            <li class="active">
                                 <a href="listado-venta.php" class="menu-item">Listado Ventas</a>
                             </li>
                         </ul>
@@ -645,7 +645,7 @@ include('modulos/cerrar_sesion.php');
                                     <div class="input-group">
                                         <label for="CboSede">Sede :
                                             <select id="CboSede" name="CboSede" class="form-control">
-                                                            </select>                                               
+                                            </select>
                                         </label>
                                     </div>
                                 </div>
@@ -653,10 +653,10 @@ include('modulos/cerrar_sesion.php');
                                     <div class="input-group">
                                         <label for="CboTipoPago">Tipo de Pago :
                                             <!-- <input type="text" style="text-transform:uppercase;" id="TxtTipoPago" name="TxtTipoPago" class="form-control" placeholder="Seleccione Pago" > -->
-                                                            <select id="CboTipoPago" name="CboTipoPago" class="form-control">
-                                                                <option value="1" selected>EFECTIVO</option>
-                                                                <option value="2">TARJETA DE CREDITO</option>
-                                                            </select>                                            
+                                            <select id="CboTipoPago" name="CboTipoPago" class="form-control">
+                                                <option value="1" selected>EFECTIVO</option>
+                                                <option value="2">TARJETA DE CREDITO</option>
+                                            </select>
                                         </label>
                                     </div>
                                 </div>
@@ -685,7 +685,7 @@ include('modulos/cerrar_sesion.php');
                 <div class="modal-body">
                     <form class="form" id="FormularioVenta">
                         <div class="form-body">
-                        <div class="card-body">
+                            <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-hover mb-0">
                                         <!-- ENCABEZADO -->
@@ -767,12 +767,13 @@ include('modulos/cerrar_sesion.php');
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Fecha</th>
-                                                    <th>DNI</th>                                                                                                        
-                                                    <th>Mascota</th>                                       
+                                                    <th>DNI Propiet.</th>
+                                                    <th>DNI</th>
+                                                    <th>Mascota</th>
                                                     <th>Sede</th>
                                                     <th>Tipo</th>
-                                                    <th>P.total</th>                                                    
-                                                    <th>Usuario</th>                                                  
+                                                    <th>P.total</th>
+                                                    <th>Usuario</th>
                                                     <th>Administrar</th>
                                                 </tr>
                                             </thead>
@@ -919,7 +920,7 @@ include('modulos/cerrar_sesion.php');
             var Cod = 'VT' + id;
         }
         return Cod;
-    }    
+    }
 
     //http://jquery-manual.blogspot.com/2013/12/como-obtener-parametros-get-con.html?mensaje=ok
     function $_GET(param) {
@@ -947,8 +948,8 @@ include('modulos/cerrar_sesion.php');
         }
     }
 
-   /* INICIO FUNCIONES */
-   function Obtener_Sede(act) {
+    /* INICIO FUNCIONES */
+    function Obtener_Sede(act) {
         $.ajax({
             type: "POST",
             url: "modulos/inicio.php",
@@ -970,7 +971,7 @@ include('modulos/cerrar_sesion.php');
             }
         });
     }
-    
+
     $("#BtnNuevo").click(function() {
         var url = "venta-nuevo.php";
         $(location).attr('href', url);
@@ -1007,8 +1008,11 @@ include('modulos/cerrar_sesion.php');
                     "data": "Venta_Fecha"
                 },
                 {
-                    "data": "Mascota_DNI"
+                    "data": "Cliente_Dni" /* Nuevo */
                 },                
+                {
+                    "data": "Mascota_DNI"
+                },
                 {
                     "data": "Mascota_Nombre"
                 },
@@ -1050,7 +1054,7 @@ include('modulos/cerrar_sesion.php');
                     orientation: 'landscape',
                     //pageSize: 'TABLOID',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6]
+                        columns: [0, 1, 2, 3, 4, 5, 6,7]
                     },
 
                     //className: 'btn btn-success'
@@ -1123,7 +1127,7 @@ include('modulos/cerrar_sesion.php');
         if (Id == 1) {
             Editar_Venta("EditarVenta",
                 $("#Txt_Codigo").val(),
-                $('#TxtFecha').val(),                
+                $('#TxtFecha').val(),
                 $('#CboSede').val(),
                 $('#CboTipoPago').val(),
                 '<?php echo $_SESSION['User']; ?>'
@@ -1167,7 +1171,7 @@ include('modulos/cerrar_sesion.php');
                 Tipo_Pago: Tipo_Pago,
                 Usuario: Usuario
             }),
-            beforeSend: function() { },
+            beforeSend: function() {},
             success: function(data) {
                 if (data == 1) {
                     $("#Modal_EditarVenta").modal("hide");
@@ -1177,14 +1181,14 @@ include('modulos/cerrar_sesion.php');
                     alert('Lo sentimos ocurrio un error en el proceso de edición');
                 }
             },
-            complete: function() {  }
+            complete: function() {}
         });
     }
 
     $('#TblVentas').on('click', '.eliminar', function() {
         var id = $(this).val();
         if (Condicion == 1) {
-            var bool = confirm("Esta seguro de eliminar el registro " + Obtener_Codigo_Formateado(id) + " ?");            
+            var bool = confirm("Esta seguro de eliminar el registro " + Obtener_Codigo_Formateado(id) + " ?");
             //var bool = confirm("Esta seguro de eliminar el registro ?");
             if (bool) {
                 Eliminar_Venta('EliminarVenta_tblVenta', id)
@@ -1208,7 +1212,7 @@ include('modulos/cerrar_sesion.php');
                 Id: codigo,
                 usuario: usuario
             }),
-            beforeSend: function() { },
+            beforeSend: function() {},
             success: function(data) {
                 if (data <= 1) {
                     listar();
@@ -1216,7 +1220,7 @@ include('modulos/cerrar_sesion.php');
                     alert('Lo sentimos ocurrio un error en el proceso de edición');
                 }
             },
-            complete: function() { }
+            complete: function() {}
         });
     }
 
@@ -1224,14 +1228,14 @@ include('modulos/cerrar_sesion.php');
         Id = $(this).val();
         if (Condicion == 1) {
             $("#LblIdResumenVenta").text("Resumen de Compra : " + Obtener_Codigo_Formateado(Id));
-            Obtener_Tablas_Resumenes_Ventas('tablaResumenVentas',Id);
+            Obtener_Tablas_Resumenes_Ventas('tablaResumenVentas', Id);
             $("#Modal_VerVentas").modal("show");
         } else {
             alert('El perfil de usurio no esta habilitado para opción');
         }
     });
 
-    function Obtener_Tablas_Resumenes_Ventas(act,Id) {
+    function Obtener_Tablas_Resumenes_Ventas(act, Id) {
         $.ajax({
             type: "POST",
             url: "modulos/ventas.php",
@@ -1243,7 +1247,7 @@ include('modulos/cerrar_sesion.php');
             }),
             beforeSend: function() {
                 $("#tablaResumenVentas").html('');
-            },  
+            },
             success: function(data) {
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
@@ -1253,9 +1257,9 @@ include('modulos/cerrar_sesion.php');
                         '<td class="text-truncate">' + json[i].VentaDetalle_PrecioUni + '</td>' +
                         '<td class="text-truncate">' + json[i].VentaDetalle_Cantidad + '</td>' +
                         '<td class="text-truncate">' + json[i].VentaDetalle_Precio + '</td>' +
-                        '<td class="text-truncate">' + json[i].VentaDetalle_Descuento + '</td>' +                                                                       
+                        '<td class="text-truncate">' + json[i].VentaDetalle_Descuento + '</td>' +
                         '<td class="text-truncate">' + json[i].VentaDetalle_PrecioTotal + '</td>');
-                        //'<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>');
+                    //'<td class="text-truncate"> <button type="button" class="btn btn-success btn-sm">' + 'Ver Detalle' + '</button> </td>' + '</tr>');
                 });
             },
             complete: function() {

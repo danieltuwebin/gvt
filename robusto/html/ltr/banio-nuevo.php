@@ -755,7 +755,7 @@ include('modulos/cerrar_sesion.php');
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="Txt_Fecha">Fecha Vacunación </label>
+                                                            <label for="Txt_Fecha">Fecha Baño </label>
                                                             <input id="Txt_Fecha" type="date" class="form-control">
                                                         </div>
                                                     </div>

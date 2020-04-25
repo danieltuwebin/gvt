@@ -1298,6 +1298,10 @@ include('modulos/cerrar_sesion.php');
         Atencion_sc_TLLC, Atencion_sc_Vom, Atencion_sc_Dia, Atencion_sc_Gan, Atencion_sc_Pes, Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des,
         Atencion_tr_Obs, Atencion_tr_Pre, Pint_Documento, Pint_Cita, Pint_CitaEstado, Pint_Estado, Pvchr_Usuario, Pint_VentaTipo, Pint_IdAlmacen, Pint_IdVBDA) {
 
+console.log(act+','+ IdTipoRegistro+','+ IdAtencion+','+ Fecha+','+ IdProducto+','+ IdMascota+','+ Sintomas+','+ Atencion_T+','+ Atencion_FC+','+ Atencion_FR+','+ Atencion_sc_Des+','+ Atencion_sc_Muc+','+
+        Atencion_sc_TLLC+','+ Atencion_sc_Vom+','+ Atencion_sc_Dia+','+ Atencion_sc_Gan+','+ Atencion_sc_Pes+','+ Atencion_dx_Pre+','+ Atencion_dx_Def+','+ Atencion_dx_Sol+','+ Atencion_tr_Des+','+
+        Atencion_tr_Obs+','+ Atencion_tr_Pre+','+ Pint_Documento+','+ Pint_Cita+','+ Pint_CitaEstado+','+ Pint_Estado+','+ Pvchr_Usuario+','+ Pint_VentaTipo+','+ Pint_IdAlmacen+','+ Pint_IdVBDA)            
+
         $.ajax({
             type: "POST",
             url: "modulos/atencion.php",
@@ -1367,6 +1371,7 @@ include('modulos/cerrar_sesion.php');
                 Habilita_Desabilita(false, true, true);
             }
         });
+        
     }
 
     // Clase Proser

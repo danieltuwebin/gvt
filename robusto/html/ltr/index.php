@@ -682,6 +682,7 @@ include('modulos/cerrar_sesion.php');
                             <div class="card-body">
                                 <div class="card-block">
                                     <h4 class="card-title">Estadisticas Ingresos</h4>
+
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="media">
@@ -695,6 +696,7 @@ include('modulos/cerrar_sesion.php');
                                             </div>
                                         </div>
                                     </div>
+                                    <?php if ($CondicionMnu == 1) { ?>
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="media">
@@ -721,6 +723,7 @@ include('modulos/cerrar_sesion.php');
                                             </div>
                                         </div>
                                     </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -947,9 +950,9 @@ include('modulos/cerrar_sesion.php');
                 $('#TotalClientes').html(json.tclientes);
                 $('#TotalMascotas').html(json.tmascotas);
                 $('#TotalAtenciones').html(json.tatenciones);
-                $('#IngresosDia').html(json.tdia);
-                $('#IngresosSemana').html(json.tsemana);
-                $('#IngresosMes').html(json.tmes);
+                $('#IngresosDia').html('S/. ' + json.tdia);
+                $('#IngresosSemana').html('S/. ' + json.tsemana);
+                $('#IngresosMes').html('S/. ' + json.tmes);
             },
             complete: function() {
                 //alert('ok2');
