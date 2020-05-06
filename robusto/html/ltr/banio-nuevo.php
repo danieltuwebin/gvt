@@ -933,7 +933,12 @@ include('modulos/cerrar_sesion.php');
             success: function(data) {
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
-                    $('#Txt_Dni').val(json[i].Cliente_Dni);
+                    //$('#Txt_Dni').val(json[i].Cliente_Dni);
+                    if (json[i].Cliente_Dni == ""){
+                        $('#Txt_Dni').val('0');
+                    }else{
+                        $('#Txt_Dni').val(json[i].Cliente_Dni);
+                    }                     
                     $('#Txt_Nombre_Dni').html(json[i].Mascota_Cliente);
                     $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
                     $('#Txt_CodigoMascota').val(json[i].Mascota_Id);

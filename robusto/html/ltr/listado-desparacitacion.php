@@ -64,7 +64,7 @@ include('modulos/cerrar_sesion.php');
         $CondicionMnu = $_SESSION['UserPerfil'];
 
         if ($CondicionMnu == 1) { /* PERFIL ADMIN (1) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -118,7 +118,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -172,7 +172,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -252,7 +252,7 @@ include('modulos/cerrar_sesion.php');
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 2) { /* PERFIL JEFE (2) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -306,7 +306,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -360,7 +360,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!-- <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -440,7 +440,7 @@ include('modulos/cerrar_sesion.php');
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 3) { /* PERFIL SOLO LECTURA (3) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -519,7 +519,7 @@ include('modulos/cerrar_sesion.php');
                             <span data-i18n="nav.content.main" class="menu-title">Desparacitación</span>
                         </a>
                         <ul class="menu-content">
-                            <li  class="active">
+                            <li class="active">
                                 <a href="listado-desparacitacion.php" class="menu-item">Listado Desparacitaciones</a>
                             </li>
                         </ul>
@@ -533,7 +533,7 @@ include('modulos/cerrar_sesion.php');
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -696,9 +696,9 @@ include('modulos/cerrar_sesion.php');
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                    <label for="CboProducto">Seleccione Desparacitación :</label>
-                                                            <select id="CboProducto" name="CboProducto" class="form-control">
-                                                            </select>
+                                        <label for="CboProducto">Seleccione Desparacitación :</label>
+                                        <select id="CboProducto" name="CboProducto" class="form-control">
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
@@ -711,7 +711,7 @@ include('modulos/cerrar_sesion.php');
                                     <div class="form-group">
                                         <label for="CboEstado">Estado Desparacitación :</label>
                                         <select id="CboEstado" name="CboEstado" class="form-control">
-                                            <option value="1" disabled="disabled">REALIZADO</option>                                                 
+                                            <option value="1" disabled="disabled">REALIZADO</option>
                                             <option value="2">AGENDADO</option>
                                             <option value="3">REPROGRAMADO</option>
                                         </select>
@@ -753,7 +753,7 @@ include('modulos/cerrar_sesion.php');
                 <?php
 
                 if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-                    ?>
+                ?>
                     <div class="content-header-left col-md-3 col-xs-12 mb-1">
                         <button id="BtnNuevo" type="button" class="btn btn-success"><i class="icon-android-add-circle"></i> Nueva Desparacitación</button>
                     </div>
@@ -781,31 +781,32 @@ include('modulos/cerrar_sesion.php');
                             </div>
                             <br>
                             <div class="card-body collapse in">
-                            <div class="card-block">
-                                <div class="card-body collapse in">
-                                    <div class="table-responsive">
-                                        <!-- <table id="TblDesparacitacion" class="table table-bordered table-striped"> -->
-                                        <table id="TblDesparacitacion" class="table table-striped table-bordered" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>DNI mascota</th>
-                                                    <th>Nombre</th>
-                                                    <th>Fecha_Despar.</th>
-                                                    <th>Desparacitación</th>
-                                                    <th>Estado</th>
-                                                    <th>Observación</th>
-                                                    <th>Administrar</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
+                                <div class="card-block">
+                                    <div class="card-body collapse in">
+                                        <div class="table-responsive">
+                                            <!-- <table id="TblDesparacitacion" class="table table-bordered table-striped"> -->
+                                            <table id="TblDesparacitacion" class="table table-striped table-bordered" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>DNI mascota</th>
+                                                        <th>Nombre</th>
+                                                        <th>Fecha_Despar.</th>
+                                                        <th>Desparacitación</th>
+                                                        <th>Estado</th>
+                                                        <th>Observación</th>
+                                                        <th>Administrar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div id="Resultado_Grabacion"></div>
                                     </div>
-                                    <div id="Resultado_Grabacion"></div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -829,7 +830,7 @@ include('modulos/cerrar_sesion.php');
     <?php
     require_once("includes_html/footer.php");
     ?>
-    
+
     <!-- BEGIN VENDOR JS-->
     <script src="../../app-assets/js/core/libraries/jquery.min.js" type="text/javascript"></script>
     <script src="../../app-assets/vendors/js/ui/tether.min.js" type="text/javascript"></script>
@@ -888,7 +889,7 @@ include('modulos/cerrar_sesion.php');
     var IdMascota = '';
     var IdMascotaExterno = 0;
     var ValorRb = 2;
-    var IdSede = 0;         
+    var IdSede = 0;
 
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
@@ -921,11 +922,11 @@ include('modulos/cerrar_sesion.php');
     function Obtener_Condicion() {
         <?php
         if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-            ?>
+        ?>
             Condicion = 1;
         <?php
         } else {
-            ?>
+        ?>
             Condicion = 0;
         <?php
         }
@@ -943,7 +944,7 @@ include('modulos/cerrar_sesion.php');
             var Cod = 'D' + id;
         }
         return Cod;
-    }    
+    }
 
     //http://jquery-manual.blogspot.com/2013/12/como-obtener-parametros-get-con.html?mensaje=ok
     function $_GET(param) {
@@ -1074,7 +1075,7 @@ include('modulos/cerrar_sesion.php');
                     //className: 'btn btn-success'
                     exportOptions: {
                         columns: [0, 1, 2, 3, 4, 5, 6]
-                    },                    
+                    },
                     "oSelectorOpts": {
                         filter: 'applied',
                         order: 'current'
@@ -1122,7 +1123,7 @@ include('modulos/cerrar_sesion.php');
             //Obtener_Desparacitacion('MostrarProductoxCondicion', 3);
             Obtener_Desparacitacion('MostrarProductoxCondicion', 3, IdSede);
             Obtener_Datos_Desparacitacion('ObtenerDatosDesparacitacionxId', id);
-            $("#LblIdDesparacitacion").text("Edición Desparacitación : " + Obtener_Codigo_Formateado(id));            
+            $("#LblIdDesparacitacion").text("Edición Desparacitación : " + Obtener_Codigo_Formateado(id));
             $("#Modal_ListadoDesparacitacion").modal("show");
         } else {
             alert('El perfil de usuario no esta habilitado para opción');
@@ -1193,13 +1194,13 @@ include('modulos/cerrar_sesion.php');
                     $('#CboProducto').val(json[i].Producto_Id);
                     $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
                     $('#CboEstado').val(json[i].Desparacitacion_Cita);
-                    if (json[i].Desparacitacion_Cita == 1){
+                    if (json[i].Desparacitacion_Cita == 1) {
                         $("#CboEstado").attr('disabled', true);
-                    }else{
+                    } else {
                         $("#CboEstado").attr('disabled', false);
-                    }                     
+                    }
                     $('#Txt_Fecha').val(json[i].Desparacitacion_Fecha);
-                    $('#Txt_Notas').val(json[i].Desparacitacion_Observacion );
+                    $('#Txt_Notas').val(json[i].Desparacitacion_Observacion);
                     $('#Txt_CodigoDesparacitacion').val(json[i].Desparacitacion_Id);
                 });
             },
@@ -1472,9 +1473,8 @@ include('modulos/cerrar_sesion.php');
     $(function() {
         Obtener_Nombre();
         Obtener_Condicion();
-        Obtener_Sede_Usuario('MostrarSede_Usuario');        
-        if ($_GET("IdCli") === undefined) {
-        } else {
+        Obtener_Sede_Usuario('MostrarSede_Usuario');
+        if ($_GET("IdCli") === undefined) {} else {
             IdMascotaExterno = $_GET("IdCli");
         }
         listar();

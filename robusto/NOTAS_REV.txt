@@ -82,3 +82,17 @@ __________________________ version 4.0 -----------------------------------------
 1. CORRECCION DEL SP VENTA
 2. SE QUITO LOS BOTONES DE ELIMINACION DEL MODULO DE CONFIGURACIÓN
 __________________________ version 4.0 -------------------------------------------
+
+
+__________________________ version 5.0 -------------------------------------------
+1. CAMBIO DE LOS PANEL PRINCIPAL DE DATOS - MONTO SEMANAL Y MENSUAL PERFIL 1
+2. ADICION EN EL LISTADO DE VENTA NRO DE DNI
+3. CORRECCION DE LA HISTORIA CLINICA TAMAÑO DIRECCION Y TAMAÑO SINTOMAS.
+4. CAMBIO DE ETIQUETAS EN EL MODULO BAÑO
+__________________________ version 5.0 -------------------------------------------
+
+
+__________________________ version 6.0 -------------------------------------------
+1. CORRECCION DE LOS MODULOS DE VBDA, PERMITE REGISTRAR SIN NUMERO DE DNI
+2. POSICIONAMIENTO DE FOOTER LISTADO DE DESPARACITACION
+__________________________ version 6.0 -------------------------------------------
