@@ -1004,6 +1004,7 @@ include('modulos/cerrar_sesion.php');
             Editar_Cliente("EditarCliente",
                 $("#Txt_Nombre").val().toUpperCase().trim(),
                 $("#Txt_Apellido").val().toUpperCase().trim(),
+                $('#Txt_Dni').val().trim(),                
                 $("#Txt_Email").val().toUpperCase().trim(),
                 $("#Txt_TelFijo").val().toUpperCase().trim(),
                 $("#Txt_TelCelular").val().toUpperCase().trim(),
@@ -1020,7 +1021,7 @@ include('modulos/cerrar_sesion.php');
         }
     });
 
-    function Editar_Cliente(act, nombre, apellido, email, telfijo, telcelular, provincia, distrito, direccion, notas, estado, usuario, codigo) {
+    function Editar_Cliente(act, nombre, apellido, dni, email, telfijo, telcelular, provincia, distrito, direccion, notas, estado, usuario, codigo) {
         $.ajax({
             type: "POST",
             url: "modulos/clientes.php",
@@ -1030,6 +1031,7 @@ include('modulos/cerrar_sesion.php');
                 action: act,
                 Nomb: nombre,
                 Ape: apellido,
+                Dni: dni,                
                 Email: email,
                 TelFijo: telfijo,
                 TelCelu: telcelular,
@@ -1092,6 +1094,7 @@ include('modulos/cerrar_sesion.php');
             Editar_Cliente("EditarCliente",
                 $("#Txt_Nombre").val().toUpperCase().trim(),
                 $("#Txt_Apellido").val().toUpperCase().trim(),
+                $('#Txt_Dni').val().trim(),
                 $("#Txt_Email").val().toUpperCase().trim(),
                 $("#Txt_TelFijo").val().toUpperCase().trim(),
                 $("#Txt_TelCelular").val().toUpperCase().trim(),

@@ -70,7 +70,6 @@ __________________________ version 2.0 -----------------------------------------
 __________________________ version 2.0 -------------------------------------------
 
 
-
 __________________________ version 3.0 -------------------------------------------
 1. ADICION DE BOTON EN EL LISTADO DE MASCOTA QUE REDIRECCIONA AL MODULO DE VENTA NUEVA
 2. CORRECCION DE REGISTRO DE NUEVO CLIENTE SIN EL DNI (CELULAR)
@@ -96,3 +95,10 @@ __________________________ version 6.0 -----------------------------------------
 1. CORRECCION DE LOS MODULOS DE VBDA, PERMITE REGISTRAR SIN NUMERO DE DNI
 2. POSICIONAMIENTO DE FOOTER LISTADO DE DESPARACITACION
 __________________________ version 6.0 -------------------------------------------
+
+
+__________________________ version 7.0 -------------------------------------------
+1. CORRECCION DE EDICION DE CLIENTES SIN NUMRERO DE DNI
+2. ADICION DE UN BOTON DE BUSQUEDA POR CELULAR EN EL MODULO VACUNAS
+3. ADICION DE UN BOTON DE BUSQUEDA POR CELULAR EN EL MODULO ATENCION
+__________________________ version 7.0 -------------------------------------------

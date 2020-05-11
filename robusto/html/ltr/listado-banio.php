@@ -118,7 +118,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -306,7 +306,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -640,6 +640,11 @@ include('modulos/cerrar_sesion.php');
                                                     <span class="custom-control-indicator"></span>
                                                     <span class="custom-control-description ml-0">DNI Propietario</span>
                                                 </label>
+                                                <!-- <label class="display-inline-block custom-control custom-radio">
+                                                    <input type="radio" id="RbDniC" name="Dni" class="custom-control-input" value="3">
+                                                    <span class="custom-control-indicator"></span>
+                                                    <span class="custom-control-description ml-0">NRO. Celular</span>
+                                                </label> -->
                                                 <label class="display-inline-block custom-control custom-radio">
                                                     <input type="radio" id="RbDniM" name="Dni" class="custom-control-input" value="2" checked>
                                                     <span class="custom-control-indicator"></span>
@@ -712,7 +717,7 @@ include('modulos/cerrar_sesion.php');
                                     <div class="form-group">
                                         <label for="CboEstado">Estado baño :</label>
                                         <select id="CboEstado" name="CboEstado" class="form-control">
-                                            <option value="1" disabled="disabled">REALIZADO</option>                                         
+                                            <option value="1" disabled="disabled">REALIZADO</option>
                                             <option value="2">AGENDADO</option>
                                             <option value="3">REPROGRAMADO</option>
                                         </select>
@@ -889,7 +894,7 @@ include('modulos/cerrar_sesion.php');
     var IdMascota = '';
     var IdMascotaExterno = 0;
     var ValorRb = 2;
-    var IdSede = 0;       
+    var IdSede = 0;
 
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
@@ -1192,13 +1197,13 @@ include('modulos/cerrar_sesion.php');
                     Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
                     $('#CboMascota').val(json[i].Mascota_Id);
                     $('#CboProducto').val(json[i].Producto_Id);
-                    $('#Txt_Precio').val(json[i].Producto_PrecioVenta);                    
+                    $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
                     $('#CboEstado').val(json[i].Banio_Cita);
-                    if (json[i].Banio_Cita == 1){
+                    if (json[i].Banio_Cita == 1) {
                         $("#CboEstado").attr('disabled', true);
-                    }else{
+                    } else {
                         $("#CboEstado").attr('disabled', false);
-                    }                    
+                    }
                     $('#Txt_Fecha').val(json[i].Banio_Fecha);
                     $('#Txt_Notas').val(json[i].Banio_Observacion);
                     $('#Txt_CodigoBanio').val(json[i].Banio_Id);
@@ -1276,6 +1281,13 @@ include('modulos/cerrar_sesion.php');
                             $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
                         });
                         Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
+                    } else if (condicion == 3) {
+                        //celular
+                        $.each(json, function(i, item) {
+                            $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
+                            $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
+                        });
+                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());                          
                     } else if (condicion == 2) {
                         $.each(json, function(i, item) {
                             $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);

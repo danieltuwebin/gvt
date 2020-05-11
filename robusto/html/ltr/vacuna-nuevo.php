@@ -663,6 +663,11 @@ include('modulos/cerrar_sesion.php');
                                                                         <span class="custom-control-description ml-0">DNI Propietario</span>
                                                                     </label>
                                                                     <label class="display-inline-block custom-control custom-radio">
+                                                                        <input type="radio" id="RbDniC" name="Dni" class="custom-control-input" value="3">
+                                                                        <span class="custom-control-indicator"></span>
+                                                                        <span class="custom-control-description ml-0">NRO. Celular</span>
+                                                                    </label>                                                                     
+                                                                    <label class="display-inline-block custom-control custom-radio">
                                                                         <input type="radio" id="RbDniM" name="Dni" class="custom-control-input" value="2">
                                                                         <span class="custom-control-indicator"></span>
                                                                         <span class="custom-control-description ml-0">DNI Mascota</span>
@@ -976,6 +981,7 @@ include('modulos/cerrar_sesion.php');
 
     // Clase Mascota
     function Obtener_Nombre_x_Dni_Mascota_Cliente(act, condicion, id) {
+        //console.log(act +'-' + condicion +'-' + id);
         $.ajax({
             type: "POST",
             url: "modulos/mascotas.php",
@@ -990,15 +996,25 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok');
             },
             success: function(data) {
+                //console.log(data);
                 var json = JSON.parse(data);
                 if (json.length != 0) {
                     if (condicion == 1) {
+                        //dni
                         $.each(json, function(i, item) {
                             $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
                             $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
                         });
                         Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
+                    } else if (condicion == 3) {
+                        //celular
+                        $.each(json, function(i, item) {
+                            $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
+                            $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
+                        });
+                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());                        
                     } else if (condicion == 2) {
+                        // dni mascota
                         $.each(json, function(i, item) {
                             $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
                             $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
