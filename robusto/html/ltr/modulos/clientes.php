@@ -109,6 +109,7 @@ if ($_POST['action'] == "EditarCliente") {
 
     $Nombre = $_POST['Nomb'];
     $Apellido = $_POST['Ape'];
+    $Dni = $_POST['Dni'];
     $Email = $_POST['Email'];     
     $TelefonoFij = $_POST['TelFijo'];
     $TelefonoCelu = $_POST['TelCelu'];
@@ -121,7 +122,7 @@ if ($_POST['action'] == "EditarCliente") {
     $Usuario = $_POST['Usuario'];
     $Codigo = $_POST['Codigo'];
 
-    $sql = "CALL SP_Actualizar_TblCliente('$Nombre', '$Apellido', '$Email', '$TelefonoFij', '$TelefonoCelu',
+    $sql = "CALL SP_Actualizar_TblCliente('$Nombre', '$Apellido', '$Dni', '$Email', '$TelefonoFij', '$TelefonoCelu',
                                                       '$Foto', '$Provincia', '$Distrito', '$Direccion', '$Obervacion', '$Estado', '$Usuario','$Codigo')";
     $oCado = new Cado();
     $rst = $oCado->ejecute_sql($sql);
