@@ -4050,3 +4050,83 @@ BEGIN
                     FROM tblVenta WHERE Venta_Estado = 1 AND MONTH(Venta_Fecha) = MONTH(NOW()));    
    SELECT TotalClientes,TotalMascotas,TotalAtenciones,VentasDia,VentasSem,VentasMes;
    END
+
+/************************************** CAMBIO DOCUMENTOS ADUNTOS **************************************************/
+
+CREATE TABLE tblDocumentoAdjunto (
+	DocumentoAdjunto_Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    DocumentoAdjunto_NombreActual VARCHAR(25) NOT NULL,
+    DocumentoAdjunto_NombreAnterior VARCHAR(100) NOT NULL,
+    DocumentoAdjunto_Carpeta VARCHAR(10) NOT NULL,
+    DocumentoAdjunto_Codigo INT,
+    DocumentoAdjunto_Estado INT,
+    DocumentoAdjunto_FechaGra DATETIME,
+    DocumentoAdjunto_UserGrab VARCHAR(100)        
+)
+
+
+
+INSERT INTO `tblDocumentoAdjunto`(`DocumentoAdjunto_Id`, `DocumentoAdjunto_NombreActual`, `DocumentoAdjunto_NombreAnterior`, `DocumentoAdjunto_Carpeta`, `DocumentoAdjunto_Codigo`, `DocumentoAdjunto_Estado`, `DocumentoAdjunto_FechaGra`, `DocumentoAdjunto_UserGrab`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8])
+
+DROP PROCEDURE IF EXISTS SP_Registrar_TblDocumentoAdjunto;
+DELIMITER $$
+CREATE PROCEDURE SP_Registrar_TblDocumentoAdjunto (IN Pvchr_NombreActual VARCHAR(25),
+                                                   IN Pvchr_NombreAnterior VARCHAR(100),
+                                                   IN Pvchr_Carpeta VARCHAR(10),
+                                                   IN Pint_Codigo INT,
+                                                   IN Pint_Estado INT,
+                                                   IN Pvchr_Usuario VARCHAR(100))
+BEGIN
+INSERT INTO tblDocumentoAdjunto(DocumentoAdjunto_NombreActual, DocumentoAdjunto_NombreAnterior, DocumentoAdjunto_Carpeta, DocumentoAdjunto_Codigo, DocumentoAdjunto_Estado, DocumentoAdjunto_FechaGra, DocumentoAdjunto_UserGrab) 
+VALUES
+(Pvchr_NombreActual, Pvchr_NombreAnterior, Pvchr_Carpeta, Pint_Codigo, Pint_Estado, NOW(), Pvchr_Usuario);
+END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS SP_Obtener_TblDocumentoAdjunto_Cantidad_x_Carpeta;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblDocumentoAdjunto_Cantidad_x_Carpeta (IN Pvchr_Carpeta VARCHAR(10))
+BEGIN
+SELECT COUNT(*) AS cantidad FROM tblDocumentoAdjunto WHERE DocumentoAdjunto_Carpeta = Pvchr_Carpeta AND DocumentoAdjunto_Estado = 1;
+END$$
+DELIMITER ;
+
+
+SP_Registrar_TblVenta_TblVentaDetalle
+
+
+
+DROP PROCEDURE IF EXISTS SP_Obtener_TblDocumentoAdjunto_x_Carpeta;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblDocumentoAdjunto_x_Carpeta (IN Pint_Carpeta INT)
+BEGIN
+SET @numero=0;
+SELECT @numero:=@numero+1 AS Orden,
+DocumentoAdjunto_Id,DocumentoAdjunto_NombreActual,DocumentoAdjunto_NombreAnterior,DocumentoAdjunto_Carpeta,
+CONCAT('http://186.64.116.55/~gavet/files/',DocumentoAdjunto_Carpeta,'/',DocumentoAdjunto_NombreActual) AS Link
+FROM tblDocumentoAdjunto WHERE DocumentoAdjunto_Carpeta = Pint_Carpeta AND DocumentoAdjunto_Estado = 1
+ORDER BY DocumentoAdjunto_NombreActual ASC;
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS SP_Eliminar_TblDocumentoAdjunto;
+DELIMITER $$
+CREATE PROCEDURE SP_Eliminar_TblDocumentoAdjunto (IN Pint_id INT)
+BEGIN
+UPDATE tblDocumentoAdjunto SET DocumentoAdjunto_Estado = 2 WHERE DocumentoAdjunto_Id = Pint_id;
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS SP_Obtener_TblDocumentoAdjunto_x_Id;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblDocumentoAdjunto_x_Id (IN Pint_id INT)
+BEGIN
+SELECT
+DocumentoAdjunto_Id,DocumentoAdjunto_NombreActual,DocumentoAdjunto_NombreAnterior,DocumentoAdjunto_Carpeta,
+CONCAT('http://186.64.116.55/~gavet/files/',DocumentoAdjunto_Carpeta,'/') AS Link
+FROM tblDocumentoAdjunto WHERE DocumentoAdjunto_Id = Pint_id AND DocumentoAdjunto_Estado = 1
+ORDER BY DocumentoAdjunto_NombreActual ASC;
+END$$
+DELIMITER ;

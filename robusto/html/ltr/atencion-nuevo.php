@@ -665,7 +665,7 @@ include('modulos/cerrar_sesion.php');
                                                                         <input type="radio" id="RbDniC" name="Dni" class="custom-control-input" value="3">
                                                                         <span class="custom-control-indicator"></span>
                                                                         <span class="custom-control-description ml-0">NRO. Celular</span>
-                                                                    </label>                                                                   
+                                                                    </label>
                                                                     <label class="display-inline-block custom-control custom-radio">
                                                                         <input type="radio" id="RbDniM" name="Dni" class="custom-control-input" value="2">
                                                                         <span class="custom-control-indicator"></span>
@@ -881,6 +881,30 @@ include('modulos/cerrar_sesion.php');
 
                                                 </div>
 
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Subir Documentos (PDF)</label>
+                                                            <label id="lblfile" class="file center-block">
+                                                                <input type="file" id="fileToUpload" accept="application/pdf, .PDF">
+                                                                <span class="file-custom"></span>
+                                                            </label>
+                                                            <button id="btnSubir" type="button" class="btn btn-primary mr-1">
+                                                                <i class="icon-upload5"></i> Subir
+                                                            </button>
+
+                                                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                                                <button id="btncarga1" type="button" class="btn btn-secondary" disabled="true">1</button>
+                                                                <button id="btncarga2" type="button" class="btn btn-secondary" disabled="true">2</button>
+                                                                <button id="btncarga3" type="button" class="btn btn-secondary" disabled="true">3</button>
+                                                                <button id="btncarga4" type="button" class="btn btn-secondary" disabled="true">4</button>
+                                                                <button id="btncarga5" type="button" class="btn btn-secondary" disabled="true">5</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="upload-msg"></div>
+
                                             </div>
 
                                             <div class="form-actions">
@@ -982,8 +1006,7 @@ include('modulos/cerrar_sesion.php');
             success: function(data) {
                 IdSede = data;
             },
-            complete: function() {
-            }
+            complete: function() {}
         });
     }
 
@@ -1032,11 +1055,11 @@ include('modulos/cerrar_sesion.php');
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
                     //$('#Txt_Dni').val(json[i].Cliente_Dni);
-                    if (json[i].Cliente_Dni == ""){
+                    if (json[i].Cliente_Dni == "") {
                         $('#Txt_Dni').val('0');
-                    }else{
+                    } else {
                         $('#Txt_Dni').val(json[i].Cliente_Dni);
-                    }                     
+                    }
                     $('#Txt_Nombre_Dni').html(json[i].Mascota_Cliente);
                     $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
                     $('#Txt_CodigoMascota').val(json[i].Mascota_Id);
@@ -1120,7 +1143,7 @@ include('modulos/cerrar_sesion.php');
                             $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
                             $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
                         });
-                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());                          
+                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
                     } else if (condicion == 2) {
                         $.each(json, function(i, item) {
                             $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
@@ -1196,6 +1219,7 @@ include('modulos/cerrar_sesion.php');
     });
 
     $("#btnGrabar").click(function() {
+        //LeeArchivos("LeeArchivos",7710);
         if (IdTipoProcesoGrabacion == 0) {
             ProcesoGrabacion(1, 4000000, 1)
         } else {
@@ -1228,7 +1252,8 @@ include('modulos/cerrar_sesion.php');
                 //$('#Txt_Dx_Definitivo').val().toUpperCase().trim(),
                 //$('#Txt_Dx_Solicitado').val().toUpperCase().trim(),
                 $('#Txt_Descripcion').val().toUpperCase().trim(),
-                $('#Txt_NotasAdicionales').val().toUpperCase().trim())
+                $('#Txt_NotasAdicionales').val().toUpperCase().trim(),
+                $('#Txt_CodigoProducto').val())
             if (Id == 1) {
                 localStorage.setItem('Observacion', $("#Txt_NotasAdicionales").val());
                 RegistrarAtencion("GrabarAtencion",
@@ -1269,8 +1294,33 @@ include('modulos/cerrar_sesion.php');
         }
     }
 
-    function ValidaCamposObligatorios(sintomas, temp, peso, dxpresuntivo, descripcion, notasadicionales) {
-        return 1;
+    //========================== DOCUMENTOS ==========================
+    function Eliminar_Documento(act) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/atencion.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            success: function(data) {
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+    function ValidaCamposObligatorios(sintomas, temp, peso, dxpresuntivo, descripcion, notasadicionales, codigoproducto) {
+        //return 1;
+        if (codigoproducto.length == 0) {
+            alert('El campo selección de atención es obligatorio');
+            $('#Txt_CodigoProducto').focus();
+            return 0;
+        } else {
+            return 1;
+        }
         /*         if (sintomas.length == 0) {
                     alert('El campo sintomas es obligatorio');
                     $("#Txt_Sintomas").focus();
@@ -1315,9 +1365,9 @@ include('modulos/cerrar_sesion.php');
         Atencion_sc_TLLC, Atencion_sc_Vom, Atencion_sc_Dia, Atencion_sc_Gan, Atencion_sc_Pes, Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des,
         Atencion_tr_Obs, Atencion_tr_Pre, Pint_Documento, Pint_Cita, Pint_CitaEstado, Pint_Estado, Pvchr_Usuario, Pint_VentaTipo, Pint_IdAlmacen, Pint_IdVBDA) {
 
-console.log(act+','+ IdTipoRegistro+','+ IdAtencion+','+ Fecha+','+ IdProducto+','+ IdMascota+','+ Sintomas+','+ Atencion_T+','+ Atencion_FC+','+ Atencion_FR+','+ Atencion_sc_Des+','+ Atencion_sc_Muc+','+
-        Atencion_sc_TLLC+','+ Atencion_sc_Vom+','+ Atencion_sc_Dia+','+ Atencion_sc_Gan+','+ Atencion_sc_Pes+','+ Atencion_dx_Pre+','+ Atencion_dx_Def+','+ Atencion_dx_Sol+','+ Atencion_tr_Des+','+
-        Atencion_tr_Obs+','+ Atencion_tr_Pre+','+ Pint_Documento+','+ Pint_Cita+','+ Pint_CitaEstado+','+ Pint_Estado+','+ Pvchr_Usuario+','+ Pint_VentaTipo+','+ Pint_IdAlmacen+','+ Pint_IdVBDA)            
+        /*console.log(act + ',' + IdTipoRegistro + ',' + IdAtencion + ',' + Fecha + ',' + IdProducto + ',' + IdMascota + ',' + Sintomas + ',' + Atencion_T + ',' + Atencion_FC + ',' + Atencion_FR + ',' + Atencion_sc_Des + ',' + Atencion_sc_Muc + ',' +
+            Atencion_sc_TLLC + ',' + Atencion_sc_Vom + ',' + Atencion_sc_Dia + ',' + Atencion_sc_Gan + ',' + Atencion_sc_Pes + ',' + Atencion_dx_Pre + ',' + Atencion_dx_Def + ',' + Atencion_dx_Sol + ',' + Atencion_tr_Des + ',' +
+            Atencion_tr_Obs + ',' + Atencion_tr_Pre + ',' + Pint_Documento + ',' + Pint_Cita + ',' + Pint_CitaEstado + ',' + Pint_Estado + ',' + Pvchr_Usuario + ',' + Pint_VentaTipo + ',' + Pint_IdAlmacen + ',' + Pint_IdVBDA)*/
 
         $.ajax({
             type: "POST",
@@ -1388,36 +1438,8 @@ console.log(act+','+ IdTipoRegistro+','+ IdAtencion+','+ Fecha+','+ IdProducto+'
                 Habilita_Desabilita(false, true, true);
             }
         });
-        
+
     }
-
-    // Clase Proser
-    /* function Obtener_Atencion(act, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/proser.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                $("#Txt_CodigoProducto").val();
-                $.each(json, function(i, item) {
-                    $("#Txt_CodigoProducto").val(json[i].Producto_Id);
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    } */
-
 
     function Obtener_Datos_Atencion(act, id) {
         $.ajax({
@@ -1436,7 +1458,6 @@ console.log(act+','+ IdTipoRegistro+','+ IdAtencion+','+ Fecha+','+ IdProducto+'
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
                     //$('#Txt_CodigoProducto').val(json[i].Atencion_IdProducto);
-
                     $('#Txt_CodigoProducto').val(json[i].Atencion_IdProducto);
                     $("#CboAtencion option[value=" + $('#Txt_CodigoProducto').val() + "]").attr("selected", true);
                     $("#CboAtencion").attr('disabled', true);
@@ -1474,7 +1495,63 @@ console.log(act+','+ IdTipoRegistro+','+ IdAtencion+','+ Fecha+','+ IdProducto+'
         limpiaForm($("#FormularioAtencion"));
     });
 
+    $("#btnSubir").click(function() {
+        upload_image()
+    });
+
+    function upload_image() { //Funcion encargada de enviar el archivo via AJAX
+        $(".upload-msg").text('Cargando...');
+        var inputFileImage = document.getElementById("fileToUpload");
+        var file = inputFileImage.files[0];
+        var data = new FormData();
+        data.append('fileToUpload', file);
+        /*jQuery.each($('#fileToUpload')[0].files, function(i, file) {
+        	data.append('file'+i, file);
+        });*/
+        $.ajax({
+            url: "upload.php?tipo=1&directorio=0", // Url to which the request is send
+            type: "POST", // Type of request to be send, called as method
+            data: data, // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+            contentType: false, // The content type used when sending data to the server.
+            cache: false, // To unable request pages to be cached
+            processData: false, // To send DOMDocument or non processed data file it is set to false
+            success: function(data) // A function to be called if request succeeds
+            {
+                $(".upload-msg").html(data);
+                $("#fileToUpload").val(null);
+                // capturar valor JS
+                var cantidad = localStorage.getItem('Cantidad');
+                //var data = sessionStorage.getItem('key');
+                if (cantidad == 1) {
+                    $("#btncarga1").removeClass("btn-secondary");
+                    $("#btncarga1").addClass("btn-success");
+                } else if (cantidad == 2) {
+                    $("#btncarga2").removeClass("btn-secondary");
+                    $("#btncarga2").addClass("btn-success");
+                } else if (cantidad == 3) {
+                    $("#btncarga3").removeClass("btn-secondary");
+                    $("#btncarga3").addClass("btn-success");
+                } else if (cantidad == 4) {
+                    $("#btncarga4").removeClass("btn-secondary");
+                    $("#btncarga4").addClass("btn-success");
+                } else if (cantidad == 5) {
+                    $("#btncarga5").removeClass("btn-secondary");
+                    $("#btncarga5").addClass("btn-success");
+                }
+
+                window.setTimeout(function() {
+                    $(".alert-dismissible").fadeTo(250, 0).slideUp(250, function() {
+                        $(this).remove();
+                    });
+                }, 5000);
+
+            }
+        });
+    }
+
+
     $(function() {
+        Eliminar_Documento('EliminarDocumento');
         Habilita_Desabilita(true, false, false);
         Obtener_Sede_Usuario('MostrarSede_Usuario');
         Obtener_Atencion('MostrarProductoxCondicion_Atencion', IdSede);

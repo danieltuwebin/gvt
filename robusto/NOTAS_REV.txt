@@ -92,13 +92,23 @@ __________________________ version 5.0 -----------------------------------------
 
 
 __________________________ version 6.0 -------------------------------------------
-1. CORRECCION DE LOS MODULOS DE VBDA, PERMITE REGISTRAR SIN NUMERO DE DNI
+1. CORRECCIÓN DE LOS MODULOS DE VBDA, PERMITE REGISTRAR SIN NUMERO DE DNI
 2. POSICIONAMIENTO DE FOOTER LISTADO DE DESPARACITACION
 __________________________ version 6.0 -------------------------------------------
 
 
 __________________________ version 7.0 -------------------------------------------
-1. CORRECCION DE EDICION DE CLIENTES SIN NUMRERO DE DNI
+1. CORRECCIÓN DE EDICION DE CLIENTES SIN NUMRERO DE DNI
 2. ADICION DE UN BOTON DE BUSQUEDA POR CELULAR EN EL MODULO VACUNAS
 3. ADICION DE UN BOTON DE BUSQUEDA POR CELULAR EN EL MODULO ATENCION
 __________________________ version 7.0 -------------------------------------------
+
+
+__________________________ version 8.0 -------------------------------------------
+1. CORRECCIÓN DE ELIMINACIÓN DE VENTA EN EL MODULO DE VENTA
+2. CORRECCIÓN DE LA EDICIÓN DEL TIPO DE ATENCIÓN
+3. PEMITE SUBIR DOCUMENTOS SOLO EN PDF MAXIMO DE PESO 1MB - MAXIMO 5 DOCUMENTOS
+   DESDE EL MODULO DE NUEVA ATENCIÓN.
+4. PERMITE AGREGAR, ELIMINAR, VISUALIZAR, DESCARGAR LOS DOCUMENTOS EN PDF DESDE EL
+   MODULO DE LISTADO DE ATENCIÓN.
+__________________________ version 8.0 -------------------------------------------

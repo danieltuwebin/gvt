@@ -117,7 +117,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -305,7 +305,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -663,7 +663,7 @@ include('modulos/cerrar_sesion.php');
                                                                         <input type="radio" id="RbDniC" name="Dni" class="custom-control-input" value="3">
                                                                         <span class="custom-control-indicator"></span>
                                                                         <span class="custom-control-description ml-0">NRO. Celular</span>
-                                                                    </label>-->                                                                   
+                                                                    </label>-->
                                                                     <label class="display-inline-block custom-control custom-radio">
                                                                         <input type="radio" id="RbDniM" name="Dni" class="custom-control-input" value="2">
                                                                         <span class="custom-control-indicator"></span>
@@ -823,8 +823,8 @@ include('modulos/cerrar_sesion.php');
                                                             <th style="width: 5%;">Id</th>
                                                             <th style="width: 50%;">Producto</th>
                                                             <th style="width: 7%;">P.uni.</th>
-                                                            <th style="width: 7%;">Cantidad</th>                                                            
-                                                            <th style="width: 7%;">P.tot.</th>                                                            
+                                                            <th style="width: 7%;">Cantidad</th>
+                                                            <th style="width: 7%;">P.tot.</th>
                                                             <th style="width: 7%;">Desc.</th>
                                                             <th style="width: 7%;">Total</th>
                                                             <th style="width: 5%;">&nbsp;&nbsp;X</th>
@@ -914,15 +914,17 @@ include('modulos/cerrar_sesion.php');
     var ValorRb = 1;
     var table;
     var IdVentaTmp = 0;
-    var Id_TipoVenta=0;
-    var IdProducto_VBDA=0;
+    var Id_TipoVenta = 0;
+    var IdProducto_VBDA = 0;
     var IdAgendado = 0;
     var Observacion_Final;
     var CodigoVenta_Elminacion;
     var CodigoVenta_Servicio;
-    var IdentifProcesoCancelacVenta=0;
-    var ProcesoVBDA_CancelarCompra=0;
-    var IdVenta_temporal=0;
+    var IdentifProcesoCancelacVenta = 0;
+    var ProcesoVBDA_CancelarCompra = 0;
+    var IdVenta_temporal = 0;
+    var Carpeta;
+
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
     }
@@ -978,9 +980,9 @@ include('modulos/cerrar_sesion.php');
         $("#Txt_Cantidad").attr('disabled', bool);
     }
 
-    function Habilita_Desabilita_Controles(boolSede,boolTipPago,boolFec,boolPro,boolPre,boolDes,boolCan,boolTabla) {
+    function Habilita_Desabilita_Controles(boolSede, boolTipPago, boolFec, boolPro, boolPre, boolDes, boolCan, boolTabla) {
         $("#CboSede").attr('disabled', boolSede);
-        $("#CboTipoPago").attr('disabled', boolTipPago);        
+        $("#CboTipoPago").attr('disabled', boolTipPago);
         $("#TxtFecha").attr('disabled', boolFec);
         $("#TxtProducto").attr('disabled', boolPro);
         $("#Txt_Precio").attr('disabled', boolPre);
@@ -1207,7 +1209,7 @@ include('modulos/cerrar_sesion.php');
                             $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
                             $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
                         });
-                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());                          
+                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
                     } else if (condicion == 2) {
                         $.each(json, function(i, item) {
                             $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
@@ -1252,7 +1254,7 @@ include('modulos/cerrar_sesion.php');
                 Grabar_Venta_Tmp('GrabarVentaTmp', IdVentaTmp, $("#CboSede").val(), Codigo, $('#Txt_Cantidad').val(),
                     ($('#Txt_Precio').val() * $('#Txt_Cantidad').val()).toFixed(2),
                     ($('#Txt_Descuento').val() * $('#Txt_Cantidad').val()).toFixed(2),
-                    (( $('#Txt_Precio').val() - Descuento) * $('#Txt_Cantidad').val()).toFixed(2),
+                    (($('#Txt_Precio').val() - Descuento) * $('#Txt_Cantidad').val()).toFixed(2),
                     '<?php echo $_SESSION['User']; ?>');
             } else {
                 alert('Debe seleccionar un producto');
@@ -1266,7 +1268,6 @@ include('modulos/cerrar_sesion.php');
     function Grabar_Venta_Tmp(act, IdVenta, IdSede, IdProducto, Cantidad, Precio, Descuento, PrecioTotal, Usuario) {
         //console.log(act+','+ IdVenta+','+ IdSede+','+ IdProducto+','+  Cantidad+','+ Precio+','+ Descuento+','+ PrecioTotal+','+ Usuario);
         var Estado = 0;
-        
         $.ajax({
             type: "POST",
             url: "modulos/ventas.php",
@@ -1295,9 +1296,9 @@ include('modulos/cerrar_sesion.php');
                 if (Estado == 1 || Estado == 2) {
                     listar();
                     if (Id_TipoVenta == 1 || Id_TipoVenta == 2 || Id_TipoVenta == 3 || Id_TipoVenta == 4) {
-                        Habilita_Desabilita_Controles(false,false,false,true,true,true,true,false);
+                        Habilita_Desabilita_Controles(false, false, false, true, true, true, true, false);
                         Habilita_Desabilita(true, false, true);
-                    }else{
+                    } else {
                         $("#TxtProducto").val('');
                         $("#Txt_Precio").val('');
                         $("#Txt_Descuento").val('');
@@ -1314,7 +1315,6 @@ include('modulos/cerrar_sesion.php');
                 }
             }
         });
-        
     }
 
     var listar = function() {
@@ -1328,7 +1328,7 @@ include('modulos/cerrar_sesion.php');
             "ajax": {
                 "method": "POST",
                 //"url": "modulos/ventas_listado.php?Id=" + IdVentaTmp+"&Precio=" + PrecioUnitTemporal,
-                "url": "modulos/ventas_listado.php?Id=" + IdVentaTmp,                
+                "url": "modulos/ventas_listado.php?Id=" + IdVentaTmp,
             },
             "columns": [{
                     "data": "Orden"
@@ -1344,7 +1344,7 @@ include('modulos/cerrar_sesion.php');
                 },
                 {
                     "data": "VentaDetalle_tmp_Cantidad"
-                },                
+                },
                 {
                     "data": "VentaDetalle_tmp_Precio"
                 },
@@ -1395,20 +1395,20 @@ include('modulos/cerrar_sesion.php');
 
     $('#TblVenta').on('click', '.eliminar', function() {
         var id = $(this).val();
-            var bool = confirm("Esta seguro de eliminar el registro ?");
-            if (bool) {
-                Eliminar_Venta('EliminarVenta', id)
-                if (Id_TipoVenta == 1 || Id_TipoVenta == 2 || Id_TipoVenta == 3 || Id_TipoVenta == 4) {
-                    Habilita_Desabilita(true, true, true);
-                    Habilita_Desabilita_Controles(false,false,false,true,false,false,true,false);
-                        // establecer el proceso ** Pint_ProcesoVBDA **
-                        ProcesoVBDA_CancelarCompra = 0;
-                        // establecer el proceso ** Pint_ProcesoVBDA **
-                    }
-                //alert('El cliente seleccionado fue eliminado correctamente');
-            } else {
-                //alert("cancelo la solicitud");
+        var bool = confirm("Esta seguro de eliminar el registro ?");
+        if (bool) {
+            Eliminar_Venta('EliminarVenta', id)
+            if (Id_TipoVenta == 1 || Id_TipoVenta == 2 || Id_TipoVenta == 3 || Id_TipoVenta == 4) {
+                Habilita_Desabilita(true, true, true);
+                Habilita_Desabilita_Controles(false, false, false, true, false, false, true, false);
+                // establecer el proceso ** Pint_ProcesoVBDA **
+                ProcesoVBDA_CancelarCompra = 0;
+                // establecer el proceso ** Pint_ProcesoVBDA **
             }
+            //alert('El cliente seleccionado fue eliminado correctamente');
+        } else {
+            //alert("cancelo la solicitud");
+        }
     });
 
     function Eliminar_Venta(act, codigo) {
@@ -1437,7 +1437,7 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok2');
                 if (Id_TipoVenta == 1 || Id_TipoVenta == 2 || Id_TipoVenta == 3 || Id_TipoVenta == 4) {
                     $("#btnAgregar").show();
-                }                
+                }
             }
         });
     }
@@ -1445,10 +1445,10 @@ include('modulos/cerrar_sesion.php');
 
     $('#BtnNuevaVenta').click(function() {
         if (Id_TipoVenta == 1 || Id_TipoVenta == 2 || Id_TipoVenta == 3 || Id_TipoVenta == 4) {
-            if (IdentifProcesoCancelacVenta == 0){
+            if (IdentifProcesoCancelacVenta == 0) {
                 var URLactual = jQuery(location).attr('href');
                 $(location).attr('href', URLactual);
-            }else{
+            } else {
                 var url = "venta-nuevo.php";
                 $(location).attr('href', url);
             }
@@ -1460,34 +1460,33 @@ include('modulos/cerrar_sesion.php');
 
 
     $('#BtnGrabarVenta').click(function() {
-        if (Id_TipoVenta==4 && IdAgendado ==0){
+        if (Id_TipoVenta == 4 && IdAgendado == 0) {
             IdProducto_VBDA = IdVenta_temporal;
         }
 
-         Grabar_Venta(
+        Grabar_Venta(
             'GrabarVenta',
             IdVentaTmp,
             IdProducto_VBDA,
             IdAgendado,
             $('#CodigoProducto').val(),
             1,
-            $('#TxtFecha').val(),         
+            $('#TxtFecha').val(),
             Id_TipoVenta,
             $('#CboTipoPago').val(),
             $('#CboMascota').val(),
-            $("#CboSede").val() ,   
+            $("#CboSede").val(),
             Observacion_Final,
             1,
             '<?php echo $_SESSION['User']; ?>'
-        ) 
+        )
     });
 
 
     function Grabar_Venta(act, idVentatmp, idVBDA, idAgendado, idProducto, idKardex, fecha, idTipoVenta,
         idTipoPago, idMascota, idAlmacen, observacion, estado, usuario) {
-            /*console.log(act+','+ idVentatmp+','+ idVBDA+','+ idAgendado+','+ idProducto+','+ idKardex+','+ fecha+','+ idTipoVenta+','+
-        idTipoPago+','+ idMascota+','+ idAlmacen+','+ observacion+','+ estado+','+ usuario)*/
-
+        /*console.log(act + ',' + idVentatmp + ',' + idVBDA + ',' + idAgendado + ',' + idProducto + ',' + idKardex + ',' + fecha + ',' + idTipoVenta + ',' +
+            idTipoPago + ',' + idMascota + ',' + idAlmacen + ',' + observacion + ',' + estado + ',' + usuario);*/
         $.ajax({
             type: "POST",
             url: "modulos/ventas.php",
@@ -1519,46 +1518,50 @@ include('modulos/cerrar_sesion.php');
                     CodigoVenta_Servicio = json[i].CODIGO_SERVICIO;
                 });
                 //.---------------------------------------------------------------------------------------------------
-                IdentifProcesoCancelacVenta= 1;
+                IdentifProcesoCancelacVenta = 1;
+
+                if (Id_TipoVenta == 4) {
+                    LeeArchivos("LeeArchivos", CodigoVenta_Servicio);
+                }
+
                 Habilita_Desabilita(false, true, false);
-                Habilita_Desabilita_Controles(true,true,true,true,true,true,true,true);
+                Habilita_Desabilita_Controles(true, true, true, true, true, true, true, true);
                 $("#Resultado_Grabacion").show();
-                    $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
-                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                        '<span aria-hidden="true">&times;</span>' +
-                        '</button>' +
-                        '<strong>Venta registrada correctamente</strong>' +
-                        '</div>')
+                $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                    '<span aria-hidden="true">&times;</span>' +
+                    '</button>' +
+                    '<strong>Venta registrada correctamente</strong>' +
+                    '</div>')
                 $("#Resultado_Grabacion").fadeTo(2000, 500).slideUp(500, function() {
                     $("#Resultado_Grabacion").slideUp(500);
                 });
             },
-            error : function(xhr, status) {
+            error: function(xhr, status) {
                 alert('Error al procesar los datos contacte al administrador de sistemas');
             },
             complete: function() {}
         });
     }
 
-
     $("#BtnCancelarVenta").click(function() {
         var bool = confirm("Esta seguro de cancelar la venta ?");
         if (bool) {
             Cancelar_Venta('CancelarVenta',
-             CodigoVenta_Elminacion,
-              IdVentaTmp,
-              '<?php echo $_SESSION['User']; ?>',
-              CodigoVenta_Servicio,
-              ProcesoVBDA_CancelarCompra,
-              IdAgendado,
-              Id_TipoVenta
-              )
+                CodigoVenta_Elminacion,
+                IdVentaTmp,
+                '<?php echo $_SESSION['User']; ?>',
+                CodigoVenta_Servicio,
+                ProcesoVBDA_CancelarCompra,
+                IdAgendado,
+                Id_TipoVenta
+            )
         } else {
             //alert("cancelo la solicitud");
         }
     });
 
-    function Cancelar_Venta(act, IdVenta, IdVentatmp, Usuario, IdVBDA, ProcesoVBDA, Atencion_Agen, IdTipoVenta){
+    function Cancelar_Venta(act, IdVenta, IdVentatmp, Usuario, IdVBDA, ProcesoVBDA, Atencion_Agen, IdTipoVenta) {
         //console.log(act+','+IdVenta+','+IdVentatmp+','+Usuario+','+IdVBDA+','+ProcesoVBDA+','+Atencion_Agen+','+IdTipoVenta);
         $.ajax({
             type: "POST",
@@ -1573,7 +1576,7 @@ include('modulos/cerrar_sesion.php');
                 IdVBDA: IdVBDA,
                 ProcesoVBDA: ProcesoVBDA,
                 Atencion_Agen: Atencion_Agen,
-                IdTipoVenta: IdTipoVenta                                             
+                IdTipoVenta: IdTipoVenta
             }),
             beforeSend: function() {},
             success: function(data) {
@@ -1590,7 +1593,9 @@ include('modulos/cerrar_sesion.php');
         });
     }
 
-   
+    /*****************************
+     *****************************/
+
 
     function Actualizar_Nuevo() {
         limpiaForm($("#FormularioVenta"));
@@ -1623,8 +1628,118 @@ include('modulos/cerrar_sesion.php');
         $("#Resultado_Grabacion").hide();
     });
 
+
+    /*=========================================== DOCUMENTO ===============================================*/
+    function LeeArchivos(act, codigo) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/atencion.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                var ind = 1;
+                RenombrarArchivos("RenombrarArchivos", json, codigo);
+                ValidarDocumento("ValidarDocumento", codigo);
+                if (Carpeta == "false") {
+                    $.each(json, function(i, item) {
+                        GrabarDocumento('GrabarDocumento', (codigo +"_"+ ind + ".pdf"), json[i], codigo, 1, 1, '<?php echo $_SESSION['User']; ?>');
+                        ind = ind + 1;
+                    });
+                }
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+    function RenombrarArchivos(act, array, codigo) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/atencion.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                ArrayDocumento: JSON.stringify(array),
+                codigo: codigo
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+    function ValidarDocumento(act, codigo) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/atencion.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                codigo: codigo
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                Carpeta = data;
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+    function GrabarDocumento(act, NombreActual, NombreAnterior, Carpeta, Codigo, Estado, Usuario) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/atencion.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                NombreActual: NombreActual,
+                NombreAnterior: NombreAnterior,
+                Carpeta: Carpeta,
+                Codigo: Codigo,
+                Estado: Estado,
+                Usuario: Usuario
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                //var json = JSON.parse(data);
+                if (data == 1) {
+                    /* alert('Venta cancelada Correctamente');
+                    var url = "venta-nuevo.php";
+                    $(location).attr('href', url); */
+                } else {
+                    alert('Lo sentimos ocurrio un error en el proceso de eliminación');
+                }
+            },
+            complete: function() {}
+        });
+    }
+
+    /*===========================================FIN DOCUMENTO ===============================================*/
+
+
+
     $(function() {
-        Observacion_Final= localStorage.getItem('Observacion');  
+        Observacion_Final = localStorage.getItem('Observacion');
 
         Obtener_Sede('MostrarSede');
         $('#TxtFecha').val(MostrarFechaActual());
@@ -1635,10 +1750,10 @@ include('modulos/cerrar_sesion.php');
             //SIN VALOR GET
             if ($_GET("IdMas") === undefined) {
                 //SIN VALOR GET
-            }else{
+            } else {
                 Obtener_NombreCliente_NombreMascota('MostrarNombrecliNombreMas', $_GET("IdMas"));
             }
-           
+
         } else {
             // CON VALOR GET
             Id_TipoVenta = $_GET("Tipo");

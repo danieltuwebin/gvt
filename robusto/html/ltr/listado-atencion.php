@@ -939,6 +939,125 @@ require('lib_externos/fpdf182/fpdf.php');
         </div>
     </div>
 
+    <!-- Modal Visualizador de Imagenes -->
+    <div class="modal fade text-xs-left" id="Modal_Visualizador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel17"><label id="LblIdDocumentos">Administrar Documento</label></h4>
+                </div>
+
+                <div class="modal-body">
+                    <form class="form" id="FormularioDocumentos">
+                        <input type="hidden" id="Txt_CodigoCarpeta" name="Txt_CodigoCarpeta">
+                        <div class="form-body">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0 table-bordered">
+                                        <!-- ENCABEZADO -->
+                                        <thead>
+                                            <tr>
+                                                <th width="10%" style="text-align:center">Nro</th>
+                                                <th width="81%" style="text-align:center">Nombre Archivo</th>
+                                                <th width="9%" colspan="3" style="text-align:center">Opciones</th>
+                                                <!-- <th width= "5%">Ver</th>                                                   
+                                                <th width= "5%">Agregar</th>                                                
+                                                <th width= "5%">Eliminar</th>
+                                                <th width= "5%">Descargar</th> -->
+                                            </tr>
+                                        </thead>
+                                        <!-- DETALLE -->
+                                        <tbody id="tablaResumenDocumentos">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="Resultado_Grabacion"></div>
+
+                <div class="modal-footer">
+                    <div class="row">
+                        <button id="BtnActualizarAtencion" type="button" class="btn btn-success mr-1" onclick="Agregar_Documento()"><i class="icon-upload4"></i> &nbsp; Agregar</button>
+                        <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Subir Imagenes -->
+    <div class="modal fade text-xs-left" id="Modal_Subir" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel17"><label id="LblSubirIdDocumentos">Subir Documentos</label></h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form" id="FormularioAtencion">
+                        <div class="modal-body">
+                            <form class="form" id="FormularioDocumentos">
+                                <div class="form-body">
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Subir Documentos (PDF)</label>
+                                                    <label id="lblfile" class="file center-block">
+                                                        <input type="file" id="fileToUpload" accept="application/pdf, .PDF">
+                                                        <span class="file-custom"></span>
+                                                    </label>
+                                                    <button id="btnSubir" type="button" class="btn btn-primary mr-1">
+                                                        <i class="icon-upload5"></i> Subir
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                                        <button id="btncarga1" type="button" class="btn btn-secondary" disabled="true">1</button>
+                                                        <button id="btncarga2" type="button" class="btn btn-secondary" disabled="true">2</button>
+                                                        <button id="btncarga3" type="button" class="btn btn-secondary" disabled="true">3</button>
+                                                        <button id="btncarga4" type="button" class="btn btn-secondary" disabled="true">4</button>
+                                                        <button id="btncarga5" type="button" class="btn btn-secondary" disabled="true">5</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="upload-msg"></div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="Resultado_Grabacion"></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">Cerrar</button>
+                        <!-- <button id="BtnActualizarAtencion" type="button" class="btn btn-success mr-1"><i class="icon-edit2"></i>Grabar Edición</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
     <div class="app-content content container-fluid">
@@ -993,7 +1112,7 @@ require('lib_externos/fpdf182/fpdf.php');
                                                     <th>Atención</th>
                                                     <th>Estado Atención</th>
                                                     <th>Observación</th>
-                                                    <th>Administrar</th>
+                                                    <th>Administrar_Op.</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -1087,6 +1206,11 @@ require('lib_externos/fpdf182/fpdf.php');
     var IdMascotaExterno = 0;
     var ValorRb = 2;
     var IdSede = 0;
+    // Documentos
+    var Archivo = '';
+    var Ruta = '';
+    // Nuevo 
+    var Carpeta = '';
 
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
@@ -1256,7 +1380,8 @@ require('lib_externos/fpdf182/fpdf.php');
                 },
                 {
                     "render": function(data, type, row) {
-                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Atencion_Id + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Atencion_Id + "'><i class='icon-trash-o'></i></button>    <button id='ver' type='button' class='ver btn btn-success' value='" + row.Atencion_Id + "'><i class='icon-eye-plus'></i></button>   </div></div>";
+                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Atencion_Id + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Atencion_Id + "'><i class='icon-trash-o'></i></button>    <button id='ver' type='button' class='ver btn btn-success' value='" + row.Atencion_Id + "'><i class='icon-eye-plus'></i></button>    <button id='documento' type='button' class='documento btn btn-info' value='" + row.Atencion_Id + "'><i class='icon-clipboard4'></i></button>   </div></div>";
+                        //return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Atencion_Id + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Atencion_Id + "'><i class='icon-trash-o'></i></button>    <button id='ver' type='button' class='ver btn btn-success' value='" + row.Atencion_Id + "'><i class='icon-eye-plus'></i></button>   </div></div>";
                     }
                 }
             ],
@@ -1497,7 +1622,7 @@ require('lib_externos/fpdf182/fpdf.php');
                             $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
                             $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
                         });
-                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());                           
+                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
                     } else if (condicion == 2) {
                         $.each(json, function(i, item) {
                             $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
@@ -1761,6 +1886,346 @@ require('lib_externos/fpdf182/fpdf.php');
             }
         });
     }
+
+
+    $('#TblAtencion').on('click', '.documento', function() {
+        var id = $(this).val();
+        Obtener_Tablas_Resumenes_Documentos('tablaResumenDocumentos', id);
+        $("#LblIdDocumentos").text("Administrar Documento : " + Obtener_Codigo_Formateado(id));
+        $('#Txt_CodigoCarpeta').val(id);
+        $("#Modal_Visualizador").modal("show");
+    });
+
+    // clase atencion
+    function Obtener_Tablas_Resumenes_Documentos(act, Id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/atencion.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: Id
+            }),
+            beforeSend: function() {
+                $("#tablaResumenDocumentos").html('');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                $.each(json, function(i, item) {
+                    $("#tablaResumenDocumentos").append('<tr>' +
+                        '<td class="text-truncate">' + json[i].Orden + '</td>' +
+                        '<td class="text-truncate">' + json[i].DocumentoAdjunto_NombreAnterior + '</td>' +
+                        '<td class="text-truncate"><a class="btn btn-secondary btn-sm" href="' + json[i].Link + '" target="_blank" title="Visualizar PDF"><i class="icon-eye4"></i></a> </td>' +
+                        /* '<td class="text-truncate"><button type="button" class="btn btn-secondary btn-sm" title="Agregar PDF" onclick="Agregar_Documento(' + json[i].DocumentoAdjunto_Carpeta + ')"><i class="icon-upload4"></i></button></td>' + */
+                        '<td class="text-truncate"><button type="button" class="btn btn-secondary btn-sm" title="Eliminar PDF" onclick="Eliminar_Documento(' + json[i].DocumentoAdjunto_Id + ')"><i class="icon-remove"></i></button></td>' +
+                        '<td class="text-truncate"><a class="btn btn-secondary btn-sm" download="' + json[i].DocumentoAdjunto_NombreAnterior + '" href="' + json[i].Link + '" title="Descargar PDF"><i class="icon-download4"></i></a> </td>');
+                });
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+    function Agregar_Documento() {
+        id = $('#Txt_CodigoCarpeta').val();
+        Obtener_Cantidad_Archivos_Carpeta('ObtenerDocumentoCantidadCarpeta', id);
+        Carpeta = id;
+        $("#Modal_Subir").modal("show");
+    }
+
+    function Eliminar_Documento(id) {
+        var bool = confirm("Esta seguro de eliminar el documento ?");
+        if (bool) {
+            Obtener_Datos_DocumentoxId('ObtenerDocumentoxId', id)
+        } else {
+            //alert("cancelo la solicitud");
+        }
+    }
+
+    function Obtener_Datos_DocumentoxId(act, id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/atencion.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: id
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                $.each(json, function(i, item) {
+                    Archivo = json[i].DocumentoAdjunto_NombreActual;
+                    Ruta = json[i].DocumentoAdjunto_Carpeta;
+                });
+                Eliminar_DocumentoxId('EliminarDocumentoxId', id, Ruta, Archivo);
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+    function Eliminar_DocumentoxId(act, id, carpeta, archivo) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/atencion.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: id,
+                Carpeta: carpeta,
+                Archivo: archivo
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                Obtener_Tablas_Resumenes_Documentos('tablaResumenDocumentos', carpeta);
+                alert('El documento fue eliminado correctamente');
+                //var json = JSON.parse(data);
+                /*
+                $.each(json, function(i, item) {
+                    Nombre = json[i].DocumentoAdjunto_NombreActual;
+                    Ruta = json[i].DocumentoAdjunto_Carpeta;
+                });*/
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+    function Obtener_Cantidad_Archivos_Carpeta(act, id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/atencion.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: id
+            }),
+            beforeSend: function() {
+                //alert('ok');
+                $("#btncarga1").addClass("btn-secondary");
+                $("#btncarga1").removeClass("btn-success");
+                $("#btncarga2").addClass("btn-secondary");
+                $("#btncarga2").removeClass("btn-success");
+                $("#btncarga3").addClass("btn-secondary");
+                $("#btncarga3").removeClass("btn-success");
+                $("#btncarga4").addClass("btn-secondary");
+                $("#btncarga4").removeClass("btn-success");
+                $("#btncarga5").addClass("btn-secondary");
+                $("#btncarga5").removeClass("btn-success");
+            },
+            success: function(data) {
+
+                var cantidad = data;
+                localStorage.setItem('Cantidad', cantidad);
+
+                if (cantidad >= 1) {
+                    $("#btncarga1").removeClass("btn-secondary");
+                    $("#btncarga1").addClass("btn-success");
+                }
+                if (cantidad >= 2) {
+                    $("#btncarga2").removeClass("btn-secondary");
+                    $("#btncarga2").addClass("btn-success");
+                }
+                if (cantidad >= 3) {
+                    $("#btncarga3").removeClass("btn-secondary");
+                    $("#btncarga3").addClass("btn-success");
+                }
+                if (cantidad >= 4) {
+                    $("#btncarga4").removeClass("btn-secondary");
+                    $("#btncarga4").addClass("btn-success");
+                }
+                if (cantidad == 5) {
+                    $("#btncarga5").removeClass("btn-secondary");
+                    $("#btncarga5").addClass("btn-success");
+                }
+
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+    $("#btnSubir").click(function() {
+        upload_image()
+    });
+
+    function upload_image() { //Funcion encargada de enviar el archivo via AJAX
+        $(".upload-msg").text('Cargando...');
+        var inputFileImage = document.getElementById("fileToUpload");
+        var file = inputFileImage.files[0];
+
+        // OBTIENE NOMBRE DEL ARCHIVO
+        var nombrefile = file["name"];
+        var data = new FormData();
+        data.append('fileToUpload', file);
+        /*jQuery.each($('#fileToUpload')[0].files, function(i, file) {
+        	data.append('file'+i, file);
+        });*/
+        $.ajax({
+            url: "upload.php?tipo=2&directorio=" + Carpeta, // Url to which the request is send
+            type: "POST", // Type of request to be send, called as method
+            data: data, // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+            contentType: false, // The content type used when sending data to the server.
+            cache: false, // To unable request pages to be cached
+            processData: false, // To send DOMDocument or non processed data file it is set to false
+            success: function(data) // A function to be called if request succeeds
+            {
+
+                $(".upload-msg").html(data);
+                $("#fileToUpload").val(null);
+                // capturar valor JS
+                var cantidad = localStorage.getItem('Cantidad');
+                var proceso = localStorage.getItem('ProcesoOK');
+
+                if (proceso == 1) {
+                    if (cantidad <= 5) {
+                        Obtener_Archivos_x_Carpeta('tablaResumenDocumentos', Carpeta, nombrefile, cantidad);
+                    }
+                }
+
+                if (cantidad == 1) {
+                    $("#btncarga1").removeClass("btn-secondary");
+                    $("#btncarga1").addClass("btn-success");
+                } else if (cantidad == 2) {
+                    $("#btncarga2").removeClass("btn-secondary");
+                    $("#btncarga2").addClass("btn-success");
+                } else if (cantidad == 3) {
+                    $("#btncarga3").removeClass("btn-secondary");
+                    $("#btncarga3").addClass("btn-success");
+                } else if (cantidad == 4) {
+                    $("#btncarga4").removeClass("btn-secondary");
+                    $("#btncarga4").addClass("btn-success");
+                } else if (cantidad == 5) {
+                    $("#btncarga5").removeClass("btn-secondary");
+                    $("#btncarga5").addClass("btn-success");
+                }
+
+                window.setTimeout(function() {
+                    $(".alert-dismissible").fadeTo(250, 0).slideUp(250, function() {
+                        $(this).remove();
+                    });
+                }, 5000);
+
+            }
+        });
+    }
+
+    function Obtener_Archivos_x_Carpeta(act, Id, nombrefile, cantidad) {
+
+        var array = new Array(5);
+        for (var i = 1; i <= 5; i++) {
+            array[i] = Id + '_' + i + '.pdf';
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "modulos/atencion.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: Id
+            }),
+            beforeSend: function() {
+                //$("#tablaResumenDocumentos").html('');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                var numeroArray = 0;
+                //var i = 1;
+                $.each(json, function(i, item) {
+                    if (json[i].DocumentoAdjunto_NombreActual == array[i + 1]) {
+                        numeroArray = numeroArray + 1;
+                        cantidad = cantidad - 1;
+                        //console.log('numeroArray : ' + numeroArray + ' cantidad : ' + cantidad);
+                    } else {
+                        //insertar y cambiar de nombre archivo
+                        numeroArray = numeroArray + 1;
+                        GrabarDocumento('GrabarDocumento', (Id + "_" + numeroArray + ".pdf"), nombrefile, Id, 1, 1, '<?php echo $_SESSION['User']; ?>')
+                        return false;
+                    }
+                });
+
+                //insertar nuevo registro
+                if (cantidad == 1) {
+                    numeroArray = numeroArray + 1;
+                    GrabarDocumento('GrabarDocumento', (Id + "_" + numeroArray + ".pdf"), nombrefile, Id, 1, 1, '<?php echo $_SESSION['User']; ?>')
+                }
+
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+
+    function GrabarDocumento(act, NombreActual, NombreAnterior, Carpeta, Codigo, Estado, Usuario) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/atencion.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                NombreActual: NombreActual,
+                NombreAnterior: NombreAnterior,
+                Carpeta: Carpeta,
+                Codigo: Codigo,
+                Estado: Estado,
+                Usuario: Usuario
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                if (data == 1) {
+                    Mover_Archivo_Individual('MoverArchivoIndividual', Carpeta, NombreAnterior, NombreActual);
+                } else {
+                    alert('Lo sentimos ocurrio un error en el proceso de eliminación');
+                }
+            },
+            complete: function() {}
+        });
+    }
+
+
+    function Mover_Archivo_Individual(act, Carpeta, NombreAnterior, NombreActual) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/atencion.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                Carpeta: Carpeta,
+                NombreAnterior: NombreAnterior,
+                NombreActual: NombreActual
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                Obtener_Tablas_Resumenes_Documentos('tablaResumenDocumentos', Carpeta);
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+
 
     $(function() {
         Obtener_Nombre();
