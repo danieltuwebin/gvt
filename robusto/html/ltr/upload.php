@@ -50,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_FILES["fileToUpload"]["type"
             $uploadOk = 0;
         }
         // Check file size
-        if ($_FILES["fileToUpload"]["size"] > 524288) {
-            $errors[] = "Lo sentimos, el archivo es demasiado grande.  Tamaño máximo admitido: 0.5 MB";
+        if ($_FILES["fileToUpload"]["size"] > 1048576) {
+            $errors[] = "Lo sentimos, el archivo es demasiado grande.  Tamaño máximo admitido: 1 MB";
             $uploadOk = 0;
         }
         // Allow certain file formats
