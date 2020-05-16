@@ -982,7 +982,6 @@ include('modulos/cerrar_sesion.php');
     }
 
     var listar = function() {
-        console.log('listar');
         var url = "modulos/ventas_listado_general.php?Cond=1&Id=0";
         table = $('#TblVentas').DataTable({
             "destroy": true,
@@ -1159,7 +1158,7 @@ include('modulos/cerrar_sesion.php');
     }
 
     function Editar_Venta(act, Codigo, Fecha, Sede, Tipo_Pago, Usuario) {
-        console.log(act +' - ' +Codigo+' - ' + Fecha+' - ' + Sede+' - ' + Tipo_Pago+' - ' + Usuario)
+        //console.log(act +' - ' +Codigo+' - ' + Fecha+' - ' + Sede+' - ' + Tipo_Pago+' - ' + Usuario)
         $.ajax({
             type: "POST",
             url: "modulos/ventas.php",
@@ -1175,7 +1174,6 @@ include('modulos/cerrar_sesion.php');
             }),
             beforeSend: function() {},
             success: function(data) {
-                console.log(data);
                 if (data == 1) {
                     $("#Modal_EditarVenta").modal("hide");
                     listar();

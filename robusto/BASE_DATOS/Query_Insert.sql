@@ -4059,7 +4059,7 @@ CREATE TABLE tblDocumentoAdjunto (
     DocumentoAdjunto_NombreAnterior VARCHAR(100) NOT NULL,
     DocumentoAdjunto_Carpeta VARCHAR(10) NOT NULL,
     DocumentoAdjunto_Codigo INT,
-    DocumentoAdjunto_Estado INT,
+    DocumentoAdjunto_Estado INT COMMENT '1(activ).2(desact)',
     DocumentoAdjunto_FechaGra DATETIME,
     DocumentoAdjunto_UserGrab VARCHAR(100)        
 )
