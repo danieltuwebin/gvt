@@ -982,6 +982,7 @@ include('modulos/cerrar_sesion.php');
     }
 
     var listar = function() {
+        console.log('listar');
         var url = "modulos/ventas_listado_general.php?Cond=1&Id=0";
         table = $('#TblVentas').DataTable({
             "destroy": true,
@@ -1158,6 +1159,7 @@ include('modulos/cerrar_sesion.php');
     }
 
     function Editar_Venta(act, Codigo, Fecha, Sede, Tipo_Pago, Usuario) {
+        console.log(act +' - ' +Codigo+' - ' + Fecha+' - ' + Sede+' - ' + Tipo_Pago+' - ' + Usuario)
         $.ajax({
             type: "POST",
             url: "modulos/ventas.php",
@@ -1173,6 +1175,7 @@ include('modulos/cerrar_sesion.php');
             }),
             beforeSend: function() {},
             success: function(data) {
+                console.log(data);
                 if (data == 1) {
                     $("#Modal_EditarVenta").modal("hide");
                     listar();
@@ -1191,7 +1194,7 @@ include('modulos/cerrar_sesion.php');
             var bool = confirm("Esta seguro de eliminar el registro " + Obtener_Codigo_Formateado(id) + " ?");
             //var bool = confirm("Esta seguro de eliminar el registro ?");
             if (bool) {
-                Eliminar_Venta('EliminarVenta_tblVenta', id)
+                Eliminar_Venta('EliminarVenta_tblVenta', id, '<?php echo $_SESSION['User']; ?>')
                 alert('La Venta seleccionado fue eliminada correctamente');
             } else {
                 //alert("cancelo la solicitud");
@@ -1202,6 +1205,7 @@ include('modulos/cerrar_sesion.php');
     });
 
     function Eliminar_Venta(act, codigo, usuario) {
+        //console.log(act+'-'+ codigo+'-'+ usuario);
         $.ajax({
             type: "POST",
             url: "modulos/ventas.php",
@@ -1214,10 +1218,10 @@ include('modulos/cerrar_sesion.php');
             }),
             beforeSend: function() {},
             success: function(data) {
-                if (data <= 1) {
+                if (data > 0) {
                     listar();
                 } else {
-                    alert('Lo sentimos ocurrio un error en el proceso de edición');
+                    alert('Lo sentimos ocurrio un error en el proceso de eliminación');
                 }
             },
             complete: function() {}

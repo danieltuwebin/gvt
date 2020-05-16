@@ -237,11 +237,9 @@ if ($_POST['action'] == "EditarVenta") {
     $sql = "CALL SP_Actualizar_TblVenta_Validando_Stock('$Codigo', '$Fecha', '$Sede', '$Tipo_Pago', '$Usuario')";
     $oCado = new Cado();
     $rst = $oCado->ejecute_sql($sql);
-
-    //$dt = mysqli_fetch_array($rst);
-    //$Codigo = $dt['Codigo'];
-
-    echo $rst;
+    $dt = mysqli_fetch_array($rst);
+    $Codigo = $dt['CODIGO'];
+    echo $Codigo;
 }
 
 
