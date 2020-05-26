@@ -1038,7 +1038,7 @@ include('modulos/cerrar_sesion.php');
 
     function ProcesoGrabacion() {
         if ($('#Txt_Cantidad').val() != 0) {
-            if ($('#Txt_Cantidad').val() <= $('#lblCantidad').html()) {
+            if (parseInt($('#Txt_Cantidad').val(),10)  <= parseInt($('#lblCantidad').html(),10)) {
             RegistrarMovimiento(
                "GrabarMovimiento",
                $("#Txt_Fecha").val(),
