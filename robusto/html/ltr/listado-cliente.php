@@ -2,6 +2,8 @@
 // start a session
 session_start();
 include('modulos/cerrar_sesion.php');
+$user = $_SESSION['User'];
+echo '<script type="text/javascript">localStorage.setItem("Usuario","'.$user.'");</script>';
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">

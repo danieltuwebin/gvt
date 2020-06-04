@@ -748,6 +748,394 @@ include('modulos/cerrar_sesion.php');
         </div>
     </div>
 
+
+    <!-- Modal Evaluacion Medica -->
+    <div class="modal fade text-xs-left" id="Modal_EvaluacionMedica" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel17"><label id="LblEvaluacionMedica">Evaluación Integral</label></h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form" id="FormularioEvaluacionMedica">
+                        <div id="contenido" class="form-body">
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="em" class="input-group">
+                                        <label for="Evaluacion_Medica"><strong>Necesita Evaluación Medica :</strong></label>&nbsp;&nbsp;&nbsp;
+                                        <label class="display-inline-block custom-control custom-radio ml-1">
+                                            <input type="radio" id="RbSi" name="Respuesta" class="custom-control-input" value="1">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">SI</span>
+                                        </label>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbNo" name="Respuesta" class="custom-control-input" value="2">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">NO</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <h6 class="form-section"><i class="icon-arrow-right-b"></i>ECTOPARASITOS</h6>
+                            <!-- <div class="card">
+                                <div class="card-body">
+                                    <div class="card-block"> -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="" for="ChkPulgas">
+                                            Pulgas&nbsp;&nbsp;
+                                            <input class="" type="checkbox" id="ChkPulgas" value="1">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="" for="ChkPiojos">
+                                            Piojos&nbsp;&nbsp;
+                                            <input class="" type="checkbox" id="ChkPiojos" value="1">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="" for="ChkGarrapatas">
+                                            Garrapatas&nbsp;&nbsp;
+                                            <input class="" type="checkbox" id="ChkGarrapatas" value="1">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="" for="ChkGusanos">
+                                            Gusanos&nbsp;&nbsp;
+                                            <input class="" type="checkbox" id="ChkGusanos" value="1">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <textarea id="Txt_Ectoparasitos" name="Txt_Ectoparasitos" style="text-transform:uppercase;" rows="2" class="form-control" placeholder="Ingrese observación adicional"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- </div>
+                                </div>
+                            </div> -->
+
+                            <h6 class="form-section"><i class="icon-arrow-right-b"></i>VALORACIÓN FISICA</h6>
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <i class="icon-arrow-right-b"></i><label for="">Ojos : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Nariz : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Cavidad Bucal : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Dientes : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Piel y pelaje : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Cojinetes (Almohadillas) : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Uñas : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Oidos : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Arias Genitales : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Glandulas Mamarias : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Extremidades : </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div id="vfojos">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaOjos" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaOjos" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfnariz">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaNariz" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaNariz" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfcavidad">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaCavidad" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaCavidad" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfdientes">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaDientes" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaDientes" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfpiel">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaPiel" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaPiel" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfcojinentes">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaCojinetes" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaCojinetes" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfunas">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaUnas" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaUnas" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfoidos">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaOidos" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaOidos" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfgenitales">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaGenitales" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaGenitales" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfglandulas">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaGlandulas" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaGlandulas" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfextremidades">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaExtremidades" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaExtremidades" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h6 class="form-section"><i class="icon-arrow-right-b"></i>NUTRICIÓN E HIGIENE</h6>
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <i class="icon-arrow-right-b"></i><label for="">Estado Nutricional : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Pelaje : </label><br>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbDelgado" name="Estado" class="custom-control-input" value="1">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">Delgado</span>
+                                        </label><br>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbAdecuado" name="Pelaje" class="custom-control-input" value="1">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">Adecuado</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbIdeal" name="Estado" class="custom-control-input" value="2">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">Ideal</span>
+                                        </label><br>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbAceptable" name="Pelaje" class="custom-control-input" value="2">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">Aceptable</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbGordo" name="Estado" class="custom-control-input" value="3">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">Gordo</span>
+                                        </label><br>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbDeteriorado" name="Pelaje" class="custom-control-input" value="3">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">Deteriorado</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbObeso" name="Estado" class="custom-control-input" value="4">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">Obeso</span>
+                                        </label><br>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbTerrible" name="Pelaje" class="custom-control-input" value="4">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">Terrible</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <i class="icon-arrow-right-b"></i><label for="">Sedante : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Puntaje de Salud: </label><br>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbSedanteSi" name="Sedante" class="custom-control-input" value="1">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">SI</span>
+                                        </label>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbSedanteNo" name="Sedante" class="custom-control-input" value="2">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">NO</span>
+                                        </label><br>
+
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="Rb0" name="Puntaje" class="custom-control-input" value="0">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">0&nbsp;&nbsp;&nbsp;</span>
+                                        </label>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="Rb2" name="Puntaje" class="custom-control-input" value="2">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">2&nbsp;&nbsp;&nbsp;</span>
+                                        </label>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="Rb4" name="Puntaje" class="custom-control-input" value="4">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">4&nbsp;&nbsp;&nbsp;</span>
+                                        </label>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="Rb6" name="Puntaje" class="custom-control-input" value="6">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">6&nbsp;&nbsp;&nbsp;</span>
+                                        </label>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="Rb8" name="Puntaje" class="custom-control-input" value="8">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">8&nbsp;&nbsp;&nbsp;</span>
+                                        </label>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="Rb10" name="Puntaje" class="custom-control-input" value="10">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">10&nbsp;&nbsp;&nbsp;</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="form-section"><i class="icon-arrow-right-b"></i>RECOMENDACIÓN</h6>
+                            <div class=" row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <textarea id="Txt_Recomendacion" style="text-transform:uppercase;" rows="2" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">Cerrar</button>
+                    <button id="btnEvEditar" type="button" class="btn btn-info mr-1"><i class="icon-edit2"></i>Editar</button>
+                    <button id="BtnEvGrabar" type="button" class="btn btn-success mr-1"><i class=""></i>Grabar</button>
+                    <button id="BtnEvVer" type="button" class="btn btn-primary mr-1"><i class=""></i>Ver informe</button>
+                    <button id="BtnEvEliminar" type="button" class="btn btn-danger mr-1"><i class=""></i>Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / Modal -->
+
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
     <div class="app-content content container-fluid">
@@ -797,7 +1185,7 @@ include('modulos/cerrar_sesion.php');
                                                     <th>ID</th>
                                                     <th>DNI mascota</th>
                                                     <th>Nombre</th>
-                                                    <th>Fecha</th>
+                                                    <th>Fecha_Baño</th>
                                                     <th>Baño</th>
                                                     <th>Estado Baño</th>
                                                     <th>Observación</th>
@@ -895,6 +1283,7 @@ include('modulos/cerrar_sesion.php');
     var IdMascotaExterno = 0;
     var ValorRb = 2;
     var IdSede = 0;
+    var IdEvaluacionMedica = 0;
 
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
@@ -947,6 +1336,19 @@ include('modulos/cerrar_sesion.php');
             var Cod = 'B0' + id;
         } else {
             var Cod = 'B' + id;
+        }
+        return Cod;
+    }
+
+    function Obtener_Codigo_Formateado_Ev(id) {
+        if (id.length == 1) {
+            var Cod = 'EI000' + id;
+        } else if (id.length == 2) {
+            var Cod = 'EI00' + id;
+        } else if (id.length == 3) {
+            var Cod = 'EI0' + id;
+        } else {
+            var Cod = 'EI' + id;
         }
         return Cod;
     }
@@ -1066,7 +1468,7 @@ include('modulos/cerrar_sesion.php');
                 },
                 {
                     "render": function(data, type, row) {
-                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Banio_Id + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Banio_Id + "'><i class='icon-trash-o'></i></button>  </div></div>";
+                        return "<div class='form-group'><div class='btn-group btn-group-sm' role='group'> <button type='button' id='editar' class='editar btn btn-warning' value='" + row.Banio_Id + "'><i class='icon-pencil3'></i></button>  <button id='eliminar' type='button' class='eliminar btn btn-danger' value='" + row.Banio_Id + "'><i class='icon-trash-o'></i></button> <button id='evaluacionmedica' type='button' class='evaluacionmedica btn btn-success' value='" + row.Banio_Id + "'><i class='icon-android-list'></i></button>  </div></div>";
                     }
                 }
             ],
@@ -1287,7 +1689,7 @@ include('modulos/cerrar_sesion.php');
                             $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
                             $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
                         });
-                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());                          
+                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
                     } else if (condicion == 2) {
                         $.each(json, function(i, item) {
                             $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
@@ -1480,6 +1882,305 @@ include('modulos/cerrar_sesion.php');
             }
         });
     }
+
+    //******************* EVALUACION MEDIDA *************************************************/
+
+    $('#TblBanios').on('click', '.evaluacionmedica', function() {
+        var id = $(this).val();
+        if (Condicion == 1) {
+            IdEvaluacionMedica = id;
+            if (Obtener_Existencia_EvaluacionMedicaxId() == 1) {
+                Obtener_Datos_EvaluacionMedica('ObtenerDatosEvaluacionMedicaxId', id);
+                $("#LblEvaluacionMedica").text("Evaluación Integral : " + Obtener_Codigo_Formateado_Ev(id));
+                $('#contenido').find('input, textarea, button, select').attr('disabled', 'disabled');
+                Habilita_Botones(false, true, false, false);
+                $("#Modal_EvaluacionMedica").modal("show");
+            } else {
+                alert('El baño seleccionado, no contiene una Evaluación Integral registrada');
+            }
+        } else {
+            alert('El perfil de usuario no esta habilitado para opción');
+        }
+    });
+
+    function Habilita_Botones(boolEdi, boolGra, boolVer, boolEli) {
+        $("#btnEvEditar").attr('disabled', boolEdi);
+        $("#BtnEvGrabar").attr('disabled', boolGra);
+        $("#BtnEvVer").attr('disabled', boolVer);
+        $("#BtnEvEliminar").attr('disabled', boolEli);
+    }
+
+    function Obtener_Datos_EvaluacionMedica(act, id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/banios.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: id
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                var json = JSON.parse(data);
+                $.each(json, function(i, item) {
+
+                    if (json[i].EvaluacionMedica_Ev == 1) {
+                        $("#RbSi").attr('checked', true);
+                    } else if (json[i].EvaluacionMedica_Ev == 2) {
+                        $("#RbNo").attr('checked', true);
+                    }
+
+                    if (json[i].EvaluacionMedica_Ecto_Pulgas == 1) {
+                        $("#ChkPulgas").attr('checked', true);
+                    }
+                    if (json[i].EvaluacionMedica_Ecto_Piojos == 1) {
+                        $("#ChkPiojos").attr('checked', true);
+                    }
+                    if (json[i].EvaluacionMedica_Ecto_garrapatas == 1) {
+                        $("#ChkGarrapatas").attr('checked', true);
+                    }
+                    if (json[i].EvaluacionMedica_Ecto_gusanos == 1) {
+                        $("#ChkGusanos").attr('checked', true);
+                    }
+
+                    $("#Txt_Ectoparasitos").val(json[i].EvaluacionMedica_Ecto_observacion);
+
+                    // normal 1 - anormal 2
+                    if (json[i].EvaluacionMedica_Vf_ojos == 1) {
+                        $('input[name=RespuestaOjos][value=1]').attr('checked', true);
+                    } else {
+                        $('input[name=RespuestaOjos][value=2]').attr('checked', true);
+                    }
+                    if (json[i].EvaluacionMedica_Vf_nariz == 1) {
+                        $('input[name=RespuestaNariz][value=1]').attr('checked', true);
+                    } else {
+                        $('input[name=RespuestaNariz][value=2]').attr('checked', true);
+                    }
+                    if (json[i].EvaluacionMedica_Vf_cavidad == 1) {
+                        $('input[name=RespuestaCavidad][value=1]').attr('checked', true);
+                    } else {
+                        $('input[name=RespuestaCavidad][value=2]').attr('checked', true);
+                    }
+                    if (json[i].EvaluacionMedica_Vf_dientes == 1) {
+                        $('input[name=RespuestaDientes][value=1]').attr('checked', true);
+                    } else {
+                        $('input[name=RespuestaDientes][value=2]').attr('checked', true);
+                    }
+                    if (json[i].EvaluacionMedica_Vf_piel == 1) {
+                        $('input[name=RespuestaPiel][value=1]').attr('checked', true);
+                    } else {
+                        $('input[name=RespuestaPiel][value=2]').attr('checked', true);
+                    }
+                    if (json[i].EvaluacionMedica_Vf_cojinetes == 1) {
+                        $('input[name=RespuestaCojinetes][value=1]').attr('checked', true);
+                    } else {
+                        $('input[name=RespuestaCojinetes][value=2]').attr('checked', true);
+                    }
+                    if (json[i].EvaluacionMedica_Vf_unias == 1) {
+                        $('input[name=RespuestaUnas][value=1]').attr('checked', true);
+                    } else {
+                        $('input[name=RespuestaUnas][value=2]').attr('checked', true);
+                    }
+                    if (json[i].EvaluacionMedica_Vf_oidos == 1) {
+                        $('input[name=RespuestaOidos][value=1]').attr('checked', true);
+                    } else {
+                        $('input[name=RespuestaOidos][value=2]').attr('checked', true);
+                    }
+                    if (json[i].EvaluacionMedica_Vf_arias == 1) {
+                        $('input[name=RespuestaGenitales][value=1]').attr('checked', true);
+                    } else {
+                        $('input[name=RespuestaGenitales][value=2]').attr('checked', true);
+                    }
+                    if (json[i].EvaluacionMedica_Vf_glandulas == 1) {
+                        $('input[name=RespuestaGlandulas][value=1]').attr('checked', true);
+                    } else {
+                        $('input[name=RespuestaGlandulas][value=2]').attr('checked', true);
+                    }
+                    if (json[i].EvaluacionMedica_Vf_extremidades == 1) {
+                        $('input[name=RespuestaExtremidades][value=1]').attr('checked', true);
+                    } else {
+                        $('input[name=RespuestaExtremidades][value=2]').attr('checked', true);
+                    }
+
+                    $("input[name=Estado][value='" + json[i].EvaluacionMedica_nh_estado + "']").attr("checked", true);
+                    $("input[name=Pelaje][value='" + json[i].EvaluacionMedica_nh_pelaje + "']").attr("checked", true);
+                    $("input[name=Sedante][value='" + json[i].EvaluacionMedica_nh_sedante + "']").attr("checked", true);
+                    $("input[name=Puntaje][value='" + json[i].EvaluacionMedica_nh_puntaje + "']").attr("checked", true);
+
+                    $("#Txt_Recomendacion").val(json[i].EvaluacionMedica_nh_recomendacion);
+                  
+                });
+            },
+            complete: function() {
+            }
+        });
+    }
+
+
+    $('#btnEvEditar').click(function() {
+        $('#contenido').find('input, textarea, button, select').attr('disabled', false);
+        Habilita_Botones(true, false, true, true);
+    });
+
+    $('#BtnEvGrabar').click(function() {
+        Actualizar_Evaluacion_Medica();
+        $('#contenido').find('input, textarea, button, select').attr('disabled', true);
+    });
+
+    function Actualizar_Evaluacion_Medica() {
+        var act = 'EditarEvaluacionMedica_All';
+        var BanioId = IdEvaluacionMedica;
+        var Respuesta_em = $('input:radio[name=Respuesta]:checked').val();
+        var ChkPulgas = $('#ChkPulgas:checked').val() != null ? $('#ChkPulgas:checked').val() : '0';
+        var ChkPiojos = $('#ChkPiojos:checked').val() != null ? $('#ChkPiojos:checked').val() : '0';
+        var ChkGarrapatas = $('#ChkGarrapatas:checked').val() != null ? $('#ChkGarrapatas:checked').val() : '0';
+        var ChkGusanos = $('#ChkGusanos:checked').val() != null ? $('#ChkGusanos:checked').val() : '0';
+        var Txtectoparasitos = $('#Txt_Ectoparasitos').val();
+        var Respuesta_ojos = $('input:radio[name=RespuestaOjos]:checked').val();
+        var Respuesta_nariz = $('input:radio[name=RespuestaNariz]:checked').val();
+        var Respuesta_cavidad = $('input:radio[name=RespuestaCavidad]:checked').val();
+        var Respuesta_dientes = $('input:radio[name=RespuestaDientes]:checked').val();
+        var Respuesta_piel = $('input:radio[name=RespuestaPiel]:checked').val();
+        var Respuesta_cojinetes = $('input:radio[name=RespuestaCojinetes]:checked').val();
+        var Respuesta_unias = $('input:radio[name=RespuestaUnas]:checked').val();
+        var Respuesta_oidos = $('input:radio[name=RespuestaOidos]:checked').val();
+        var Respuesta_genitales = $('input:radio[name=RespuestaGenitales]:checked').val();
+        var Respuesta_glandulas = $('input:radio[name=RespuestaGlandulas]:checked').val();
+        var Respuesta_extremidades = $('input:radio[name=RespuestaExtremidades]:checked').val();
+        var Respuesta_nh_estado = $('input:radio[name=Estado]:checked').val();
+        var Respuesta_nh_pelaje = $('input:radio[name=Pelaje]:checked').val();
+        var Respuesta_nh_sedante = $('input:radio[name=Sedante]:checked').val();
+        var Respuesta_nh_puntaje = $('input:radio[name=Puntaje]:checked').val();
+        var Txt_Recomendacion = $('#Txt_Recomendacion').val();
+        var Usuario = '<?php echo $_SESSION['User']; ?>';
+        //console.log(act + ' : ' + Respuesta_em + ' : ' + ChkPulgas + ' : ' + ChkPiojos + ' : ' + ChkGarrapatas + ' : ' + ChkGusanos);
+        $.ajax({
+            type: "POST",
+            url: "modulos/banios.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                BanioId: BanioId,
+                Respuesta_em: Respuesta_em,
+                ChkPulgas: ChkPulgas,
+                ChkPiojos: ChkPiojos,
+                ChkGarrapatas: ChkGarrapatas,
+                ChkGusanos: ChkGusanos,
+                Txtectoparasitos: Txtectoparasitos,
+                Respuesta_ojos: Respuesta_ojos,
+                Respuesta_nariz: Respuesta_nariz,
+                Respuesta_cavidad: Respuesta_cavidad,
+                Respuesta_dientes: Respuesta_dientes,
+                Respuesta_piel: Respuesta_piel,
+                Respuesta_cojinetes: Respuesta_cojinetes,
+                Respuesta_unias: Respuesta_unias,
+                Respuesta_oidos: Respuesta_oidos,
+                Respuesta_genitales: Respuesta_genitales,
+                Respuesta_glandulas: Respuesta_glandulas,
+                Respuesta_extremidades: Respuesta_extremidades,
+                Respuesta_nh_estado: Respuesta_nh_estado,
+                Respuesta_nh_pelaje: Respuesta_nh_pelaje,
+                Respuesta_nh_sedante: Respuesta_nh_sedante,
+                Respuesta_nh_puntaje: Respuesta_nh_puntaje,
+                Txt_Recomendacion: Txt_Recomendacion,
+                Usuario: Usuario
+            }),
+            beforeSend: function() {
+                //console.log(act + '-' + IdTipoRegistro + '-' + Idbanio + '-' + Fecha + '-' + IdProducto + '-' + Precio + '-' + IdMascota + '-' + Observacion + '-' + Cita + '-' + Usuario + '-' + VentaTipo + '-' + Cantidad + '-' + IdAlmacen);
+            },
+            success: function(data) {
+                if (data == 1) {
+                    alert('Evaluación Integral editada correctamente');
+                    Habilita_Botones(false, true, false, false);
+                } else {
+                    alert('Lo sentimos ocurrio un error en el proceso de edición');
+                }
+            },
+            complete: function() {
+
+            }
+        });
+    }
+
+
+    function Obtener_Existencia_EvaluacionMedicaxId() {
+        var act = 'ObtenerExistenciaEvaluacionMedicaxId';
+        var BanioId = IdEvaluacionMedica;
+        var codigo = 0;
+        //console.log(act + ' : ' + Respuesta_em + ' : ' + ChkPulgas + ' : ' + ChkPiojos + ' : ' + ChkGarrapatas + ' : ' + ChkGusanos);
+        $.ajax({
+            type: "POST",
+            url: "modulos/banios.php",
+            async: false,
+            dataType: "html",
+            data: ({
+                action: act,
+                BanioId: BanioId,
+            }),
+            beforeSend: function() {
+                //console.log(act + '-' + IdTipoRegistro + '-' + Idbanio + '-' + Fecha + '-' + IdProducto + '-' + Precio + '-' + IdMascota + '-' + Observacion + '-' + Cita + '-' + Usuario + '-' + VentaTipo + '-' + Cantidad + '-' + IdAlmacen);
+            },
+            success: function(data) {
+                if (data == 1) {
+                    codigo = 1;
+                } else {
+                    codigo = 2;
+                }
+            },
+            complete: function() {
+
+            }
+        });
+        return codigo;
+    }
+
+    $('#BtnEvEliminar').click(function() {
+        var bool = confirm("Esta seguro de eliminar el registro " + Obtener_Codigo_Formateado_Ev(IdEvaluacionMedica) + " ?");
+        if (bool) {
+            Eliminar_Evaluacion_Medica('EliminarEvaluacionMedica', IdEvaluacionMedica);
+        } else {
+            //alert("cancelo la solicitud");
+        }
+    });
+
+    function Eliminar_Evaluacion_Medica(act, id) {
+        $.ajax({
+            type: "POST",
+            url: "modulos/banios.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                Id: id
+            }),
+            beforeSend: function() {
+                //alert('ok');
+            },
+            success: function(data) {
+                if (data == 1) {
+                    alert('Se elimino el registro correctamente');
+                    Habilita_Botones(true, true, true, true);
+                    $("#Modal_EvaluacionMedica").modal("hide");
+                } else {
+                    alert('Lo sentimos ocurrio un error en el proceso de eliminación');
+                }
+            },
+            complete: function() {
+                //alert('ok2');
+            }
+        });
+    }
+
+
+    $('#BtnEvVer').click(function() {
+        window.open('banio_visor.php?Cond=' + IdEvaluacionMedica, '_blank');
+    });    
+
+    //******************* FIN EVALUACION MEDIDA *********************************************/
 
 
     $(function() {

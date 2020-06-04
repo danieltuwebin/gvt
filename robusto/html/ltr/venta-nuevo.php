@@ -1482,15 +1482,14 @@ include('modulos/cerrar_sesion.php');
         )
     });
 
-
     function Grabar_Venta(act, idVentatmp, idVBDA, idAgendado, idProducto, idKardex, fecha, idTipoVenta,
         idTipoPago, idMascota, idAlmacen, observacion, estado, usuario) {
-        /*console.log(act + ',' + idVentatmp + ',' + idVBDA + ',' + idAgendado + ',' + idProducto + ',' + idKardex + ',' + fecha + ',' + idTipoVenta + ',' +
-            idTipoPago + ',' + idMascota + ',' + idAlmacen + ',' + observacion + ',' + estado + ',' + usuario);*/
+        console.log(act + ',' + idVentatmp + ',' + idVBDA + ',' + idAgendado + ',' + idProducto + ',' + idKardex + ',' + fecha + ',' + idTipoVenta + ',' +
+            idTipoPago + ',' + idMascota + ',' + idAlmacen + ',' + observacion + ',' + estado + ',' + usuario);
         $.ajax({
             type: "POST",
             url: "modulos/ventas.php",
-            async: true,
+            async: false,
             dataType: "html",
             data: ({
                 action: act,
@@ -1516,6 +1515,7 @@ include('modulos/cerrar_sesion.php');
                 $.each(json, function(i, item) {
                     CodigoVenta_Elminacion = json[i].CODIGO;
                     CodigoVenta_Servicio = json[i].CODIGO_SERVICIO;
+                    console.log(CodigoVenta_Elminacion,'-',CodigoVenta_Servicio)
                 });
                 //.---------------------------------------------------------------------------------------------------
                 IdentifProcesoCancelacVenta = 1;
@@ -1523,6 +1523,10 @@ include('modulos/cerrar_sesion.php');
                 if (Id_TipoVenta == 4) {
                     LeeArchivos("LeeArchivos", CodigoVenta_Servicio);
                 }
+
+                if (Id_TipoVenta == 2) {
+                    Actualizar_Registro_Evaluacion_Medica("EditarEvaluacionMedica", CodigoVenta_Servicio, IdVenta_temporal);
+                }                
 
                 Habilita_Desabilita(false, true, false);
                 Habilita_Desabilita_Controles(true, true, true, true, true, true, true, true);
@@ -1545,6 +1549,7 @@ include('modulos/cerrar_sesion.php');
     }
 
     $("#BtnCancelarVenta").click(function() {
+        console.log(CodigoVenta_Elminacion, IdVentaTmp, CodigoVenta_Servicio, ProcesoVBDA_CancelarCompra, IdAgendado,Id_TipoVenta);
         var bool = confirm("Esta seguro de cancelar la venta ?");
         if (bool) {
             Cancelar_Venta('CancelarVenta',
@@ -1737,13 +1742,34 @@ include('modulos/cerrar_sesion.php');
     /*===========================================FIN DOCUMENTO ===============================================*/
 
 
+    /*=========================================== EVALUACION MEDICA ===========================================*/
+
+    function Actualizar_Registro_Evaluacion_Medica (act, IdBanio, IdBanioTmp){
+        //console.log(act,' - ', IdBanio,' - ', IdBanioTmp);
+        $.ajax({
+            type: "POST",
+            url: "modulos/banios.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                IdBanio: IdBanio,
+                IdBanioTmp: IdBanioTmp
+            }),
+            beforeSend: function() {},
+            success: function(data) {
+                //console.log(data);
+            },
+            complete: function() {}
+        });
+    }
+
+    /*=========================================== FIN EVALUACION MEDICA =======================================*/    
 
     $(function() {
         Observacion_Final = localStorage.getItem('Observacion');
-
         Obtener_Sede('MostrarSede');
         $('#TxtFecha').val(MostrarFechaActual());
-
         Habilita_Desabilita(true, true, true);
 
         if ($_GET("IdVen") === undefined) {

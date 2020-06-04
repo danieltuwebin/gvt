@@ -1,7 +1,10 @@
 <?php
-// start a session
 session_start();
 include('modulos/cerrar_sesion.php');
+$user = $_SESSION['User'];
+$IdAlmacen = $_SESSION['IdAlmacen'];
+echo '<script type="text/javascript">localStorage.setItem("Usuario","' . $user . '");</script>';
+echo '<script type="text/javascript">localStorage.setItem("IdAlmacen","' . $IdAlmacen . '");</script>';
 ?>
 <!DOCTYPE html>
 <html lang="es" data-textdirection="ltr" class="loading">
@@ -42,7 +45,14 @@ include('modulos/cerrar_sesion.php');
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
     <!-- END Custom CSS-->
+
 </head>
+
+<STYLE type="text/css">
+    input[type=checkbox] {
+        transform: scale(1.2) !important;
+    }
+</STYLE>
 
 <body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">
 
@@ -117,7 +127,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -305,7 +315,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                             
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -633,6 +643,397 @@ include('modulos/cerrar_sesion.php');
     </div>
     <!-- / Modal -->
 
+
+    <!-- Modal -->
+    <div class="modal fade text-xs-left" id="Modal_EvaluacionMedica" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel17"><label id="LblIdCliente">Evaluación Integral</label></h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form" id="FormularioEvaluacionMedica">
+                        <div class="form-body">
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="em" class="input-group">
+                                        <label for="Evaluacion_Medica"><strong>Necesita Evaluación Medica :</strong></label>&nbsp;&nbsp;&nbsp;
+                                        <label class="display-inline-block custom-control custom-radio ml-1">
+                                            <input type="radio" id="RbSi" name="Respuesta" class="custom-control-input" value="1">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">SI</span>
+                                        </label>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbNo" name="Respuesta" class="custom-control-input" value="2">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">NO</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <h6 class="form-section"><i class="icon-arrow-right-b"></i>ECTOPARASITOS</h6>
+                            <!-- <div class="card">
+                                <div class="card-body">
+                                    <div class="card-block"> -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="" for="ChkPulgas">
+                                            Pulgas&nbsp;&nbsp;
+                                            <input class="chkectoparasitos" type="checkbox" id="ChkPulgas" value="1">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="" for="ChkPiojos">
+                                            Piojos&nbsp;&nbsp;
+                                            <input class="chkectoparasitos" type="checkbox" id="ChkPiojos" value="1">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="" for="ChkGarrapatas">
+                                            Garrapatas&nbsp;&nbsp;
+                                            <input class="chkectoparasitos" type="checkbox" id="ChkGarrapatas" value="1">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="" for="ChkGusanos">
+                                            Gusanos&nbsp;&nbsp;
+                                            <input class="chkectoparasitos" type="checkbox" id="ChkGusanos" value="1">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <textarea id="Txt_Ectoparasitos" name="Txt_Ectoparasitos" style="text-transform:uppercase;" rows="2" class="form-control" placeholder="Ingrese observación adicional"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- </div>
+                                </div>
+                            </div> -->
+
+                            <h6 class="form-section"><i class="icon-arrow-right-b"></i>VALORACIÓN FISICA</h6>
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <i class="icon-arrow-right-b"></i><label for="">Ojos : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Nariz : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Cavidad Bucal : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Dientes : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Piel y pelaje : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Cojinetes (Almohadillas) : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Uñas : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Oidos : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Arias Genitales : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Glandulas Mamarias : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Extremidades : </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div id="vfojos">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaOjos" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaOjos" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfnariz">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaNariz" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaNariz" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfcavidad">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaCavidad" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaCavidad" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfdientes">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaDientes" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaDientes" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfpiel">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaPiel" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaPiel" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfcojinentes">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaCojinetes" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaCojinetes" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfunas">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaUnas" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaUnas" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfoidos">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaOidos" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaOidos" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfgenitales">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaGenitales" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaGenitales" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfglandulas">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaGlandulas" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaGlandulas" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                        <div id="vfextremidades">
+                                            <label class="display-inline-block custom-control custom-radio ml-1">
+                                                <input type="radio" id="RbNormal" name="RespuestaExtremidades" class="custom-control-input" value="1">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Normal</span>
+                                            </label>
+                                            <label class="display-inline-block custom-control custom-radio">
+                                                <input type="radio" id="RbAnormal" name="RespuestaExtremidades" class="custom-control-input" value="2">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description ml-0">Anormal</span>
+                                            </label><br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h6 class="form-section"><i class="icon-arrow-right-b"></i>NUTRICIÓN E HIGIENE</h6>
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <i class="icon-arrow-right-b"></i><label for="">Estado Nutricional : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Pelaje : </label><br>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbDelgado" name="Estado" class="custom-control-input" value="1">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">Delgado</span>
+                                        </label><br>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbAdecuado" name="Pelaje" class="custom-control-input" value="1">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">Adecuado</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbIdeal" name="Estado" class="custom-control-input" value="2">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">Ideal</span>
+                                        </label><br>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbAceptable" name="Pelaje" class="custom-control-input" value="2">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">Aceptable</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbGordo" name="Estado" class="custom-control-input" value="3">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">Gordo</span>
+                                        </label><br>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbDeteriorado" name="Pelaje" class="custom-control-input" value="3">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">Deteriorado</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbObeso" name="Estado" class="custom-control-input" value="4">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">Obeso</span>
+                                        </label><br>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbTerrible" name="Pelaje" class="custom-control-input" value="4">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">Terrible</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <i class="icon-arrow-right-b"></i><label for="">Sedante : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Puntaje de Salud: </label><br>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbSedanteSi" name="Sedante" class="custom-control-input" value="1">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">SI</span>
+                                        </label>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="RbSedanteNo" name="Sedante" class="custom-control-input" value="2">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">NO</span>
+                                        </label><br>
+
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="Rb0" name="Puntaje" class="custom-control-input" value="0">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">0&nbsp;&nbsp;&nbsp;</span>
+                                        </label>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="Rb2" name="Puntaje" class="custom-control-input" value="2">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">2&nbsp;&nbsp;&nbsp;</span>
+                                        </label>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="Rb4" name="Puntaje" class="custom-control-input" value="4">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">4&nbsp;&nbsp;&nbsp;</span>
+                                        </label>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="Rb6" name="Puntaje" class="custom-control-input" value="6">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">6&nbsp;&nbsp;&nbsp;</span>
+                                        </label>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="Rb8" name="Puntaje" class="custom-control-input" value="8">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">8&nbsp;&nbsp;&nbsp;</span>
+                                        </label>
+                                        <label class="display-inline-block custom-control custom-radio">
+                                            <input type="radio" id="Rb10" name="Puntaje" class="custom-control-input" value="10">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description ml-0">10&nbsp;&nbsp;&nbsp;</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="form-section"><i class="icon-arrow-right-b"></i>RECOMENDACIÓN</h6>
+                            <div class=" row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <textarea id="Txt_Recomendacion" style="text-transform:uppercase;" rows="2" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">Cerrar</button>
+                    <button id="btnLimpiarEm" type="button" class="btn btn-info mr-1"><i class="icon-reload"></i>Limpiar</button>
+                    <button id="BtnGrabarEm" type="button" class="btn btn-success mr-1"><i class="icon-edit2"></i>Grabar Evaluación Integral</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / Modal -->
+
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+
+
+
+
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
     <div class="app-content content container-fluid">
@@ -685,7 +1086,7 @@ include('modulos/cerrar_sesion.php');
                                                                         <input type="radio" id="RbDniC" name="Dni" class="custom-control-input" value="3">
                                                                         <span class="custom-control-indicator"></span>
                                                                         <span class="custom-control-description ml-0">NRO. Celular</span>
-                                                                    </label>-->                                                                     
+                                                                    </label>-->
                                                                     <label class="display-inline-block custom-control custom-radio">
                                                                         <input type="radio" id="RbDniM" name="Dni" class="custom-control-input" value="2">
                                                                         <span class="custom-control-indicator"></span>
@@ -768,7 +1169,7 @@ include('modulos/cerrar_sesion.php');
 
                                                 <div class="form-group">
                                                     <label for="Txt_Notas">Notas</label>
-                                                    <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="5" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales"></textarea>
+                                                    <textarea id="Txt_Notas" style="text-transform:uppercase;" rows="3" class="form-control" name="Txt_Notas" placeholder="Notas Adicionales"></textarea>
                                                 </div>
 
                                             </div>
@@ -782,6 +1183,9 @@ include('modulos/cerrar_sesion.php');
                                                 </button>
                                                 <button id="btnAgendar" type="button" class="btn btn-warning mr-1">
                                                     <i class="icon-check2"></i> Agendar Baño
+                                                </button>
+                                                <button id="btnEvaluacion" type="button" class="btn btn-primary mr-1">
+                                                    <i class="icon-paper-clip"></i> Agregar Evaluación
                                                 </button>
                                             </div>
 
@@ -826,487 +1230,14 @@ include('modulos/cerrar_sesion.php');
 
     <!-- BEGIN PROPIOS JS-->
     <script src="lib_propio/propio.js" type="text/javascript"></script>
+    <script src="lib_propio/Banio.js" type="text/javascript"></script>
     <!-- END PROPIOS JS-->
 </body>
 
 <!-- BEGIN. EVENTOS SCRIPT-->
 <script type="text/javascript">
-    var IdMascota = '';
-    var ValorRb = 1;
-    var IdTipoProcesoGrabacion = 0;    
-    var IdBanio = 0;
-    var IdAgendado = 0;
-    var IdSede = 0;       
-    /* BEGIN FUNCIONES GENERALES */
-
-    /* END FUNCIONES GENERALES */
-
-    function Obtener_Nombre() {
-        $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
-    }
-
-    $('#Salir').click(function() {
-        Cerrar_Sesion("salir");
-    });
-
-    function Actualizar() {
-        limpiaForm($("#FormularioBanio"));
-        Obtener_Banio('MostrarProductoxCondicion', 2,IdSede);
-    }
-
-    function Habilita_Desabilita(boolLimpiar, boolGrabar, boolAgendar) {
-        $("#btnLimpiar").attr('disabled', boolLimpiar);
-        $("#btnGrabar").attr('disabled', boolGrabar);
-        $("#btnAgendar").attr('disabled', boolAgendar);
-    }
-
-    function Obtener_Sede_Usuario(act) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/inicio.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act
-            }),
-            beforeSend: function() {},
-            success: function(data) {
-                IdSede = data;
-                /* $("#CboSede option[value=" + IdSede + "]").attr("selected", true);
-                $("#CboSede_Bus option[value=" + IdSede + "]").attr("selected", true); */
-            },
-            complete: function() {
-                // $("#CboSede option[value=" + CondicionSede + "]").attr("selected", true);
-                //listar();
-            }
-        });
-    }
-
-    // Clase Proser
-    function Obtener_Banio(act, id, sede) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/proser.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id,
-                Sede: sede
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                $("#CboProducto").empty();
-                $("#CboProducto").append('<option selected="true" disabled="disabled">SELECCIONE BAÑO</option>');
-                $.each(json, function(i, item) {
-                    $("#CboProducto").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    $("#btnLimpiar").click(function() {
-        limpiaForm($("#FormularioBanio"));
-        $('#Txt_Nombre_Dni').html('');
-        Habilita_Desabilita(true, false, false);
-        if (IdTipoProcesoGrabacion == 1) {
-            var url = "banio-nuevo.php";
-            $(location).attr('href', url);
-        }
-    });
-
-    // Clase Mascota
-    function Obtener_NombreCliente_NombreMascota(act, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/mascotas.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                $.each(json, function(i, item) {
-                    //$('#Txt_Dni').val(json[i].Cliente_Dni);
-                    if (json[i].Cliente_Dni == ""){
-                        $('#Txt_Dni').val('0');
-                    }else{
-                        $('#Txt_Dni').val(json[i].Cliente_Dni);
-                    }                     
-                    $('#Txt_Nombre_Dni').html(json[i].Mascota_Cliente);
-                    $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
-                    $('#Txt_CodigoMascota').val(json[i].Mascota_Id);
-                    Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    // Clase Mascota
-    function Obtener_Mascotas_x_IdCliente(act, cond, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/mascotas.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                Cond: cond,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                $("#CboMascota").empty();
-                $.each(json, function(i, item) {
-                    $("#CboMascota").append('<option value="' + json[i].Mascota_Id + '">' + json[i].Mascota_Nombre + '</option>');
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    $('#FormularioBanio input').on('change', function() {
-        ValorRb = $('input[name=Dni]:checked', '#FormularioBanio').val();
-    });
-
-    $('#btnBuscar').click(function() {
-        Obtener_Nombre_x_Dni_Mascota_Cliente('ObtenerNombrexIdClienteMascota', ValorRb, $('#Txt_Dni').val().toUpperCase().trim())
-    });
-    $("#Txt_Dni").keypress(function(e) {
-        if (e.which == 13) {
-            Obtener_Nombre_x_Dni_Mascota_Cliente('ObtenerNombrexIdClienteMascota', ValorRb, $('#Txt_Dni').val().toUpperCase().trim())
-        }
-    });
-
-    // Clase Mascota
-    function Obtener_Nombre_x_Dni_Mascota_Cliente(act, condicion, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/mascotas.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act,
-                Condicion: condicion,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                if (json.length != 0) {
-                    if (condicion == 1) {
-                        $.each(json, function(i, item) {
-                            $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
-                            $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
-                        });
-                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
-                    } else if (condicion == 3) {
-                        //celular
-                        $.each(json, function(i, item) {
-                            $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
-                            $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
-                        });
-                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());                          
-                    } else if (condicion == 2) {
-                        $.each(json, function(i, item) {
-                            $('#Txt_Nombre_Dni').html(json[i].Cliente_Nombre);
-                            $('#Txt_CodigoCliente').val(json[i].Cliente_Id);
-                            $('#Txt_CodigoMascota').val(json[i].Mascota_Id);
-                        });
-                        Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
-                        $("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
-                    }
-                } else {
-                    $('#Txt_Nombre_Dni').html('');
-                    $('#Txt_CodigoCliente').val('');
-                    $('#Txt_CodigoMascota').val('');
-                    $("#CboMascota").empty();
-                    alert('No existen registros para mostrar, verifique DNI propietario/mascota');
-                }
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    $("#CboMascota").change(function() {
-        $('#Txt_CodigoMascota').val($("#CboMascota").val());
-    });
-
-    $("#CboProducto").change(function() {
-        Obtener_Precio('MostrarPrecio', $("#CboProducto").val().trim());
-    });
-
-    // Clase proser
-    function Obtener_Precio(act, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/proser.php",
-            async: true,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                $("#Txt_Precio").empty();
-                $.each(json, function(i, item) {
-                    $("#Txt_Precio").val(json[i].Producto_PrecioVenta);
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
-
-    $('#btnAgendar').click(function() {
-        if (IdTipoProcesoGrabacion == 0) {
-            ProcesoGrabacion(1, 2000000, 2);
-        } else {
-            if ($("#CboEstadoBanio").val() == 3) {
-                ProcesoGrabacion(2, IdBanio, 3);
-            } else {
-                alert('Debe cambiar el estado del baño a Reprogramado');
-                $("#CboEstadoBanio").focus();
-                $("#CboEstadoBanio").select();
-            }
-        }
-    });
-
-    $("#btnGrabar").click(function() {
-        if (IdTipoProcesoGrabacion == 0) {
-            ProcesoGrabacion(1, 2000000, 1)
-        } else {
-            if ($("#CboEstadoBanio").val() == 1) {
-                ProcesoGrabacion(2, IdBanio, 1);
-            } else {
-                alert('Debe cambiar el estado del baño a Realizado');
-                $("#CboEstadoBanio").focus();
-                $("#CboEstadoBanio").select();
-            }
-        }
-    });
-
-    function ProcesoGrabacion(tiporegistro, idbanio, idcita) {
-        var nombredni = $('#Txt_Nombre_Dni').html();
-        if (nombredni == 0) {
-            alert('El DNI ingresado no existe, verificar el numero por favor o ingrese el DNI por defecto')
-        } else {
-            var Id = ValidaCamposObligatorios(
-                $('#Txt_Dni').val().toUpperCase().trim(),
-                $('#CboMascota').val().toUpperCase().trim(),
-                $('#CboProducto').val().toUpperCase().trim(),
-                $('#Txt_Precio').val().toUpperCase().trim(),
-                $('#Txt_Fecha').val());
-            if (Id == 1) {
-                localStorage.setItem('Observacion',$("#Txt_Notas").val());                
-                Registrar_Banio("GrabarBanio",
-                    tiporegistro,
-                    idbanio,
-                    $("#Txt_Fecha").val(),
-                    $("#CboProducto").val().toUpperCase().trim(),
-                    $("#Txt_Precio").val().toUpperCase().trim(),
-                    $("#CboMascota").val().toUpperCase().trim(),
-                    $("#Txt_Notas").val().toUpperCase().trim(),
-                    idcita,
-                    '<?php echo $_SESSION['User']; ?>',
-                    '1', '1',
-                    '<?php echo $_SESSION['IdAlmacen']; ?>'
-                );
-            }
-        }
-    }
-
-    function ValidaCamposObligatorios(dni, mascota, vacuna, precio, fecha) {
-        if (dni.length == 0) {
-            alert('El campo DNI es obligatorio');
-            $("#Txt_Dni").focus();
-            return 0;
-        } else {
-            if (mascota.length == 0) {
-                alert('El campo mascota es obligatorio');
-                $("#CboMascota").focus();
-                return 0;
-            } else {
-                if (vacuna.length == 0) {
-                    alert('El campo baño es obligatorio');
-                    $("#CboProducto").focus();
-                    return 0;
-                } else {
-                    if (precio.length == 0) {
-                        alert('El campo precio es obligatorio');
-                        $("#Txt_Precio").focus();
-                        return 0;
-                    } else {
-                        if (fecha.length == 0) {
-                            alert('El campo fecha es obligatorio')
-                            $('#Txt_Fecha').focus();
-                            return 0;
-                        } else {
-                            return 1;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    function Registrar_Banio(act, IdTipoRegistro, Idbanio, Fecha, IdProducto, Precio, IdMascota, Observacion, Cita, Usuario, VentaTipo, Cantidad, IdAlmacen) {
-    //console.log(act+','+IdTipoRegistro+','+Idbanio+','+Fecha+','+IdProducto+','+Precio+','+IdMascota+','+Observacion+','+Cita+','+Usuario+','+VentaTipo+','+Cantidad+','+IdAlmacen);
-        $.ajax({
-            type: "POST",
-            url: "modulos/banios.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                IdTipoRegistro: IdTipoRegistro,
-                Idbanio: Idbanio,
-                Fecha: Fecha,
-                IdProducto: IdProducto,
-                Precio: Precio,
-                IdMascota: IdMascota,
-                Observacion: Observacion,
-                Cita: Cita,
-                Usuario: Usuario,
-                VentaTipo: VentaTipo,
-                Cantidad: Cantidad,
-                IdAlmacen: IdAlmacen
-            }),
-            beforeSend: function() {
-                //alert('ok');
-                //console.log(act + '-' + IdTipoRegistro + '-' + Idbanio + '-' + Fecha + '-' + IdProducto + '-' + Precio + '-' + IdMascota + '-' + Observacion + '-' + Cita + '-' + Usuario + '-' + VentaTipo + '-' + Cantidad + '-' + IdAlmacen);
-            },
-            success: function(data) {
-                var idtmp;
-                var json = JSON.parse(data);
-                $.each(json, function(i, item) {
-                    idtmp = json[i].CodigoVentaTmp;
-                });
-                // Redireccionar
-                if (Cita == 1) {
-                    $("#Resultado_Grabacion").html('');
-                    var url = "venta-nuevo.php?IdVen=" + idtmp + "&IdMas=" + $("#CboMascota").val() + "&Tipo=2"+ "&Pro=" + IdBanio + "&A=" + IdAgendado;
-                    //var url = "venta-nuevo.php?IdVen=" + idtmp +"&IdMas=" + $("#CboMascota").val() + "&Tipo=1" + "&Pro=" + IdVacuna + "&A=" + IdAgendado;                    
-                    $(location).attr('href', url);
-                } else {
-                    if (IdTipoProcesoGrabacion == 1) {
-                        $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
-                            '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                            '<span aria-hidden="true">&times;</span>' +
-                            '</button>' +
-                            '<strong>Baño reprogramado correctamente </strong>' +
-                            '</div>')
-                    } else {
-                        $("#Resultado_Grabacion").html('<div class="alert alert-info alert-dismissible fade in mb-2" role="alert">' +
-                            '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                            '<span aria-hidden="true">&times;</span>' +
-                            '</button>' +
-                            '<strong>Nuevo baño agendado correctamente</strong>' +
-                            '</div>')
-                    }
-                }
-                $("#Resultado_Grabacion").fadeTo(2000, 500).slideUp(500, function() {
-                    $("#Resultado_Grabacion").slideUp(500);
-                });
-            },
-            complete: function() {
-                Habilita_Desabilita(false, true, true);
-            }
-        });
-    }
-
-    function Obtener_Datos_Banio(act, id) {
-        $.ajax({
-            type: "POST",
-            url: "modulos/banios.php",
-            async: false,
-            dataType: "html",
-            data: ({
-                action: act,
-                Id: id
-            }),
-            beforeSend: function() {
-                //alert('ok');
-            },
-            success: function(data) {
-                var json = JSON.parse(data);
-                $.each(json, function(i, item) {
-                    $('#Txt_CodigoProducto').val(json[i].Producto_Id);
-                    $("#CboProducto option[value=" + $('#Txt_CodigoProducto').val() + "]").attr("selected", true);
-                    $("#CboProducto").attr('disabled', true);
-                    $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
-                    $('#Txt_Fecha').val(json[i].Banio_Fecha);
-                    $('#Txt_Notas').val(json[i].Banio_Observacion);
-                    localStorage.setItem('Observacion',json[i].Banio_Observacion);                    
-                });
-            },
-            complete: function() {
-                //alert('ok2');
-            }
-        });
-    }
 
 
-    $(function() {
-        Habilita_Desabilita(true,false,false);
-        Obtener_Sede_Usuario('MostrarSede_Usuario');
-        Obtener_Banio('MostrarProductoxCondicion', 2,IdSede);
-        $("#CboEstadoBanio").attr('disabled', true);
-        $('#Txt_Fecha').val(MostrarFechaActual());        
-
-        if ($_GET("IdMas") === undefined) {
-            //SIN VALOR GET
-        } else {
-            // CON VALOR GET
-            $("#RbDniM").attr('checked', true);
-            $("input[type=radio]").attr('disabled', true);
-            $("#Txt_Dni").attr('disabled', true);
-            $("#btnBuscar").attr('disabled', true);
-            Obtener_NombreCliente_NombreMascota('MostrarNombrecliNombreMas', $_GET("IdMas"));
-            $("#CboMascota option[value=" + $('#Txt_CodigoMascota').val() + "]").attr("selected", true);
-            if ($_GET("IdPro") === undefined) {
-                //SIN VALOR GET
-            } else {
-                $("#CboEstadoBanio").attr('disabled', false);
-                IdBanio = $_GET("IdPro");
-                IdAgendado = 1; // 1 : siginifica si - no agendado (valor por defecto)                
-                Obtener_Datos_Banio('ObtenerDatosBaniosxId', IdBanio);
-                IdTipoProcesoGrabacion = 1;
-                $("#btnAgendar").text('Reprogramar');
-            }            
-        }
-        //EVALUAR
-        //Obtener_Precio('MostrarPrecio', 1);
-
-    });
 </script>
 <!-- END. EVENTOS SCRIPT-->
 
