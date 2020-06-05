@@ -112,3 +112,23 @@ __________________________ version 8.0 -----------------------------------------
 4. PERMITE AGREGAR, ELIMINAR, VISUALIZAR, DESCARGAR LOS DOCUMENTOS EN PDF DESDE EL
    MODULO DE LISTADO DE ATENCIÓN.
 __________________________ version 8.0 -------------------------------------------
+
+
+
+__________________________ version 9.0 -------------------------------------------
+## Modulo de Baño
+
+  1. Añadir un boton para registrar la Evaluación Integral de la mascota
+
+  2. Crear un formulario emergente Evaluación Integral
+   Condiciones
+  3. Una Evaluación por baño
+  4. Asociada a un unico codigo de baño
+## Modulo de listado Baño
+
+ 5. Permitir Editar la Evaluacion Integral
+ 6. Permitir la Previsualizacion de la Evaluacion Integral en formato PDF
+ 7. Permitir la descarga de la Evaluacion Integral en formato PDF
+ 8. Permitir la eliminacion Evaluacion Integral
+ 9. Una Evaluación registrada para cada baño
+__________________________ version 9.0 -------------------------------------------

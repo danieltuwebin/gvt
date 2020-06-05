@@ -4130,3 +4130,332 @@ FROM tblDocumentoAdjunto WHERE DocumentoAdjunto_Id = Pint_id AND DocumentoAdjunt
 ORDER BY DocumentoAdjunto_NombreActual ASC;
 END$$
 DELIMITER ;
+
+
+-- NUEVO REQ EVALUACION MEDICA
+
+
+DROP PROCEDURE IF EXISTS SP_Registrar_TblVenta_TblVentaDetalle;
+DELIMITER $$
+CREATE PROCEDURE `SP_Registrar_TblVenta_TblVentaDetalle`(IN `Pint_IdVenta` INT,
+                                                         IN `Pint_IdVBDA` INT,
+                                                          -- IN `Pint_Atencion_Agen` INT,
+                                                          IN `Pint_Atencion_Agen` VARCHAR(5),
+                                                           IN `Pint_IdProducto` INT,
+                                                            IN `Pint_Kardex` INT,
+                                                             IN `Pdat_Fecha` DATE,
+                                                              IN `Pint_TipoVenta` INT,
+                                                               IN `Pint_TipoPago` INT,
+                                                                IN `Pint_IdMascota` INT,
+                                                                 IN `Pint_IdAlmacen` INT,
+                                                                  IN `Pvchr_Observacion` VARCHAR(100),
+                                                                   IN `Pint_Estado` INT,
+                                                                    IN `Pvchr_Usuario` VARCHAR(100))
+BEGIN
+DECLARE IdVenta INT;
+DECLARE IdVBDA INT;
+DECLARE PrecioVenta FLOAT;
+DECLARE DescuentoVenta FLOAT;
+DECLARE CantidadVenta FLOAT;
+DECLARE PrecioTotalVenta FLOAT;
+-- DECLARE IdAtencion INT;
+
+SET PrecioVenta = 0;
+SET DescuentoVenta = 0;
+SET CantidadVenta = 0;
+SET PrecioTotalVenta = 0;
+
+
+INSERT INTO tblVenta(Venta_IdKardex, Venta_Fecha, Venta_Tipo, Venta_TipoPago, Venta_IdMascota, Venta_IdAlmacen, Venta_Precio, Venta_Descuento, Venta_Cantidad, Venta_PrecioTotal, Venta_Observacion, Venta_Estado, Venta_FechaGra, Venta_UserGrab)
+VALUES
+(Pint_Kardex, Pdat_Fecha, Pint_TipoVenta, Pint_TipoPago, Pint_IdMascota, Pint_IdAlmacen, PrecioVenta, DescuentoVenta, CantidadVenta, PrecioTotalVenta, Pvchr_Observacion, Pint_Estado, NOW(), Pvchr_Usuario );
+SET IdVenta = (SELECT Venta_Id FROM tblVenta ORDER BY Venta_Id DESC LIMIT 1);
+
+INSERT INTO tblVentaDetalle (VentaDetalle_VentaId, VentaDetalle_IdProducto, VentaDetalle_Precio, VentaDetalle_Descuento, VentaDetalle_Cantidad, VentaDetalle_PrecioTotal, VentaDetalle_Estado, VentaDetalle_FechaGra, VentaDetalle_UserGrab)
+SELECT IdVenta, VentaDetalle_tmp_IdProducto, VentaDetalle_tmp_Precio, VentaDetalle_tmp_Descuento, VentaDetalle_tmp_Cantidad, VentaDetalle_tmp_PrecioTotal, VentaDetalle_tmp_Estado, NOW(), VentaDetalle_tmp_UserGrab FROM tblVentaDetalle_tmp WHERE VentaDetalle_tmp_VentaId = Pint_IdVenta;
+
+SET PrecioVenta = (SELECT SUM(VentaDetalle_tmp_Precio) FROM tblVentaDetalle_tmp WHERE VentaDetalle_tmp_VentaId = Pint_IdVenta );
+SET DescuentoVenta = (SELECT SUM(VentaDetalle_tmp_Descuento) FROM tblVentaDetalle_tmp WHERE VentaDetalle_tmp_VentaId = Pint_IdVenta );
+SET CantidadVenta = (SELECT SUM(VentaDetalle_tmp_Cantidad) FROM tblVentaDetalle_tmp WHERE VentaDetalle_tmp_VentaId = Pint_IdVenta );
+SET PrecioTotalVenta = (SELECT SUM(VentaDetalle_tmp_PrecioTotal) FROM tblVentaDetalle_tmp WHERE VentaDetalle_tmp_VentaId = Pint_IdVenta );
+UPDATE tblVenta SET Venta_Precio = PrecioVenta, Venta_Descuento = DescuentoVenta, Venta_Cantidad = CantidadVenta, Venta_PrecioTotal = PrecioTotalVenta WHERE Venta_Id = IdVenta;
+
+IF Pint_Atencion_Agen = '' THEN
+SELECT IdVenta AS CODIGO, '0' AS CODIGO_SERVICIO;
+ELSEIF Pint_Atencion_Agen = 0 THEN /* VENTA DIRECTA SIN AGENDAR */
+
+    IF Pint_TipoVenta = 1 THEN
+        INSERT INTO tblVacunas
+        (Vacunas_IdVenta, Vacunas_Fecha, Vacunas_IdProducto, Vacunas_Precio, Vacunas_IdMascota, Vacunas_Observacion, Vacunas_Cita, Vacunas_CitaEstado, Vacunas_Estado, Vacunas_FechaGra, Vacunas_UserGrab)
+        VALUES
+        (IdVenta, Pdat_Fecha, Pint_IdProducto, PrecioTotalVenta, Pint_IdMascota, Pvchr_Observacion, 1, 'A', 1, now(), Pvchr_Usuario);
+        SET IdVBDA = (SELECT Vacunas_Id FROM tblVacunas ORDER BY Vacunas_Id DESC LIMIT 1);
+        SELECT IdVenta AS CODIGO, IdVBDA AS CODIGO_SERVICIO;
+    ELSEIF Pint_TipoVenta = 2 THEN
+        INSERT INTO tblBanio
+        (Banio_IdVenta, Banio_Fecha, Banio_IdProducto, Banio_Precio, Banio_IdMascota, Banio_Observacion, Banio_Cita, Banio_CitaEstado, Banio_Estado, Banio_FechaGra, Banio_UserGrab)
+        VALUES
+        (IdVenta, Pdat_Fecha, Pint_IdProducto, PrecioTotalVenta, Pint_IdMascota, Pvchr_Observacion, 1, 'A', 1, now(), Pvchr_Usuario);
+        SET IdVBDA = (SELECT Banio_Id FROM tblBanio ORDER BY Banio_Id DESC LIMIT 1);
+        SELECT IdVenta AS CODIGO, IdVBDA AS CODIGO_SERVICIO;
+    ELSEIF Pint_TipoVenta = 3 THEN
+        INSERT INTO tblDesparacitacion
+        (Desparacitacion_IdVenta, Desparacitacion_Fecha, Desparacitacion_IdProducto, Desparacitacion_Precio, Desparacitacion_IdMascota, Desparacitacion_Observacion, Desparacitacion_Cita,
+        Desparacitacion_CitaEstado, Desparacitacion_Estado, Desparacitacion_FechaGra, Desparacitacion_UserGrab)
+        VALUES
+        (IdVenta,Pdat_Fecha, Pint_IdProducto, PrecioTotalVenta, Pint_IdMascota, Pvchr_Observacion, 1, 'A', 1, now(), Pvchr_Usuario);
+        SET IdVBDA = (SELECT Desparacitacion_Id FROM tblDesparacitacion ORDER BY Desparacitacion_Id DESC LIMIT 1);
+        SELECT IdVenta AS CODIGO, IdVBDA AS CODIGO_SERVICIO;
+    ELSEIF Pint_TipoVenta = 4 THEN
+        SET IdVBDA = (SELECT VentaTemporal_Id_vbda FROM tblVentaTemporal WHERE VentaTemporal_Id = Pint_IdVBDA);
+        INSERT INTO tblAtencion (Atencion_IdVenta, Atencion_Fecha, Atencion_IdProducto, Atencion_IdMascota, Atencion_Sintomas, Atencion_T, Atencion_FC, Atencion_FR, Atencion_sc_Deshidratacion, Atencion_sc_Mucosas, Atencion_sc_TLLC, Atencion_sc_Vomitos, Atencion_sc_Diarreas, Atencion_sc_Ganglios, Atencion_sc_Peso, Atencion_dx_Presuntivo, Atencion_dx_Definitivo, Atencion_dx_Solicitado, Atencion_tr_Descripcion, Atencion_tr_Observacion, Atencion_tr_Precio, Atencion_IdDocumento, Atencion_Cita, Atencion_CitaEstado, Atencion_Estado, Atencion_FechaGra, Atencion_UserGrab)
+        SELECT IdVenta, Atencion_Fecha, Atencion_IdProducto, Atencion_IdMascota, Atencion_Sintomas, Atencion_T, Atencion_FC, Atencion_FR, Atencion_sc_Deshidratacion, Atencion_sc_Mucosas, Atencion_sc_TLLC, Atencion_sc_Vomitos, Atencion_sc_Diarreas, Atencion_sc_Ganglios, Atencion_sc_Peso, Atencion_dx_Presuntivo, Atencion_dx_Definitivo, Atencion_dx_Solicitado, Atencion_tr_Descripcion, Atencion_tr_Observacion, Atencion_tr_Precio, Atencion_IdDocumento, Atencion_Cita, Atencion_CitaEstado, Atencion_Estado, Atencion_FechaGra, Atencion_UserGrab FROM tblAtencionTemporal WHERE Atencion_Id = IdVBDA;
+        SET IdVBDA = (SELECT Atencion_Id FROM tblAtencion ORDER BY Atencion_Id DESC LIMIT 1);
+        SELECT IdVenta AS CODIGO, IdVBDA AS CODIGO_SERVICIO;
+    END IF;
+ELSE /* VENTA INDIRECTA AGENDADA */
+
+    IF Pint_TipoVenta = 1 THEN
+        UPDATE tblVacunas SET Vacunas_IdVenta = IdVenta, Vacunas_Precio = PrecioTotalVenta, Vacunas_CitaEstado = 'C', Vacunas_Cita = 1,Vacunas_FechaGrab_Edicion = NOW(),Vacunas_UserGrab_Edicion = Pvchr_Usuario
+        WHERE Vacunas_Id  = Pint_IdVBDA;
+        SELECT IdVenta AS CODIGO, Pint_IdVBDA AS CODIGO_SERVICIO;
+    ELSEIF Pint_TipoVenta = 2 THEN
+        UPDATE tblBanio SET Banio_IdVenta = IdVenta, Banio_Precio = PrecioTotalVenta, Banio_CitaEstado = 'C',Banio_Cita = 1, Banio_FechaGrab_Edicion = NOW(), Banio_UserGrab_Edicion = Pvchr_Usuario
+        WHERE Banio_Id  = Pint_IdVBDA;
+        SELECT IdVenta AS CODIGO, Pint_IdVBDA AS CODIGO_SERVICIO;
+    ELSEIF Pint_TipoVenta = 3 THEN
+        UPDATE tblDesparacitacion SET Desparacitacion_IdVenta = IdVenta, Desparacitacion_Precio = PrecioTotalVenta, Desparacitacion_CitaEstado = 'C', Desparacitacion_Cita = 1, Desparacitacion_FechaGrab_Edicion = NOW(), Desparacitacion_UserGrab_Edicion = Pvchr_Usuario
+        WHERE Desparacitacion_Id  = Pint_IdVBDA;
+        SELECT IdVenta AS CODIGO, Pint_IdVBDA AS CODIGO_SERVICIO;
+    ELSEIF Pint_TipoVenta = 4 THEN
+        UPDATE tblAtencion SET Atencion_IdVenta = IdVenta, Atencion_tr_Precio = PrecioTotalVenta, Atencion_CitaEstado = 'C', Atencion_Cita = 1, Atencion_FechaGrab_Edicion = NOW(), Atencion_UserGrab_Edicion = Pvchr_Usuario
+        WHERE Atencion_Id = Pint_IdVBDA;
+        SELECT IdVenta AS CODIGO, Pint_IdVBDA AS CODIGO_SERVICIO;
+    END IF;
+END IF;
+
+END $$
+DELIMITER ;
+
+
+
+
+DROP TABLE IF EXISTS tblEvaluacionMedica;
+CREATE TABLE `tblEvaluacionMedica` (
+ `EvaluacionMedica_Id` int(11) NOT NULL AUTO_INCREMENT,
+ `EvaluacionMedica_BanioId` int(11) NOT NULL DEFAULT 0,
+ `EvaluacionMedica_BanioIdtmp` int(11) NOT NULL DEFAULT 0,
+ `EvaluacionMedica_Ev` int(11) DEFAULT 0 COMMENT '1:SI - 2-0:NO',
+ `EvaluacionMedica_Ecto_Pulgas` int(11) DEFAULT 0 COMMENT '1:ACTIVADO - 2-0:DESACTIVADO',
+ `EvaluacionMedica_Ecto_Piojos` int(11) DEFAULT 0 COMMENT '1:ACTIVADO - 2-0:DESACTIVADO',
+ `EvaluacionMedica_Ecto_garrapatas` int(11) DEFAULT 0 COMMENT '1:ACTIVADO - 2-0:DESACTIVADO',
+ `EvaluacionMedica_Ecto_gusanos` int(11) DEFAULT 0 COMMENT '1:ACTIVADO - 2-0:DESACTIVADO',
+ `EvaluacionMedica_Ecto_observacion` varchar(2000) COLLATE latin1_spanish_ci DEFAULT '',
+ `EvaluacionMedica_Vf_ojos` int(11) DEFAULT 0 COMMENT '1:NORMAL - 2-0:ANORMAL',
+ `EvaluacionMedica_Vf_nariz` int(11) DEFAULT 0 COMMENT '1:NORMAL - 2-0:ANORMAL',
+ `EvaluacionMedica_Vf_cavidad` int(11) DEFAULT 0 COMMENT '1:NORMAL - 2-0:ANORMAL',
+ `EvaluacionMedica_Vf_dientes` int(11) DEFAULT 0 COMMENT '1:NORMAL - 2-0:ANORMAL',
+ `EvaluacionMedica_Vf_piel` int(11) DEFAULT 0 COMMENT '1:NORMAL - 2:ANORMAL',
+ `EvaluacionMedica_Vf_cojinetes` int(11) DEFAULT 0 COMMENT '1:NORMAL - 2-0:ANORMAL',
+ `EvaluacionMedica_Vf_unias` int(11) DEFAULT 0 COMMENT '1:NORMAL - 2-0:ANORMAL',
+ `EvaluacionMedica_Vf_oidos` int(11) DEFAULT 0 COMMENT '1:NORMAL - 2-0:ANORMAL',
+ `EvaluacionMedica_Vf_arias` int(11) DEFAULT 0 COMMENT '1:NORMAL - 2-0:ANORMAL',
+ `EvaluacionMedica_Vf_glandulas` int(11) DEFAULT 0 COMMENT '1:NORMAL - 2-0:ANORMAL',
+ `EvaluacionMedica_Vf_extremidades` int(11) DEFAULT 0 COMMENT '1:NORMAL - 2-0:ANORMAL',
+ `EvaluacionMedica_nh_estado` int(11) DEFAULT 0,
+ `EvaluacionMedica_nh_pelaje` int(11) DEFAULT 0,
+ `EvaluacionMedica_nh_sedante` int(11) DEFAULT 0 COMMENT '1:SI - 2-0:NO',
+ `EvaluacionMedica_nh_puntaje` int(11) DEFAULT 0,
+ `EvaluacionMedica_nh_recomendacion` varchar(2000) COLLATE latin1_spanish_ci DEFAULT '',
+ `EvaluacionMedica_estado` int(11) DEFAULT 1 COMMENT '1(activ).2(desact)',
+ `EvaluacionMedica_usuario` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
+ `EvaluacionMedica_FechaGrabacion` datetime DEFAULT NULL,
+ PRIMARY KEY (`EvaluacionMedica_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci
+
+
+
+DROP PROCEDURE IF EXISTS SP_Registrar_TblEvaluacionMedica;
+DELIMITER $$
+CREATE PROCEDURE SP_Registrar_TblEvaluacionMedica (IN Pint_BanioId INT,
+                                                   IN Pint_BanioIdtmp INT,
+                                                   IN Pint_BanioEv INT,
+                                                   IN Pint_Ecto_Pulgas INT,
+                                                   IN Pint_Ecto_Piojos INT,
+                                                   IN Pint_Ecto_garrapatas INT,
+                                                   IN Pint_Ecto_gusanos INT,
+                                                   IN Pvchr_Ecto_observacion VARCHAR(2000),
+                                                   IN Pint_Vf_ojos INT,
+                                                   IN Pint_Vf_nariz INT,
+                                                   IN Pint_Vf_cavidad INT,
+                                                   IN Pint_Vf_dientes INT,
+                                                   IN Pint_Vf_piel INT,
+                                                   IN Pint_Vf_cojinetes INT,
+                                                   IN Pint_Vf_unias INT,
+                                                   IN Pint_Vf_oidos INT,
+                                                   IN Pint_Vf_arias INT,
+                                                   IN Pint_Vf_glandulas INT,
+                                                   IN Pint_Vf_extremidades INT,
+                                                   IN Pint_nh_estado INT,
+                                                   IN Pint_nh_pelaje INT,
+                                                   IN Pint_nh_sedante INT,
+                                                   IN Pint_nh_puntaje INT,
+                                                   IN Pvchr_nh_recomendacion VARCHAR(2000),
+                                                   IN Pvchr_Usuario VARCHAR(50))
+BEGIN
+INSERT INTO tblEvaluacionMedica(
+    EvaluacionMedica_BanioId, EvaluacionMedica_BanioIdtmp, EvaluacionMedica_Ev,  EvaluacionMedica_Ecto_Pulgas, EvaluacionMedica_Ecto_Piojos, EvaluacionMedica_Ecto_garrapatas, EvaluacionMedica_Ecto_gusanos, EvaluacionMedica_Ecto_observacion, 
+    EvaluacionMedica_Vf_ojos, EvaluacionMedica_Vf_nariz, EvaluacionMedica_Vf_cavidad, EvaluacionMedica_Vf_dientes, EvaluacionMedica_Vf_piel, EvaluacionMedica_Vf_cojinetes, EvaluacionMedica_Vf_unias, EvaluacionMedica_Vf_oidos, EvaluacionMedica_Vf_arias, EvaluacionMedica_Vf_glandulas, EvaluacionMedica_Vf_extremidades,
+    EvaluacionMedica_nh_estado, EvaluacionMedica_nh_pelaje, EvaluacionMedica_nh_sedante, EvaluacionMedica_nh_puntaje, EvaluacionMedica_nh_recomendacion, EvaluacionMedica_estado, EvaluacionMedica_usuario, EvaluacionMedica_FechaGrabacion)
+    VALUES
+    (Pint_BanioId, Pint_BanioIdtmp, Pint_BanioEv, Pint_Ecto_Pulgas, Pint_Ecto_Piojos, Pint_Ecto_garrapatas, Pint_Ecto_gusanos, Pvchr_Ecto_observacion,
+    Pint_Vf_ojos, Pint_Vf_nariz, Pint_Vf_cavidad, Pint_Vf_dientes, Pint_Vf_piel,
+     Pint_Vf_cojinetes, Pint_Vf_unias, Pint_Vf_oidos, Pint_Vf_arias, Pint_Vf_glandulas, Pint_Vf_extremidades,
+    Pint_nh_estado, Pint_nh_pelaje, Pint_nh_sedante, Pint_nh_puntaje, Pvchr_nh_recomendacion, '1', Pvchr_Usuario, NOW());
+END $$
+DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS SP_Actualizar_IdBanio_TblEvaluacionMedica;
+DELIMITER $$
+CREATE PROCEDURE SP_Actualizar_IdBanio_TblEvaluacionMedica(IN Pint_IdBanio INT, IN Pint_IdBanioTmp INT)
+BEGIN
+IF EXISTS (SELECT * FROM tblEvaluacionMedica WHERE EvaluacionMedica_BanioIdtmp = Pint_IdBanioTmp) THEN
+UPDATE tblEvaluacionMedica SET EvaluacionMedica_BanioId = Pint_IdBanio, EvaluacionMedica_FechaGrabacion = NOW() 
+WHERE EvaluacionMedica_BanioIdtmp = Pint_IdBanioTmp;
+END IF;
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS SP_Obtener_TblEvaluacionMedica_All_x_idBanio;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblEvaluacionMedica_All_x_idBanio(IN Pint_IdBanio INT)
+BEGIN
+SELECT EvaluacionMedica_Id, EvaluacionMedica_BanioId, EvaluacionMedica_BanioIdtmp, EvaluacionMedica_Ev, EvaluacionMedica_Ecto_Pulgas, EvaluacionMedica_Ecto_Piojos, EvaluacionMedica_Ecto_garrapatas, EvaluacionMedica_Ecto_gusanos, EvaluacionMedica_Ecto_observacion, EvaluacionMedica_Vf_ojos, EvaluacionMedica_Vf_nariz, EvaluacionMedica_Vf_cavidad, EvaluacionMedica_Vf_dientes, EvaluacionMedica_Vf_piel, EvaluacionMedica_Vf_cojinetes, EvaluacionMedica_Vf_unias, EvaluacionMedica_Vf_oidos, EvaluacionMedica_Vf_arias, EvaluacionMedica_Vf_glandulas, EvaluacionMedica_Vf_extremidades, EvaluacionMedica_nh_estado, EvaluacionMedica_nh_pelaje, EvaluacionMedica_nh_sedante, EvaluacionMedica_nh_puntaje, EvaluacionMedica_nh_recomendacion, EvaluacionMedica_estado, EvaluacionMedica_usuario, EvaluacionMedica_FechaGrabacion FROM tblEvaluacionMedica WHERE EvaluacionMedica_BanioId = Pint_IdBanio;
+END$$
+DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS SP_Actualizar_TblEvaluacionMedica;
+DELIMITER $$
+CREATE PROCEDURE SP_Actualizar_TblEvaluacionMedica (IN Pint_BanioId INT,
+                                                   IN Pint_BanioEv INT,
+                                                   IN Pint_Ecto_Pulgas INT,
+                                                   IN Pint_Ecto_Piojos INT,
+                                                   IN Pint_Ecto_garrapatas INT,
+                                                   IN Pint_Ecto_gusanos INT,
+                                                   IN Pvchr_Ecto_observacion VARCHAR(2000),
+                                                   IN Pint_Vf_ojos INT,
+                                                   IN Pint_Vf_nariz INT,
+                                                   IN Pint_Vf_cavidad INT,
+                                                   IN Pint_Vf_dientes INT,
+                                                   IN Pint_Vf_piel INT,
+                                                   IN Pint_Vf_cojinetes INT,
+                                                   IN Pint_Vf_unias INT,
+                                                   IN Pint_Vf_oidos INT,
+                                                   IN Pint_Vf_arias INT,
+                                                   IN Pint_Vf_glandulas INT,
+                                                   IN Pint_Vf_extremidades INT,
+                                                   IN Pint_nh_estado INT,
+                                                   IN Pint_nh_pelaje INT,
+                                                   IN Pint_nh_sedante INT,
+                                                   IN Pint_nh_puntaje INT,
+                                                   IN Pvchr_nh_recomendacion VARCHAR(2000),
+                                                   IN Pvchr_Usuario VARCHAR(50))
+BEGIN
+UPDATE tblEvaluacionMedica SET 
+EvaluacionMedica_Ev=Pint_BanioEv,
+EvaluacionMedica_Ecto_Pulgas=Pint_Ecto_Pulgas,
+EvaluacionMedica_Ecto_Piojos=Pint_Ecto_Piojos,
+EvaluacionMedica_Ecto_garrapatas=Pint_Ecto_garrapatas,
+EvaluacionMedica_Ecto_gusanos=Pint_Ecto_gusanos,
+EvaluacionMedica_Ecto_observacion=Pvchr_Ecto_observacion,
+EvaluacionMedica_Vf_ojos=Pint_Vf_ojos,
+EvaluacionMedica_Vf_nariz=Pint_Vf_nariz,
+EvaluacionMedica_Vf_cavidad=Pint_Vf_cavidad,
+EvaluacionMedica_Vf_dientes=Pint_Vf_dientes,
+EvaluacionMedica_Vf_piel=Pint_Vf_piel,
+EvaluacionMedica_Vf_cojinetes=Pint_Vf_cojinetes,
+EvaluacionMedica_Vf_unias=Pint_Vf_unias,
+EvaluacionMedica_Vf_oidos=Pint_Vf_oidos,
+EvaluacionMedica_Vf_arias=Pint_Vf_arias,
+EvaluacionMedica_Vf_glandulas=Pint_Vf_glandulas,
+EvaluacionMedica_Vf_extremidades=Pint_Vf_extremidades,
+EvaluacionMedica_nh_estado=Pint_nh_estado,
+EvaluacionMedica_nh_pelaje=Pint_nh_pelaje,
+EvaluacionMedica_nh_sedante=Pint_nh_sedante,
+EvaluacionMedica_nh_puntaje=Pint_nh_puntaje,
+EvaluacionMedica_nh_recomendacion=Pvchr_nh_recomendacion,
+EvaluacionMedica_usuario=Pvchr_Usuario,
+EvaluacionMedica_FechaGrabacion=NOW() 
+WHERE EvaluacionMedica_BanioId = Pint_BanioId AND EvaluacionMedica_estado = 1;
+SELECT '1' AS CODIGO;
+END $$
+DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS SP_Obtener_Existencia_TblEvaluacionMedica_x_idBanio;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_Existencia_TblEvaluacionMedica_x_idBanio(IN Pint_IdBanio INT)
+BEGIN
+IF EXISTS(SELECT * FROM tblEvaluacionMedica WHERE EvaluacionMedica_BanioId = Pint_IdBanio AND EvaluacionMedica_estado = 1) THEN
+SELECT '1' AS CODIGO;
+ELSE
+SELECT '2' AS CODIGO;
+END IF;
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS SP_Eliminar_TblEvaluacionMedica;
+DELIMITER $$
+CREATE PROCEDURE SP_Eliminar_TblEvaluacionMedica(IN Pint_IdBanio INT)
+BEGIN
+UPDATE tblEvaluacionMedica SET EvaluacionMedica_estado = 2 WHERE EvaluacionMedica_BanioId = Pint_IdBanio;
+SELECT '1' AS CODIGO;
+END$$
+DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS SP_Obtener_TblEvaluacionMedica_Reporte_x_IdBanio;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblEvaluacionMedica_Reporte_x_IdBanio(IN IdBanio INT)
+BEGIN
+SELECT tem.EvaluacionMedica_Id,tma.Mascota_Id,tma.Mascota_Nombre,tcl.Cliente_Nombre,tcl.Cliente_Apellido,tba.Banio_Fecha,tus.Usuario_NombreCompleto,
+CASE WHEN tem.EvaluacionMedica_Ev = 1 THEN 'SI' ELSE 'NO' END AS EvaluacionMedica_Ev,
+CASE WHEN tem.EvaluacionMedica_Ecto_Pulgas  = 1 THEN 'SI' ELSE 'NO' END AS EvaluacionMedica_Ecto_Pulgas,
+CASE WHEN tem.EvaluacionMedica_Ecto_Piojos  = 1 THEN 'SI' ELSE 'NO' END AS EvaluacionMedica_Ecto_Piojos,
+CASE WHEN tem.EvaluacionMedica_Ecto_garrapatas  = 1 THEN 'SI' ELSE 'NO' END AS EvaluacionMedica_Ecto_garrapatas,
+CASE WHEN tem.EvaluacionMedica_Ecto_gusanos  = 1 THEN 'SI' ELSE 'NO' END AS EvaluacionMedica_Ecto_gusanos,
+EvaluacionMedica_Ecto_observacion,
+CASE WHEN tem.EvaluacionMedica_Vf_ojos  = 1 THEN 'NORMAL' ELSE 'ANORMAL' END AS EvaluacionMedica_Vf_ojos,
+CASE WHEN tem.EvaluacionMedica_Vf_nariz  = 1 THEN 'NORMAL' ELSE 'ANORMAL' END AS EvaluacionMedica_Vf_nariz,
+CASE WHEN tem.EvaluacionMedica_Vf_cavidad  = 1 THEN 'NORMAL' ELSE 'ANORMAL' END AS EvaluacionMedica_Vf_cavidad,
+CASE WHEN tem.EvaluacionMedica_Vf_dientes  = 1 THEN 'NORMAL' ELSE 'ANORMAL' END AS EvaluacionMedica_Vf_dientes,
+CASE WHEN tem.EvaluacionMedica_Vf_piel  = 1 THEN 'NORMAL' ELSE 'ANORMAL' END AS EvaluacionMedica_Vf_piel,
+CASE WHEN tem.EvaluacionMedica_Vf_cojinetes  = 1 THEN 'NORMAL' ELSE 'ANORMAL' END AS EvaluacionMedica_Vf_cojinetes,
+CASE WHEN tem.EvaluacionMedica_Vf_unias  = 1 THEN 'NORMAL' ELSE 'ANORMAL' END AS EvaluacionMedica_Vf_unias,
+CASE WHEN tem.EvaluacionMedica_Vf_oidos  = 1 THEN 'NORMAL' ELSE 'ANORMAL' END AS EvaluacionMedica_Vf_oidos,
+CASE WHEN tem.EvaluacionMedica_Vf_arias  = 1 THEN 'NORMAL' ELSE 'ANORMAL' END AS EvaluacionMedica_Vf_arias,
+CASE WHEN tem.EvaluacionMedica_Vf_glandulas  = 1 THEN 'NORMAL' ELSE 'ANORMAL' END AS EvaluacionMedica_Vf_glandulas,
+CASE WHEN tem.EvaluacionMedica_Vf_extremidades  = 1 THEN 'NORMAL' ELSE 'ANORMAL' END AS EvaluacionMedica_Vf_extremidades,
+CASE WHEN tem.EvaluacionMedica_nh_estado  = 1 THEN 'DELGADO' WHEN tem.EvaluacionMedica_nh_estado  = 2 THEN 'IDEAL'
+WHEN tem.EvaluacionMedica_nh_estado  = 3 THEN 'GORDO' WHEN tem.EvaluacionMedica_nh_estado  = 4 THEN 'OBESO' END AS EvaluacionMedica_nh_estado,
+CASE WHEN tem.EvaluacionMedica_nh_pelaje  = 1 THEN 'ADECUADO' WHEN tem.EvaluacionMedica_nh_pelaje  = 2 THEN 'ACEPTABLE'
+WHEN tem.EvaluacionMedica_nh_pelaje  = 3 THEN 'DETERIOADO' WHEN tem.EvaluacionMedica_nh_pelaje  = 4 THEN 'TERRIBLE'
+END AS EvaluacionMedica_nh_pelaje,
+CASE WHEN tem.EvaluacionMedica_nh_sedante  = 1 THEN 'SI' ELSE 'NO' END AS EvaluacionMedica_nh_sedante,
+tem.EvaluacionMedica_nh_puntaje,tem.EvaluacionMedica_nh_recomendacion
+FROM tblEvaluacionMedica tem 
+LEFT JOIN tblBanio tba ON tem.EvaluacionMedica_BanioId = tba.Banio_Id
+LEFT JOIN tblMascota tma ON tba.Banio_IdMascota = tma.Mascota_Id
+LEFT JOIN tblCliente tcl ON tcl.Cliente_Id = tma.Mascota_IdCliente
+LEFT JOIN tblUsuario tus ON tem.EvaluacionMedica_usuario = tus.Usuario_NombreUsuario
+WHERE EvaluacionMedica_BanioId = IdBanio;
+END $$
+DELIMITER ;
