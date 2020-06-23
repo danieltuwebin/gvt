@@ -132,3 +132,14 @@ __________________________ version 9.0 -----------------------------------------
  8. Permitir la eliminacion Evaluacion Integral
  9. Una Evaluación registrada para cada baño
 __________________________ version 9.0 -------------------------------------------
+
+
+__________________________ version 9.5 -------------------------------------------
+## 
+
+  1. Correción de la Fecha en modulo Cuadro de Cajas
+  2. Correción del item arias Genitales por areas Genitales
+  3. Permite grabar una evaluacion Medica despues del registro de venta de un baño.
+
+__________________________ version 9.5 -------------------------------------------
+

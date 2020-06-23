@@ -4459,3 +4459,34 @@ LEFT JOIN tblUsuario tus ON tem.EvaluacionMedica_usuario = tus.Usuario_NombreUsu
 WHERE EvaluacionMedica_BanioId = IdBanio;
 END $$
 DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS SP_Obtener_Existencia_TblEvaluacionMedica_x_idBanio;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_Existencia_TblEvaluacionMedica_x_idBanio(IN Pint_IdBanio INT)
+BEGIN
+SET @valorSuma = (
+SELECT SUM(EvaluacionMedica_Ev+EvaluacionMedica_Ecto_Pulgas+EvaluacionMedica_Ecto_Piojos+
+           EvaluacionMedica_Ecto_garrapatas+EvaluacionMedica_Ecto_gusanos+EvaluacionMedica_Vf_ojos+EvaluacionMedica_Vf_nariz+
+           EvaluacionMedica_Vf_cavidad+EvaluacionMedica_Vf_dientes+EvaluacionMedica_Vf_piel+EvaluacionMedica_Vf_cojinetes+
+           EvaluacionMedica_Vf_unias+EvaluacionMedica_Vf_oidos+EvaluacionMedica_Vf_arias+EvaluacionMedica_Vf_glandulas+
+           EvaluacionMedica_Vf_extremidades+EvaluacionMedica_nh_estado+EvaluacionMedica_nh_pelaje+
+           EvaluacionMedica_nh_sedante+EvaluacionMedica_nh_puntaje) AS SUMA_1
+           FROM `tblEvaluacionMedica` WHERE EvaluacionMedica_BanioId = Pint_IdBanio);
+IF (@valorSuma > 0) THEN 
+SELECT '1' AS CODIGO;
+ELSE
+SELECT '2' AS CODIGO;
+END IF;
+
+/*
+IF EXISTS(SELECT * FROM tblEvaluacionMedica WHERE EvaluacionMedica_BanioId = Pint_IdBanio AND EvaluacionMedica_estado = 1) THEN
+SELECT '1' AS CODIGO;
+ELSE
+SELECT '2' AS CODIGO;
+END IF;
+*/
+
+END$$
+DELIMITER ;

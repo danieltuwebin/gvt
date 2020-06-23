@@ -750,14 +750,14 @@ include('modulos/cerrar_sesion.php');
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <div class="input-group">
-                                                        <label class="display-inline-block" for="Txt_FechaInicial">Fecha inicial:
+                                                        <label class="display-inline-block" for="Txt_FechaInicial">Fecha Inicial:
                                                             <input id="Txt_FechaInicial" name="Txt_FechaInicial" type="date" class="form-control">
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="input-group">
-                                                        <label class="display-inline-block" for="Txt_FechaFinal">Fecha inicial:
+                                                        <label class="display-inline-block" for="Txt_FechaFinal">Fecha Final:
                                                             <input id="Txt_FechaFinal" name="Txt_FechaFinal" type="date" class="form-control">
                                                         </label>
                                                     </div>

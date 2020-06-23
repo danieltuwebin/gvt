@@ -741,7 +741,7 @@ echo '<script type="text/javascript">localStorage.setItem("IdAlmacen","' . $IdAl
                                         <i class="icon-arrow-right-b"></i><label for="">Cojinetes (Almohadillas) : </label><br>
                                         <i class="icon-arrow-right-b"></i><label for="">Uñas : </label><br>
                                         <i class="icon-arrow-right-b"></i><label for="">Oidos : </label><br>
-                                        <i class="icon-arrow-right-b"></i><label for="">Arias Genitales : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Areas Genitales : </label><br>
                                         <i class="icon-arrow-right-b"></i><label for="">Glandulas Mamarias : </label><br>
                                         <i class="icon-arrow-right-b"></i><label for="">Extremidades : </label>
                                     </div>

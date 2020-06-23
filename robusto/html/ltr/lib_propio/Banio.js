@@ -383,11 +383,13 @@
                 });
                 // Redireccionar
                 if (Cita == 1) {
-
+                    /******** HABILITAR PARA VALIDAR QUE SOLO SE GRABEN EVALUACION MEDICAS CUANDO SE REGISTRA UN BAÑO
                     if (IdentificadorEm == 1) {
                         //grabar Ev Medico
                         Registrar_Evaluacion_Medica(idtmp);
                     }
+                    FIN HABILITAR PARA VALIDAR QUE SOLO SE GRABEN EVALUACION MEDICAS CUANDO SE REGISTRA UN BAÑO */
+                    Registrar_Evaluacion_Medica(idtmp);
 
                     $("#Resultado_Grabacion").html('');
                     var url = "venta-nuevo.php?IdVen=" + idtmp + "&IdMas=" + $("#CboMascota").val() + "&Tipo=2" + "&Pro=" + IdBanio + "&A=" + IdAgendado;

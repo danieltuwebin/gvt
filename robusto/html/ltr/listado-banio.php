@@ -846,7 +846,7 @@ include('modulos/cerrar_sesion.php');
                                         <i class="icon-arrow-right-b"></i><label for="">Cojinetes (Almohadillas) : </label><br>
                                         <i class="icon-arrow-right-b"></i><label for="">Uñas : </label><br>
                                         <i class="icon-arrow-right-b"></i><label for="">Oidos : </label><br>
-                                        <i class="icon-arrow-right-b"></i><label for="">Arias Genitales : </label><br>
+                                        <i class="icon-arrow-right-b"></i><label for="">Areas Genitales : </label><br>
                                         <i class="icon-arrow-right-b"></i><label for="">Glandulas Mamarias : </label><br>
                                         <i class="icon-arrow-right-b"></i><label for="">Extremidades : </label>
                                     </div>
@@ -1129,7 +1129,7 @@ include('modulos/cerrar_sesion.php');
                     <button id="btnEvEditar" type="button" class="btn btn-info mr-1"><i class="icon-edit2"></i>Editar</button>
                     <button id="BtnEvGrabar" type="button" class="btn btn-success mr-1"><i class=""></i>Grabar</button>
                     <button id="BtnEvVer" type="button" class="btn btn-primary mr-1"><i class=""></i>Ver informe</button>
-                    <button id="BtnEvEliminar" type="button" class="btn btn-danger mr-1"><i class=""></i>Eliminar</button>
+                    <button id="BtnEvEliminar" type="button" class="btn btn-danger mr-1" style="display:none"><i class=""></i>Eliminar</button>
                 </div>
             </div>
         </div>
@@ -1889,15 +1889,28 @@ include('modulos/cerrar_sesion.php');
         var id = $(this).val();
         if (Condicion == 1) {
             IdEvaluacionMedica = id;
+
+            $("#LblEvaluacionMedica").text("Evaluación Integral : " + Obtener_Codigo_Formateado_Ev(id));
+            $('#contenido').find('input, textarea, button, select').attr('disabled', 'disabled');
             if (Obtener_Existencia_EvaluacionMedicaxId() == 1) {
+                Obtener_Datos_EvaluacionMedica('ObtenerDatosEvaluacionMedicaxId', id);                                                   
+            } else {
+                //alert('El baño seleccionado, no contiene una Evaluación Integral registrada');
+            }
+            Habilita_Botones(false, true, false, false);
+            $("#Modal_EvaluacionMedica").modal("show");     
+
+            /*if (Obtener_Existencia_EvaluacionMedicaxId() == 1) {
                 Obtener_Datos_EvaluacionMedica('ObtenerDatosEvaluacionMedicaxId', id);
                 $("#LblEvaluacionMedica").text("Evaluación Integral : " + Obtener_Codigo_Formateado_Ev(id));
                 $('#contenido').find('input, textarea, button, select').attr('disabled', 'disabled');
                 Habilita_Botones(false, true, false, false);
-                $("#Modal_EvaluacionMedica").modal("show");
+                $("#Modal_EvaluacionMedica").modal("show");            
             } else {
                 alert('El baño seleccionado, no contiene una Evaluación Integral registrada');
             }
+            */
+
         } else {
             alert('El perfil de usuario no esta habilitado para opción');
         }
@@ -2026,9 +2039,103 @@ include('modulos/cerrar_sesion.php');
     });
 
     $('#BtnEvGrabar').click(function() {
-        Actualizar_Evaluacion_Medica();
-        $('#contenido').find('input, textarea, button, select').attr('disabled', true);
+
+        if (Validar_registro_evaluacio_medica() == true) {
+            Actualizar_Evaluacion_Medica();
+            $('#contenido').find('input, textarea, button, select').attr('disabled', true);
+        }
+
+        /* Actualizar_Evaluacion_Medica();
+        $('#contenido').find('input, textarea, button, select').attr('disabled', true); */
     });
+
+    function Validar_registro_evaluacio_medica() {
+        if (!$('#em input[name="Respuesta"]').is(':checked')) {
+            alert('Seleccione una opción de la evaluación medica');
+            return false;
+        }
+
+        if ($('input[type=checkbox]:checked').length === 0) {
+            alert('Seleccione al menos un Ectoparasito presentado por la mascota');
+            return false;
+        }
+        if ($('input[type=checkbox]:checked').length === 0) {
+            alert('Seleccione al menos un Ectoparasito presentado por la mascota');
+            return false;
+        }
+        if (!$('#vfojos input[name="RespuestaOjos"]').is(':checked')) {
+            alert('Seleccione una opción de la valoración fisica (ojos)');
+            return false;
+        }
+        if (!$('#vfnariz input[name="RespuestaNariz"]').is(':checked')) {
+            alert('Seleccione una opción de la valoración fisica (nariz)');
+            return false;
+        }
+        if (!$('#vfcavidad input[name="RespuestaCavidad"]').is(':checked')) {
+            alert('Seleccione una opción de la valoración fisica (cavidad bucal)');
+            return false;
+        }
+        if (!$('#vfdientes input[name="RespuestaDientes"]').is(':checked')) {
+            alert('Seleccione una opción de la valoración fisica (dientes)');
+            return false;
+        }
+        if (!$('#vfpiel input[name="RespuestaPiel"]').is(':checked')) {
+            alert('Seleccione una opción de la valoración fisica (piel y pelaje)');
+            return false;
+        }
+        if (!$('#vfcojinentes input[name="RespuestaCojinetes"]').is(':checked')) {
+            alert('Seleccione una opción de la valoración fisica (cojinetes - almohadillas)');
+            return false;
+        }
+        if (!$('#vfunas input[name="RespuestaUnas"]').is(':checked')) {
+            alert('Seleccione una opción de la valoración fisica (uñas)');
+            return false;
+        }
+        if (!$('#vfoidos input[name="RespuestaOidos"]').is(':checked')) {
+            alert('Seleccione una opción de la valoración fisica (oidos)');
+            return false;
+        }
+        if (!$('#vfgenitales input[name="RespuestaGenitales"]').is(':checked')) {
+            alert('Seleccione una opción de la valoración fisica (arias genitales)');
+            return false;
+        }
+        if (!$('#vfglandulas input[name="RespuestaGlandulas"]').is(':checked')) {
+            alert('Seleccione una opción de la valoración fisica (glandulas mamarias)');
+            return false;
+        }
+        if (!$('#vfextremidades input[name="RespuestaExtremidades"]').is(':checked')) {
+            alert('Seleccione una opción de la valoración fisica (extremidades)');
+            return false;
+        }
+        if (!$('input[name=Estado]:checked').val()) {
+            alert('Seleccione un estado nutricional de la mascota');
+            return false;
+        }
+        if (!$('input[name=Pelaje]:checked').val()) {
+            alert('Seleccione un estado del pelaje de la mascota');
+            return false;
+        }
+        if (!$('input[name=Sedante]:checked').val()) {
+            alert('Seleccione si requiere sedante para la mascota');
+            return false;
+        }
+        if (!$('input[name=Estado]:checked').val()) {
+            alert('Seleccione el puntaje de salud de la mascota');
+            return false;
+        }
+        //Campos textos obligatorios
+        if ($('#Txt_Ectoparasitos').val() == '') {
+            alert('Ingrese una observacion para en el campo descripción de ectoparasitos');
+            return false;
+        }
+        if ($('#Txt_Recomendacion').val() == '') {
+            alert('Ingrese una recomendación para la mascota');
+            return false;
+        }
+
+        return true;
+    }
+
 
     function Actualizar_Evaluacion_Medica() {
         var act = 'EditarEvaluacionMedica_All';
