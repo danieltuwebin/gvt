@@ -472,7 +472,7 @@
             alert('Seleccione una opción de la evaluación medica');
             return false;
         }
-
+        /*
         if ($('input[type=checkbox]:checked').length === 0) {
             alert('Seleccione al menos un Ectoparasito presentado por la mascota');
             return false;
@@ -481,6 +481,7 @@
             alert('Seleccione al menos un Ectoparasito presentado por la mascota');
             return false;
         }
+        */
         if (!$('#vfojos input[name="RespuestaOjos"]').is(':checked')) {
             alert('Seleccione una opción de la valoración fisica (ojos)');
             return false;
