@@ -1486,6 +1486,7 @@ include('modulos/cerrar_sesion.php');
         idTipoPago, idMascota, idAlmacen, observacion, estado, usuario) {
         console.log(act + ',' + idVentatmp + ',' + idVBDA + ',' + idAgendado + ',' + idProducto + ',' + idKardex + ',' + fecha + ',' + idTipoVenta + ',' +
             idTipoPago + ',' + idMascota + ',' + idAlmacen + ',' + observacion + ',' + estado + ',' + usuario);
+           
         $.ajax({
             type: "POST",
             url: "modulos/ventas.php",
@@ -1767,6 +1768,7 @@ include('modulos/cerrar_sesion.php');
     /*=========================================== FIN EVALUACION MEDICA =======================================*/    
 
     $(function() {
+        Obtener_Nombre();
         Observacion_Final = localStorage.getItem('Observacion');
         Obtener_Sede('MostrarSede');
         $('#TxtFecha').val(MostrarFechaActual());

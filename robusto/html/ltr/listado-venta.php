@@ -999,7 +999,7 @@ include('modulos/cerrar_sesion.php');
                         } else if (row.Venta_Id.length == 3) {
                             var Cod = 'VT0' + row.Venta_Id;
                         } else {
-                            var Cod = 'VT0' + row.Venta_Id;
+                            var Cod = 'VT' + row.Venta_Id;
                         }
                         return Cod;
                     }

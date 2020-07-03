@@ -960,13 +960,13 @@ include('modulos/cerrar_sesion.php');
                     //"data": "Compra_Id"
                     "render": function(data, type, row) {
                         if (row.Compra_Id.length == 1) {
-                            var Cod = 'CO000' + row.Compra_Id;
+                            var Cod = 'CP000' + row.Compra_Id;
                         } else if (row.Compra_Id.length == 2) {
                             var Cod = 'CP00' + row.Compra_Id;
                         } else if (row.Compra_Id.length == 3) {
                             var Cod = 'CP0' + row.Compra_Id;
                         } else {
-                            var Cod = 'C0' + row.Compra_Id;
+                            var Cod = 'CP' + row.Compra_Id;
                         }
                         return Cod;
                     }

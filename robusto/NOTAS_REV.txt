@@ -143,3 +143,33 @@ __________________________ version 9.5 -----------------------------------------
 
 __________________________ version 9.5 -------------------------------------------
 
+
+__________________________ version 9.6 -------------------------------------------
+## 
+
+  1. Corrección de nombres del header de nombre del usuario.
+  2. Corrección de los codigos de ventas y compras CO-CP
+  3. Corrección del modulo de ventas individuales, para todos los usuarios.
+
+__________________________ version 9.6 -------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+********************* NOTAS REVISIONES ***********************************
+->Revisar cuando se vende un producto que no se encuentra en el alamcen se oculta el boton agregar de
+la venta
+->Cuando se ingresa un servicio desde un usuario de una sede diferente a la predeterminada en el
+proceso de venta el combo vuelve a la sede principal
+->No se visualiza la sede correcta de acuerdo a la venta en el modulo de ventas
+

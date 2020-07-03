@@ -1551,6 +1551,7 @@ include('modulos/cerrar_sesion.php');
 
 
     $(function() {
+        Obtener_Nombre();
         Eliminar_Documento('EliminarDocumento');
         Habilita_Desabilita(true, false, false);
         Obtener_Sede_Usuario('MostrarSede_Usuario');

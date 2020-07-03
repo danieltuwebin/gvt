@@ -821,6 +821,7 @@ include('modulos/cerrar_sesion.php');
     }
 
       $(function() {
+        Obtener_Nombre();
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next',
