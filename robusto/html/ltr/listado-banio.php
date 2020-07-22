@@ -1530,6 +1530,7 @@ include('modulos/cerrar_sesion.php');
             Obtener_Banio('MostrarProductoxCondicion', 2, IdSede);
             Obtener_Datos_Banio('ObtenerDatosBaniosxId', id);
             $("#LblIdBanio").text("Edición Baño : " + Obtener_Codigo_Formateado(id));
+            $("#CboProducto").attr('disabled', true);
             $("#Modal_ListadoBanios").modal("show");
         } else {
             alert('El perfil de usuario no esta habilitado para opción');
@@ -1599,7 +1600,7 @@ include('modulos/cerrar_sesion.php');
                     Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
                     $('#CboMascota').val(json[i].Mascota_Id);
                     $('#CboProducto').val(json[i].Producto_Id);
-                    $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
+                    $('#Txt_Precio').val(json[i].Banio_Precio);
                     $('#CboEstado').val(json[i].Banio_Cita);
                     if (json[i].Banio_Cita == 1) {
                         $("#CboEstado").attr('disabled', true);
@@ -1765,7 +1766,8 @@ include('modulos/cerrar_sesion.php');
                     $("#Txt_Precio").val().toUpperCase().trim(),
                     $("#CboMascota").val().toUpperCase().trim(),
                     $("#Txt_Notas").val().toUpperCase().trim(),
-                    $("#CboEstado").val(),
+                    //$("#CboEstado").val(),
+                    '1',
                     '<?php echo $_SESSION['User']; ?>'
                 );
             }
@@ -1807,6 +1809,8 @@ include('modulos/cerrar_sesion.php');
     }
 
     function Editar_Banio(act, IdBanio, Fecha, IdProducto, Precio, IdMascota, Observacion, Cita, Usuario) {
+        //console.log(act +'-'+IdBanio+'-'+ Fecha+'-'+IdProducto+'-'+ Precio+'-'+ IdMascota+'-'+ Observacion+'-'+ Cita+'-'+ Usuario);
+        
         $.ajax({
             type: "POST",
             url: "modulos/banios.php",
@@ -1839,6 +1843,7 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok2');
             }
         });
+        
     }
 
 

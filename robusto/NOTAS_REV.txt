@@ -154,6 +154,17 @@ __________________________ version 9.6 -----------------------------------------
 __________________________ version 9.6 -------------------------------------------
 
 
+__________________________ version 10.0 -------------------------------------------
+## 
+
+  1. Corrección del modulo listado de baños edición de precio.
+  2. Corrección del modulo listado de desparacitación edición de precio.
+  3. Corrección del modulo listado de vacunas edición de precio.
+  4. Corrección del modulo listado de atenciones edición de precio.  
+
+__________________________ version 10.0 -------------------------------------------
+
+
 
 
 

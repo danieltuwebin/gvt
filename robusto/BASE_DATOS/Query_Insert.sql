@@ -4597,3 +4597,242 @@ END IF;
 
 END$$
 DELIMITER ;
+
+
+
+/* 21-07-20 */
+
+DROP PROCEDURE IF EXISTS SP_Obtener_TblBanio_All_x_Id;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblBanio_All_x_Id (IN Pint_IdBanio INT)
+BEGIN
+SELECT tb.Banio_Id,tc.Cliente_Id,tc.Cliente_Dni,CONCAT(tc.Cliente_Nombre,' ',tc.Cliente_Apellido) AS Cliente_NombreCompleto,
+tm.Mascota_Id,tm.Mascota_Nombre,tp.Producto_Id,tp.Producto_Nombre,tb.Banio_Precio,tb.Banio_Cita,tb.Banio_Fecha,tb.Banio_Observacion
+-- tm.Mascota_Id,tm.Mascota_Nombre,tp.Producto_Id,tp.Producto_Nombre,tp.Producto_PrecioVenta,tb.Banio_Cita,tb.Banio_Fecha,tb.Banio_Observacion
+FROM tblBanio tb LEFT JOIN tblMascota tm ON tb.Banio_IdMascota = tm.Mascota_Id
+LEFT JOIN tblProducto tp ON tb.Banio_IdProducto = tp.Producto_Id
+LEFT JOIN tblCliente tc ON tm.Mascota_IdCliente = tc.Cliente_Id
+WHERE tb.Banio_Estado = 1 AND tb.Banio_Id = Pint_IdBanio;
+END$$
+DELIMITER ;
+
+
+
+-- *************************************************
+CREATE PROCEDURE SP_Actualizar_TblBanio(IN Pint_IdBanio INT, IN Pdat_Fecha DATE, IN Pint_IdProducto INT, IN Pflo_Precio FLOAT, IN Pint_IdMascota INT, IN Pvchr_Observacion VARCHAR(1000), IN Pint_Cita INT, IN Pvchr_Usuario VARCHAR(50))
+BEGIN
+IF EXISTS(SELECT Banio_Id FROM tblBanio WHERE Banio_Id = Pint_IdBanio AND Banio_CitaEstado LIKE 'A') THEN
+UPDATE tblBanio SET
+Banio_Fecha=Pdat_Fecha,
+Banio_IdProducto=Pint_IdProducto,
+Banio_Precio=Pflo_Precio,
+Banio_IdMascota=Pint_IdMascota,
+Banio_Observacion=Pvchr_Observacion,
+Banio_Cita=Pint_Cita,
+Banio_FechaGrab_Edicion=NOW(),
+Banio_UserGrab_Edicion=Pvchr_Usuario
+WHERE Banio_Id = Pint_IdBanio;
+SELECT '1' AS CODIGO;
+ELSE
+SELECT '2' AS CODIGO;
+END IF;
+END
+-- **************************************************
+-- SHOW CREATE PROCEDURE SP_Actualizar_TblBanio
+DROP PROCEDURE IF EXISTS SP_Actualizar_TblBanio;
+DELIMITER $$
+CREATE PROCEDURE SP_Actualizar_TblBanio(IN Pint_IdBanio INT, IN Pdat_Fecha DATE, IN Pint_IdProducto INT, IN Pflo_Precio FLOAT, IN Pint_IdMascota INT, IN Pvchr_Observacion VARCHAR(1000), IN Pint_Cita INT, IN Pvchr_Usuario VARCHAR(50))
+BEGIN
+IF EXISTS(SELECT Banio_Id FROM tblBanio WHERE Banio_Id = Pint_IdBanio AND Banio_CitaEstado LIKE 'A') THEN
+SET @precio = (SELECT Banio_Precio FROM tblBanio WHERE Banio_Id = Pint_IdBanio);
+UPDATE tblBanio SET
+Banio_Fecha=Pdat_Fecha,
+Banio_IdProducto=Pint_IdProducto,
+Banio_Precio=Pflo_Precio,
+Banio_IdMascota=Pint_IdMascota,
+Banio_Observacion=Pvchr_Observacion,
+Banio_Cita=Pint_Cita,
+Banio_FechaGrab_Edicion=NOW(),
+Banio_UserGrab_Edicion=Pvchr_Usuario
+WHERE Banio_Id = Pint_IdBanio;
+-- ACTUALIZA TBL VENTA - VENTA-DETALLE
+SET @idVenta = (SELECT Banio_IdVenta FROM tblBanio WHERE Banio_Id = Pint_IdBanio);
+IF @precio <> Pflo_Precio THEN 
+UPDATE tblVenta SET Venta_Precio = Pflo_Precio,Venta_Descuento = 0,Venta_PrecioTotal = Pflo_Precio,Venta_Observacion = Pvchr_Observacion,
+Venta_FechaGrab_Edicion = NOW(), Venta_UserGrab_Edicion = Pvchr_Usuario WHERE Venta_Id = @idVenta;
+UPDATE tblVentaDetalle SET VentaDetalle_Precio = Pflo_Precio, VentaDetalle_Descuento = 0, VentaDetalle_PrecioTotal = Pflo_Precio,VentaDetalle_FechaGrab_Edicion = NOW(),
+VentaDetalle_UserGrab_Edicion = Pvchr_Usuario WHERE VentaDetalle_VentaId =  @idVenta;
+END IF;
+SELECT '1' AS CODIGO;
+ELSE
+SELECT '2' AS CODIGO;
+END IF;
+END$$
+DELIMITER ;
+
+
+
+
+
+
+
+
+DROP PROCEDURE IF EXISTS SP_Actualizar_TblDesparacitacion;
+DELIMITER $$
+CREATE PROCEDURE SP_Actualizar_TblDesparacitacion(IN Pint_IdDesparacitacion INT, IN Pdat_Fecha DATE, IN Pint_IdProducto INT, IN Pflo_Precio FLOAT, IN Pint_IdMascota INT, IN Pvchr_Observacion VARCHAR(1000), IN Pint_Cita INT, IN Pvchr_Usuario VARCHAR(50))
+BEGIN
+IF EXISTS(SELECT Desparacitacion_Id FROM tblDesparacitacion WHERE Desparacitacion_Id = Pint_IdDesparacitacion AND Desparacitacion_CitaEstado LIKE 'A') THEN
+SET @precio = (SELECT Desparacitacion_Precio FROM tblDesparacitacion WHERE Desparacitacion_Id = Pint_IdDesparacitacion);
+UPDATE tblDesparacitacion SET
+Desparacitacion_Fecha=Pdat_Fecha,
+Desparacitacion_IdProducto=Pint_IdProducto,
+Desparacitacion_Precio=Pflo_Precio,
+Desparacitacion_IdMascota=Pint_IdMascota,
+Desparacitacion_Observacion=Pvchr_Observacion,
+Desparacitacion_Cita=Pint_Cita,
+Desparacitacion_FechaGrab_Edicion=NOW(),
+Desparacitacion_UserGrab_Edicion=Pvchr_Usuario
+WHERE Desparacitacion_Id = Pint_IdDesparacitacion;
+-- ACTUALIZA TBL VENTA - VENTA-DETALLE
+SET @idVenta = (SELECT Desparacitacion_IdVenta FROM tblDesparacitacion WHERE Desparacitacion_Id = Pint_IdDesparacitacion);
+IF @precio <> Pflo_Precio THEN 
+UPDATE tblVenta SET Venta_Precio = Pflo_Precio,Venta_Descuento = 0,Venta_PrecioTotal = Pflo_Precio,Venta_Observacion = Pvchr_Observacion,
+Venta_FechaGrab_Edicion = NOW(), Venta_UserGrab_Edicion = Pvchr_Usuario WHERE Venta_Id = @idVenta;
+UPDATE tblVentaDetalle SET VentaDetalle_Precio = Pflo_Precio, VentaDetalle_Descuento = 0, VentaDetalle_PrecioTotal = Pflo_Precio,VentaDetalle_FechaGrab_Edicion = NOW(),
+VentaDetalle_UserGrab_Edicion = Pvchr_Usuario WHERE VentaDetalle_VentaId =  @idVenta;
+END IF;
+SELECT '1' AS CODIGO;
+ELSE
+SELECT '2' AS CODIGO;
+END IF;
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS SP_Obtener_TblDesparacitacion_All_x_Id;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblDesparacitacion_All_x_Id(IN Pint_IdDesparacitacion INT)
+BEGIN
+SELECT td.Desparacitacion_Id,tc.Cliente_Id,tc.Cliente_Dni,CONCAT(tc.Cliente_Nombre,' ',tc.Cliente_Apellido) AS Cliente_NombreCompleto,
+tm.Mascota_Id,tm.Mascota_Nombre,tp.Producto_Id,tp.Producto_Nombre,td.Desparacitacion_Precio,td.Desparacitacion_Cita,td.Desparacitacion_Fecha,td.Desparacitacion_Observacion
+FROM tblDesparacitacion td LEFT JOIN tblMascota tm ON td.Desparacitacion_IdMascota = tm.Mascota_Id
+LEFT JOIN tblProducto tp ON td.Desparacitacion_IdProducto = tp.Producto_Id
+LEFT JOIN tblCliente tc ON tm.Mascota_IdCliente = tc.Cliente_Id
+WHERE td.Desparacitacion_Estado = 1 AND td.Desparacitacion_Id = Pint_IdDesparacitacion;
+END$$
+DELIMITER ;
+
+
+
+
+-- SHOW CREATE PROCEDURE SP_Obtener_TblDesparacitacion_x_IdMascota
+DROP PROCEDURE IF EXISTS SP_Obtener_TblDesparacitacion_x_IdMascota;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblDesparacitacion_x_IdMascota(IN Pint_IdMascota INT)
+BEGIN
+SELECT
+case when length(td.Desparacitacion_Id) = 1 then concat('D000',td.Desparacitacion_Id)
+when length(td.Desparacitacion_Id) = 2 then concat('D00',td.Desparacitacion_Id)
+when length(td.Desparacitacion_Id) = 3 then concat('D0',td.Desparacitacion_Id)
+when length(td.Desparacitacion_Id) = 4 then concat('V',td.Desparacitacion_Id) else 'ERROR' end AS Codigo,td.Desparacitacion_Fecha,tp.Producto_Nombre,td.Desparacitacion_Precio
+FROM tblDesparacitacion td LEFT JOIN tblMascota tm ON td.Desparacitacion_IdMascota = tm.Mascota_Id
+LEFT JOIN tblProducto tp ON td.Desparacitacion_IdProducto = tp.Producto_Id
+LEFT JOIN tblCliente tc ON tm.Mascota_IdCliente = tc.Cliente_Id
+WHERE td.Desparacitacion_Estado = 1 AND td.Desparacitacion_IdMascota = Pint_IdMascota AND Desparacitacion_Cita = 1;
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS SP_Obtener_TblVacunas_All_x_Id;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_TblVacunas_All_x_Id(IN Pint_IdVacuna INT)
+BEGIN
+SELECT tv.Vacunas_Id,tc.Cliente_Id,tc.Cliente_Dni,CONCAT(tc.Cliente_Nombre,' ',tc.Cliente_Apellido) AS Cliente_NombreCompleto,
+tm.Mascota_Id,tm.Mascota_Nombre,tp.Producto_Id,tp.Producto_Nombre,tv.Vacunas_Precio,tv.Vacunas_Cita,tv.Vacunas_Fecha,tv.Vacunas_Observacion
+FROM tblVacunas tv LEFT JOIN tblMascota tm ON tv.Vacunas_IdMascota = tm.Mascota_Id
+LEFT JOIN tblProducto tp ON tv.Vacunas_IdProducto = tp.Producto_Id
+LEFT JOIN tblCliente tc ON tm.Mascota_IdCliente = tc.Cliente_Id
+WHERE tv.Vacunas_Estado = 1 AND tv.Vacunas_Id = Pint_IdVacuna;
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS SP_Actualizar_TblVacunas;
+DELIMITER $$
+CREATE PROCEDURE SP_Actualizar_TblVacunas(IN Pint_IdVacuna INT, IN Pdat_Fecha DATE, IN Pint_IdProducto INT, IN Pflo_Precio FLOAT, IN Pint_IdMascota INT, IN Pvchr_Observacion VARCHAR(1000), IN Pint_Cita INT, IN Pvchr_Usuario VARCHAR(50))
+BEGIN
+IF EXISTS(SELECT Vacunas_Id FROM tblVacunas WHERE Vacunas_Id = Pint_IdVacuna AND Vacunas_CitaEstado LIKE 'A') THEN
+SET @precio = (SELECT Vacunas_Precio FROM tblVacunas WHERE Vacunas_Id = Pint_IdVacuna);
+UPDATE tblVacunas SET
+Vacunas_Fecha=Pdat_Fecha,
+Vacunas_IdProducto=Pint_IdProducto,
+Vacunas_Precio=Pflo_Precio,
+Vacunas_IdMascota=Pint_IdMascota,
+Vacunas_Observacion=Pvchr_Observacion,
+Vacunas_Cita=Pint_Cita,
+Vacunas_FechaGrab_Edicion=NOW(),
+Vacunas_UserGrab_Edicion=Pvchr_Usuario
+WHERE Vacunas_Id = Pint_IdVacuna;
+-- ACTUALIZA TBL VENTA - VENTA-DETALLE
+SET @idVenta = (SELECT Vacunas_IdVenta FROM tblVacunas WHERE Vacunas_Id = Pint_IdVacuna);
+IF @precio <> Pflo_Precio THEN 
+UPDATE tblVenta SET Venta_Precio = Pflo_Precio,Venta_Descuento = 0,Venta_PrecioTotal = Pflo_Precio,Venta_Observacion = Pvchr_Observacion,
+Venta_FechaGrab_Edicion = NOW(), Venta_UserGrab_Edicion = Pvchr_Usuario WHERE Venta_Id = @idVenta;
+UPDATE tblVentaDetalle SET VentaDetalle_Precio = Pflo_Precio, VentaDetalle_Descuento = 0, VentaDetalle_PrecioTotal = Pflo_Precio,VentaDetalle_FechaGrab_Edicion = NOW(),
+VentaDetalle_UserGrab_Edicion = Pvchr_Usuario WHERE VentaDetalle_VentaId =  @idVenta;
+END IF;
+SELECT '1' AS CODIGO;
+ELSE
+SELECT '2' AS CODIGO;
+END IF;
+END$$
+DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS SP_Actualizar_TblAtencion;
+DELIMITER $$
+CREATE PROCEDURE SP_Actualizar_TblAtencion(IN Pint_IdAtencion INT, IN Pdat_Fecha DATE, IN Pint_IdProducto INT, IN Pint_IdMascota INT, IN Pvchr_Sintomas VARCHAR(3000), IN Pvchr_Atencion_T VARCHAR(100), IN Pvchr_Atencion_FC VARCHAR(100), IN Pvchr_Atencion_FR VARCHAR(100), IN Pvchr_Atencion_sc_Des VARCHAR(100), IN Pvchr_Atencion_sc_Muc VARCHAR(100), IN Pvchr_Atencion_sc_TLLC VARCHAR(100), IN Pvchr_Atencion_sc_Vom VARCHAR(100), IN Pvchr_Atencion_sc_Dia VARCHAR(100), IN Pvchr_Atencion_sc_Gan VARCHAR(100), IN Pvchr_Atencion_sc_Pes VARCHAR(50), IN Pvchr_Atencion_dx_Pre VARCHAR(150), IN Pvchr_Atencion_dx_Def VARCHAR(150), IN Pvchr_Atencion_dx_Sol VARCHAR(150), IN Pvchr_Atencion_tr_Des VARCHAR(150), IN Pvchr_Atencion_tr_Obs VARCHAR(150), IN Pflo_Atencion_tr_Pre FLOAT, IN Pint_Documento INT, IN Pint_Cita INT, IN Pchr_CitaEstado CHAR(1), IN Pint_Estado INT, IN Pvchr_Usuario VARCHAR(100))
+BEGIN
+IF EXISTS(SELECT Atencion_Id FROM tblAtencion WHERE Atencion_Id = Pint_IdAtencion AND Atencion_CitaEstado LIKE 'A') THEN
+SET @precio = (SELECT Atencion_tr_Precio FROM tblAtencion WHERE Atencion_Id = Pint_IdAtencion);
+UPDATE tblAtencion SET
+Atencion_Fecha=Pdat_Fecha
+,Atencion_IdProducto=Pint_IdProducto
+,Atencion_IdMascota=Pint_IdMascota
+,Atencion_Sintomas=Pvchr_Sintomas
+,Atencion_T=Pvchr_Atencion_T
+,Atencion_FC=Pvchr_Atencion_FC
+,Atencion_FR=Pvchr_Atencion_FR
+,Atencion_sc_Deshidratacion=Pvchr_Atencion_sc_Des
+,Atencion_sc_Mucosas=Pvchr_Atencion_sc_Muc
+,Atencion_sc_TLLC=Pvchr_Atencion_sc_TLLC
+,Atencion_sc_Vomitos=Pvchr_Atencion_sc_Vom
+,Atencion_sc_Diarreas=Pvchr_Atencion_sc_Dia
+,Atencion_sc_Ganglios=Pvchr_Atencion_sc_Gan
+,Atencion_sc_Peso=Pvchr_Atencion_sc_Pes
+,Atencion_dx_Presuntivo=Pvchr_Atencion_dx_Pre
+,Atencion_dx_Definitivo=Pvchr_Atencion_dx_Def
+,Atencion_dx_Solicitado=Pvchr_Atencion_dx_Sol
+,Atencion_tr_Descripcion=Pvchr_Atencion_tr_Des
+,Atencion_tr_Observacion=Pvchr_Atencion_tr_Obs
+,Atencion_tr_Precio=Pflo_Atencion_tr_Pre
+,Atencion_IdDocumento=Pint_Documento
+,Atencion_Cita=Pint_Cita
+,Atencion_CitaEstado=Pchr_CitaEstado
+,Atencion_Estado=Pint_Estado
+,Atencion_FechaGrab_Edicion=NOW()
+,Atencion_UserGrab_Edicion=Pvchr_Usuario WHERE Atencion_Id = Pint_IdAtencion;
+-- ACTUALIZA TBL VENTA - VENTA-DETALLE
+SET @idVenta = (SELECT Atencion_IdVenta FROM tblAtencion WHERE Atencion_Id = Pint_IdAtencion);
+IF @precio <> Pflo_Atencion_tr_Pre THEN 
+UPDATE tblVenta SET Venta_Precio = Pflo_Atencion_tr_Pre,Venta_Descuento = 0,Venta_PrecioTotal = Pflo_Atencion_tr_Pre,Venta_Observacion = Pvchr_Atencion_tr_Obs,
+Venta_FechaGrab_Edicion = NOW(), Venta_UserGrab_Edicion = Pvchr_Usuario WHERE Venta_Id = @idVenta;
+UPDATE tblVentaDetalle SET VentaDetalle_Precio = Pflo_Atencion_tr_Pre, VentaDetalle_Descuento = 0, VentaDetalle_PrecioTotal = Pflo_Atencion_tr_Pre,VentaDetalle_FechaGrab_Edicion = NOW(),
+VentaDetalle_UserGrab_Edicion = Pvchr_Usuario WHERE VentaDetalle_VentaId =  @idVenta;
+END IF;
+SELECT '1' AS CODIGO;
+ELSE
+SELECT '2' AS CODIGO;
+END IF;
+END$$
+DELIMITER ;

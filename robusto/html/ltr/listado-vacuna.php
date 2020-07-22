@@ -685,7 +685,7 @@ include('modulos/cerrar_sesion.php');
                                             <div class="input-group">
                                                 <label for="CboMascota">Seleccione nombre mascota :
                                                     <!-- <label class="display-inline" for="CboMascota">Seleccione nombre mascota : -->
-                                                    <!-- <label class="display-inline-block" for="CboVacuna">S : -->
+                                                    <!-- <label class="display-inline-block" for="CboProducto">S : -->
                                                     <select id="CboMascota" name="CboMascota" class="form-control">
                                                     </select>
                                                 </label>
@@ -702,8 +702,8 @@ include('modulos/cerrar_sesion.php');
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label for="CboVacuna">Seleccione Vacuna :</label>
-                                        <select id="CboVacuna" name="CboVacuna" class="form-control">
+                                        <label for="CboProducto">Seleccione Vacuna :</label>
+                                        <select id="CboProducto" name="CboProducto" class="form-control">
                                         </select>
                                     </div>
                                 </div>
@@ -715,8 +715,8 @@ include('modulos/cerrar_sesion.php');
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label for="CboEstadoVacuna">Estado vacuna :</label>
-                                        <select id="CboEstadoVacuna" name="CboEstadoVacuna" class="form-control">
+                                        <label for="CboEstado">Estado vacuna :</label>
+                                        <select id="CboEstado" name="CboEstado" class="form-control">
                                             <option value="1" disabled="disabled">REALIZADO</option>'
                                             <option value="2">AGENDADO</option>
                                             <option value="3">REPROGRAMADO</option>
@@ -1126,6 +1126,7 @@ include('modulos/cerrar_sesion.php');
             //Obtener_Vacunas('MostrarProductoxCondicion_Vacunas', IdSede);
             Obtener_Datos_Vacuna('ObtenerDatosVacunasxId', id);
             $("#LblIdVacuna").text("Edición Vacuna : " + Obtener_Codigo_Formateado(id));
+            $("#CboProducto").attr('disabled', true);
             $("#Modal_ListadoVacunas").modal("show");
         } else {
             alert('El perfil de usuario no esta habilitado para opción');
@@ -1148,9 +1149,9 @@ include('modulos/cerrar_sesion.php');
             },
             success: function(data) {
                 var json = JSON.parse(data);
-                $("#CboVacuna").empty();
+                $("#CboProducto").empty();
                 $.each(json, function(i, item) {
-                    $("#CboVacuna").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
+                    $("#CboProducto").append('<option value="' + json[i].Producto_Id + '">' + json[i].Producto_Nombre + '</option>');
                 });
             },
             complete: function() {
@@ -1193,14 +1194,14 @@ include('modulos/cerrar_sesion.php');
                     $('#Txt_CodigoMascota').val(json[i].Mascota_Id); // Mascota_Id (oculto)
                     Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
                     $('#CboMascota').val(json[i].Mascota_Id);
-                    $('#CboVacuna').val(json[i].Producto_Id);
-                    $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
-                    $('#CboEstadoVacuna').val(json[i].Vacunas_Cita);
+                    $('#CboProducto').val(json[i].Producto_Id);
+                    $('#Txt_Precio').val(json[i].Vacunas_Precio);
+                    $('#CboEstado').val(json[i].Vacunas_Cita);
                     //console.log('estado : ' + json[i].Vacunas_Cita);               
                     if (json[i].Vacunas_Cita == 1) {
-                        $("#CboEstadoVacuna").attr('disabled', true);
+                        $("#CboEstado").attr('disabled', true);
                     } else {
-                        $("#CboEstadoVacuna").attr('disabled', false);
+                        $("#CboEstado").attr('disabled', false);
                     }
                     $('#Txt_Fecha').val(json[i].Vacunas_Fecha);
                     $('#Txt_Notas').val(json[i].Vacunas_Observacion);
@@ -1311,8 +1312,8 @@ include('modulos/cerrar_sesion.php');
     }
 
 
-    $("#CboVacuna").change(function() {
-        Obtener_Precio('MostrarPrecio', $("#CboVacuna").val().trim());
+    $("#CboProducto").change(function() {
+        Obtener_Precio('MostrarPrecio', $("#CboProducto").val().trim());
     });
 
     // Clase proser
@@ -1351,18 +1352,19 @@ include('modulos/cerrar_sesion.php');
             var Id = ValidaCamposObligatorios(
                 $('#Txt_Dni').val().toUpperCase().trim(),
                 $('#CboMascota').val().toUpperCase().trim(),
-                $('#CboVacuna').val().toUpperCase().trim(),
+                $('#CboProducto').val().toUpperCase().trim(),
                 $('#Txt_Precio').val().toUpperCase().trim(),
                 $('#Txt_Fecha').val());
             if (Id == 1) {
                 Editar_Vacuna("EditarVacuna",
                     $("#Txt_CodigoVacuna").val(),
                     $('#Txt_Fecha').val(),
-                    $("#CboVacuna").val().toUpperCase().trim(),
+                    $("#CboProducto").val().toUpperCase().trim(),
                     $("#Txt_Precio").val().toUpperCase().trim(),
                     $("#CboMascota").val().toUpperCase().trim(),
                     $("#Txt_Notas").val().toUpperCase().trim(),
-                    $("#CboEstadoVacuna").val(),
+                    //$("#CboEstado").val(),
+                    '1',
                     '<?php echo $_SESSION['User']; ?>'
                 );
             }
@@ -1382,7 +1384,7 @@ include('modulos/cerrar_sesion.php');
             } else {
                 if (vacuna.length == 0) {
                     alert('El campo vacuna es obligatorio');
-                    $("#CboVacuna").focus();
+                    $("#CboProducto").focus();
                     return 0;
                 } else {
                     if (precio.length == 0) {

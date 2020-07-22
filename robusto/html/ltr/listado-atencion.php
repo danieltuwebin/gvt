@@ -1769,11 +1769,11 @@ require('lib_externos/fpdf182/fpdf.php');
         Atencion_dx_Pre, Atencion_dx_Def, Atencion_dx_Sol, Atencion_tr_Des, Atencion_tr_Obs, Atencion_tr_Pre, Documento,
         Cita, CitaEstado, Estado, Usuario) {
 
-        /* console.log(act + '-' + IdAtencion + '-' + Fecha + '-prod__' + IdProducto + '-' + IdMascota + '-' + Sintomas + '-' + Atencion_T + '-' + Atencion_FC + '-' + Atencion_FR + '-' +
+        /*console.log(act + '-' + IdAtencion + '-' + Fecha + '-prod__' + IdProducto + '-' + IdMascota + '-' + Sintomas + '-' + Atencion_T + '-' + Atencion_FC + '-' + Atencion_FR + '-' +
             Atencion_sc_Des + '-' + Atencion_sc_Muc + '-' + Atencion_sc_TLLC + '-' + Atencion_sc_Vom + '-' + Atencion_sc_Dia + '-' + Atencion_sc_Gan + '-' + Atencion_sc_Pes + '-' +
             Atencion_dx_Pre + '-' + Atencion_dx_Def + '-' + Atencion_dx_Sol + '-' + Atencion_tr_Des + '-' + Atencion_tr_Obs + '-' + Atencion_tr_Pre + '-' + Documento + '-' +
-            Cita + '-' + CitaEstado + '-' + Estado + '-' + Usuario); */
-
+            Cita + '-' + CitaEstado + '-' + Estado + '-' + Usuario);*/
+        
         $.ajax({
             type: "POST",
             url: "modulos/atencion.php",
@@ -1824,6 +1824,7 @@ require('lib_externos/fpdf182/fpdf.php');
                 //alert('ok2');
             }
         });
+        
     }
 
 

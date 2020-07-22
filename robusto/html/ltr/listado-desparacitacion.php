@@ -1129,6 +1129,7 @@ include('modulos/cerrar_sesion.php');
             Obtener_Desparacitacion('MostrarProductoxCondicion', 3, IdSede);
             Obtener_Datos_Desparacitacion('ObtenerDatosDesparacitacionxId', id);
             $("#LblIdDesparacitacion").text("Edición Desparacitación : " + Obtener_Codigo_Formateado(id));
+            $("#CboProducto").attr('disabled', true);
             $("#Modal_ListadoDesparacitacion").modal("show");
         } else {
             alert('El perfil de usuario no esta habilitado para opción');
@@ -1197,7 +1198,7 @@ include('modulos/cerrar_sesion.php');
                     Obtener_Mascotas_x_IdCliente('ObtenerMascotasxIdCliente', 2, $('#Txt_CodigoCliente').val());
                     $('#CboMascota').val(json[i].Mascota_Id);
                     $('#CboProducto').val(json[i].Producto_Id);
-                    $('#Txt_Precio').val(json[i].Producto_PrecioVenta);
+                    $('#Txt_Precio').val(json[i].Desparacitacion_Precio);
                     $('#CboEstado').val(json[i].Desparacitacion_Cita);
                     if (json[i].Desparacitacion_Cita == 1) {
                         $("#CboEstado").attr('disabled', true);
@@ -1363,7 +1364,8 @@ include('modulos/cerrar_sesion.php');
                     $("#Txt_Precio").val().toUpperCase().trim(),
                     $("#CboMascota").val().toUpperCase().trim(),
                     $("#Txt_Notas").val().toUpperCase().trim(),
-                    $("#CboEstado").val(),
+                    //$("#CboEstado").val(),
+                    '1',
                     '<?php echo $_SESSION['User']; ?>'
                 );
             }
