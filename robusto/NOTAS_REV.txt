@@ -166,6 +166,16 @@ __________________________ version 10.0 ----------------------------------------
 
 
 
+__________________________ version 10.1 -------------------------------------------
+## 
+
+  1. Corrección del resumen de montos semanas-dias SP
+  2. Correccion de las observaciones duplicadas en el modulo de nuevas ventas (localstorage)  
+
+__________________________ version 10.0 -------------------------------------------
+
+
+
 
 
 

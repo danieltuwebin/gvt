@@ -946,6 +946,7 @@ include('modulos/cerrar_sesion.php');
                 //alert('ok');
             },
             success: function(data) {
+                //console.log(data);
                 var json = JSON.parse(data);
                 $('#TotalClientes').html(json.tclientes);
                 $('#TotalMascotas').html(json.tmascotas);

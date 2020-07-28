@@ -4836,3 +4836,30 @@ SELECT '2' AS CODIGO;
 END IF;
 END$$
 DELIMITER ;
+
+
+-- 27-07-2020 ---------- CORRECION DE PANEL Y VENTAS
+
+
+DROP PROCEDURE SP_Obtener_Totales_Dashboard;
+DELIMITER $$
+CREATE PROCEDURE SP_Obtener_Totales_Dashboard()
+BEGIN
+  DECLARE TotalClientes INT;
+  DECLARE TotalMascotas INT;
+  DECLARE TotalAtenciones INT;
+  DECLARE VentasDia DECIMAL(7,2);
+  DECLARE VentasSem DECIMAL(7,2);    
+  DECLARE VentasMes DECIMAL(7,2);
+  SET TotalClientes = (SELECT COUNT(*) FROM tblCliente WHERE Cliente_Estado = 1);
+  SET TotalMascotas = (SELECT COUNT(*) FROM tblMascota WHERE Mascota_Estado = 1);
+  SET TotalAtenciones = (SELECT COUNT(*) FROM tblAtencion WHERE Atencion_Estado = 1);
+  SET VentasDia = (SELECT CASE WHEN SUM(Venta_PrecioTotal) IS NULL THEN '0' ELSE ROUND(SUM(Venta_PrecioTotal),2) END
+				   FROM tblVenta WHERE Venta_Estado = 1 AND Venta_Fecha = DATE(NOW()));      
+  SET VentasSem = (SELECT CASE WHEN SUM(Venta_PrecioTotal) IS NULL THEN '0' ELSE ROUND(SUM(Venta_PrecioTotal),2) END
+                   FROM tblVenta WHERE Venta_Estado = 1 AND WEEK(Venta_Fecha,1) = WEEK(NOW(),1));
+  SET VentasMes = (SELECT CASE WHEN SUM(Venta_PrecioTotal) IS NULL THEN '0' ELSE ROUND(SUM(Venta_PrecioTotal),2) END
+                   FROM tblVenta WHERE Venta_Estado = 1 AND MONTH(Venta_Fecha) = MONTH(NOW()));    
+  SELECT TotalClientes,TotalMascotas,TotalAtenciones,VentasDia,VentasSem,VentasMes;
+END$$
+DELIMITER ;

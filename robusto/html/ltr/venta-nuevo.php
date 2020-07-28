@@ -1769,7 +1769,7 @@ include('modulos/cerrar_sesion.php');
 
     $(function() {
         Obtener_Nombre();
-        Observacion_Final = localStorage.getItem('Observacion');
+        Observacion_Final = "";
         Obtener_Sede('MostrarSede');
         $('#TxtFecha').val(MostrarFechaActual());
         Habilita_Desabilita(true, true, true);
@@ -1783,6 +1783,7 @@ include('modulos/cerrar_sesion.php');
             }
 
         } else {
+            Observacion_Final = localStorage.getItem('Observacion');
             // CON VALOR GET
             Id_TipoVenta = $_GET("Tipo");
             $("#RbDniM").attr('checked', true);
