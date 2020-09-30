@@ -175,6 +175,18 @@ __________________________ version 10.1 ----------------------------------------
 __________________________ version 10.0 -------------------------------------------
 
 
+__________________________ version 11.0 -------------------------------------------
+## 
+
+  1.Modificacion de la estructura de la Ficha de Historia Clinica				
+  2.Adicion del campo notas en LISTADO DE BAÑOS, realizado en el registro del modulo Baños				
+  3.Adicion del campo notas en LISTADO DE DESPARACITACIONES, realizado en el registro del modulo Desparacitación				
+  4.Adicion del campo notas en LISTADO DE VACUNAS, realizado en el registro del modulo Vacunas				
+
+
+__________________________ version 11.0 -------------------------------------------
+
+
 
 
 

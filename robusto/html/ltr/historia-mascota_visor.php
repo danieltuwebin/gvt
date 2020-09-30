@@ -78,6 +78,9 @@ while ($row = $rst->fetch_array(MYSQLI_ASSOC)) {
 
 class PDF extends FPDF
 {  
+    var $widths;
+    var $aligns;
+
     // Cabecera de pagina
     function Header()
     {
@@ -120,16 +123,16 @@ class PDF extends FPDF
         // Simple table
     function BasicTable($header, $data)
     {
-        $c1 = 18;
-        $c2 = 27;
-        $c3 = 85;
-        $c4 = 20;
+        $c1 = 14;
+        $c2 = 16;
+        $c3 = 55;
+        $c4 = 14;
+        $c5 = 75;
+        
         // Header
         $cont_h=1;
         $this->Cell(10);
         foreach($header as $col){
-
-
 
             if($cont_h==1){
                 //$this->Cell($c1,6,utf8_decode($col),1);
@@ -143,7 +146,10 @@ class PDF extends FPDF
             }
             if($cont_h==4){
                 $this->Cell($c4,6,utf8_decode($col),1,0,'C');
-            }   
+            }
+            if($cont_h==5){
+                $this->Cell($c5,6,utf8_decode($col),1,0,'C');
+            }              
             $cont_h =  $cont_h + 1 ;      
         }
             //$this->Cell(40,7,utf8_decode($col),1);
@@ -152,25 +158,48 @@ class PDF extends FPDF
         foreach($data as $row)
         {
             $cont=1;
+            $v1 ="";
+            $v2 ="";
+            $v3 ="";
+            $v4 ="";
+            $v5 ="";
             $this->Cell(10);
             foreach($row as $col){
                 if($cont==1){
                     //$this->Cell($c1,6,utf8_decode($col),1);
-                    $this->Cell($c1,6,utf8_decode($col),1);
+                    //$this->Cell($c1,5,utf8_decode($col),1);
+
+                    //$this->Cell($c1,5,utf8_decode($col),1);
+                    $v1 = utf8_decode($col);
                 }
                 if($cont==2){
-                    $this->Cell($c2,6,utf8_decode($col),1);
+                    //$this->Cell($c2,5,utf8_decode($col),1);
+                    $v2 = utf8_decode($col);
                 }
                 if($cont==3){
-                    $this->Cell($c3,6,utf8_decode($col),1);
+                    //$this->Cell($c3,5,utf8_decode($col),1);
+                    $v3 = utf8_decode($col);
                 }
                 if($cont==4){
-                    $this->Cell($c4,6,utf8_decode('S/. '.$col),1);
+                    //$this->Cell($c4,5,utf8_decode('S/. '.$col),1);
+
+
                     //$this->MultiCell($c4,6,utf8_decode($col),1, 'J');
-                }   
+                    //$this->MultiCell($c4,5,utf8_decode('S/. '.$col),1, 'J');
+                    $v4 = utf8_decode('S/. '.$col);
+                }
+                if($cont==5){
+                    //$this->Cell($c5,6,utf8_decode($col),1);
+                    //$this->MultiCell($c5,5,utf8_decode($col),1, 'J');
+
+                    $v5 = utf8_decode($col);
+                }                   
                 $cont =  $cont + 1 ;                                            
             }
-            $this->Ln(); 
+            
+            $this->SetWidths(array($c1,$c2,$c3,$c4,$c5));
+            $this->Row(array($v1,$v2,$v3,$v4,$v5));
+            $this->Ln(0.5); 
         }
     }
 
@@ -409,6 +438,107 @@ class PDF extends FPDF
     }
 
 
+    // CLASE TABLA
+
+    function SetWidths($w)
+    {
+        //Set the array of column widths
+        $this->widths=$w;
+    }
+    
+    function SetAligns($a)
+    {
+        //Set the array of column alignments
+        $this->aligns=$a;
+    }
+    
+    function Row($data)
+    {
+        //Calculate the height of the row
+        $nb=0;
+        for($i=0;$i<count($data);$i++)
+            $nb=max($nb,$this->NbLines($this->widths[$i],$data[$i]));
+        $h=5*$nb;
+        //Issue a page break first if needed
+        $this->CheckPageBreak($h);
+        //Draw the cells of the row
+        for($i=0;$i<count($data);$i++)
+        {
+            $w=$this->widths[$i];
+            $a=isset($this->aligns[$i]) ? $this->aligns[$i] : 'L';
+            //Save the current position
+            $x=$this->GetX();
+            $y=$this->GetY();
+            //Draw the border
+            $this->Rect($x,$y,$w,$h);
+            //Print the text
+            $this->MultiCell($w,5,$data[$i],0,$a);
+            //Put the position to the right of the cell
+            $this->SetXY($x+$w,$y);
+        }
+        //Go to the next line
+        $this->Ln($h);
+    }
+    
+    function CheckPageBreak($h)
+    {
+        //If the height h would cause an overflow, add a new page immediately
+        if($this->GetY()+$h>$this->PageBreakTrigger)
+            $this->AddPage($this->CurOrientation);
+    }
+    
+    function NbLines($w,$txt)
+    {
+        //Computes the number of lines a MultiCell of width w will take
+        $cw=&$this->CurrentFont['cw'];
+        if($w==0)
+            $w=$this->w-$this->rMargin-$this->x;
+        $wmax=($w-2*$this->cMargin)*1000/$this->FontSize;
+        $s=str_replace("\r",'',$txt);
+        $nb=strlen($s);
+        if($nb>0 and $s[$nb-1]=="\n")
+            $nb--;
+        $sep=-1;
+        $i=0;
+        $j=0;
+        $l=0;
+        $nl=1;
+        while($i<$nb)
+        {
+            $c=$s[$i];
+            if($c=="\n")
+            {
+                $i++;
+                $sep=-1;
+                $j=$i;
+                $l=0;
+                $nl++;
+                continue;
+            }
+            if($c==' ')
+                $sep=$i;
+            $l+=$cw[$c];
+            if($l>$wmax)
+            {
+                if($sep==-1)
+                {
+                    if($i==$j)
+                        $i++;
+                }
+                else
+                    $i=$sep+1;
+                $sep=-1;
+                $j=$i;
+                $l=0;
+                $nl++;
+            }
+            else
+                $i++;
+        }
+        return $nl;
+    }
+
+
 }
 
 
@@ -490,8 +620,8 @@ $pdf->SetFont('Arial','BU',10);
 $pdf->Cell(10);
 $pdf->Cell(30 ,5,utf8_decode('LISTADO DE BAÑOS'),0,0);
 $pdf->Ln(10);
-$pdf->SetFont('Arial','',9);
-$header = array('CODIGO', 'FECHA', 'NOMBRE PRODUCTO', 'PRECIO');
+$pdf->SetFont('Arial','',7);
+$header = array('CODIGO', 'FECHA', 'NOMBRE PRODUCTO', 'PRECIO', 'OBSERVACIÓN');
 $pdf->BasicTable($header,$data);
 
 $pdf->Ln(10);
@@ -499,8 +629,8 @@ $pdf->SetFont('Arial','BU',10);
 $pdf->Cell(10);
 $pdf->Cell(30 ,5,utf8_decode('LISTADO DE DESPARACITACIONES'),0,0);
 $pdf->Ln(10);
-$pdf->SetFont('Arial','',9);
-$header = array('CODIGO', 'FECHA', 'NOMBRE PRODUCTO', 'PRECIO');
+$pdf->SetFont('Arial','',7);
+$header = array('CODIGO', 'FECHA', 'NOMBRE PRODUCTO', 'PRECIO', 'OBSERVACIÓN');
 $pdf->BasicTable($header,$data2);
 
 
@@ -509,8 +639,8 @@ $pdf->SetFont('Arial','BU',10);
 $pdf->Cell(10);
 $pdf->Cell(30 ,5,utf8_decode('LISTADO DE VACUNAS'),0,0);
 $pdf->Ln(10);
-$pdf->SetFont('Arial','',9);
-$header = array('CODIGO', 'FECHA', 'NOMBRE PRODUCTO', 'PRECIO');
+$pdf->SetFont('Arial','',7);
+$header = array('CODIGO', 'FECHA', 'NOMBRE PRODUCTO', 'PRECIO', 'OBSERVACIÓN');
 $pdf->BasicTable($header,$data3);
 
 $pdf->AddPage();
