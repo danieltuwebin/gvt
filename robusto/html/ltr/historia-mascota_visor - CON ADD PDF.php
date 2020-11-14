@@ -21,6 +21,8 @@ if (strlen($Condicion) == 1) {
 
 $GLOBALS['Codigo'] = "FICHA DE HISTORIA CLINICA MASCOTA - ".$C;
 
+
+
 $sql = "CALL SP_Obtener_Encabezado_Hc_x_IdMascota('$Condicion')";
 $oCado = new Cado();
 $rst = $oCado->ejecute_sql($sql);
@@ -416,31 +418,14 @@ class PDF extends Fpdi
                     $this->SetX(20);
                     $this->SetFont('Arial','',9);  
                     $this->MultiCell(165,5,utf8_decode($col),0, 'J'); 
-                }
-                if($cont==19){
-                    $num = $col;
-                    $number = sprintf('%.2f', $num);
-
-                    $this->Cell(10);
-                    $this->SetFont('Arial','B',9);                    
-                    $this->Cell(18 ,5,utf8_decode('PRECIO  : '),0,0);
-                    //$this->Ln();                      
-                    //$this->SetX(20);
-                    $this->SetFont('Arial','',9);  
-                    //$this->MultiCell(165,5,utf8_decode($col),0, 'J'); 
-                    $this->Cell(35,5,utf8_decode('S/. '.$number),0, 'J'); 
-                    $this->Ln();  
-                    $this->SetX(20);
                     $x2 = $this->GetX();
                     $y2 = $this->GetY(); 
 
                     $this->Line($x1,$y1,$x1,$y2);
                     $this->Line(185,$y1,185,$y2);
                     $this->Line($x1,$y2,185,$y2);
-                }
-                if($cont==20){
-                    //DEFINIR
-                }                                                                         
+                }                                                                               
+                
                 /*                 $y2 = $this->GetY(); 
                 $this->Cell(30 ,5,utf8_decode($y2),0,0); */
                 $cont =  $cont + 1 ;     
@@ -457,6 +442,7 @@ class PDF extends Fpdi
 
 
     // CLASE TABLA
+
     function SetWidths($w)
     {
         //Set the array of column widths
@@ -558,11 +544,18 @@ class PDF extends Fpdi
 
 }
 
-// Creacion del objeto de la clase heredada
+
+
+
+
+//$Condicion = utf8_decode('Atención Nro. '.$_GET["Cond"]);
+
+// Creaci�n del objeto de la clase heredada
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
 //$pdf->SetFont('Times', '', 12);
+
 
 $pdf->SetFont('Arial','BU',9);
 $pdf->Cell(25);
@@ -659,86 +652,63 @@ $pdf->Cell(10);
 $pdf->Cell(30 ,5,utf8_decode('LISTADO DE ATENCIONES'),0,0);
 $pdf->Ln(10);
 
+
+
+
 $pdf->SetFont('Arial','',9);
 $pdf->BasicAtencion($data_a);
 
-$directorios = array();
-//$directoriofiles = array();
-
-foreach($data_a as $row)
-{
-    $cant = 1;
-    $ruta ="";
-    foreach($row as $campo)
-    {        
-        if($cant == 20){
-            //$directorios[] = $campo;
-            $ruta = $campo;
-            //$pdf->Cell(30 ,5,utf8_decode('numb '.$campo),0,0); 
-            //$pdf->Ln(10);                    
-        }
-        if($cant == 21){
-            if (file_exists($ruta.'/'.$campo.'_1.pdf')) {
-                $directorios[] = $ruta.'/'.$campo.'_1.pdf';
-            }
-            if (file_exists($ruta.'/'.$campo.'_2.pdf')) {
-                $directorios[] = $ruta.'/'.$campo.'_2.pdf';
-            }
-            if (file_exists($ruta.'/'.$campo.'_3.pdf')) {
-                $directorios[] = $ruta.'/'.$campo.'_3.pdf';
-            }
-            if (file_exists($ruta.'/'.$campo.'_4.pdf')) {
-                $directorios[] = $ruta.'/'.$campo.'_4.pdf';
-            }
-            if (file_exists($ruta.'/'.$campo.'_5.pdf')) {
-                $directorios[] = $ruta.'/'.$campo.'_5.pdf';
-            }                                                
-        }
-        $cant = $cant +1;
-    }
-}
-
-/*
-foreach ($directorios AS $fi) {                          
-    //$pageCount = $pdf->setSourceFile($fi);
-    $pdf->Cell(15 ,5,utf8_decode($fi),0,0);
-    $pdf->Ln(10);
-}
-*/
 
 
 
+
+//$pdf->AddPage();
 // define some files to concatenate
 $files = array(
-    '../../files/1309/1309_2.pdf',
-    //'../../files/1309/1309_4.pdf',
-    '../../files/1309/1309_1.pdf'
-
+    '1309_2.pdf',
+    '1309_1.pdf',
+    '1304_1.pdf'
 );
 
+
 // iterate through the files
-foreach ($directorios as $file) {
-    $pageCount = $pdf->setSourceFile($file);
-    for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
-        // import a page
-        $templateId = $pdf->importPage($pageNo);
-        // get the size of the imported page
-        $size = $pdf->getTemplateSize($templateId);
-        // add a page with the same orientation and size
-        //$pdf->AddPage($size['orientation'], $size);
-        $pdf->AddPage($size['vertical'], $size);
-        // use the imported page
-        $pdf->useTemplate($templateId, 5, 10, 200);
-        /*
+foreach ($files AS $file) {                          
+        $pageCount = $pdf->setSourceFile($file);
+       
+        for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+            
+            // import a page
+            $templateId = $pdf->importPage($pageNo);
+            // get the size of the imported page
+            $size = $pdf->getTemplateSize($templateId);
+    
+            // add a page with the same orientation and size
+            //$pdf->AddPage($size['orientation'], $size);
+            
+            $pdf->AddPage($size['vertical'], $size);
+            // use the imported page
+            $pdf->useTemplate($templateId,5,10,200);
+    /*
             $pdf->SetFont('Helvetica');
             $pdf->SetXY(5, 5);
             $pdf->Write(8, $pdf);
             //$pdf->Write(8, 'A simple concatenation demo with FPDI');
             */
-        $pdf->Ln(10);
-        //$pdf->Cell(4,10,$pageNo);
-    }
+            $pdf->Ln(10);
+
+            //$pdf->Cell(4,10,$pageNo);
+
+        }        
+
 }
+
+
+
+
+
+
+
+
 
 $pdf->Output();
 

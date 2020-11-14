@@ -186,6 +186,15 @@ __________________________ version 11.0 ----------------------------------------
 
 __________________________ version 11.0 -------------------------------------------
 
+__________________________ version 12.0 -------------------------------------------
+## 
+
+  1.Modificacion de la estructura del reporte de historia clinica - se agrego precio	
+  2.Adicion de los archivos subidos mediante el modulo atencion, al reporte  de historia clinica de mascota			
+
+
+__________________________ version 12.0 -------------------------------------------
+
 
 
 
