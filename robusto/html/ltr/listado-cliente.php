@@ -66,7 +66,7 @@ echo '<script type="text/javascript">localStorage.setItem("Usuario","'.$user.'")
         $CondicionMnu = $_SESSION['UserPerfil'];
 
         if ($CondicionMnu == 1) { /* PERFIL ADMIN (1) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -120,7 +120,7 @@ echo '<script type="text/javascript">localStorage.setItem("Usuario","'.$user.'")
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                            
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -174,7 +174,7 @@ echo '<script type="text/javascript">localStorage.setItem("Usuario","'.$user.'")
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -254,7 +254,7 @@ echo '<script type="text/javascript">localStorage.setItem("Usuario","'.$user.'")
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 2) { /* PERFIL JEFE (2) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -308,7 +308,7 @@ echo '<script type="text/javascript">localStorage.setItem("Usuario","'.$user.'")
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                            
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -362,7 +362,7 @@ echo '<script type="text/javascript">localStorage.setItem("Usuario","'.$user.'")
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--<li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
                             <span data-i18n="nav.content.main" class="menu-title">Compras</span>
@@ -442,7 +442,7 @@ echo '<script type="text/javascript">localStorage.setItem("Usuario","'.$user.'")
             <!-- / main menu-->
         <?php
         } elseif ($CondicionMnu == 3) { /* PERFIL SOLO LECTURA (3) */
-            ?>
+        ?>
             <!-- main menu content-->
             <div class="main-menu-content">
                 <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
@@ -535,7 +535,7 @@ echo '<script type="text/javascript">localStorage.setItem("Usuario","'.$user.'")
                                 <a href="listado-atencion.php" class="menu-item">Listado Atenciones</a>
                             </li>
                         </ul>
-                    </li>                    
+                    </li>
                     <!--
                     <li class=" nav-item">
                         <a href="#"><i class="icon-list2"></i>
@@ -721,7 +721,7 @@ echo '<script type="text/javascript">localStorage.setItem("Usuario","'.$user.'")
                 <?php
 
                 if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-                    ?>
+                ?>
                     <div class="content-header-left col-md-3 col-xs-12 mb-1">
                         <button id="BtnNuevo" type="button" class="btn btn-success"><i class="icon-android-add-circle"></i> Nuevo cliente</button>
                     </div>
@@ -748,9 +748,9 @@ echo '<script type="text/javascript">localStorage.setItem("Usuario","'.$user.'")
                                 </div>
                             </div>
                             <br>
-
                             <div class="card-body collapse in">
                             <div class="card-block">
+
                                     <div class="table-responsive">
                                         <table id="TblClientes" class="table table-striped table-bordered" style="width:100%">
                                             <thead>
@@ -863,11 +863,11 @@ echo '<script type="text/javascript">localStorage.setItem("Usuario","'.$user.'")
     function Obtener_Condicion() {
         <?php
         if ($CondicionMnu == 1 || $CondicionMnu == 2) {
-            ?>
+        ?>
             Condicion = 1;
         <?php
         } else {
-            ?>
+        ?>
             Condicion = 0;
         <?php
         }
@@ -885,7 +885,7 @@ echo '<script type="text/javascript">localStorage.setItem("Usuario","'.$user.'")
             var Cod = 'C' + id;
         }
         return Cod;
-    }    
+    }
 
     $("#BtnNuevo").click(function() {
         var url = "cliente-nuevo.php";
@@ -1014,7 +1014,7 @@ echo '<script type="text/javascript">localStorage.setItem("Usuario","'.$user.'")
         if (Condicion == 1) {
             Obtener_Provincia('MostrarProvincia');
             Obtener_Datos_cliente('MostrarClientexId', id, 1)
-            $("#LblIdCliente").text("Edición de Cliente : " + Obtener_Codigo_Formateado(id));  
+            $("#LblIdCliente").text("Edición de Cliente : " + Obtener_Codigo_Formateado(id));
             $("#Modal_ListadoCliente").modal("show");
         } else {
             alert('El perfil de usurio no esta habilitado para opción');
@@ -1182,7 +1182,7 @@ echo '<script type="text/javascript">localStorage.setItem("Usuario","'.$user.'")
                 action: act,
                 Nomb: nombre,
                 Ape: apellido,
-                Dni:dni,
+                Dni: dni,
                 Email: email,
                 TelFijo: telfijo,
                 TelCelu: telcelular,

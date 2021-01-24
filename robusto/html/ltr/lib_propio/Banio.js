@@ -683,10 +683,13 @@
             if ($_GET("IdPro") === undefined) {
                 //SIN VALOR GET
             } else {
+                var codigo = "";
                 $("#CboEstadoBanio").attr('disabled', false);
-                IdBanio = $_GET("IdPro");
+                IdBanio = $_GET("IdCod");
+                codigo = $_GET("IdPro");
                 IdAgendado = 1; // 1 : siginifica si - no agendado (valor por defecto)                
                 Obtener_Datos_Banio('ObtenerDatosBaniosxId', IdBanio);
+                Obtener_Precio('MostrarPrecio', codigo);
                 IdTipoProcesoGrabacion = 1;
                 $("#btnAgendar").text('Reprogramar');
             }

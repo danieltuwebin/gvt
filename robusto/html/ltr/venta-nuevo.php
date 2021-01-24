@@ -1484,8 +1484,8 @@ include('modulos/cerrar_sesion.php');
 
     function Grabar_Venta(act, idVentatmp, idVBDA, idAgendado, idProducto, idKardex, fecha, idTipoVenta,
         idTipoPago, idMascota, idAlmacen, observacion, estado, usuario) {
-        console.log(act + ',' + idVentatmp + ',' + idVBDA + ',' + idAgendado + ',' + idProducto + ',' + idKardex + ',' + fecha + ',' + idTipoVenta + ',' +
-            idTipoPago + ',' + idMascota + ',' + idAlmacen + ',' + observacion + ',' + estado + ',' + usuario);
+        //console.log(act + ',' + idVentatmp + ',' + idVBDA + ',' + idAgendado + ',' + idProducto + ',' + idKardex + ',' + fecha + ',' + idTipoVenta + ',' +
+            //idTipoPago + ',' + idMascota + ',' + idAlmacen + ',' + observacion + ',' + estado + ',' + usuario);
            
         $.ajax({
             type: "POST",
@@ -1550,7 +1550,7 @@ include('modulos/cerrar_sesion.php');
     }
 
     $("#BtnCancelarVenta").click(function() {
-        console.log(CodigoVenta_Elminacion, IdVentaTmp, CodigoVenta_Servicio, ProcesoVBDA_CancelarCompra, IdAgendado,Id_TipoVenta);
+        //console.log(CodigoVenta_Elminacion, IdVentaTmp, CodigoVenta_Servicio, ProcesoVBDA_CancelarCompra, IdAgendado,Id_TipoVenta);
         var bool = confirm("Esta seguro de cancelar la venta ?");
         if (bool) {
             Cancelar_Venta('CancelarVenta',
@@ -1806,6 +1806,7 @@ include('modulos/cerrar_sesion.php');
             } else {
                 //ALMACENA ID DE LA TABLA A LA QUE SE QUIERE TRABAJAR VIENE DEL MODULO INDEX
                 IdProducto_VBDA = $_GET("Pro");
+                //console.log('tiene valor el IdProducto_VBDA ' + IdProducto_VBDA);
                 IdAgendado = $_GET("A");
             }
         }

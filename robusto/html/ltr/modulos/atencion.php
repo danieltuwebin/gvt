@@ -200,7 +200,6 @@ if ($_POST['action'] == "tablaResumenDocumentos") {
     echo json_encode($myArray);
 }
 
-
 if ($_POST['action'] == "ObtenerDocumentoxId") {
     $Id = $_POST['Id'];
     $sql = "CALL SP_Obtener_TblDocumentoAdjunto_x_Id('$Id')";
@@ -212,7 +211,6 @@ if ($_POST['action'] == "ObtenerDocumentoxId") {
     echo json_encode($myArray);
 }
 
-
 if ($_POST['action'] == "EliminarDocumentoxId") {
     $Id = $_POST['Id'];
     $Carpeta = $_POST['Carpeta'];
@@ -223,7 +221,6 @@ if ($_POST['action'] == "EliminarDocumentoxId") {
     $rst = $oCado->ejecute_sql($sql);
     echo '1';
 }
-
 
 if ($_POST['action'] == "ObtenerDocumentoCantidadCarpeta") {
     $Id = $_POST['Id'];

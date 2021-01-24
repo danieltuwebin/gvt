@@ -1260,6 +1260,7 @@ include('modulos/cerrar_sesion.php');
         });
     }
 
+
     $(function() {
         Obtener_Nombre();
         Habilita_Desabilita(true,false,false);
@@ -1270,7 +1271,7 @@ include('modulos/cerrar_sesion.php');
         $("#CboEstadoVacuna").attr('disabled', true);
         $('#Txt_Fecha').val(MostrarFechaActual());
 
-        if ($_GET("IdMas") === undefined) {
+        if ($_GET("IdMas") === undefined) {         
             //SIN VALOR GET
         } else {
             // CON VALOR GET
@@ -1283,10 +1284,14 @@ include('modulos/cerrar_sesion.php');
             if ($_GET("IdPro") === undefined) {
                 //SIN VALOR GET
             } else {
+                var codigo="";      
                 $("#CboEstadoVacuna").attr('disabled', false);
-                IdVacuna = $_GET("IdPro");
+                IdVacuna = $_GET("IdCod");
+                codigo = $_GET("IdPro");
                 IdAgendado = 1; // 1 : siginifica si - no agendado (valor por defecto)
                 Obtener_Datos_Vacuna('ObtenerDatosVacunasxId', IdVacuna);
+                //Obtener_Datos_Vacuna('ObtenerDatosVacunasxId', codigo);
+                Obtener_Precio('MostrarPrecio', codigo);
                 IdTipoProcesoGrabacion = 1;
                 $("#btnAgendar").text('Reprogramar');
             }

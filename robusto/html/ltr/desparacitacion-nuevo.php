@@ -1296,10 +1296,13 @@ include('modulos/cerrar_sesion.php');
             if ($_GET("IdPro") === undefined) {
                 //SIN VALOR GET
             } else {
-                $("#CboEstadoDesparacitacion").attr('disabled', false);
-                IdDesparacitacion = $_GET("IdPro");
+                var codigo = "";
+                $("#CboEstadoDesparacitacion").attr('disabled', false);                
+                IdDesparacitacion =$_GET("IdCod");
+                codigo = $_GET("IdPro");
                 IdAgendado = 1; // 1 : siginifica si - no agendado (valor por defecto)                
                 Obtener_Datos_Desparacitacion('ObtenerDatosDesparacitacionxId', IdDesparacitacion);
+                Obtener_Precio('MostrarPrecio', codigo);
                 IdTipoProcesoGrabacion = 1;
                 $("#btnAgendar").text('Reprogramar');
             }                       

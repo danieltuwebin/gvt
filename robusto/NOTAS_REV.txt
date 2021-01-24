@@ -196,6 +196,21 @@ __________________________ version 12.0 ----------------------------------------
 __________________________ version 12.0 -------------------------------------------
 
 
+__________________________ version 13.0 -------------------------------------------
+## 
+
+  1.	Borrar divisiones DIV de próximas atenciones, vacunas, baños y desparasitación.
+  2.	Cambiar las posiciones de los cuadros de datos estadísticos
+  3.	Funcionalidad para poder ver solo atenciones agendadas o reprogramadas de la fecha actual y todas las atenciones en el modulo LISTADO DE CITAS
+  4.	Modificar en el modulo LISTADO DE CITAS, agregando una columna con el nombre y el celular del dueño despues de la columna fecha_cita.
+  5.	Agregar la funcionalidad mediante boton para que puedas registrar en el modulo LISTADO DE CITAS la atencion es decir realizar la venta de (atenciones, vacunas, baños y desparasitación) o reprogramarla.
+  6.	Modificacion para que se pueda ver el celular y el nombre del dueño en en el modal del modulo Calendario.
+   
+
+
+__________________________ version 13.0 -------------------------------------------
+
+
 
 
 

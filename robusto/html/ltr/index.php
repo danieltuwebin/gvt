@@ -118,7 +118,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                            
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -306,7 +306,7 @@ include('modulos/cerrar_sesion.php');
                             </li>
                             <li>
                                 <a href="listado-movimientos.php" class="menu-item">Mover Producto-Serv.</a>
-                            </li>                            
+                            </li>
                         </ul>
                     </li>
                     <li class=" nav-item">
@@ -677,59 +677,66 @@ include('modulos/cerrar_sesion.php');
 
                 <!-- Estadisticas de ingresos -->
                 <div class="row match-height">
-                    <div class="col-xl-4 col-lg-12">
+                    <div class="col-xl-12 col-lg-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-block">
                                     <h4 class="card-title">Estadisticas Ingresos</h4>
 
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="media">
-                                                <div class="p-2 text-xs-center bg-deep-orange media-left media-middle">
-                                                    <i class="icon-money1 font-large-2 white"></i>
-                                                </div>
-                                                <div class="p-2 media-body">
-                                                    <h5 class="deep-orange">Ingresos del Día</h5>
-                                                    <h5 class="text-bold-400" id="IngresosDia">0</h5>
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="media">
+                                                    <div class="p-2 text-xs-center bg-deep-orange media-left media-middle">
+                                                        <i class="icon-money1 font-large-2 white"></i>
+                                                    </div>
+                                                    <div class="p-2 media-body">
+                                                        <h5 class="deep-orange">Ingresos del Día</h5>
+                                                        <h5 class="text-bold-400" id="IngresosDia">0</h5>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                     <?php if ($CondicionMnu == 1) { ?>
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="media">
-                                                <div class="p-2 text-xs-center bg-cyan media-left media-middle">
-                                                    <i class="icon-money1 font-large-2 white"></i>
-                                                </div>
-                                                <div class="p-2 media-body">
-                                                    <h5>Ingresos de la Semana</h5>
-                                                    <h5 class="text-bold-400" id="IngresosSemana">0</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="media">
-                                                <div class="p-2 text-xs-center bg-teal media-left media-middle">
-                                                    <i class="icon-money1 font-large-2 white"></i>
-                                                </div>
-                                                <div class="p-2 media-body">
-                                                    <h5>Ingresos del Mes</h5>
-                                                    <h5 class="text-bold-400" id="IngresosMes">0</h5>
+                                        <div class="col-md-4">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="media">
+                                                        <div class="p-2 text-xs-center bg-cyan media-left media-middle">
+                                                            <i class="icon-money1 font-large-2 white"></i>
+                                                        </div>
+                                                        <div class="p-2 media-body">
+                                                            <h5>Ingresos de la Semana</h5>
+                                                            <h5 class="text-bold-400" id="IngresosSemana">0</h5>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="col-md-4">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="media">
+                                                        <div class="p-2 text-xs-center bg-teal media-left media-middle">
+                                                            <i class="icon-money1 font-large-2 white"></i>
+                                                        </div>
+                                                        <div class="p-2 media-body">
+                                                            <h5>Ingresos del Mes</h5>
+                                                            <h5 class="text-bold-400" id="IngresosMes">0</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     <?php } ?>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-xl-8 col-lg-12">
+                    <div style="display: none" class="col-xl-8 col-lg-12">
 
                         <div class="card">
                             <div class="card-header">
@@ -870,6 +877,7 @@ include('modulos/cerrar_sesion.php');
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
     <?php
+    echo "<br><br><br><br><br><br><br><br>";
     require_once("includes_html/footer.php");
     ?>
 
@@ -902,7 +910,6 @@ include('modulos/cerrar_sesion.php');
 </body>
 <!-- BEGIN. EVENTOS SCRIPT-->
 <script type="text/javascript">
-
     function Obtener_Nombre() {
         $("#NombreUsuario").append('<?php echo $_SESSION['User']; ?>');
     }
@@ -977,7 +984,7 @@ include('modulos/cerrar_sesion.php');
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
                     $("#tablaResumenVacunas").append('<tr>' +
-                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +                    
+                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
                         '<td class="text-truncate">' + json[i].Cliente_TelefonoCel + '</td>' +
                         '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
                         '<td class="text-truncate">' + json[i].Vacunas_Fecha + '</td>' +
@@ -1006,7 +1013,7 @@ include('modulos/cerrar_sesion.php');
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
                     $("#tablaResumenBanios").append('<tr>' +
-                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +                    
+                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
                         '<td class="text-truncate">' + json[i].Cliente_TelefonoCel + '</td>' +
                         '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
                         '<td class="text-truncate">' + json[i].Banio_Fecha + '</td>' +
@@ -1035,7 +1042,7 @@ include('modulos/cerrar_sesion.php');
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
                     $("#tablaResumenDesparacitacion").append('<tr>' +
-                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +                    
+                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
                         '<td class="text-truncate">' + json[i].Cliente_TelefonoCel + '</td>' +
                         '<td class="text-truncate">' + json[i].Producto_Nombre + '</td>' +
                         '<td class="text-truncate">' + json[i].Desparacitacion_Fecha + '</td>' +
@@ -1064,8 +1071,8 @@ include('modulos/cerrar_sesion.php');
                 var json = JSON.parse(data);
                 $.each(json, function(i, item) {
                     $("#tablaResumenAtenciones").append('<tr>' +
-                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +                    
-                        '<td class="text-truncate">' + json[i].Cliente_TelefonoCel	+ '</td>' +
+                        '<td class="text-truncate">' + json[i].Mascota_Nombre + '</td>' +
+                        '<td class="text-truncate">' + json[i].Cliente_TelefonoCel + '</td>' +
                         '<td class="text-truncate">' + json[i].Atencion + '</td>' +
                         '<td class="text-truncate">' + json[i].Atencion_Fecha + '</td>' +
                         '<td class="text-truncate"><a class="btn btn-success btn-sm" href="atencion-nuevo.php?IdMas=' + json[i].Mascota_Id + '&IdPro=' + json[i].Atencion_Id + '">' + 'Atender' + '</a> </td> </tr>');
@@ -1080,12 +1087,11 @@ include('modulos/cerrar_sesion.php');
     $(function() {
         Obtener_Nombre();
         ObtenerTotales('MostrarTotales');
-        Obtener_Tablas_Resumenes_Atenciones('tablaResumenAtenciones');
-        Obtener_Tablas_Resumenes_Banios('tablaResumenBanios');
-        Obtener_Tablas_Resumenes_Vacunas('tablaResumenVacunas');
-        Obtener_Tablas_Resumenes_Desparacitacion('tablaResumenDesparacitacion');
+        //Obtener_Tablas_Resumenes_Atenciones('tablaResumenAtenciones');
+        //Obtener_Tablas_Resumenes_Banios('tablaResumenBanios');
+        //Obtener_Tablas_Resumenes_Vacunas('tablaResumenVacunas');
+        //Obtener_Tablas_Resumenes_Desparacitacion('tablaResumenDesparacitacion');
     });
-
 </script>
 <!-- END. EVENTOS SCRIPT-->
 

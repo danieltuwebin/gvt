@@ -825,7 +825,7 @@ include('modulos/cerrar_sesion.php');
                                                             <div id="Resultado_Grabacion_2"></div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1351,7 +1351,7 @@ include('modulos/cerrar_sesion.php');
                     '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
                     '<span aria-hidden="true">&times;</span>' +
                     '</button>' +
-                    '<strong>El cliente seleccionado, no registra mascotas en el sistema.</strong>' +
+                    '<strong>No se encontraron registros en el rango de fechas seleccionadas.</strong>' +
                     '</div>')
             } else {
                 $("#Resultado_Grabacion_2").html('')
